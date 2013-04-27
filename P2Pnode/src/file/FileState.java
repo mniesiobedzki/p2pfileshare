@@ -54,7 +54,7 @@ public class FileState {
 		this.personID = personID;
 	}
 	
-	public String generateFileHash(String filePath){
+	public String generateFileMD5Hash(String filePath){
 		
 		String datafile = filePath;
 		try

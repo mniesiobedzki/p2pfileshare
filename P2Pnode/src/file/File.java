@@ -1,5 +1,6 @@
 package file;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -13,54 +14,93 @@ import java.nio.file.WatchService;
 import java.util.List;
 
 public class File {
-	
-	private String fileHash = "";	// file hash z pakietu P2PP
 
-	// Lista obiektów typu FileState. 
+	private String fileHash = ""; // file hash pliku z pakietu P2PP
+
+	// Lista obiektów typu FileState.
 	// Lista ta przechowuje informacje o wszystkich modyfikacjach
 	// danego pliku z folderu.
-	public static Map<String, LinkedList<FileState>> filesAndTheirHistory = new HashMap<String, LinkedList<FileState>>();
 	
+	// file = linkedlista stanów + id
+	// fileID
+	//
+	public static Map<String, File> filesAndTheirHistory = new HashMap<String, File>();
+
 	private LinkedList<FileState> singleFileHistory = new LinkedList<FileState>();
 
 	public static void main(String[] args) {
+		// define a folder root
+		final Path myDir = Paths.get("C:/Programowanie");
+		try {
+			Runnable r = new Runnable() {
+				@Override
+				public void run() {
+					while (true) {
+						handleDirectoryChangeEvent(myDir);
+					}
+				}
+			};
 
-        //define a folder root
-        Path myDir = Paths.get("C:/Programowanie");  
-        FileState fileStateObj = new FileState();
+			Thread t = new Thread(r);
+			t.start();
+			t.join();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 
-        try {
-           WatchService watcher = myDir.getFileSystem().newWatchService();
-           myDir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE, 
-           StandardWatchEventKinds.ENTRY_DELETE, StandardWatchEventKinds.ENTRY_MODIFY);
+		
 
-           WatchKey watckKey = watcher.take();
+	}
 
-           List<WatchEvent<?>> events = watckKey.pollEvents();
-           for (WatchEvent event : events) {
-                if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
-                    System.out.println("Created: " + event.context().toString());
-                }
-                if (event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
-                    System.out.println("Delete: " + event.context().toString());
-                }
-                if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
-                    System.out.println("Modify: " + event.context().toString());
-                    
-                }
-            }
-           
-        } catch (Exception e) {
-            System.out.println("Error: " + e.toString());
-        }
-    }
-	
-	public Map<String, LinkedList<FileState>> getFilesAndTheirHistory() {
+	private static void handleDirectoryChangeEvent(Path myDir) {
+		
+		FileState fileStateObj = new FileState();
+
+		try {
+			WatchService watcher = myDir.getFileSystem().newWatchService();
+			myDir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE,
+					StandardWatchEventKinds.ENTRY_DELETE,
+					StandardWatchEventKinds.ENTRY_MODIFY);
+
+			WatchKey watchKey = watcher.take();
+
+			List<WatchEvent<?>> events = watchKey.pollEvents();
+			for (WatchEvent event : events) {
+				if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
+					System.out
+							.println("Created: " + event.context().toString());
+				}
+				if (event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
+					System.out.println("Delete: " + event.context().toString());
+				}
+				if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
+					System.out.println("Modify: " + event.context().toString());
+
+					java.io.File file = new java.io.File("C:/Programowanie/"
+							+ event.context().toString());
+					long lDateTime = new Date().getTime();
+					fileStateObj.setData(lDateTime);
+					fileStateObj.setFileName(event.context().toString());
+					fileStateObj.setPersonID("1111");
+					fileStateObj.setSize(file.length());
+					fileStateObj.setMd5(fileStateObj
+							.generateFileMD5Hash("C:/Programowanie/"
+									+ event.context().toString()));
+
+				}
+			}
+
+		} catch (Exception e) {
+			System.out.println("Error: " + e.toString());
+		}
+	}
+
+	public Map<String, File> getFilesAndTheirHistory() {
 		return filesAndTheirHistory;
 	}
 
 	public void setFilesAndTheirHistory(
-			Map<String, LinkedList<FileState>> filesAndTheirHistory) {
+			Map<String, File> filesAndTheirHistory) {
 		this.filesAndTheirHistory = filesAndTheirHistory;
 	}
 
@@ -71,7 +111,7 @@ public class File {
 	public void setSingleFileHistory(LinkedList<FileState> singleFileHistory) {
 		this.singleFileHistory = singleFileHistory;
 	}
-	
+
 	public String getFileHash() {
 		return fileHash;
 	}
