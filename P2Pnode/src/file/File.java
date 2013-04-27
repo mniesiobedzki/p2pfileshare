@@ -24,7 +24,7 @@ public class File {
 	public static Map<String, File> filesAndTheirHistory = new HashMap<String, File>();
 	
 	// file hash pliku z pakietu P2PP
-	private String fileId = generateFileId(); 
+	private String fileId = generateFileId("1111"); 
 
 	// historia zmian pliku 
 	private LinkedList<FileState> singleFileHistory = new LinkedList<FileState>();
@@ -52,9 +52,8 @@ public class File {
 	}
 
 	
-	private String generateFileId() {
-		
-		return null;
+	private String generateFileId(String userId) {
+		return userId+"_"+new Date().getTime();
 	}
 
 	private void handleDirectoryChangeEvent(Path myDir) {
@@ -73,13 +72,20 @@ public class File {
 				if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
 					System.out.println("Created: " + event.context().toString());
 					
-					// fileId = ""; // to-do ustawianie file hasha
+					// To-Do PERSON ID podstawic prawdziwe dane
+					setFileStateHistoryEntry(new Date().getTime(),
+							event.context().toString(),
+							"1111",
+							new java.io.File(myDir.toString() + "/" + event.context().toString()).length(),
+							FileState.generateFileMD5Hash(myDir.toString()+"/" + event.context().toString())
+						);
 					filesAndTheirHistory.put(getFileId(), this);
 				}
 				if (event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
 					System.out.println("Delete: " + event.context().toString());
 					
 					//Metoda ustawiaj¹ca pola obiektu FileState na stan - DELETED
+					// To-Do PERSON ID podstawic prawdziwe dane
 					setFileStateHistoryEntry(new Date().getTime(),"deleted","1111",0,"");
 				}
 				if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
