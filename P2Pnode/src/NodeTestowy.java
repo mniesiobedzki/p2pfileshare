@@ -46,8 +46,6 @@ public class NodeTestowy implements Observer {
 		
 		System.out.println("Node " + nodeName + ": Initializing");
 		
-		
-
 		this.node = new P2PNode(null, P2PNode.RoutingAlgorithm.SUPERPEER);
 		this.node.setServerReflexiveAddress(serverIP);
 		this.node.setServerReflexivePort(serverPort);
