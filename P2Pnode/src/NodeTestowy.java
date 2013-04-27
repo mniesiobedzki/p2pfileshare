@@ -250,7 +250,7 @@ public class NodeTestowy implements Observer {
 	}
 	
 	public void testWrite() {
-		//
+		//s
 	}
 	
 	public void testRead(){
