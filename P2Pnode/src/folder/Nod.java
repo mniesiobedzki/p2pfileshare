@@ -10,7 +10,12 @@ public class Nod {
 	String parent;
 	Nod owner;
 	LinkedList<FileState> history = new LinkedList<FileState>();
-
+	/**
+	 * konstruktor dla korzenia i dla urzytkowników
+	 * @param val
+	 * @param par
+	 * @param key
+	 */
 	public Nod(String val, Nod par, String key){
 		value=val;
 		parent=par.getValue();
@@ -18,6 +23,14 @@ public class Nod {
 			par.addChlid(this.value);
 		}
 	}
+	/**
+	 * konstruktor dla plików
+	 * @param val - ID pliku
+	 * @param par - ID rodzica
+	 * @param key - Klucz
+	 * @param hist - Historia pliku
+	 * @param own - ID w³aœciciela
+	 */
 	public Nod(String val, Nod par, String key, LinkedList<FileState> hist, Nod own){
 		value=val;
 		parent=par.getValue();
@@ -27,6 +40,10 @@ public class Nod {
 		history=hist;
 		owner=own;
 	}
+	/**
+	 * Metoda dodaje nastêpnik wêz³a
+	 * @param ch
+	 */
 	public void addChlid(String ch){
 		if(!children.contains(ch)){
 			children.add(ch);
@@ -43,6 +60,10 @@ public class Nod {
 			children.remove(ch);
 		}
 	}
+	/**
+	 * Metoda aktualizuj¹ca historie pliku o nowy stan
+	 * @param state - nowy stan
+	 */
 	public void update(FileState state){
 		if(!this.history.getLast().equals(state)){
 			history.add(state);
