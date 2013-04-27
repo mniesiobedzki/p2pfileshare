@@ -53,6 +53,8 @@ public class ClientP2Pnode {
 		this.node.setUserName(nodeName);
 		this.node.setUdpPort(portOut);
 		this.node.networkJoin();
+		
+		
 
 		while (!this.node.isConnected()) {
 			System.out.println("Node " + nodeName + ": Not connected :(");
@@ -138,6 +140,8 @@ public class ClientP2Pnode {
 			System.err.println("Node " + nodeName + ": Nienany błąd");
 			e.printStackTrace();
 		}
+		
+		
 	}
 	
 	/**
@@ -233,38 +237,10 @@ public class ClientP2Pnode {
 	
 	public static void main(String[] args) {
 		ClientP2Pnode nt = new ClientP2Pnode(6061, "127.0.0.1", 6060, "testowy1");
-		//nt.testRead();
-		nt.writeTest();
-		nt.testWrite();
-		}
-	
-	private void writeTest() {
-		jcSyncArrayList.add("aa");
 		
-	}
+		}
+	
 
-	/**
-	 * 
-	 */
-	public void testWrite() {
-		while (true) {
-			jcSyncArrayList.add(""+ new Date().getDate());
-			snooze(500);
-			
-		}
-	}
-	
-	public void testRead(){
-		while(true){
-			System.out.print("AL: size:" + jcSyncArrayList.size());
-			if(jcSyncArrayList.size() > 0){
-				System.out.print(" LAST:"+ jcSyncArrayList.get(jcSyncArrayList.size()-1));
-			}
-			System.out.println("");
-			snooze(1000);
-		}
-	}
-	
 	public void snooze(long time) {
 		try {
 			Thread.sleep(time);
@@ -272,6 +248,37 @@ public class ClientP2Pnode {
 			/*Logger.getLogger(BasicCollectionUsage.class.getName()).log(
 					Level.SEVERE, null, ex);*/
 		}
+	}
+	
+	/**
+	 * Zwraca ID podłączonego użytkownika
+	 * @return
+	 */
+	public String getUserID(){
+		return this.node.getID();
+	}
+	
+	/**
+	 * Zwraca czy node jest podłączony do sieci P2P
+	 * @return true - node połączony do sieci P2P
+	 */
+	public boolean isConnected(){
+		return this.node.isConnected();
+	}
+	
+	/**
+	 * Restartuje połączenie. TRZEBA RESTARTOWAĆ SERVER
+	 */
+	public void restartConnection(){
+		if(this.node.isConnected()){
+			this.node.networkLeave();
+		}
+		this.node.networkJoin();
+	}
+	
+	
+	public JCSyncHashMap getJCsyncTreMap() {
+		return this.jcSyncHashMap;
 	}
 
 
