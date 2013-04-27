@@ -57,9 +57,8 @@ public class FolderTree {
 	}
 	
 	public void updateAll(){
-		for(LinkedList<FileState> f: File.filesAndTheirHistory.values()){
-			
-			if(f.getLast()
+		for(File f: File.files.values()){
+			if(f.getSingleFileHistory().getLast()
 		}
 	}
 	
