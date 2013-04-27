@@ -46,7 +46,10 @@ public class FolderTree {
 
 	public void updateFile(File f, String usr) {
 		boolean found = false;
-		for(Nod n: this.folder.get(usr).getChildren()){
+		Nod file = folder.get(usr+f.getFileHash());
+		if(file==null){
+			file=new Nod();
+			file.setParent(folder.get(usr));
 			
 		}
 	}
