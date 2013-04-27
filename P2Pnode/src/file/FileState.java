@@ -1,4 +1,4 @@
-
+package file;
 // Obiekt który jest dodawany do LinkedListy folderu który obserwujemy.
 // FileState jest po prostu wygodn¹ wersj¹ wiersza w historii danego pliku 
 
