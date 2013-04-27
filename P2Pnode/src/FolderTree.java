@@ -37,12 +37,17 @@ public class FolderTree {
 	public void setFolder(JCSyncTreeMap<String, Nod> folder) {
 		this.folder = folder;
 	}
-
+	
 	public void addFile(File f, String usr) {
-		f.
+		f.getSingleFileHistory()
+		f.get
+		this.folder.get(usr)
 	}
 
 	public void updateFile(File f, String usr) {
-
+		boolean found = false;
+		for(Nod n: this.folder.get(usr).getChildren()){
+			
+		}
 	}
 }
