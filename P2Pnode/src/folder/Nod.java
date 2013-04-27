@@ -8,7 +8,7 @@ public class Nod {
 	String value;
 	LinkedList<Nod> children= new LinkedList<Nod>();
 	Nod parent;
-	LinkedList<FileState> history = new LinkedList<FileState>();
+	LinkedList<FileState> history = null;
 
 	public Nod(String val, Nod par, String key){
 		value=val;
