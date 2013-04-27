@@ -1,4 +1,7 @@
 package file;
+
+import java.io.FileInputStream;
+import java.security.MessageDigest;
 // Obiekt który jest dodawany do LinkedListy folderu który obserwujemy.
 // FileState jest po prostu wygodn¹ wersj¹ wiersza w historii danego pliku 
 
@@ -49,6 +52,38 @@ public class FileState {
 
 	public void setPersonID(String personID) {
 		this.personID = personID;
+	}
+	
+	public String generateFileHash(String filePath){
+		
+		String datafile = filePath;
+		try
+		{
+		    MessageDigest md = MessageDigest.getInstance("MD5");
+		    FileInputStream fis = new FileInputStream(datafile);
+		    byte[] dataBytes = new byte[1024];
+		 
+		    int nread = 0; 
+		 
+		    while ((nread = fis.read(dataBytes)) != -1) {
+		      md.update(dataBytes, 0, nread);
+		    };
+		 
+		    byte[] mdbytes = md.digest();
+		 
+		    //convert the byte to hex format
+		    StringBuffer sb = new StringBuffer("");
+		    for (int i = 0; i < mdbytes.length; i++) {
+		    	sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
+		    }
+		    
+		    System.out.println("DEBUG: Digest(in hex format):: " + sb.toString());
+			return sb.toString();
+			
+		} catch(Exception e){
+		
+		}
+		return "";
 	}
 	
 }
