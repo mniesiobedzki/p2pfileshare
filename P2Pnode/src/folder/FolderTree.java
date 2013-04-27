@@ -56,10 +56,11 @@ public class FolderTree {
 		}
 	}
 	
-	public void updateAll(){
-		for(File f: File.files.values()){
-			if(f.getSingleFileHistory().getLast()
+	public void updateAll(String usr){
+		for(File f: File.filesAndTheirHistory.values()){
+			if(!f.getSingleFileHistory().getLast().equals(this.folder.get(f.getFileHash()))){
+				this.updateFile(f, usr);
+			}
 		}
 	}
-	
 }
