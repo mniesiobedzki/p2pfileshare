@@ -247,9 +247,16 @@ public class NodeTestowy implements Observer {
 	
 	public static void main(String[] args) {
 		NodeTestowy nt = new NodeTestowy(6061, "127.0.0.1", 6060, "testowy1");
-		nt.testRead();
-	}
+		//nt.testRead();
+		nt.writeTest();
+		nt.testWrite();
+		}
 	
+	private void writeTest() {
+		jcSyncArrayList.add("aa");
+		
+	}
+
 	/**
 	 * 
 	 */
