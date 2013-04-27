@@ -1,3 +1,4 @@
+package folder;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import file.File;
 public class FolderTree {
@@ -39,18 +40,17 @@ public class FolderTree {
 	}
 	
 	public void addFile(File f, String usr) {
-		f.getSingleFileHistory()
-		f.get
-		this.folder.get(usr)
+
+		Nod file = new Nod(usr+f.getFileHash(),folder.get(usr),f.getFileHash(),f.getSingleFileHistory());
+		file.setParent(folder.get(usr));
 	}
 
 	public void updateFile(File f, String usr) {
-		boolean found = false;
 		Nod file = folder.get(usr+f.getFileHash());
 		if(file==null){
-			file=new Nod();
-			file.setParent(folder.get(usr));
-			
+			addFile(f,usr);
+		}else{
+			file.history.add(f.getSingleFileHistory().getLast());
 		}
 	}
 }

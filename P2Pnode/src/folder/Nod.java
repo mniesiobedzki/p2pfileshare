@@ -1,3 +1,4 @@
+package folder;
 import java.util.LinkedList;
 
 import file.FileState;
@@ -8,10 +9,15 @@ public class Nod {
 	LinkedList<Nod> children= new LinkedList<Nod>();
 	Nod parent;
 	LinkedList<FileState> history = new LinkedList<FileState>();
-	
+
 	public Nod(String val, Nod par, String key){
 		value=val;
 		parent=par;
+	}
+	public Nod(String val, Nod par, String key, LinkedList<FileState> hist){
+		value=val;
+		parent=par;
+		history=hist;
 	}
 	public void addChlid(Nod ch){
 		if(!children.contains(ch)){
