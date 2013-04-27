@@ -1,6 +1,9 @@
 package folder;
+import java.util.LinkedList;
+
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import file.File;
+import file.FileState;
 public class FolderTree {
 	public JCSyncTreeMap<String, Nod> folder = new JCSyncTreeMap<String, Nod>();
 	public JCSyncTreeMap<String, Nod> folderOld = new JCSyncTreeMap<String, Nod>();
@@ -40,7 +43,6 @@ public class FolderTree {
 	}
 	
 	public void addFile(File f, String usr) {
-
 		Nod file = new Nod(usr+f.getFileHash(),folder.get(usr),f.getFileHash(),f.getSingleFileHistory());
 		file.setParent(folder.get(usr));
 	}
@@ -53,4 +55,12 @@ public class FolderTree {
 			file.history.add(f.getSingleFileHistory().getLast());
 		}
 	}
+	
+	public void updateAll(){
+		for(LinkedList<FileState> f: File.filesAndTheirHistory.values()){
+			
+			if(f.getLast()
+		}
+	}
+	
 }
