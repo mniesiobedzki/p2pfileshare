@@ -6,22 +6,28 @@ import file.FileState;
 
 public class Nod {
 	String value;
-	LinkedList<Nod> children= new LinkedList<Nod>();
-	Nod parent;
+	LinkedList<String> children= new LinkedList<String>();
+	String parent;
 	Nod owner;
 	LinkedList<FileState> history = new LinkedList<FileState>();
 
 	public Nod(String val, Nod par, String key){
 		value=val;
-		parent=par;
+		parent=par.getValue();
+		if(parent!=null){
+			par.addChlid(this.value);
+		}
 	}
 	public Nod(String val, Nod par, String key, LinkedList<FileState> hist, Nod own){
 		value=val;
-		parent=par;
+		parent=par.getValue();
+		if(parent!=null){
+			par.addChlid(this.value);
+		}
 		history=hist;
 		owner=own;
 	}
-	public void addChlid(Nod ch){
+	public void addChlid(String ch){
 		if(!children.contains(ch)){
 			children.add(ch);
 		}
@@ -48,17 +54,21 @@ public class Nod {
 	public void setValue(String value) {
 		this.value = value;
 	}
-	public LinkedList<Nod> getChildren() {
+	public LinkedList<String> getChildren() {
 		return children;
 	}
 	public void setChildren(LinkedList<Nod> children) {
-		this.children = children;
+		LinkedList<String> ch = new LinkedList<String>();
+		for(Nod n : children){
+			ch.add(n.getValue());
+		}
+		this.children = ch;
 	}
-	public Nod getParent() {
+	public String getParent() {
 		return parent;
 	}
 	public void setParent(Nod parent) {
-		this.parent = parent;
+		this.parent = parent.value;
 	}
 	public LinkedList<FileState> getHistory() {
 		return history;

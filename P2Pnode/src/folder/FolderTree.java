@@ -75,8 +75,8 @@ public class FolderTree {
 		folder.putAll(folder2);
 		LinkedList<String> users = new LinkedList<String>();
 		root=folder.get("root");
-		for(Nod u: root.children){
-			users.add(u.getValue());
+		for(String u: root.children){
+			users.add(folder.get(u).getValue());
 		}
 		LinkedList<Nod> conflicts = new LinkedList<Nod>();
 		for(String u: users){
