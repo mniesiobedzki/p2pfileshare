@@ -1,7 +1,5 @@
 package node;
 
-
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -10,6 +8,7 @@ import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import pl.edu.pjwstk.mteam.core.Node;
 import pl.edu.pjwstk.mteam.jcsync.core.JCSyncCore;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncArrayList;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncHashMap;
@@ -30,17 +29,18 @@ public class ClientP2Pnode {
 
 	private JCSyncHashMap<String, String> jcSyncHashMap;
 	private JCSyncArrayList<String> jcSyncArrayList;
-	
+
 	// KOLECKCJE APLIKACJI
 	private HashMap<String, String> myHashMap;
 	private ArrayList<String> myArrayList;
-	
+
 	// OBSERWACJA
 	private Observable observable;
 	private JCSyncObservable jcSyncObservable;
-	
+
 	private boolean working;
 
+	private TestClassCallback testClassCallback;
 
 	public ClientP2Pnode(int portOut, String serverIP, int serverPort,
 			String nodeName) {
@@ -55,25 +55,26 @@ public class ClientP2Pnode {
 		this.node.setUserName(nodeName);
 		this.node.setUdpPort(portOut);
 		this.node.networkJoin();
-		
-		
 
 		while (!this.node.isConnected()) {
 			System.out.println("Node " + nodeName + ": Not connected :(");
-			
-			/*try {
-				//Thread.sleep(1000);
-				//snooze(500);
-			} catch (InterruptedException e) {
-				System.out.println("SimpleNode.SimpleNode()" + e);
-				/*Logger.getLogger(BasicCollectionUsage.class.getName()).log(
-						Level.SEVERE, null, e);
-			}*/
-			this.node.networkLeave();
-			System.out.println("Leave");
+
+			/*
+			 * try { //Thread.sleep(1000); //snooze(500); } catch
+			 * (InterruptedException e) {
+			 * System.out.println("SimpleNode.SimpleNode()" + e);
+			 * /*Logger.getLogger(BasicCollectionUsage.class.getName()).log(
+			 * Level.SEVERE, null, e); }
+			 */
+			// this.node.networkLeave();
+			// System.out.println("Leave");
 			snooze(1000);
-			this.node.networkJoin();
+			// this.node.networkJoin();
 		}
+		//node.get
+		
+		
+		
 		this.working = true;
 		System.out.println("Node " + nodeName + ": Connected !!");
 
@@ -84,8 +85,10 @@ public class ClientP2Pnode {
 			this.jcSyncCore.init();
 		} catch (Exception e) {
 			e.printStackTrace();
-			/*Logger.getLogger(BasicCollectionUsage.class.getName()).log(
-					Level.SEVERE, null, e);*/
+			/*
+			 * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
+			 * Level.SEVERE, null, e);
+			 */
 		}
 
 		// Tworzenie lub podpinanie się pod kolekcję
@@ -119,7 +122,7 @@ public class ClientP2Pnode {
 			System.err.println("Node " + nodeName + ": Nienany błąd");
 			e.printStackTrace();
 		}
-
+/*
 		// ARRAYLIST
 		String collIDa = "mojaLista";
 		try {
@@ -149,10 +152,12 @@ public class ClientP2Pnode {
 			System.err.println("Node " + nodeName + ": Nienany błąd");
 			e.printStackTrace();
 		}
-		this.getObservable(jcSyncCore);
-		
+		// this.getObservable(jcSyncCore);*/
+
+		testClassCallback = new TestClassCallback(this.getObservable(this.jcSyncCore));
+		//testClassCallback = new TestClassCallback(getObservable(node.getPubSubCoreAlgorithm().));
 	}
-	
+
 	/**
 	 * Metoda tworzenia nowej czystej koleckji
 	 * 
@@ -170,8 +175,6 @@ public class ClientP2Pnode {
 				collID, map, jcSyncCore);
 		return map;
 	}
-
-	
 
 	/**
 	 * Metoda tworzenia nowej koleckji i przekazania jej już istniewjącej
@@ -192,7 +195,7 @@ public class ClientP2Pnode {
 				collID, map, jcSyncCore);
 		return map;
 	}
-	
+
 	/**
 	 * Tworzenie nowej kolekcji ArrayList
 	 * 
@@ -207,15 +210,17 @@ public class ClientP2Pnode {
 			JCSyncCore jcSyncCore, ArrayList<String> incomingArrayList)
 			throws ObjectExistsException, Exception {
 		// create collection instance
-		if(incomingArrayList == null){
+		if (incomingArrayList == null) {
 			incomingArrayList = new ArrayList<String>();
 		}
-		JCSyncArrayList<String> arrayList = new JCSyncArrayList<String>(incomingArrayList);
+		JCSyncArrayList<String> arrayList = new JCSyncArrayList<String>(
+				incomingArrayList);
 		// we need c r e a t e an Shar edCol l e c t ionObj e c t , that wi l l
 		// be a s s i gned with -our c o l l e c t i o n .
-		SharedCollectionObject sharedCollectionObject = new SharedCollectionObject(collectionID, arrayList,
-				jcSyncCore);
-		return (JCSyncArrayList<String>) sharedCollectionObject.getNucleusObject();
+		SharedCollectionObject sharedCollectionObject = new SharedCollectionObject(
+				collectionID, arrayList, jcSyncCore);
+		return (JCSyncArrayList<String>) sharedCollectionObject
+				.getNucleusObject();
 	}
 
 	public SharedCollectionObject subscribeCollection(String collectionName,
@@ -225,14 +230,16 @@ public class ClientP2Pnode {
 				.getFromOverlay(collectionName, coreAlg);
 		return sharedCollectionObject;
 	}
-	
-	public JCSyncObservable getObservable(JCSyncCore jcSyncCore){
-		String observableID = "mojObserwator";
+
+	public JCSyncObservable getObservable(JCSyncCore jcSyncCore) {
+		String observableID = "mojaMapa2";
 		SharedObservableObject sharedObservableObject = null;
 		try {
-			sharedObservableObject = (SharedObservableObject) SharedObservableObject.getFromOverlay(observableID, jcSyncCore);
+			sharedObservableObject = (SharedObservableObject) SharedObservableObject
+					.getFromOverlay(observableID, jcSyncCore);
 		} catch (ObjectNotExistsException e) {
 			// TODO Auto-generated catch block
+			//sharedObservableObject = new 
 			e.printStackTrace();
 		} catch (OperationForbiddenException e) {
 			// TODO Auto-generated catch block
@@ -243,52 +250,86 @@ public class ClientP2Pnode {
 		}
 		return (JCSyncObservable) sharedObservableObject.getNucleusObject();
 	}
-	
+
+	/**
+	 * 
+	 * @return
+	 * @throws ObjectNotExistsException
+	 */
+	public JCSyncObservable getObservable() throws ObjectNotExistsException {
+		return this.getObservable(jcSyncCore);
+	}
+
 	public static void main(String[] args) {
-		ClientP2Pnode nt = new ClientP2Pnode(6061, "127.0.0.1", 6060, "testowy1");
+		ClientP2Pnode nt = new ClientP2Pnode(6061, "127.0.0.1", 6060,
+				"testowy1");
+		nt.testRead();
 		
-		}
+
+	}
 	
+	public void testRead(){
+		while(true){
+			System.out.print("AL: size:" + jcSyncArrayList.size());
+			if(jcSyncArrayList.size() > 0){
+				System.out.print(" LAST:"+ jcSyncArrayList.get(jcSyncArrayList.size()-1));
+			}
+			System.out.println("");
+			snooze(1000);
+		}
+	}
 
 	public void snooze(long time) {
 		try {
 			Thread.sleep(time);
 		} catch (InterruptedException ex) {
-			/*Logger.getLogger(BasicCollectionUsage.class.getName()).log(
-					Level.SEVERE, null, ex);*/
+			/*
+			 * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
+			 * Level.SEVERE, null, ex);
+			 */
 		}
 	}
-	
+
 	/**
 	 * Zwraca ID podłączonego użytkownika
+	 * 
 	 * @return
 	 */
-	public String getUserID(){
+	public String getUserID() {
 		return this.node.getID();
 	}
-	
+
 	/**
 	 * Zwraca czy node jest podłączony do sieci P2P
+	 * 
 	 * @return true - node połączony do sieci P2P
 	 */
-	public boolean isConnected(){
+	public boolean isConnected() {
 		return this.node.isConnected();
 	}
-	
+
 	/**
 	 * Restartuje połączenie. TRZEBA RESTARTOWAĆ SERVER
 	 */
-	public void restartConnection(){
-		if(this.node.isConnected()){
+	public void restartConnection() {
+		if (this.node.isConnected()) {
 			this.node.networkLeave();
 		}
 		this.node.networkJoin();
 	}
-	
-	
+
 	public JCSyncHashMap getJCsyncTreMap() {
 		return this.jcSyncHashMap;
 	}
 
+	public JCSyncCore getJCsyncCore() {
+		// TODO Auto-generated method stub
+		return this.jcSyncCore;
+	}
+
+	public Node getNode() {
+		// TODO Auto-generated method stub
+		return this.node;
+	}
 
 }
