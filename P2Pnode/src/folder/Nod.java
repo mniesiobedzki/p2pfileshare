@@ -8,21 +8,29 @@ public class Nod {
 	String value;
 	LinkedList<Nod> children= new LinkedList<Nod>();
 	Nod parent;
-	LinkedList<FileState> history = null;
+	Nod owner;
+	LinkedList<FileState> history = new LinkedList<FileState>();
 
 	public Nod(String val, Nod par, String key){
 		value=val;
 		parent=par;
 	}
-	public Nod(String val, Nod par, String key, LinkedList<FileState> hist){
+	public Nod(String val, Nod par, String key, LinkedList<FileState> hist, Nod own){
 		value=val;
 		parent=par;
 		history=hist;
+		owner=own;
 	}
 	public void addChlid(Nod ch){
 		if(!children.contains(ch)){
 			children.add(ch);
 		}
+	}
+	public Nod getOwner() {
+		return owner;
+	}
+	public void setOwner(Nod owner) {
+		this.owner = owner;
 	}
 	public void removeChild(Nod ch){
 		if(!children.contains(ch)){

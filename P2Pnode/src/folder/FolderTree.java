@@ -1,13 +1,15 @@
 package folder;
 import java.util.LinkedList;
+import java.util.Observable;
+import java.util.Observer;
 
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import file.File;
 import file.FileState;
-public class FolderTree {
+public class FolderTree implements Observer {
 	public JCSyncTreeMap<String, Nod> folder = new JCSyncTreeMap<String, Nod>();
 	public Nod root;
-
+	
 	public FolderTree(String path) {
 		root = new Nod(path, null, "root");
 	}
@@ -37,7 +39,7 @@ public class FolderTree {
 	}
 
 	public void addFile(File f, String usr) {
-		Nod file = new Nod(usr+f.getFileHash(),folder.get(usr),f.getFileHash(),f.getSingleFileHistory());
+		Nod file = new Nod(usr+f.getFileId(),folder.get(usr),f.getFileId(),f.getSingleFileHistory(), folder.get(usr));
 		file.setParent(folder.get(usr));
 	}
 	/**
@@ -47,7 +49,7 @@ public class FolderTree {
 	 * @param usr
 	 */
 	public void updateFile(File f, String usr) {
-		Nod file = folder.get(usr+f.getFileHash());
+		Nod file = folder.get(usr+f.getFileId());
 		if(file==null){
 			addFile(f,usr);
 		}else{
@@ -62,7 +64,7 @@ public class FolderTree {
 	 */
 	public void updateAll(String usr){
 		for(File f: File.filesAndTheirHistory.values()){
-			if(!f.getSingleFileHistory().getLast().equals(this.folder.get(f.getFileHash()))){
+			if(!f.getSingleFileHistory().getLast().equals(this.folder.get(f.getFileId()))){
 				this.updateFile(f, usr);
 			}
 		}
@@ -82,17 +84,26 @@ public class FolderTree {
 		for(String u: users){
 			if(!u.equals(usr)){
 				for(File f:File.filesAndTheirHistory.values()){
-					if(File.filesAndTheirHistory.get(f.getFileHash()).getSingleFileHistory().getLast().getData()<folder.get(usr+f.getFileHash()).getHistory().getLast().getData()){
-						conflicts.add(folder.get(usr+f.getFileHash()));
+					if(File.filesAndTheirHistory.get(f.getFileId()).getSingleFileHistory().getLast().getData()<folder.get(usr+f.getFileId()).getHistory().getLast().getData()){
+						conflicts.add(folder.get(usr+f.getFileId()));
 					}
 					
 				}
 			}
 		}
 		for(Nod n: folder.values()){
-			if(n.getHistory()!=null){
-				
+			if(n.getHistory().size()>0){
+				if(!File.filesAndTheirHistory.containsKey(n.getValue())){
+					conflicts.add(folder.get(n.getOwner().value+n.getValue()));
+				}
 			}
 		}
+		
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		// TODO Auto-generated method stub
+		
 	}
 }
