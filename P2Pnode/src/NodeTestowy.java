@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
@@ -249,8 +250,15 @@ public class NodeTestowy implements Observer {
 		nt.testRead();
 	}
 	
+	/**
+	 * 
+	 */
 	public void testWrite() {
-		//s
+		while (true) {
+			jcSyncArrayList.add(""+ new Date().getDate());
+			snooze(500);
+			
+		}
 	}
 	
 	public void testRead(){
