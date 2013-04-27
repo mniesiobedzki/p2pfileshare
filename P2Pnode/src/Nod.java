@@ -9,7 +9,6 @@ public class Nod {
 	public Nod(String val, Nod par, String key){
 		value=val;
 		parent=par;
-		FolderTree.folder.put(key, this);
 	}
 	public void addChlid(Nod ch){
 		if(!children.contains(ch)){
