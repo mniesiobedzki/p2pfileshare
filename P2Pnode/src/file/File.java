@@ -19,15 +19,14 @@ public class File {
 	// Lista ta przechowuje informacje o wszystkich modyfikacjach
 	// danego pliku z folderu.
 	//
-	// TO-DO trzeba przerzuciæ to do g³ównej klasy
-	
+	// TO-DO trzeba przerzuciæ to do g³ównej klasy - do rozwa¿enia
 	public static Map<String, File> filesAndTheirHistory = new HashMap<String, File>();
 	
 	// file hash pliku z pakietu P2PP
-	private String fileId = generateFileId("1111"); 
+	private String fileId; 
 
 	// historia zmian pliku 
-	private LinkedList<FileState> singleFileHistory = new LinkedList<FileState>();
+	private LinkedList<FileState> singleFileHistory;
 	
 	public void main(String[] args) {
 		
@@ -51,11 +50,20 @@ public class File {
 
 	}
 
-	
-	private String generateFileId(String userId) {
-		return userId+"_"+new Date().getTime();
+	public File(){
+		fileId 				= generateFileId("1111");
+		singleFileHistory 	= new LinkedList<FileState>();
 	}
-
+	
+	/*******************REGION METOD**********************/
+	public File getCurrentFileWithLatestHistoryEntry(){
+		File file = new File();
+		file.setFileId(this.getFileId());
+		LinkedList<FileState> latestFileState = new LinkedList<FileState>();
+		file.setSingleFileHistory(latestFileState);
+		return file; 
+	}
+	
 	private void handleDirectoryChangeEvent(Path myDir) {
 		
 		try 
@@ -134,6 +142,12 @@ public class File {
 		this.getSingleFileHistory().add(fileStateObj);
 	}
 
+	private String generateFileId(String userId) {
+		return userId+"_"+new Date().getTime();
+	}
+
+	/*****************************************************/
+	
 	// Gettery i settery WszystkiePlikiHistorii
 	
 	public Map<String, File> getFilesAndTheirHistory() {
