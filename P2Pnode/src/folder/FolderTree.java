@@ -1,12 +1,10 @@
 package folder;
 import java.util.LinkedList;
-import java.util.Observable;
-import java.util.Observer;
 
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import file.File;
 import file.FileState;
-public class FolderTree implements Observer {
+public class FolderTree {
 	public JCSyncTreeMap<String, Nod> folder = new JCSyncTreeMap<String, Nod>();
 	public Nod root;
 	
@@ -98,12 +96,7 @@ public class FolderTree implements Observer {
 				}
 			}
 		}
-		
+		//tu dodaæ kod wy³apuj¹cy zmiany wymagaj¹ce dodania
 	}
 
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		// TODO Auto-generated method stub
-		
-	}
 }
