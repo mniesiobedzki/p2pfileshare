@@ -249,6 +249,10 @@ public class NodeTestowy implements Observer {
 		nt.testRead();
 	}
 	
+	public void testWrite() {
+		
+	}
+	
 	public void testRead(){
 		while(true){
 			System.out.print("AL: size:" + jcSyncArrayList.size());
