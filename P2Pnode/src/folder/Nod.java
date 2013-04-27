@@ -6,12 +6,12 @@ import file.FileState;
 
 public class Nod {
 	String value;
-	LinkedList<String> children= new LinkedList<String>();
-	String parent;
+	LinkedList<String> children= new LinkedList<String>();//klucze potomków
+	String parent;//klucz rodzica
 	Nod owner;
 	LinkedList<FileState> history = new LinkedList<FileState>();
 	/**
-	 * konstruktor dla korzenia i dla urzytkowników
+	 * konstruktor dla korzenia i dla u¿ytkowników
 	 * @param val
 	 * @param par
 	 * @param key

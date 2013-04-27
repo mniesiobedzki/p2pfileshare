@@ -5,7 +5,10 @@ import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import file.File;
 public class FolderTree {
 	public JCSyncTreeMap<String, Nod> folder = new JCSyncTreeMap<String, Nod>();
-	public Nod root;
+	//klucz to dla korzenia "root"
+	// dla u¿ytkownika jego ID
+	//dla pliku ID u¿ytkownika + ID pliku
+	public Nod root;// nazwa folderu albo lokalizacja url
 	
 	public FolderTree(String path) {
 		root = new Nod(path, null, "root");
