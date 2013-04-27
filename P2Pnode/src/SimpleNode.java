@@ -14,9 +14,9 @@ public class SimpleNode {
 	
 	public SimpleNode() {
 		node1 = new P2PNode(null, P2PNode.RoutingAlgorithm.SUPERPEER);
-		node1.setServerReflexiveAddress("127.0.0.1");
+		node1.setServerReflexiveAddress("127.0.0.1"); // kuku
 		node1.setServerReflexivePort(5050);
-		node1.setBootIP("127.0.0.1");
+		node1.setBootIP("192.168.80.182");
 		node1.setBootPort(6060);
 		node1.setUdpPort(4040);
 		node1.networkJoin();
