@@ -3,7 +3,6 @@ import java.util.LinkedList;
 
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import file.File;
-import file.FileState;
 public class FolderTree {
 	public JCSyncTreeMap<String, Nod> folder = new JCSyncTreeMap<String, Nod>();
 	public Nod root;
@@ -17,7 +16,7 @@ public class FolderTree {
 	}
 	/**
 	 * Metoda dodaj¹ca u¿ytkownika
-	 * @param usr
+	 * @param usr - ID u¿ytkownika
 	 */
 	public void addUser(String usr) {
 		Nod n = new Nod(usr, root, usr);
@@ -44,7 +43,7 @@ public class FolderTree {
 	 * Metoda aktualizuj¹ca historie pliku 
 	 * o najnowszy wpis z listy lokalnej
 	 * @param f
-	 * @param usr
+	 * @param usr - ID u¿ytkownika
 	 */
 	public void updateFile(File f, String usr) {
 		Nod file = folder.get(usr+f.getFileId());
@@ -58,7 +57,7 @@ public class FolderTree {
 	 * Metoda przechodzi po liscie lokalnych plików i ich historii 
 	 * porównuj¹c je z plikami trzymanymi w drzewie synchronizowanym 
 	 * przez JCSync
-	 * @param usr
+	 * @param usr - ID U¿ytkownika
 	 */
 	public void updateAll(String usr){
 		for(File f: File.filesAndTheirHistory.values()){
