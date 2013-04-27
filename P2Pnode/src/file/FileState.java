@@ -2,6 +2,7 @@ package file;
 
 import java.io.FileInputStream;
 import java.security.MessageDigest;
+
 // Obiekt który jest dodawany do LinkedListy folderu który obserwujemy.
 // FileState jest po prostu wygodn¹ wersj¹ wiersza w historii danego pliku 
 
@@ -11,7 +12,7 @@ public class FileState {
 	private long   data 	= 0;	// kiedy plik by³ zmieniany		
 	private String fileName = "";	// nazwa zmienianego pliku
 	private double size		= 0;	// rozmiar pliku
-	private String md5		= "";	// suma kontrolna
+	private String md5		= "";	// suma kontrolna	
 	
 	public String getMd5() {
 		return md5;
@@ -20,7 +21,6 @@ public class FileState {
 	public void setMd5(String md5) {
 		this.md5 = md5;
 	}
-
 
 	public long getData() {
 		return data;
@@ -54,7 +54,7 @@ public class FileState {
 		this.personID = personID;
 	}
 	
-	public String generateFileMD5Hash(String filePath){
+	public static String generateFileMD5Hash(String filePath){
 		
 		String datafile = filePath;
 		try
@@ -77,7 +77,7 @@ public class FileState {
 		    	sb.append(Integer.toString((mdbytes[i] & 0xff) + 0x100, 16).substring(1));
 		    }
 		    
-		    System.out.println("DEBUG: Digest(in hex format):: " + sb.toString());
+		    System.out.println("DEBUG: MD5 " + sb.toString());
 		    fis.close();
 			return sb.toString();
 			
