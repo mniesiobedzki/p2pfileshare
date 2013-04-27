@@ -78,6 +78,7 @@ public class FileState {
 		    }
 		    
 		    System.out.println("DEBUG: Digest(in hex format):: " + sb.toString());
+		    fis.close();
 			return sb.toString();
 			
 		} catch(Exception e){
