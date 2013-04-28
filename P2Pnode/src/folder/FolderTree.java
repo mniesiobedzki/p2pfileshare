@@ -100,5 +100,4 @@ public class FolderTree {
 		}
 		//tu dodaæ kod wy³apuj¹cy zmiany wymagaj¹ce dodania
 	}
-
 }
