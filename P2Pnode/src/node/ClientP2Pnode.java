@@ -1,12 +1,8 @@
 package node;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Observable;
-import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import pl.edu.pjwstk.mteam.core.Node;
 import pl.edu.pjwstk.mteam.jcsync.core.JCSyncCore;
@@ -31,20 +27,21 @@ public class ClientP2Pnode {
 	private JCSyncArrayList<String> jcSyncArrayList;
 
 	// KOLECKCJE APLIKACJI
-	private HashMap<String, String> myHashMap;
-	private ArrayList<String> myArrayList;
+	//private HashMap<String, String> myHashMap;
+	//private ArrayList<String> myArrayList;
 
 	// OBSERWACJA
+	@SuppressWarnings("unused")
 	private Observable observable;
+	@SuppressWarnings("unused")
 	private JCSyncObservable jcSyncObservable;
 
-	private boolean working;
-
+	@SuppressWarnings("unused")
 	private TestClassCallback testClassCallback;
 
+	@SuppressWarnings("unchecked")
 	public ClientP2Pnode(int portOut, String serverIP, int serverPort,
 			String nodeName) {
-		this.working = false;
 		System.out.println("Node " + nodeName + ": Initializing");
 
 		this.node = new P2PNode(null, P2PNode.RoutingAlgorithm.SUPERPEER);
@@ -75,7 +72,6 @@ public class ClientP2Pnode {
 		
 		
 		
-		this.working = true;
 		System.out.println("Node " + nodeName + ": Connected !!");
 
 		// Jeżeli uda się połączyć to tworzę JCSyncCore
