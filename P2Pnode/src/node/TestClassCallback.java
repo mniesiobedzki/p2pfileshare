@@ -14,7 +14,6 @@ public class TestClassCallback implements Observer {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
 		System.out.println("Obserwacja " + o.getClass().toString() + " " + arg.toString());
 		
 	}
