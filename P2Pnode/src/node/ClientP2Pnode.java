@@ -37,14 +37,18 @@ public class ClientP2Pnode {
 	private JCSyncObservable jcSyncObservable;
 
 	@SuppressWarnings("unused")
-	private TestClassCallback testClassCallback;
+	private TestObserver testObserver;
+
+	private ClientP2PnodeCallback nodeCallback;
 
 	@SuppressWarnings("unchecked")
 	public ClientP2Pnode(int portOut, String serverIP, int serverPort,
 			String nodeName) {
 		System.out.println("Node " + nodeName + ": Initializing");
+		
+		this.nodeCallback = new ClientP2PnodeCallback();
 
-		this.node = new P2PNode(null, P2PNode.RoutingAlgorithm.SUPERPEER);
+		this.node = new P2PNode(this.nodeCallback, P2PNode.RoutingAlgorithm.SUPERPEER);
 		this.node.setServerReflexiveAddress(serverIP);
 		this.node.setServerReflexivePort(serverPort);
 		this.node.setBootIP(serverIP);
@@ -52,6 +56,10 @@ public class ClientP2Pnode {
 		this.node.setUserName(nodeName);
 		this.node.setUdpPort(portOut);
 		this.node.networkJoin();
+		
+		//JCSyncObservable nn = new JCSyncObservable();
+		//nn.addObserver(o)
+		
 
 		while (!this.node.isConnected()) {
 			System.out.println("Node " + nodeName + ": Not connected :(");
@@ -90,7 +98,7 @@ public class ClientP2Pnode {
 		// Tworzenie lub podpinanie się pod kolekcję
 
 		// HASH MAP
-		String collID = "mojaMapa";
+		String collID = "myMap";
 		try {
 			jcSyncHashMap = createHashMap(collID, this.jcSyncCore);
 			System.out.println("Node " + nodeName
@@ -150,7 +158,7 @@ public class ClientP2Pnode {
 		}
 		// this.getObservable(jcSyncCore);*/
 
-		testClassCallback = new TestClassCallback(this.getObservable(this.jcSyncCore));
+		testObserver = new TestObserver(this.getObservable(this.jcSyncCore));
 		//testClassCallback = new TestClassCallback(getObservable(node.getPubSubCoreAlgorithm().));
 	}
 
@@ -228,7 +236,7 @@ public class ClientP2Pnode {
 	}
 
 	public JCSyncObservable getObservable(JCSyncCore jcSyncCore) {
-		String observableID = "mojaMapa2";
+		String observableID = "myMap";
 		SharedObservableObject sharedObservableObject = null;
 		try {
 			sharedObservableObject = (SharedObservableObject) SharedObservableObject
@@ -263,6 +271,8 @@ public class ClientP2Pnode {
 		
 
 	}
+	
+	
 	
 	public void testRead(){
 		while(true){
