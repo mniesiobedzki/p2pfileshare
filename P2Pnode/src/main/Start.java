@@ -13,7 +13,8 @@ public class Start {
 	private Controller controller;
 
 	public static void main(String[] args) {
-		
+		Start s = new Start();
+		s.runMVC();
 	}
 
 	public void runMVC() {
