@@ -38,21 +38,31 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.LookAndFeel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileSystemView;
+
+import main.Controller;
 
 
 public class GuiWindower {
 	
     protected static final PopupFrame POPUP_FRAME = new PopupFrame();
-    static JTextField idInput; 
+    static JTextField idInput, ipInput, portInput; 
     static String folderSynchronizowany;
+    static JButton generujIdInput, rozpocznijBt;
+    static Controller kontroler;
     
-    public static void main(String[] args) {
+    public static void setController(Controller c) {
+    	kontroler = c;
+	}
 
-        createGUI();
+	public static void main(String[] args) {
+		createGUI();
     }
 
 	private static void createGUI() {
@@ -146,17 +156,47 @@ public class GuiWindower {
             tytulPowitania.setFont(new Font("Segoe UI", Font.PLAIN, 22));
             panelPierwszegoUruchomienia.add(tytulPowitania);
             
+            RichJLabel podajIPJLabel = new RichJLabel("Podaj IP i port bootstrapa",0);
+            podajIPJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            panelPierwszegoUruchomienia.add(podajIPJLabel);
+
+            ipInput = new JTextField();
+            ipInput.setPreferredSize(new Dimension(180, 30));
+            ipInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            ipInput.setHorizontalAlignment(JTextField.CENTER);
+            panelPierwszegoUruchomienia.add(ipInput);
+          
+            portInput = new JTextField();
+            portInput.setPreferredSize(new Dimension(50, 30));
+            portInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            portInput.setHorizontalAlignment(JTextField.CENTER);
+            panelPierwszegoUruchomienia.add(portInput);
+            
             RichJLabel podajIdJLabel = new RichJLabel("Podaj ID lub wygeneruj automatycznie",0);
             podajIdJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             panelPierwszegoUruchomienia.add(podajIdJLabel);
             
             idInput = new JTextField();
+            idInput.getDocument().addDocumentListener(new DocumentListener() {
+				public void changedUpdate(DocumentEvent e) {
+					generujIdInput.setEnabled(false);
+				}
+
+				public void removeUpdate(DocumentEvent e) {
+					generujIdInput.setEnabled(false);
+				}
+
+				public void insertUpdate(DocumentEvent e) {
+					generujIdInput.setEnabled(false);
+				}
+			});
+            
             idInput.setPreferredSize(new Dimension(250, 30));
             idInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             idInput.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(idInput);
             
-            JButton generujIdInput = new JButton("Generuj ID", null);
+            generujIdInput = new JButton("Generuj ID", null);
             generujIdInput.addActionListener(new ActionListener() {
 				
 				@Override
@@ -195,6 +235,7 @@ public class GuiWindower {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					wyborFolderu();
+					rozpocznijBt.setEnabled(true);
 				}
 			});
             panelPierwszegoUruchomienia.add(wybierzFolderBt);
@@ -204,9 +245,28 @@ public class GuiWindower {
             spacer3.setBackground(new Color(0,0,0,0));
             panelPierwszegoUruchomienia.add(spacer3);
             
-            JButton rozpocznijBt = new JButton("Rozpocznij");
+            rozpocznijBt = new JButton("Rozpocznij");
+            rozpocznijBt.setEnabled(false);
             rozpocznijBt.setFont(new Font("Segoe UI", Font.PLAIN, 22));
+            rozpocznijBt.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					kontroler.setFolderTreePath(folderSynchronizowany);
+				}
+			});
             panelPierwszegoUruchomienia.add(rozpocznijBt);
+            
+            JPanel panelLoga = new JPanel();
+            panelLoga.setLayout(null);
+            panelLoga.setBackground(new Color(0,0,0,0));
+            panelLoga.setBounds(0,0,300,400);
+            
+            JTextPane logPane = new JTextPane();
+            logPane.setBounds(8, 5, 285, 385);
+            logPane.setEditable(false);
+            logPane.setText("To jest test");
+            panelLoga.add(logPane);
             
             add(panelPierwszegoUruchomienia, new Integer(1), 0);            
             //getRootPane().setWindowDecorationStyle(JRootPane.INFORMATION_DIALOG);
@@ -229,7 +289,7 @@ public class GuiWindower {
 
         try {
             folderSynchronizowany = dest.getCanonicalPath();
-            
+            	
         } catch (IOException ex) { // getCanonicalPath() threw IOException
 
         }
