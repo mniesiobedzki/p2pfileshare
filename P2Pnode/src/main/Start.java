@@ -1,7 +1,9 @@
 package main;
 
 import node.ClientP2Pnode;
+import node.ClientP2PnodeCallback;
 import file.File;
+import folder.FolderTree;
 import gui.GuiWindower;
 
 public class Start {
@@ -16,16 +18,19 @@ public class Start {
 
 		// ####### MODEL #######
 		// P2P
-		ClientP2Pnode clientP2Pnode = new ClientP2Pnode();
+		ClientP2PnodeCallback clientP2PnodeCallback = new ClientP2PnodeCallback();
+		ClientP2Pnode clientP2Pnode = new ClientP2Pnode(clientP2PnodeCallback);
+		
 		// Local files on the computer
-		File localFiles = new File(clientP2Pnode);
+		FolderTree folderTree = new FolderTree();
 
 		// ####### VIEW #######
 		GuiWindower gui = new GuiWindower();
 
 		// ####### CONTROLER #######
-		Controller controller = new Controller(gui, localFiles, clientP2Pnode);
+		Controller controller = new Controller(gui, folderTree, clientP2Pnode);
 
 	}
+	
 
 }

@@ -45,6 +45,10 @@ public class ClientP2Pnode {
 		// TODO Auto-generated constructor stub
 	}
 
+	public ClientP2Pnode(ClientP2PnodeCallback clientP2PnodeCallback) {
+		// TODO Auto-generated constructor stub
+	}
+
 	@SuppressWarnings("unchecked")
 	public ClientP2Pnode(int portOut, String serverIP, int serverPort,
 			String nodeName) {
@@ -327,6 +331,11 @@ public class ClientP2Pnode {
 	public Node getNode() {
 		// TODO Auto-generated method stub
 		return this.node;
+	}
+
+	public void setServerIP(String serverIP) {
+		
+		
 	}
 
 }
