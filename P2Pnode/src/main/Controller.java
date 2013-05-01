@@ -54,7 +54,7 @@ public class Controller {
 	}
 	
 	public boolean stopSync() {
-		
+		return true;
 	}
 	
 	
