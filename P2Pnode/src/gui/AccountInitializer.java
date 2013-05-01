@@ -54,7 +54,11 @@ public class AccountInitializer {
     
     public static void main(String[] args) {
 
-        EventQueue.invokeLater(new Runnable() {
+        buildGUI();
+    }
+
+	private static void buildGUI() {
+		EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
 
@@ -92,7 +96,7 @@ public class AccountInitializer {
                 }
             }
         });
-    }
+	}
 
     public static class PopupFrame extends JFrame {
 
