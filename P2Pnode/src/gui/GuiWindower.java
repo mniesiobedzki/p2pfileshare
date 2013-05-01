@@ -57,21 +57,22 @@ public class GuiWindower {
     static JButton generujIdInput, rozpocznijBt;
     static Controller kontroler;
     
-    public static void setController(Controller c) {
-    	kontroler = c;
-	}
-
-	public static void main(String[] args) {
-		createGUI();
+    public GuiWindower(Controller k) {
+    	kontroler = k;
+    	createGUI();
     }
-
-	private static void createGUI() {
+    
+    public static void main(String[] args) {
+    	GuiWindower g = new GuiWindower(null);
+    	g.createGUI();
+   	}
+    
+	private void createGUI() {
 		EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
 
                 try {
-                	
                     TrayIcon trayIcon = new TrayIcon(ImageIO.read(new File("folder.png")));
                     trayIcon.addMouseListener(new MouseAdapter() {
                         @Override

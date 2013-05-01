@@ -37,15 +37,15 @@ public class Controller {
 	}
 
 	public void setServerPort(int serverPort) {
-		clientP2Pnode.setServerPort(serverPort);
+		//clientP2Pnode.setServerPort(serverPort);
 	}
 
 	public void setClientPort(int clientPort) {
-		clientP2Pnode.setClientPort(clientPort);
+		//clientP2Pnode.setClientPort(clientPort);
 	}
 
 	public void setClientName(String clientName) {
-		clientP2Pnode.setClientName(clientName);
+		//clientP2Pnode.setClientName(clientName);
 	}
 
 	public void setFolderTreePath(String path) {
