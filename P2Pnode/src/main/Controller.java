@@ -13,13 +13,15 @@ import node.ClientP2Pnode;
 public class Controller {
 
 	private GuiWindower gui;
-	private FolderTree localFiles;
+	private FolderTree folderTree;
 	private ClientP2Pnode clientP2Pnode;
+	private File file;
 
 	public Controller(GuiWindower gui, FolderTree folderTree,
-			ClientP2Pnode clientP2Pnode) {
+			File file, ClientP2Pnode clientP2Pnode) {
 				this.gui = gui;
-				this.localFiles = folderTree;
+				this.folderTree = folderTree;
+				this.file = file;
 				this.clientP2Pnode = clientP2Pnode;
 	}
 	
@@ -32,7 +34,7 @@ public class Controller {
 	}
 	
 	public void setServerPort(int serverPort){
-		clientP2Pnode.serServerPort(serverPort);
+		clientP2Pnode.setServerPort(serverPort);
 	}
 	
 	public void setClientPort(int clientPort){
@@ -40,8 +42,22 @@ public class Controller {
 	}
 	
 	public void setClientName(String clientName){
+		clientP2Pnode.setClientName(clientName);
+	}
+	
+	public void setFolderTreePath(String path) {
+		//file.
+	}
+	
+	public boolean startSync() {
+		return true;
+	}
+	
+	public boolean stopSync() {
 		
 	}
+	
+	
 	
 	
 

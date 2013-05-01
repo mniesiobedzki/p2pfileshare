@@ -10,6 +10,8 @@ public class Start {
 
 	//
 
+	private Controller controller;
+
 	public static void main(String[] args) {
 
 	}
@@ -23,12 +25,12 @@ public class Start {
 		
 		// Local files on the computer
 		FolderTree folderTree = new FolderTree();
+		File file = new File();
 
 		// ####### VIEW #######
-		GuiWindower gui = new GuiWindower();
+		GuiWindower gui = new GuiWindower(controller);
 
-		// ####### CONTROLER #######
-		Controller controller = new Controller(gui, folderTree, clientP2Pnode);
+		controller = new Controller(gui, folderTree, file, clientP2Pnode);
 
 	}
 	
