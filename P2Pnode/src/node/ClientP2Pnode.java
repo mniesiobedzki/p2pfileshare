@@ -41,6 +41,10 @@ public class ClientP2Pnode {
 
 	private ClientP2PnodeCallback nodeCallback;
 
+	public ClientP2Pnode() {
+		// TODO Auto-generated constructor stub
+	}
+
 	@SuppressWarnings("unchecked")
 	public ClientP2Pnode(int portOut, String serverIP, int serverPort,
 			String nodeName) {
