@@ -7,8 +7,9 @@ import node.ClientP2Pnode;
 
 /**
  * Main Controller
+ * 
  * @author Marek Niesiobędzki
- *
+ * 
  */
 public class Controller {
 
@@ -17,48 +18,46 @@ public class Controller {
 	private ClientP2Pnode clientP2Pnode;
 	private File file;
 
-	public Controller(GuiWindower gui, FolderTree folderTree,
-			File file, ClientP2Pnode clientP2Pnode) {
-				this.gui = gui;
-				this.folderTree = folderTree;
-				this.file = file;
-				this.clientP2Pnode = clientP2Pnode;
+	public Controller(GuiWindower gui, FolderTree folderTree, File file,
+			ClientP2Pnode clientP2Pnode) {
+		this.gui = gui;
+		this.folderTree = folderTree;
+		this.file = file;
+		this.clientP2Pnode = clientP2Pnode;
 	}
-	
+
 	/**
 	 * Metoda dla GUI do ustawiania serwera
-	 * @param serverIP - IP boostrapserver
+	 * 
+	 * @param serverIP
+	 *            - IP boostrapserver
 	 */
-	public void setServerIP(String serverIP){
+	public void setServerIP(String serverIP) {
 		clientP2Pnode.setServerIP(serverIP);
 	}
-	
-	public void setServerPort(int serverPort){
+
+	public void setServerPort(int serverPort) {
 		clientP2Pnode.setServerPort(serverPort);
 	}
-	
-	public void setClientPort(int clientPort){
+
+	public void setClientPort(int clientPort) {
 		clientP2Pnode.setClientPort(clientPort);
 	}
-	
-	public void setClientName(String clientName){
+
+	public void setClientName(String clientName) {
 		clientP2Pnode.setClientName(clientName);
 	}
-	
+
 	public void setFolderTreePath(String path) {
-		//file.
+		//
 	}
-	
+
 	public boolean startSync() {
 		return true;
 	}
-	
+
 	public boolean stopSync() {
 		return true;
 	}
-	
-	
-	
-	
 
 }
