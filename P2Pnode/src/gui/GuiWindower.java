@@ -52,7 +52,11 @@ public class GuiWindower {
     
     public static void main(String[] args) {
 
-        EventQueue.invokeLater(new Runnable() {
+        createGUI();
+    }
+
+	private static void createGUI() {
+		EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
 
@@ -91,7 +95,7 @@ public class GuiWindower {
                 }
             }
         });
-    }
+	}
 
     public static class PopupFrame extends JFrame {
 
