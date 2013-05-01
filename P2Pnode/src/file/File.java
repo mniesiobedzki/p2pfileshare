@@ -20,6 +20,7 @@ public class File {
 	// danego pliku z folderu.
 	//
 	// TO-DO trzeba przerzuciæ to do g³ównej klasy - do rozwa¿enia
+	
 	public static Map<String, File> filesAndTheirHistory = new HashMap<String, File>();
 	
 	// file hash pliku z pakietu P2PP

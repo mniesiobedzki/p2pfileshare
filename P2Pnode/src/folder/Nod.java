@@ -6,13 +6,13 @@ import file.FileState;
 
 public class Nod {
 	String value;
-	LinkedList<String> children = new LinkedList<String>();// klucze potomków
+	LinkedList<String> children = new LinkedList<String>();// klucze potomkÃ³w
 	String parent;// klucz rodzica
 	Nod owner;
 	LinkedList<FileState> history = new LinkedList<FileState>();
 
 	/**
-	 * konstruktor dla korzenia i dla u¿ytkowników
+	 * konstruktor dla korzenia i dla uï¿½ytkownikï¿½w
 	 * 
 	 * @param val
 	 * @param par
@@ -27,7 +27,7 @@ public class Nod {
 	}
 
 	/**
-	 * konstruktor dla plików
+	 * konstruktor dla plikï¿½w
 	 * 
 	 * @param val
 	 *            - ID pliku
@@ -38,7 +38,7 @@ public class Nod {
 	 * @param hist
 	 *            - Historia pliku
 	 * @param own
-	 *            - ID w³aœciciela
+	 *            - ID wï¿½aï¿½ciciela
 	 */
 	public Nod(String val, Nod par, String key, LinkedList<FileState> hist,
 			Nod own) {
@@ -52,7 +52,7 @@ public class Nod {
 	}
 
 	/**
-	 * Metoda dodaje nastêpnik wêz³a
+	 * Metoda dodaje nastï¿½pnik wï¿½zï¿½a
 	 * 
 	 * @param ch
 	 */
@@ -77,7 +77,7 @@ public class Nod {
 	}
 
 	/**
-	 * Metoda aktualizuj¹ca historie pliku o nowy stan
+	 * Metoda aktualizujï¿½ca historie pliku o nowy stan
 	 * 
 	 * @param state
 	 *            - nowy stan
