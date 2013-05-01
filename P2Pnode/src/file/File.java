@@ -13,13 +13,15 @@ import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.List;
 
+import node.ClientP2Pnode;
+
 public class File {
 
-	// Lista obiektów typu FileState.
+	// Lista obiektï¿½w typu FileState.
 	// Lista ta przechowuje informacje o wszystkich modyfikacjach
 	// danego pliku z folderu.
 	//
-	// TO-DO trzeba przerzuciæ to do g³ównej klasy - do rozwa¿enia
+	// TO-DO trzeba przerzuciï¿½ to do gï¿½ï¿½wnej klasy - do rozwaï¿½enia
 	
 	public static Map<String, File> filesAndTheirHistory = new HashMap<String, File>();
 	
@@ -56,6 +58,10 @@ public class File {
 		singleFileHistory 	= new LinkedList<FileState>();
 	}
 	
+	public File(ClientP2Pnode clientP2Pnode) {
+		// TODO Auto-generated constructor stub
+	}
+
 	/*******************REGION METOD**********************/
 	public File getCurrentFileWithLatestHistoryEntry(){
 		File file = new File();
@@ -93,14 +99,14 @@ public class File {
 				if (event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
 					System.out.println("Delete: " + event.context().toString());
 					
-					//Metoda ustawiaj¹ca pola obiektu FileState na stan - DELETED
+					//Metoda ustawiajï¿½ca pola obiektu FileState na stan - DELETED
 					// To-Do PERSON ID podstawic prawdziwe dane
 					setFileStateHistoryEntry(new Date().getTime(),"deleted","1111",0,"");
 				}
 				if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
 					System.out.println("Modify: " + event.context().toString());
 					
-					//Metoda ustawiaj¹ca pola obiektu FileState
+					//Metoda ustawiajï¿½ca pola obiektu FileState
 					// To-Do PERSON ID podstawic prawdziwe dane
 					setFileStateHistoryEntry(new Date().getTime(),
 							event.context().toString(),
