@@ -55,6 +55,7 @@ public class ClientP2Pnode {
 		this.node.setBootPort(serverPort);
 		this.node.setUserName(nodeName);
 		this.node.setUdpPort(portOut);
+		
 		this.node.networkJoin();
 		
 		//JCSyncObservable nn = new JCSyncObservable();
@@ -63,22 +64,8 @@ public class ClientP2Pnode {
 
 		while (!this.node.isConnected()) {
 			System.out.println("Node " + nodeName + ": Not connected :(");
-
-			/*
-			 * try { //Thread.sleep(1000); //snooze(500); } catch
-			 * (InterruptedException e) {
-			 * System.out.println("SimpleNode.SimpleNode()" + e);
-			 * /*Logger.getLogger(BasicCollectionUsage.class.getName()).log(
-			 * Level.SEVERE, null, e); }
-			 */
-			// this.node.networkLeave();
-			// System.out.println("Leave");
 			snooze(1000);
-			// this.node.networkJoin();
 		}
-		//node.get
-		
-		
 		
 		System.out.println("Node " + nodeName + ": Connected !!");
 
