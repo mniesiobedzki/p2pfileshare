@@ -31,9 +31,10 @@ public class File {
 	// historia zmian pliku 
 	private LinkedList<FileState> singleFileHistory;
 	
-	public void main(String[] args) {
+	public static void runFolderListener(String path){
+		//final Path myDir = Paths.get("C:/Programowanie"); // define a folder root
 		
-		final Path myDir = Paths.get("C:/Programowanie"); // define a folder root
+		final Path myDir = Paths.get(path); // define a folder root
 		try {
 			Runnable r = new Runnable() {
 				@Override
@@ -50,7 +51,6 @@ public class File {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public File(){
@@ -71,7 +71,7 @@ public class File {
 		return file; 
 	}
 	
-	private void handleDirectoryChangeEvent(Path myDir) {
+	private static void handleDirectoryChangeEvent(Path myDir) {
 		
 		try 
 		{
@@ -88,32 +88,32 @@ public class File {
 					System.out.println("Created: " + event.context().toString());
 					
 					// To-Do PERSON ID podstawic prawdziwe dane
-					setFileStateHistoryEntry(new Date().getTime(),
-							event.context().toString(),
-							"1111",
-							new java.io.File(myDir.toString() + "/" + event.context().toString()).length(),
-							FileState.generateFileMD5Hash(myDir.toString()+"/" + event.context().toString())
-						);
-					filesAndTheirHistory.put(getFileId(), this);
+//					setFileStateHistoryEntry(new Date().getTime(),
+//							event.context().toString(),
+//							"1111",
+//							new java.io.File(myDir.toString() + "/" + event.context().toString()).length(),
+//							FileState.generateFileMD5Hash(myDir.toString()+"/" + event.context().toString())
+//						);
+//					filesAndTheirHistory.put(getFileId(), this);
 				}
 				if (event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
 					System.out.println("Delete: " + event.context().toString());
 					
 					//Metoda ustawiaj�ca pola obiektu FileState na stan - DELETED
 					// To-Do PERSON ID podstawic prawdziwe dane
-					setFileStateHistoryEntry(new Date().getTime(),"deleted","1111",0,"");
+//					setFileStateHistoryEntry(new Date().getTime(),"deleted","1111",0,"");
 				}
 				if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
 					System.out.println("Modify: " + event.context().toString());
 					
 					//Metoda ustawiaj�ca pola obiektu FileState
 					// To-Do PERSON ID podstawic prawdziwe dane
-					setFileStateHistoryEntry(new Date().getTime(),
-							event.context().toString(),
-							"1111",
-							new java.io.File(myDir.toString() + "/" + event.context().toString()).length(),
-							FileState.generateFileMD5Hash(myDir.toString()+"/" + event.context().toString())
-						);
+//					setFileStateHistoryEntry(new Date().getTime(),
+//							event.context().toString(),
+//							"1111",
+//							new java.io.File(myDir.toString() + "/" + event.context().toString()).length(),
+//							FileState.generateFileMD5Hash(myDir.toString()+"/" + event.context().toString())
+//						);
 				}
 			}
 
@@ -135,8 +135,7 @@ public class File {
 	 * 
 	 */
 	
-	private void setFileStateHistoryEntry(long entryDate, String fileName,
-			String userID, long fileSize, String fileMD5Hash) {
+	private void setFileStateHistoryEntry(long entryDate, String fileName, String userID, long fileSize, String fileMD5Hash) {
 
 		FileState fileStateObj = new FileState();
 		

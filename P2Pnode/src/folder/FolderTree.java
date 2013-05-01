@@ -6,12 +6,17 @@ import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import file.File;
 
 public class FolderTree {
+	
 	public JCSyncTreeMap<String, Nod> folder = new JCSyncTreeMap<String, Nod>();
 	// klucz to dla korzenia "root"
-	// dla u¿ytkownika jego ID
-	// dla pliku ID u¿ytkownika + ID pliku
+	// dla uÅ¼ytkownika jego ID
+	// dla pliku ID uÅ¼ytkownika + ID pliku
 	public Nod root;// nazwa folderu albo lokalizacja url
 
+	public FolderTree(){
+		
+	}
+	
 	public FolderTree(String path) {
 		root = new Nod(path, null, "root");
 	}
@@ -21,10 +26,10 @@ public class FolderTree {
 	}
 
 	/**
-	 * Metoda dodaj¹ca u¿ytkownika
+	 * Metoda dodajÄ…ca uÅ¼ytkownika
 	 * 
 	 * @param usr
-	 *            - ID u¿ytkownika
+	 *            - ID uï¿½ytkownika
 	 */
 	public void addUser(String usr) {
 		Nod n = new Nod(usr, root, usr);
@@ -50,11 +55,11 @@ public class FolderTree {
 	}
 
 	/**
-	 * Metoda aktualizuj¹ca historie pliku o najnowszy wpis z listy lokalnej
+	 * Metoda aktualizujÄ…ca historie pliku o najnowszy wpis z listy lokalnej
 	 * 
 	 * @param f
 	 * @param usr
-	 *            - ID u¿ytkownika
+	 *            - ID uï¿½ytkownika
 	 */
 	public void updateFile(File f, String usr) {
 		Nod file = folder.get(usr + f.getFileId());
@@ -66,11 +71,11 @@ public class FolderTree {
 	}
 
 	/**
-	 * Metoda przechodzi po liscie lokalnych plików i ich historii porównuj¹c je
+	 * Metoda przechodzi po liscie lokalnych plikï¿½w i ich historii porï¿½wnujï¿½c je
 	 * z plikami trzymanymi w drzewie synchronizowanym przez JCSync
 	 * 
 	 * @param usr
-	 *            - ID U¿ytkownika
+	 *            - ID Uï¿½ytkownika
 	 */
 	public void updateAll(String usr) {
 		for (File f : File.filesAndTheirHistory.values()) {
@@ -115,6 +120,6 @@ public class FolderTree {
 				}
 			}
 		}
-		// tu dodaæ kod wy³apuj¹cy zmiany wymagaj¹ce dodania
+		// tu dodaï¿½ kod wyï¿½apujï¿½cy zmiany wymagajï¿½ce dodania
 	}
 }
