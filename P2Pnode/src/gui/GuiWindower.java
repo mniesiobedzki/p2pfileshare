@@ -23,6 +23,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -49,7 +51,7 @@ import javax.swing.filechooser.FileSystemView;
 import main.Controller;
 
 
-public class GuiWindower {
+public class GuiWindower implements PropertyChangeListener {
 	
     protected static final PopupFrame POPUP_FRAME = new PopupFrame();
     static JTextField idInput, ipInput, portInput; 
@@ -57,13 +59,13 @@ public class GuiWindower {
     static JButton generujIdInput, rozpocznijBt;
     static Controller kontroler;
     
-    public GuiWindower(Controller k) {
-    	kontroler = k;
+    public GuiWindower() {
+    	//kontroler = k;
     	createGUI();
     }
     
     public static void main(String[] args) {
-    	GuiWindower g = new GuiWindower(null);
+    	GuiWindower g = new GuiWindower();
     	g.createGUI();
    	}
     
@@ -334,4 +336,16 @@ public class GuiWindower {
         }
         return device;
     }
+
+	@Override
+	public void propertyChange(PropertyChangeEvent evt) {
+		if(evt.getPropertyName().equals("nazwa")) {
+			//TODO: coś
+		}
+	}
+	
+	/* Action Listeners */
+	public void addButtonActionListener(ActionListener listener){
+		rozpocznijBt.addActionListener(listener);
+	}
 }

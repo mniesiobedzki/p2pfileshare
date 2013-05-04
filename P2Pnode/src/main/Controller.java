@@ -1,5 +1,10 @@
 package main;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 import file.File;
 import folder.FolderTree;
 import gui.GuiWindower;
@@ -17,6 +22,8 @@ public class Controller {
 	private FolderTree folderTree;
 	private ClientP2Pnode clientP2Pnode;
 	private File file;
+	
+	private PropertyChangeSupport propertyChangeSupport =  new PropertyChangeSupport(this);
 
 	public Controller(GuiWindower gui, FolderTree folderTree, File file,
 			ClientP2Pnode clientP2Pnode) {
@@ -24,7 +31,26 @@ public class Controller {
 		this.folderTree = folderTree;
 		this.file = file;
 		this.clientP2Pnode = clientP2Pnode;
+		
+		this.gui.addButtonActionListener(guziki); // podpięcie guzików
+		this.addPropertyChangeListener(this.gui); // podpięcie zmian
 	}
+	
+	private void addPropertyChangeListener(PropertyChangeListener listener) {
+		propertyChangeSupport.addPropertyChangeListener(listener);		
+	}
+
+	/* Action Listener */
+	private ActionListener guziki = new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			if (e.getActionCommand().equals("nazwa")){
+				//TODO: coś
+			}
+			
+		}
+	};
 
 	/**
 	 * Metoda dla GUI do ustawiania serwera
@@ -59,5 +85,7 @@ public class Controller {
 	public boolean stopSync() {
 		return true;
 	}
+	
+	
 
 }

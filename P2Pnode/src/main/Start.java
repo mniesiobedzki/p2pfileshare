@@ -29,7 +29,7 @@ public class Start {
 		File file = new File();
 
 		// ####### VIEW #######
-		GuiWindower gui = new GuiWindower(controller);
+		GuiWindower gui = new GuiWindower();
 
 		controller = new Controller(gui, folderTree, file, clientP2Pnode);
 
