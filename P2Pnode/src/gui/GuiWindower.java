@@ -251,13 +251,13 @@ public class GuiWindower implements PropertyChangeListener {
             rozpocznijBt = new JButton("Rozpocznij");
             rozpocznijBt.setEnabled(false);
             rozpocznijBt.setFont(new Font("Segoe UI", Font.PLAIN, 22));
-            rozpocznijBt.addActionListener(new ActionListener() {
+            /*rozpocznijBt.addActionListener(new ActionListener() {
 				
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					kontroler.setFolderTreePath(folderSynchronizowany);
+					//kontroler.setFolderTreePath(folderSynchronizowany);
 				}
-			});
+			});*/
             panelPierwszegoUruchomienia.add(rozpocznijBt);
             
             JPanel panelLoga = new JPanel();
@@ -347,5 +347,10 @@ public class GuiWindower implements PropertyChangeListener {
 	/* Action Listeners */
 	public void addButtonActionListener(ActionListener listener){
 		rozpocznijBt.addActionListener(listener);
+	}
+
+	public String getFolderPath() {
+		return this.folderSynchronizowany;
+		
 	}
 }

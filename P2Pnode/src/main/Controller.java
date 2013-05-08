@@ -45,8 +45,10 @@ public class Controller {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			if (e.getActionCommand().equals("nazwa")){
+			System.out.println("Akcja "+e.getActionCommand());
+			if (e.getActionCommand().equals("Rozpocznij")){
 				//TODO: coś
+				startSync();
 			}
 			
 		}
@@ -75,7 +77,8 @@ public class Controller {
 	}
 
 	public void setFolderTreePath(String path) {
-		//
+		//TODO: uruchomienie nasłuchu zmian
+		this.gui.getFolderPath();
 	}
 
 	public boolean startSync() {
