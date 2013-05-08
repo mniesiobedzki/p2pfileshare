@@ -22,8 +22,9 @@ public class Controller {
 	private FolderTree folderTree;
 	private ClientP2Pnode clientP2Pnode;
 	private File file;
-	
-	private PropertyChangeSupport propertyChangeSupport =  new PropertyChangeSupport(this);
+
+	private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(
+			this);
 
 	public Controller(GuiWindower gui, FolderTree folderTree, File file,
 			ClientP2Pnode clientP2Pnode) {
@@ -31,28 +32,32 @@ public class Controller {
 		this.folderTree = folderTree;
 		this.file = file;
 		this.clientP2Pnode = clientP2Pnode;
-		
+
 		this.gui.addButtonActionListener(guziki); // podpięcie guzików
 		this.addPropertyChangeListener(this.gui); // podpięcie zmian
 	}
-	
+
 	private void addPropertyChangeListener(PropertyChangeListener listener) {
-		propertyChangeSupport.addPropertyChangeListener(listener);		
+		propertyChangeSupport.addPropertyChangeListener(listener);
 	}
 
 	/* Action Listener */
 	private ActionListener guziki = new ActionListener() {
-		
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("Akcja "+e.getActionCommand());
-			if (e.getActionCommand().equals("Rozpocznij")){
-				//TODO: coś
+			System.out.println("Akcja " + e.getActionCommand());
+			if (e.getActionCommand().equals("Rozpocznij")) {
+				// TODO: coś
 				startSync();
 			}
-			
+
 		}
 	};
+	private int serverPort;
+	private int nodePort;
+	private String clientName;
+	private String serverAddress;
 
 	/**
 	 * Metoda dla GUI do ustawiania serwera
@@ -60,24 +65,34 @@ public class Controller {
 	 * @param serverIP
 	 *            - IP boostrapserver
 	 */
-	public void setServerIP(String serverIP) {
-		clientP2Pnode.setServerIP(serverIP);
+	public void getServerAddress() {
+		serverAddress = this.gui.getServerAddress();
 	}
 
-	public void setServerPort(int serverPort) {
-		//clientP2Pnode.setServerPort(serverPort);
+	public void getServerPort() {
+		String port = this.gui.getServerPort();
+		if (isStringPortNumber(port)) {
+			serverPort = Integer.parseInt(port);
+		} else {
+			this.gui.displayError("Zły numer portu serwera");
+		}
 	}
 
-	public void setClientPort(int clientPort) {
-		//clientP2Pnode.setClientPort(clientPort);
+	public void getClientPort() {
+		String port = this.gui.getClientPort();
+		if (isStringPortNumber(port)) {
+			nodePort = Integer.parseInt(port);
+		} else {
+			this.gui.displayError("Zły numer portu klienta");
+		}
 	}
 
-	public void setClientName(String clientName) {
-		//clientP2Pnode.setClientName(clientName);
+	public void getClientName() {
+		clientName = this.gui.getClientName();
 	}
 
 	public void setFolderTreePath(String path) {
-		//TODO: uruchomienie nasłuchu zmian
+		// TODO: uruchomienie nasłuchu zmian
 		this.gui.getFolderPath();
 	}
 
@@ -88,7 +103,10 @@ public class Controller {
 	public boolean stopSync() {
 		return true;
 	}
-	
-	
+
+	private boolean isStringPortNumber(String port) {
+		return port
+				.matches("(^[0-9]$)|(^[0-9][0-9]$)|(^[0-9][0-9][0-9]$)|(^[0-9][0-9][0-9][0-9]$)|((^[0-5][0-9][0-9][0-9][0-9]$)|(^6[0-4][0-9][0-9][0-9]$)|(^65[0-4][0-9][0-9]$)|(^655[0-2][0-9]$)|(^6553[0-5]$))");
+	}
 
 }

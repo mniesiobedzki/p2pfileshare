@@ -54,7 +54,7 @@ import main.Controller;
 public class GuiWindower implements PropertyChangeListener {
 	
     protected static final PopupFrame POPUP_FRAME = new PopupFrame();
-    static JTextField idInput, ipInput, portInput; 
+     JTextField idInput, ipInput, serverPortInput; 
     static String folderSynchronizowany;
     static JButton generujIdInput, rozpocznijBt;
     static Controller kontroler;
@@ -169,11 +169,11 @@ public class GuiWindower implements PropertyChangeListener {
             ipInput.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(ipInput);
           
-            portInput = new JTextField();
-            portInput.setPreferredSize(new Dimension(50, 30));
-            portInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-            portInput.setHorizontalAlignment(JTextField.CENTER);
-            panelPierwszegoUruchomienia.add(portInput);
+            serverPortInput = new JTextField();
+            serverPortInput.setPreferredSize(new Dimension(50, 30));
+            serverPortInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            serverPortInput.setHorizontalAlignment(JTextField.CENTER);
+            panelPierwszegoUruchomienia.add(serverPortInput);
             
             RichJLabel podajIdJLabel = new RichJLabel("Podaj ID lub wygeneruj automatycznie",0);
             podajIdJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
@@ -352,5 +352,29 @@ public class GuiWindower implements PropertyChangeListener {
 	public String getFolderPath() {
 		return this.folderSynchronizowany;
 		
+	}
+
+	public String getServerPort() {
+		return this.serverPortInput.getText();
+	}
+
+	public void displayError(String string) {
+		// TODO Wyświetl infromację o błędzie
+		
+	}
+
+	public String getClientPort() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getClientName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public String getServerAddress() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
