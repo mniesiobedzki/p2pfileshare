@@ -1,7 +1,6 @@
 package folder;
 
 import java.util.LinkedList;
-
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import file.File;
 
