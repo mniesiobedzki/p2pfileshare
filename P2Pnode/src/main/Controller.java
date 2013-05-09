@@ -60,13 +60,15 @@ public class Controller {
 	private String serverAddress;
 
 	/**
-	 * Metoda dla GUI do ustawiania serwera
-	 * 
-	 * @param serverIP
-	 *            - IP boostrapserver
+	 * Pobiera adres serwera z GUI i sprawdza czy pasuje do wzorców adresu IP lub hostu
 	 */
 	public void getServerAddress() {
-		serverAddress = this.gui.getServerAddress();
+		String addressOrIP = this.gui.getServerAddress();
+		if (isStringIPorHostName(addressOrIP)) {
+			serverAddress = addressOrIP;
+		} else {
+			this.gui.displayError("Zły adres IP lub host");
+		}
 	}
 
 	public void getServerPort() {
@@ -107,6 +109,21 @@ public class Controller {
 	private boolean isStringPortNumber(String port) {
 		return port
 				.matches("(^[0-9]$)|(^[0-9][0-9]$)|(^[0-9][0-9][0-9]$)|(^[0-9][0-9][0-9][0-9]$)|((^[0-5][0-9][0-9][0-9][0-9]$)|(^6[0-4][0-9][0-9][0-9]$)|(^65[0-4][0-9][0-9]$)|(^655[0-2][0-9]$)|(^6553[0-5]$))");
+	}
+
+	private boolean isStringIPorHostName(String hostOrIP) {
+		String ValidIpAddressRegex = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$";
+		String ValidHostnameRegex = "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$";
+		return (hostOrIP.matches(ValidIpAddressRegex) || hostOrIP
+				.matches(ValidHostnameRegex));
+	}
+
+	public static void main(String[] args) {
+		String ValidIpAddressRegex = "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$";
+
+		String ValidHostnameRegex = "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9])$";
+		System.out.println(new String("1299serek.pjwstk.wp.pl.dupa")
+				.matches(ValidHostnameRegex));
 	}
 
 }
