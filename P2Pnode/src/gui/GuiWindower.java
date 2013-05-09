@@ -33,6 +33,7 @@ import java.util.Random;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -53,11 +54,11 @@ import main.Controller;
 
 public class GuiWindower implements PropertyChangeListener {
 	
-    protected static final PopupFrame POPUP_FRAME = new PopupFrame();
-     JTextField idInput, ipInput, serverPortInput; 
-    static String folderSynchronizowany;
-    static JButton generujIdInput, rozpocznijBt;
-    static Controller kontroler;
+    protected final PopupFrame POPUP_FRAME = new PopupFrame();
+    JTextField idInput, ipInput, serverPortInput; 
+    String folderSynchronizowany;
+    JButton generujIdInput, rozpocznijBt;
+    Controller kontroler;
     
     public GuiWindower() {
     	//kontroler = k;
@@ -110,8 +111,8 @@ public class GuiWindower implements PropertyChangeListener {
         });
 	}
 
-    public static class PopupFrame extends JFrame {
-
+    public class PopupFrame extends JDialog {
+ 
         public PopupFrame() throws HeadlessException {
             setLayout(null);
             setUndecorated(true);
@@ -163,13 +164,13 @@ public class GuiWindower implements PropertyChangeListener {
             podajIPJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             panelPierwszegoUruchomienia.add(podajIPJLabel);
 
-            ipInput = new JTextField();
+            JTextField ipInput = new JTextField();
             ipInput.setPreferredSize(new Dimension(180, 30));
             ipInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             ipInput.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(ipInput);
           
-            serverPortInput = new JTextField();
+            JTextField serverPortInput = new JTextField();
             serverPortInput.setPreferredSize(new Dimension(50, 30));
             serverPortInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             serverPortInput.setHorizontalAlignment(JTextField.CENTER);
@@ -179,7 +180,7 @@ public class GuiWindower implements PropertyChangeListener {
             podajIdJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             panelPierwszegoUruchomienia.add(podajIdJLabel);
             
-            idInput = new JTextField();
+            final JTextField idInput = new JTextField();
             idInput.getDocument().addDocumentListener(new DocumentListener() {
 				public void changedUpdate(DocumentEvent e) {
 					generujIdInput.setEnabled(false);
@@ -277,7 +278,7 @@ public class GuiWindower implements PropertyChangeListener {
         }
     }
 
-    public static void wyborFolderu() {
+    public void wyborFolderu() {
     	JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("Wybierz folder do synchronizacji");
         chooser.setFileHidingEnabled(true);

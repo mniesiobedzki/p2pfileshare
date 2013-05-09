@@ -8,7 +8,6 @@ import gui.GuiWindower;
 
 public class Start {
 
-	//
 
 	private Controller controller;
 
