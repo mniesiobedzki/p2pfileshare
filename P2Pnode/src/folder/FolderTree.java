@@ -9,8 +9,8 @@ public class FolderTree {
 	
 	public JCSyncTreeMap<String, Nod> folder = new JCSyncTreeMap<String, Nod>();
 	// klucz to dla korzenia "root"
-	// dla uÅ¼ytkownika jego ID
-	// dla pliku ID uÅ¼ytkownika + ID pliku
+	// dla u¿ytkownika jego ID
+	// dla pliku ID u¿ytkownika + ID pliku
 	public Nod root;// nazwa folderu albo lokalizacja url
 
 	public FolderTree(){
@@ -26,10 +26,10 @@ public class FolderTree {
 	}
 
 	/**
-	 * Metoda dodajÄ…ca uÅ¼ytkownika
+	 * Metoda dodaj¹ca u¿ytkownika
 	 * 
 	 * @param usr
-	 *            - ID uï¿½ytkownika
+	 *            - ID u¿ytkownika
 	 */
 	public void addUser(String usr) {
 		Nod n = new Nod(usr, root, usr);
@@ -55,11 +55,11 @@ public class FolderTree {
 	}
 
 	/**
-	 * Metoda aktualizujÄ…ca historie pliku o najnowszy wpis z listy lokalnej
+	 * Metoda aktualizuj¹ca historie pliku o najnowszy wpis z listy lokalnej
 	 * 
 	 * @param f
 	 * @param usr
-	 *            - ID uï¿½ytkownika
+	 *            - ID u¿ytkownika
 	 */
 	public void updateFile(File f, String usr) {
 		Nod file = folder.get(usr + f.getFileId());
@@ -71,11 +71,11 @@ public class FolderTree {
 	}
 
 	/**
-	 * Metoda przechodzi po liscie lokalnych plikï¿½w i ich historii porï¿½wnujï¿½c je
+	 * Metoda przechodzi po liscie lokalnych plików i ich historii porównuj¹c je
 	 * z plikami trzymanymi w drzewie synchronizowanym przez JCSync
 	 * 
 	 * @param usr
-	 *            - ID Uï¿½ytkownika
+	 *            - ID U¿ytkownika
 	 */
 	public void updateAll(String usr) {
 		for (File f : File.filesAndTheirHistory.values()) {

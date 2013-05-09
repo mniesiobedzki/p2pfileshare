@@ -2,11 +2,11 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="bcprov-jdk15on-148.jar"/>
-	<classpathentry kind="lib" path="cloning-1.9.0.jar"/>
-	<classpathentry kind="lib" path="javasysmon-0.3.3.jar"/>
-	<classpathentry kind="lib" path="log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="objenesis-tck-1.3.jar"/>
-	<classpathentry kind="lib" path="p2pm.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Samael/Documents/GitHub/p2pfileshare/P2Pnode/bcprov-jdk15on-148.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Samael/Documents/GitHub/p2pfileshare/P2Pnode/cloning-1.9.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Samael/Documents/GitHub/p2pfileshare/P2Pnode/javasysmon-0.3.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Samael/Documents/GitHub/p2pfileshare/P2Pnode/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Samael/Documents/GitHub/p2pfileshare/P2Pnode/objenesis-tck-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Samael/Documents/GitHub/p2pfileshare/P2Pnode/p2pm.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
