@@ -7,3 +7,6 @@
 *.ear
 .DS_Store
 /bin
+.iws
+workspace.xml
+tasks.xml
