@@ -1,3 +1,5 @@
+.gitignore
+.classpath
 *.class
 *.classpath
 # Package Files #
