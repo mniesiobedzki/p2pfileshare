@@ -250,6 +250,8 @@ public class ClientP2Pnode {
 		return (JCSyncObservable) sharedObservableObject.getNucleusObject();
 	}
 
+
+
 	/**
 	 * 
 	 * @return
