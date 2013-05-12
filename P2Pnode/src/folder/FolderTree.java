@@ -49,11 +49,10 @@ public class FolderTree {
 		
 		for (String k: root.getChildren()){
 			Nod n = this.getFolder().get(k);
-			s+= "\n";
+			s+= "\n\t";
 			s+=n.name;
 			for(String c: n.getChildren()){
-				s+="\n";
-				s+="\t";
+				s+="\n\t\t";
 				s+=c;
 			}
 		}
