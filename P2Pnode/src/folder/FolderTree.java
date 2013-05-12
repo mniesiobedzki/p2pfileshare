@@ -20,6 +20,7 @@ public class FolderTree {
 	
 	public FolderTree(String path) {
 		root = new Nod(path, "root");
+		this.folder.put("root", root);
 	}
 
 	public TreeMap<String, Nod> getFolder() {

@@ -15,7 +15,7 @@ public class TestClient {
 		ft.addUser("user1");
 		File f = new File("test.txt");
 		ft.addFile(f, "user1");
-		FileClient client = new FileClient(args[0], "test.txt");
+		FileClient client = new FileClient("1.1.1.20", "test.txt");
 
 	}
 
