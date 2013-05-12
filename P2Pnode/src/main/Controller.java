@@ -34,7 +34,6 @@ public class Controller {
 		this.clientP2Pnode = clientP2Pnode;
 		this.gui.addButtonActionListener(guziki); // podpięcie guzików
 		this.addPropertyChangeListener(this.gui); // podpięcie zmian
-		this.folderTree = new FolderTree(this.gui.getFolderPath());
 	}
 
 	private void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -51,6 +50,7 @@ public class Controller {
 				// TODO: coś
 				startSync();
 				File.runFolderListener(gui.getFolderPath());
+				folderTree = new FolderTree(gui.getFolderPath());
 			}
 
 		}
