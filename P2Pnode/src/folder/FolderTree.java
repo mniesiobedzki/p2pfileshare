@@ -43,6 +43,23 @@ public class FolderTree {
 		this.root = root;
 	}
 
+	@Override
+	public String toString() {
+		String s = "FolderTree [root=" + root.getName() + "]"+"\n";
+		
+		for (String k: root.getChildren()){
+			Nod n = this.getFolder().get(k);
+			s+= "\n";
+			s+=n.name;
+			for(String c: n.getChildren()){
+				s+="\n";
+				s+="\t";
+				s+=c;
+			}
+		}
+		return s;
+	}
+
 	public void setFolder(JCSyncTreeMap<String, Nod> folder) {
 		this.folder = folder;
 	}
