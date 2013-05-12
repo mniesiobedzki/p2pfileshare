@@ -27,7 +27,8 @@ public class File {
 	
 	// file hash pliku z pakietu P2PP
 	private String fileId; 
-
+	private String fileName;
+	
 	// historia zmian pliku 
 	private LinkedList<FileState> singleFileHistory;
 	
@@ -183,6 +184,14 @@ public class File {
 
 	public void setFileId(String fileId) {
 		this.fileId = fileId;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 }
