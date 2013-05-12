@@ -1,10 +1,10 @@
 package node;
 
-import java.util.List;
-
 import pl.edu.pjwstk.mteam.core.NetworkObject;
 import pl.edu.pjwstk.mteam.core.Node;
 import pl.edu.pjwstk.mteam.core.NodeCallback;
+
+import java.util.List;
 
 public class ClientP2PnodeCallback implements NodeCallback {
 
@@ -26,7 +26,12 @@ public class ClientP2PnodeCallback implements NodeCallback {
 		return false;
 	}
 
-	@Override
+    @Override
+    public void onBootstrapError(Node node, int i) {
+        //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
 	public void onInsertObject(Node arg0, NetworkObject arg1) {
 		System.out.println("NodeCallback: Node " + arg0.getUserName() + " inserts new object");
 		
