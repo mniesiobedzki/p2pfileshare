@@ -1,10 +1,15 @@
 package file;
 
+import gui.GuiWindower;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardWatchEventKinds;
@@ -21,7 +26,7 @@ public class File {
 	// Lista ta przechowuje informacje o wszystkich modyfikacjach
 	// danego pliku z folderu.
 	//
-	// TO-DO trzeba przerzuci� to do g��wnej klasy - do rozwa�enia
+	// TO-DO trzeba przerzucić to do głównej klasy - do rozważenia
 	
 	public static Map<String, File> filesAndTheirHistory = new HashMap<String, File>();
 	
@@ -31,6 +36,28 @@ public class File {
 	
 	// historia zmian pliku 
 	private LinkedList<FileState> singleFileHistory;
+
+	public File(){
+		fileId 				= generateFileId("1111");
+		singleFileHistory 	= new LinkedList<FileState>();
+		fileName 			= "TO TRZEBA ZMIENIC";
+	}
+	
+	public File(ClientP2Pnode clientP2Pnode) {
+		// TODO Auto-generated constructor stub
+	}
+	public File(String fileName){
+		this.fileName = fileName;
+	}
+
+	/*******************REGION METOD**********************/
+	public File getCurrentFileWithLatestHistoryEntry(){
+		File file = new File();
+		file.setFileId(this.getFileId());
+		LinkedList<FileState> latestFileState = new LinkedList<FileState>();
+		file.setSingleFileHistory(latestFileState);
+		return file; 
+	}
 	
 	public static void runFolderListener(String path){
 		//final Path myDir = Paths.get("C:/Programowanie"); // define a folder root
@@ -52,24 +79,6 @@ public class File {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public File(){
-		fileId 				= generateFileId("1111");
-		singleFileHistory 	= new LinkedList<FileState>();
-	}
-	
-	public File(ClientP2Pnode clientP2Pnode) {
-		// TODO Auto-generated constructor stub
-	}
-
-	/*******************REGION METOD**********************/
-	public File getCurrentFileWithLatestHistoryEntry(){
-		File file = new File();
-		file.setFileId(this.getFileId());
-		LinkedList<FileState> latestFileState = new LinkedList<FileState>();
-		file.setSingleFileHistory(latestFileState);
-		return file; 
 	}
 	
 	private static void handleDirectoryChangeEvent(Path myDir) {
@@ -151,6 +160,25 @@ public class File {
 
 	private String generateFileId(String userId) {
 		return userId+"_"+new Date().getTime();
+	}
+	
+	private File searchForFile(String fileName){
+		
+		
+		try (BufferedReader br = new BufferedReader(new FileReader("C:\\testing.txt")))
+		{
+ 
+			String sCurrentLine;
+ 
+			while ((sCurrentLine = br.readLine()) != null) {
+				System.out.println(sCurrentLine);
+			}
+ 
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+ 
+		return null;
 	}
 
 	/*****************************************************/
