@@ -1,16 +1,19 @@
 package file;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 
 public class FileClient{
-	  public FileClient (String host, String key ) {
+	  public FileClient (String host, String key, String name ) {
 
 
 	    long start = System.currentTimeMillis();
@@ -26,7 +29,7 @@ public class FileClient{
 	    
 	    InputStream is = sock.getInputStream();
 	    // receive file
-	    this.receiveFile(is);
+	    this.receiveFile(is, name);
 	       long end = System.currentTimeMillis();
 	    System.out.println(end-start);
 
@@ -44,26 +47,37 @@ public class FileClient{
 		}
 	  }
 
-	  public void receiveFile(InputStream is) throws Exception{
-	      int filesize=6022386;
-	      int bytesRead;
-	      int current = 0;
-	      byte [] mybytearray  = new byte [filesize];
-
-	        FileOutputStream fos = new FileOutputStream("def");
-	        BufferedOutputStream bos = new BufferedOutputStream(fos);
-	        bytesRead = is.read(mybytearray,0,mybytearray.length);
-	        current = bytesRead;
-
-
-	        do {
-	           bytesRead =
-	              is.read(mybytearray, current, (mybytearray.length-current));
-	           if(bytesRead >= 0) current += bytesRead;
-	        } while(bytesRead > -1);
-
-	        bos.write(mybytearray, 0 , current);
-	        bos.flush();
-	        bos.close();
+	  public void receiveFile(InputStream is, String name) throws Exception{
+		  try{
+			BufferedReader br = new BufferedReader(new InputStreamReader(is));
+	 
+			StringBuilder sb = new StringBuilder();
+	 
+			String line;
+			while ((line = br.readLine()) != null) {
+				sb.append(line);
+			}
+	 
+			System.out.println(sb.toString());
+			System.out.println("\nDone!");
+			if (br != null) {
+				try {
+					br.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}catch(IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (is != null) {
+				try {
+					is.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			
+		}
 	  }
 	}
