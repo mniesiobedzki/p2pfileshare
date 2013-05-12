@@ -1,0 +1,4 @@
+pierwsza linia testu
+II linia testu
+#3 linia testu
+0100 linia testu
