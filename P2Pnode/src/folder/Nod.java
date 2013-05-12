@@ -8,6 +8,7 @@ public class Nod {
 	String value;
 	LinkedList<String> children = new LinkedList<String>();// klucze potomków
 	String parent;// klucz rodzica
+	String name;
 	Nod owner;
 	LinkedList<FileState> history = new LinkedList<FileState>();
 
@@ -21,6 +22,7 @@ public class Nod {
 	public Nod(String val, Nod par, String key) {
 		value = val;
 		parent = par.getValue();
+		name= val;
 		if (parent != null) {
 			par.addChlid(this.value);
 		}
@@ -31,6 +33,8 @@ public class Nod {
 	 * 
 	 * @param val
 	 *            - ID pliku
+	 * @param n
+	 *            - nazwa pliku
 	 * @param par
 	 *            - ID rodzica
 	 * @param key
@@ -41,14 +45,23 @@ public class Nod {
 	 *            - ID w�a�ciciela
 	 */
 	public Nod(String val, Nod par, String key, LinkedList<FileState> hist,
-			Nod own) {
+			Nod own, String n) {
 		value = val;
 		parent = par.getValue();
+		name = n;
 		if (parent != null) {
 			par.addChlid(this.value);
 		}
 		history = hist;
 		owner = own;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
