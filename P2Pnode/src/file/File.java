@@ -22,13 +22,12 @@ import node.ClientP2Pnode;
 
 public class File {
 
-	// Lista obiekt�w typu FileState.
+	// Lista obiektów typu FileState.
 	// Lista ta przechowuje informacje o wszystkich modyfikacjach
 	// danego pliku z folderu.
-	//
-	// TO-DO trzeba przerzucić to do głównej klasy - do rozważenia
 	
 	public static Map<String, File> filesAndTheirHistory = new HashMap<String, File>();
+	public static Path listenedPath;		// ścieżka folderu który jest nasłuchiwany
 	
 	// file hash pliku z pakietu P2PP
 	private String fileId; 
@@ -63,6 +62,7 @@ public class File {
 		//final Path myDir = Paths.get("C:/Programowanie"); // define a folder root
 		
 		final Path myDir = Paths.get(path); // define a folder root
+		listenedPath = myDir;
 		try {
 			Runnable r = new Runnable() {
 				@Override
@@ -82,7 +82,7 @@ public class File {
 	}
 	
 	private static void handleDirectoryChangeEvent(Path myDir) {
-		
+		searchForFile("bka");
 		try 
 		{
 			WatchService watcher = myDir.getFileSystem().newWatchService();
@@ -162,21 +162,23 @@ public class File {
 		return userId+"_"+new Date().getTime();
 	}
 	
-	private File searchForFile(String fileName){
+	private static File searchForFile(String fileName){
+		System.out.println(listenedPath.toString());
+
+		// dopisac wyszukiwanie plikow poprzez md5
 		
-		
-		try (BufferedReader br = new BufferedReader(new FileReader("C:\\testing.txt")))
-		{
- 
-			String sCurrentLine;
- 
-			while ((sCurrentLine = br.readLine()) != null) {
-				System.out.println(sCurrentLine);
-			}
- 
-		} catch (IOException e) {
-			e.printStackTrace();
-		} 
+//		try (BufferedReader br = new BufferedReader(new FileReader(path.toString())))
+//		{
+// 
+//			String sCurrentLine;
+// 
+//			while ((sCurrentLine = br.readLine()) != null) {
+//				System.out.println(sCurrentLine);
+//			}
+// 
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} 
  
 		return null;
 	}
