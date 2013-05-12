@@ -32,7 +32,7 @@ public class TestServer {
 			e.printStackTrace();
 		}
 		// TODO Auto-generated method stub
-		FolderTree ft = new FolderTree("c:\\");
+		FolderTree ft = new FolderTree("kuku\\");
 		ft.addUser("user1");
 		File f = new File("test.txt");
 		ft.addFile(f, "user1");
