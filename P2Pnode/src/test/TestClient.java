@@ -12,10 +12,12 @@ public class TestClient {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		FolderTree ft = new FolderTree("kuku\\");
-		ft.addUser("user1");
-		File f = new File("test.txt");
-		ft.addFile(f, "user1");
-		FileClient client = new FileClient("1.1.1.20", "user1test.txt");
+		String name = "test.txt";
+		String uname = "user1";
+		ft.addUser(uname);
+		File f = new File(name);
+		ft.addFile(f, uname);
+		FileClient client = new FileClient("1.1.1.20", uname+name, name);
 
 	}
 
