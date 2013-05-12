@@ -1,5 +1,8 @@
 package node;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  * Created with IntelliJ IDEA.
  * User: marek
@@ -7,5 +10,13 @@ package node;
  * Time: 19:32
  * To change this template use File | Settings | File Templates.
  */
-public class CollectionListener {
+public class CollectionListener implements Observer {
+
+
+
+    @Override
+    public void update(Observable o, Object arg) {
+
+
+    }
 }
