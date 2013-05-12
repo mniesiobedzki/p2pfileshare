@@ -1,10 +1,11 @@
 package folder;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 import file.FileState;
 
-public class Nod {
+public class Nod implements Serializable {
 	String value;
 	LinkedList<String> children = new LinkedList<String>();// klucze potomków
 	String parent;// klucz rodzica
@@ -26,6 +27,11 @@ public class Nod {
 		if (parent != null) {
 			par.addChlid(this.value);
 		}
+	}
+	public Nod(String val, String key) {
+		value = val;
+		parent = "root";
+		name= val;
 	}
 
 	/**

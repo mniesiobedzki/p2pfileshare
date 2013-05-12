@@ -17,7 +17,7 @@ public class FolderTree {
 	}
 	
 	public FolderTree(String path) {
-		root = new Nod(path, null, "root");
+		root = new Nod(path, "root");
 	}
 
 	public JCSyncTreeMap<String, Nod> getFolder() {
