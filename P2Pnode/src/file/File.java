@@ -82,7 +82,7 @@ public class File {
 	}
 	
 	private static void handleDirectoryChangeEvent(Path myDir) {
-		searchForFile("bka");
+		searchForFile("blab");
 		try 
 		{
 			WatchService watcher = myDir.getFileSystem().newWatchService();
@@ -163,22 +163,22 @@ public class File {
 	}
 	
 	private static File searchForFile(String fileName){
-		System.out.println(listenedPath.toString());
+		//System.out.println(listenedPath.toString()+"\\"+fileName);
 
 		// dopisac wyszukiwanie plikow poprzez md5
 		
-//		try (BufferedReader br = new BufferedReader(new FileReader(path.toString())))
-//		{
-// 
-//			String sCurrentLine;
-// 
-//			while ((sCurrentLine = br.readLine()) != null) {
-//				System.out.println(sCurrentLine);
-//			}
-// 
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} 
+		try (BufferedReader br = new BufferedReader(new FileReader(listenedPath.toString()+"\\"+fileName)))
+		{
+ 
+			String sCurrentLine;
+ 
+			while ((sCurrentLine = br.readLine()) != null) {
+				System.out.println(sCurrentLine);
+			}
+ 
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
  
 		return null;
 	}
