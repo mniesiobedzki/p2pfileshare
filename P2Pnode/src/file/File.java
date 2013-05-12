@@ -167,19 +167,19 @@ public class File {
 
 		// dopisac wyszukiwanie plikow poprzez md5
 		
-		try (BufferedReader br = new BufferedReader(new FileReader(listenedPath.toString()+"\\"+fileName)))
-		{
- 
-			String sCurrentLine;
- 
-			while ((sCurrentLine = br.readLine()) != null) {
-				System.out.println(sCurrentLine);
-			}
- 
-		} catch (IOException e) {
-			e.printStackTrace();
-		} 
- 
+//		try (BufferedReader br = new BufferedReader(new FileReader(listenedPath.toString()+"\\"+fileName)))
+//		{
+// 
+//			String sCurrentLine;
+// 
+//			while ((sCurrentLine = br.readLine()) != null) {
+//				System.out.println(sCurrentLine);
+//			}
+// 
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		} 
+// 
 		return null;
 	}
 

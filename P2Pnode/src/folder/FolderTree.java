@@ -1,12 +1,14 @@
 package folder;
 
 import java.util.LinkedList;
+import java.util.TreeMap;
+
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import file.File;
 
 public class FolderTree {
 	
-	public JCSyncTreeMap<String, Nod> folder = new JCSyncTreeMap<String, Nod>();
+	public TreeMap<String, Nod> folder = new TreeMap<String, Nod>();
 	// klucz to dla korzenia "root"
 	// dla u�ytkownika jego ID
 	// dla pliku ID u�ytkownika + ID pliku
@@ -20,7 +22,7 @@ public class FolderTree {
 		root = new Nod(path, "root");
 	}
 
-	public JCSyncTreeMap<String, Nod> getFolder() {
+	public TreeMap<String, Nod> getFolder() {
 		return folder;
 	}
 
@@ -32,6 +34,9 @@ public class FolderTree {
 	 */
 	public void addUser(String usr) {
 		Nod n = new Nod(usr, root, usr);
+		System.out.println(n);
+		System.out.println(usr);
+		n.getValue();
 		folder.put(usr, n);
 	}
 
