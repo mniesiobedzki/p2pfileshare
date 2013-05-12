@@ -1,5 +1,7 @@
 package node;
 
+import pl.edu.pjwstk.mteam.jcsync.core.implementation.util.JCSyncObservable;
+
 import java.util.Observable;
 import java.util.Observer;
 
@@ -12,11 +14,16 @@ import java.util.Observer;
  */
 public class CollectionListener implements Observer {
 
+    private JCSyncObservable jcs_obs;
 
+    public CollectionListener(JCSyncObservable jcs_obs) {
+
+        this.jcs_obs = jcs_obs;
+    }
 
     @Override
     public void update(Observable o, Object arg) {
-
+        System.out.println("UPDATE");
 
     }
 }
