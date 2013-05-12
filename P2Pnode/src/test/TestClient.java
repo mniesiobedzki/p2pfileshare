@@ -1,11 +1,10 @@
 package test;
 
 import file.File;
+import file.FileClient;
 import folder.FolderTree;
-import folder.Nod;
 
-
-public class Test {
+public class TestClient {
 
 	/**
 	 * @param args
@@ -16,6 +15,8 @@ public class Test {
 		ft.addUser("user1");
 		File f = new File("test.txt");
 		ft.addFile(f, "user1");
+		FileClient client = new FileClient(args[0], "test.txt");
+
 	}
 
 }
