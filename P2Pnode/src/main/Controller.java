@@ -32,9 +32,9 @@ public class Controller {
 		this.folderTree = folderTree;
 		this.file = file;
 		this.clientP2Pnode = clientP2Pnode;
-
 		this.gui.addButtonActionListener(guziki); // podpięcie guzików
 		this.addPropertyChangeListener(this.gui); // podpięcie zmian
+		this.folderTree = new FolderTree(this.gui.getFolderPath());
 	}
 
 	private void addPropertyChangeListener(PropertyChangeListener listener) {
