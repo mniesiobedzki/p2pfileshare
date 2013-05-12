@@ -133,6 +133,7 @@ public class Nod implements Serializable {
 
 	public void setParent(Nod parent) {
 		this.parent = parent.value;
+		parent.addChlid(this.value);
 	}
 
 	public LinkedList<FileState> getHistory() {
