@@ -50,6 +50,7 @@ public class Controller {
 			if (e.getActionCommand().equals("Rozpocznij")) {
 				// TODO: coś
 				startSync();
+				File.runFolderListener(gui.getFolderPath());
 			}
 
 		}
