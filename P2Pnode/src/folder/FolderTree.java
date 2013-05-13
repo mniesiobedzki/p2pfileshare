@@ -8,7 +8,7 @@ import file.File;
 
 public class FolderTree {
 	
-	public TreeMap<String, Nod> folder = new TreeMap<String, Nod>();
+	public JCSyncTreeMap<String, Nod> folder = new JCSyncTreeMap<String, Nod>();
 	// klucz to dla korzenia "root"
 	// dla użytkownika jego ID
 	// dla pliku ID użytkownika + ID pliku
@@ -23,7 +23,7 @@ public class FolderTree {
 		this.folder.put("root", root);
 	}
 
-	public TreeMap<String, Nod> getFolder() {
+	public JCSyncTreeMap<String, Nod> getFolder() {
 		return folder;
 	}
 
@@ -83,7 +83,7 @@ public class FolderTree {
 	 * @param usr - ID użytkownika
 	 */
 	public void updateFile(File f, String usr) {
-		Nod file = folder.get(usr + f.getFileId());
+		Nod file = folder.get(usr + f.getFileName());
 		if (file == null) {
 			addFile(f, usr);
 		} else {
@@ -99,8 +99,7 @@ public class FolderTree {
 	 */
 	public void updateAll(String usr) {
 		for (File f : File.filesAndTheirHistory.values()) {
-			if (!f.getSingleFileHistory().getLast()
-					.equals(this.folder.get(f.getFileId()))) {
+			if (!f.getSingleFileHistory().getLast().equals(this.folder.get(usr+f.getFileName()))) {
 				this.updateFile(f, usr);
 			}
 		}
