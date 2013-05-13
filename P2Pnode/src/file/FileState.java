@@ -3,17 +3,27 @@ package file;
 import java.io.FileInputStream;
 import java.security.MessageDigest;
 
-// Obiekt który jest dodawany do LinkedListy folderu który obserwujemy.
-// FileState jest po prostu wygodn¹ wersj¹ wiersza w historii danego pliku 
+// Obiekt ktï¿½ry jest dodawany do LinkedListy folderu ktï¿½ry obserwujemy.
+// FileState jest po prostu wygodnï¿½ wersjï¿½ wiersza w historii danego pliku 
 
 public class FileState {
 	
 	private	String personID = ""; 	// kto zmienil plik
-	private long   data 	= 0;	// kiedy plik by³ zmieniany		
+	private long   data 	= 0;	// kiedy plik byï¿½ zmieniany		
 	private String fileName = "";	// nazwa zmienianego pliku
 	private double size		= 0;	// rozmiar pliku
-	private String md5		= "";	// suma kontrolna	
+	private String md5		= "";	// suma kontrolna		
 	
+	public FileState(String personID, long data, String fileName, double size,
+			String md5) {
+		super();
+		this.personID = personID;
+		this.data = data;
+		this.fileName = fileName;
+		this.size = size;
+		this.md5 = md5;
+	}
+
 	public String getMd5() {
 		return md5;
 	}

@@ -1,9 +1,11 @@
 package file;
 
 import folder.FolderTree;
+import folder.Nod;
 import gui.GuiWindower;
 
 import java.security.MessageDigest;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -31,7 +33,7 @@ public class File {
 	// Lista obiektów typu FileState.
 	// Lista ta przechowuje informacje o wszystkich modyfikacjach
 	// danego pliku z folderu.
-	
+	// @param String ma postać "user1Nowy dokument tekstowy - Kopia (4).txt" 
 	public static Map<String, File> filesAndTheirHistory = new HashMap<String, File>();
 	public static Path listenedPath;		// ścieżka folderu który jest nasłuchiwany
 	
@@ -58,6 +60,13 @@ public class File {
 		this.fileName = fileName;
 		this.fileId   = generateFileId(userId, fileName, this);
 		this.singleFileHistory 	= new LinkedList<FileState>();
+		
+		try {
+			java.io.File kuku = new java.io.File(fileName);
+			this.singleFileHistory.add(new FileState(userId,kuku.lastModified(),fileName,kuku.length(),File.getMD5Checksum(fileName)));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/*******************REGION METOD**********************/
@@ -115,62 +124,101 @@ public class File {
 			List<WatchEvent<?>> events = watchKey.pollEvents();
 			
 			for (WatchEvent event : events) {
-				
-				Entry<String, File> deFajl = searchForFile(event.context().toString());
-				
+				if(event.context().toString().startsWith("^")){
+					continue;
+				}
+
 				if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
-					System.out.println("Created: " + event.context().toString());				
+					System.out.println("Created: " + event.context().toString());
 					
-					// Tutaj jest źle, bo przecież skoro plik jest dopiero tworzony
-					// to nie mamy go w żadnej bazie! 
-					// Więc tutaj jest zjebane, będzie null pointer exception
-					System.err.println("to sie zaraz wypierdzieli");
-					deFajl.getValue().setFileStateHistoryEntry(
-							new Date().getTime(),
-							event.context().toString(),
-							userId,
-							new java.io.File(myDir.toString() + "/"	+ event.context().toString()).length(),
-							getMD5Checksum(listenedPath.toString() + "\\" + event.context().toString())
-							);
+					java.io.File kuku = new java.io.File(event.context().toString());
 					
-					filesAndTheirHistory.put(deFajl.getValue().getFileId(), deFajl.getValue());
-					folderTree.addFile(deFajl.getValue(), userId);
+					File newlyCreatedFile = new File(event.context().toString(), userId);
 					
-//					setFileStateHistoryEntry(new Date().getTime(),
-//							event.context().toString(),
-//							"1111",
-//							new java.io.File(myDir.toString() + "/" + event.context().toString()).length(),
-//							FileState.generateFileMD5Hash(myDir.toString()+"/" + event.context().toString())
-//						);
-//					filesAndTheirHistory.put(getFileId(), this);
+					newlyCreatedFile.setFileStateHistoryEntry(
+							kuku.lastModified(), event.context().toString(),
+							userId, new java.io.File(event.context().toString()).length(),
+							getMD5Checksum(listenedPath.toString() + "\\"
+									+ event.context().toString()));
+					
+					System.err.println("putuje: "+userId+newlyCreatedFile.getFileName());
+					
+					filesAndTheirHistory.put(userId+newlyCreatedFile.getFileName(),
+							newlyCreatedFile);
+					
+					folderTree.addFile(newlyCreatedFile, userId);
+
+					// setFileStateHistoryEntry(new Date().getTime(),
+					// event.context().toString(),
+					// "1111",
+					// new java.io.File(myDir.toString() + "/" +
+					// event.context().toString()).length(),
+					// FileState.generateFileMD5Hash(myDir.toString()+"/" +
+					// event.context().toString())
+					// );
+					// filesAndTheirHistory.put(getFileId(), this);
 				}
 				if (event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
 					System.out.println("Delete: " + event.context().toString());
+					// Entry<String, File> deFajl =
+					// searchForFile(event.context().toString());
+					// deFajl.getValue().setFileStateHistoryEntry(new
+					// Date().getTime(), "deleted",userId,0,"");
+					int licznik = 0;
+					
+					java.io.File[] listaPlikowWFolderze = File.listAllTheFilesInDir(myDir.toString());
+					
+					for (String nodek : folderTree.getFolder().get(userId).getChildren()) {
+						Nod singleNod = folderTree.getFolder().get(nodek); // Jeden plik u usera
 						
-					deFajl.getValue().setFileStateHistoryEntry(new Date().getTime(), "deleted",userId,0,"");
-					
-					//Metoda ustawiaj�ca pola obiektu FileState na stan - DELETED
+						if(filesAndTheirHistory.get(userId+singleNod.getName()).singleFileHistory.getLast() == null){
+							break;
+						}
+						
+						boolean exists = false;
+						for (java.io.File file : listaPlikowWFolderze) {
+							if (file.getName().equals(singleNod.getName())) {
+								exists = true;
+							}
+						}
+						if (!exists) {
+							System.err.println("BUJA");
+							filesAndTheirHistory.get(userId+singleNod.getName()).singleFileHistory.add(null);
+							System.err.println("WYKASOWANO " + userId+singleNod.getName() +"\n");
+						}
+					}
+
+					// Metoda ustawiaj�ca pola obiektu FileState na stan -
+					// DELETED
 					// To-Do PERSON ID podstawic prawdziwe dane
-//					setFileStateHistoryEntry(new Date().getTime(),"deleted","1111",0,"");
-					
+					// setFileStateHistoryEntry(new
+					// Date().getTime(),"deleted","1111",0,"");
+
 				}
 				if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
 					System.out.println("Modify: " + event.context().toString());
-					
-					deFajl.getValue().setFileStateHistoryEntry(new Date().getTime(),
+
+					Entry<String, File> deFajl = searchForFile(event.context()
+							.toString());
+					java.io.File kuku = new java.io.File(event.context().toString());
+					deFajl.getValue().setFileStateHistoryEntry(
+							kuku.lastModified(),
 							event.context().toString(),
 							userId,
-							new java.io.File(myDir.toString() + "/"	+ event.context().toString()).length(),
-							getMD5Checksum(listenedPath.toString() + "\\" + event.context().toString())
-							);
-					//Metoda ustawiaj�ca pola obiektu FileState
+							new java.io.File(myDir.toString() + "/"
+									+ event.context().toString()).length(),
+							getMD5Checksum(listenedPath.toString() + "\\"
+									+ event.context().toString()));
+					// Metoda ustawiaj�ca pola obiektu FileState
 					// To-Do PERSON ID podstawic prawdziwe dane
-//					setFileStateHistoryEntry(new Date().getTime(),
-//							event.context().toString(),
-//							"1111",
-//							new java.io.File(myDir.toString() + "/" + event.context().toString()).length(),
-//							FileState.generateFileMD5Hash(myDir.toString()+"/" + event.context().toString())
-//						);
+					// setFileStateHistoryEntry(new Date().getTime(),
+					// event.context().toString(),
+					// "1111",
+					// new java.io.File(myDir.toString() + "/" +
+					// event.context().toString()).length(),
+					// FileState.generateFileMD5Hash(myDir.toString()+"/" +
+					// event.context().toString())
+					// );
 				}
 			}
 
@@ -178,17 +226,27 @@ public class File {
 			System.out.println("Error: " + e.toString());
 		}
 	}
-	
+
 	/***
 	 * 
-	 * Metoda sprawdzająca jakie pliki są w folderze i tworzyć je w drzewie
+	 * Metoda sprawdzająca jakie pliki są w folderze. Tworzy się lista ktora potem jest porównywana z elementami w drzewie.
 	 * 
 	 */
 	public static java.io.File[] listAllTheFilesInDir(String directoryPath) {
+		
 		String files;
 		java.io.File folder = new java.io.File(directoryPath);
 		java.io.File[] listOfFiles = folder.listFiles();
-		return listOfFiles;
+		int counter = 0;
+		for (int i = 1; i < listOfFiles.length-counter; i++) {
+			if(listOfFiles[i-1].getName().startsWith("^")){
+				listOfFiles[i-1]=listOfFiles[i];
+				counter++;
+			}
+		}
+
+		return  Arrays.copyOfRange(listOfFiles, 0, listOfFiles.length-counter-1);
+		
 //		for (int i = 0; i < listOfFiles.length; i++) {
 //			if (listOfFiles[i].isFile()) {
 //				files = listOfFiles[i].getName();
@@ -202,14 +260,7 @@ public class File {
 	
 	private void setFileStateHistoryEntry(long entryDate, String fileName, String userID, long fileSize, String fileMD5Hash) {
 
-		FileState fileStateObj = new FileState();
-		
-		fileStateObj.setData(entryDate);
-		fileStateObj.setFileName(fileName);
-		fileStateObj.setPersonID(userID);
-		fileStateObj.setSize(fileSize);
-		fileStateObj.setMd5(fileMD5Hash);
-		
+		FileState fileStateObj = new FileState(userID,entryDate,fileName,fileSize,fileMD5Hash);
 		this.getSingleFileHistory().add(fileStateObj);
 	}
 
@@ -226,7 +277,7 @@ public class File {
 	public static String generateFileId(String userId, String fileName, File myFile) {
 		java.io.File file = new java.io.File(fileName);
 		myFile.setLastModified(file.lastModified());
-		return userId+"_"+file.lastModified();
+		return userId+"_"+file.lastModified()+"_"+fileName;
 	}
 	
 	/***
@@ -262,22 +313,28 @@ public class File {
 	/*****************************************************/
 	
 	 public static byte[] createChecksum(String filename) throws Exception {
-	       InputStream fis =  new FileInputStream(filename);
+		byte[] buffer = new byte[1024];
+		try {
+			InputStream fis = new FileInputStream(filename);
 
-	       byte[] buffer = new byte[1024];
-	       MessageDigest complete = MessageDigest.getInstance("MD5");
-	       int numRead;
+			MessageDigest complete = MessageDigest.getInstance("MD5");
+			int numRead;
 
-	       do {
-	           numRead = fis.read(buffer);
-	           if (numRead > 0) {
-	               complete.update(buffer, 0, numRead);
-	           }
-	       } while (numRead != -1);
+			do {
+				numRead = fis.read(buffer);
+				if (numRead > 0) {
+					complete.update(buffer, 0, numRead);
+				}
+			} while (numRead != -1);
 
-	       fis.close();
-	       return complete.digest();
-	   }
+			fis.close();
+			return complete.digest();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return buffer;
+
+	}
 
 	   // see this How-to for a faster way to convert
 	   // a byte array to a HEX string

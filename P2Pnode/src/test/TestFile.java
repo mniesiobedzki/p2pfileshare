@@ -17,6 +17,7 @@ public class TestFile {
 		for (java.io.File file : listaFajli) {
 			File f = new File(file.getName(),uname);
 			ft.addFile(f, uname);
+			File.filesAndTheirHistory.put(uname+f.getFileName(),f);
 			System.out.println(f.getFileId());
 		}
 		File.runFolderListener("kuku\\", ft, uname);
