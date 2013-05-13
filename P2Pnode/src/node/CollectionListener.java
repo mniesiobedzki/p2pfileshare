@@ -23,7 +23,7 @@ public class CollectionListener implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("UPDATE");
+        System.out.println("UPDATE UPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATEUPDATE");
 
     }
 }

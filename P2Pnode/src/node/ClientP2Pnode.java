@@ -27,8 +27,8 @@ public class ClientP2Pnode {
 	private JCSyncArrayList<String> jcSyncArrayList;
 
 	// KOLECKCJE APLIKACJI
-	//private HashMap<String, String> myHashMap;
-	//private ArrayList<String> myArrayList;
+	// private HashMap<String, String> myHashMap;
+	// private ArrayList<String> myArrayList;
 
 	// OBSERWACJA
 	@SuppressWarnings("unused")
@@ -40,6 +40,8 @@ public class ClientP2Pnode {
 	private TestObserver testObserver;
 
 	private ClientP2PnodeCallback nodeCallback;
+
+	private SharedObservableObject observable_so;
 
 	public ClientP2Pnode() {
 		// TODO Auto-generated constructor stub
@@ -53,28 +55,28 @@ public class ClientP2Pnode {
 	public ClientP2Pnode(int portOut, String serverIP, int serverPort,
 			String nodeName) {
 		System.out.println("Node " + nodeName + ": Initializing");
-		
+
 		this.nodeCallback = new ClientP2PnodeCallback();
 
-		this.node = new P2PNode(this.nodeCallback, P2PNode.RoutingAlgorithm.SUPERPEER);
+		this.node = new P2PNode(this.nodeCallback,
+				P2PNode.RoutingAlgorithm.SUPERPEER);
 		this.node.setServerReflexiveAddress(serverIP);
 		this.node.setServerReflexivePort(serverPort);
 		this.node.setBootIP(serverIP);
 		this.node.setBootPort(serverPort);
 		this.node.setUserName(nodeName);
 		this.node.setUdpPort(portOut);
-		
+
 		this.node.networkJoin();
-		
-		//JCSyncObservable nn = new JCSyncObservable();
-		//nn.addObserver(o)
-		
+
+		// JCSyncObservable nn = new JCSyncObservable();
+		// nn.addObserver(o)
 
 		while (!this.node.isConnected()) {
 			System.out.println("Node " + nodeName + ": Not connected :(");
 			snooze(1000);
 		}
-		
+
 		System.out.println("Node " + nodeName + ": Connected !!");
 
 		// Jeżeli uda się połączyć to tworzę JCSyncCore
@@ -121,40 +123,35 @@ public class ClientP2Pnode {
 			System.err.println("Node " + nodeName + ": Nienany błąd");
 			e.printStackTrace();
 		}
-/*
-		// ARRAYLIST
-		String collIDa = "mojaLista";
-		try {
-			jcSyncArrayList = createArrayList(collIDa, jcSyncCore, null);
-			System.out.println("Node " + nodeName
-					+ ": Utworzono nową kolekcję o ID: " + collIDa);
-		} catch (ObjectExistsException e) {
-			System.out.println("Node " + nodeName + ": Kolekcja " + collIDa
-					+ " już istnieje, zatem spróbuję się podpiąć");
-			try {
-				jcSyncArrayList = (JCSyncArrayList<String>) subscribeCollection(
-						collIDa, this.jcSyncCore).getNucleusObject();
-				System.out.println("Node " + nodeName + ": Kolekcja " + collIDa
-						+ " już istnieje i pomyślnie się do niej podpieliśmy");
-			} catch (ObjectNotExistsException e1) {
-				System.err.println("Koleckcja od ID " + collIDa
-						+ " jednak nie istnieje");
-				e1.printStackTrace();
-			} catch (OperationForbiddenException e1) {
-				System.err.println("Dziwny błąd");
-				e1.printStackTrace();
-			} catch (Exception e1) {
-				System.err.println("Dziwny błąd");
-				e1.printStackTrace();
-			}
-		} catch (Exception e) {
-			System.err.println("Node " + nodeName + ": Nienany błąd");
-			e.printStackTrace();
-		}
-		// this.getObservable(jcSyncCore);*/
+		/*
+		 * // ARRAYLIST String collIDa = "mojaLista"; try { jcSyncArrayList =
+		 * createArrayList(collIDa, jcSyncCore, null);
+		 * System.out.println("Node " + nodeName +
+		 * ": Utworzono nową kolekcję o ID: " + collIDa); } catch
+		 * (ObjectExistsException e) { System.out.println("Node " + nodeName +
+		 * ": Kolekcja " + collIDa +
+		 * " już istnieje, zatem spróbuję się podpiąć"); try { jcSyncArrayList =
+		 * (JCSyncArrayList<String>) subscribeCollection( collIDa,
+		 * this.jcSyncCore).getNucleusObject(); System.out.println("Node " +
+		 * nodeName + ": Kolekcja " + collIDa +
+		 * " już istnieje i pomyślnie się do niej podpieliśmy"); } catch
+		 * (ObjectNotExistsException e1) { System.err.println("Koleckcja od ID "
+		 * + collIDa + " jednak nie istnieje"); e1.printStackTrace(); } catch
+		 * (OperationForbiddenException e1) { System.err.println("Dziwny błąd");
+		 * e1.printStackTrace(); } catch (Exception e1) {
+		 * System.err.println("Dziwny błąd"); e1.printStackTrace(); } } catch
+		 * (Exception e) { System.err.println("Node " + nodeName +
+		 * ": Nienany błąd"); e.printStackTrace(); } //
+		 * this.getObservable(jcSyncCore);
+		 */
 
-		//testObserver = new TestObserver(this.getObservable(this.jcSyncCore));
-		//testClassCallback = new TestClassCallback(getObservable(node.getPubSubCoreAlgorithm().));
+		// testObserver = new TestObserver(this.getObservable(this.jcSyncCore));
+		// testClassCallback = new
+		// TestClassCallback(getObservable(node.getPubSubCoreAlgorithm().));
+
+		this.jcSyncObservable = this.getObservable2(this.jcSyncCore);
+
+		CollectionListener cl = new CollectionListener(this.jcSyncObservable);
 	}
 
 	/**
@@ -238,7 +235,7 @@ public class ClientP2Pnode {
 					.getFromOverlay(observableID, jcSyncCore);
 		} catch (ObjectNotExistsException e) {
 			// TODO Auto-generated catch block
-			//sharedObservableObject = new 
+			// sharedObservableObject = new
 			e.printStackTrace();
 		} catch (OperationForbiddenException e) {
 			// TODO Auto-generated catch block
@@ -250,8 +247,6 @@ public class ClientP2Pnode {
 		return (JCSyncObservable) sharedObservableObject.getNucleusObject();
 	}
 
-
-
 	/**
 	 * 
 	 * @return
@@ -262,37 +257,74 @@ public class ClientP2Pnode {
 	}
 
 	public static void main(String[] args) {
-		ClientP2Pnode nt = new ClientP2Pnode(6061, "1.1.1.4", 6060,"testowy2");
-		nt.testWrite();
-		
+		ClientP2Pnode nt = new ClientP2Pnode(6062, "1.1.1.4", 6060, "testowy2");
+		//nt.testWrite();
 
 	}
-	
-	
-	
+
+	/**
+	 * Metoda z JCSyncBasicTest
+	 * 
+	 * @param jcsynccore
+	 * @return
+	 */
+	public JCSyncObservable getObservable2(JCSyncCore jcsynccore) {
+		JCSyncObservable jcSyncObservable = new JCSyncObservable();
+		try {
+			this.observable_so = new SharedObservableObject("myCollection_obs",
+					jcSyncObservable, this.jcSyncCore);
+		} catch (ObjectExistsException e) {
+			try {
+				this.observable_so = (SharedObservableObject) SharedObservableObject
+						.getFromOverlay("myCollection_obs", this.jcSyncCore);
+			} catch (ObjectNotExistsException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (OperationForbiddenException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			this.jcSyncObservable = (JCSyncObservable) this.observable_so
+					.getNucleusObject();
+		} catch (Exception e) {
+			e.printStackTrace(); // To change body of catch statement use File |
+									// Settings | File Templates.
+		}
+		/*
+		 * try { this.jcSyncHashMap_sharedObject = new
+		 * SharedObservableObject("myMap", this.jcSyncHashMap, this.jcSyncCore,
+		 * ConsistencyManager.class); } catch (ObjectExistsException e) {
+		 * this.jcSyncHashMap_sharedObject =
+		 * SharedCollectionObject.getFromOverlay("myMap", this.jcs) }
+		 */
+
+		return jcSyncObservable;
+
+	}
+
 	private void testWrite() {
 		// TODO Auto-generated method stub
 		String key = "a";
 		String value = "b";
-		while(true){
-		this.jcSyncHashMap.put(key, value);
-		key+="a";
-		value+="b";
-		System.err.println("Rozmiar "+this.jcSyncHashMap.size());
-		try {
-			wait(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		while (true) {
+			this.jcSyncHashMap.put(key, value);
+			key += "a";
+			value += "b";
+			System.err.println("Rozmiar " + this.jcSyncHashMap.size());
+			snooze(2000);
 		}
 	}
 
-	public void testRead(){
-		while(true){
+	public void testRead() {
+		while (true) {
 			System.out.print("AL: size:" + jcSyncArrayList.size());
-			if(jcSyncArrayList.size() > 0){
-				System.out.print(" LAST:"+ jcSyncArrayList.get(jcSyncArrayList.size()-1));
+			if (jcSyncArrayList.size() > 0) {
+				System.out.print(" LAST:"
+						+ jcSyncArrayList.get(jcSyncArrayList.size() - 1));
 			}
 			System.out.println("");
 			snooze(1000);
@@ -353,8 +385,7 @@ public class ClientP2Pnode {
 	}
 
 	public void setServerIP(String serverIP) {
-		
-		
+
 	}
 
 }
