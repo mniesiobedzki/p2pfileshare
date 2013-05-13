@@ -202,7 +202,7 @@ public class File {
 		this.getSingleFileHistory().add(fileStateObj);
 	}
 
-	private String generateFileId(String userId) {
+	public static String generateFileId(String userId) {
 		return userId+"_"+new Date().getTime();
 	}
 	
