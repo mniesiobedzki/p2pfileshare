@@ -73,7 +73,7 @@ public class FolderTree {
 	public void addFile(File f, String usr) {
 		Nod file = new Nod(f.getFileId(), folder.get(usr), f.getFileId(),f.getSingleFileHistory(), folder.get(usr), f.getFileName());
 		file.setParent(folder.get(usr));
-		folder.put(usr+file.getName(),file);
+		folder.put(f.getFileId(),file);
 	}
 
 	/**
