@@ -1,5 +1,6 @@
 package file;
 
+import folder.FolderTree;
 import gui.GuiWindower;
 
 import java.security.MessageDigest;
@@ -37,26 +38,38 @@ public class File {
 	// file hash pliku z pakietu P2PP
 	private String fileId; 
 	private String fileName;
+	private long lastModified;
 	
+
 	// historia zmian pliku 
 	private LinkedList<FileState> singleFileHistory;
 
 	public File(){
-		fileId 				= generateFileId("1111");
-		singleFileHistory 	= new LinkedList<FileState>();
-		fileName 			= "TO TRZEBA ZMIENIC";
+		this.fileName 			= "TO TRZEBA ZMIENIC";
+		this.fileId 			= generateFileId("1111", fileName, this);
+		this.singleFileHistory 	= new LinkedList<FileState>();
 	}
 	
 	public File(ClientP2Pnode clientP2Pnode) {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public File(String fileName, String fileId){
+	public File(String fileName, String userId){
 		this.fileName = fileName;
-		this.fileId   = generateFileId(fileId);
+		this.fileId   = generateFileId(userId, fileName, this);
+		this.singleFileHistory 	= new LinkedList<FileState>();
 	}
 
 	/*******************REGION METOD**********************/
+	
+	/***
+	 * 
+	 * Zwraca obiekt "File" z jednoelementową LinkedListą "FileState".
+	 * Lista ta zawiera tylko ostatni wpis z historii zmian pliku. 
+	 * 
+	 * @return
+	 */
+	
 	public File getCurrentFileWithLatestHistoryEntry(){
 		File file = new File();
 		file.setFileId(this.getFileId());
@@ -65,7 +78,7 @@ public class File {
 		return file; 
 	}
 	
-	public static void runFolderListener(String path){
+	public static void runFolderListener(String path, final FolderTree folderTree, final String userId){
 		//final Path myDir = Paths.get("C:/Programowanie"); // define a folder root
 		
 		final Path myDir = Paths.get(path); // define a folder root
@@ -75,7 +88,7 @@ public class File {
 				@Override
 				public void run() {
 					while (true) {
-						handleDirectoryChangeEvent(myDir);
+						handleDirectoryChangeEvent(myDir,folderTree,userId);
 					}
 				}
 			};
@@ -88,7 +101,7 @@ public class File {
 		}
 	}
 	
-	private static void handleDirectoryChangeEvent(Path myDir) {
+	private static void handleDirectoryChangeEvent(Path myDir, FolderTree folderTree, String userId) {
 		
 		try 
 		{
@@ -100,6 +113,7 @@ public class File {
 			WatchKey watchKey = watcher.take();
 
 			List<WatchEvent<?>> events = watchKey.pollEvents();
+			
 			for (WatchEvent event : events) {
 				
 				Entry<String, File> deFajl = searchForFile(event.context().toString());
@@ -107,17 +121,20 @@ public class File {
 				if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
 					System.out.println("Created: " + event.context().toString());				
 					
-					// To-Do PERSON ID podstawic prawdziwe dane
+					// Tutaj jest źle, bo przecież skoro plik jest dopiero tworzony
+					// to nie mamy go w żadnej bazie! 
+					// Więc tutaj jest zjebane, będzie null pointer exception
+					System.err.println("to sie zaraz wypierdzieli");
 					deFajl.getValue().setFileStateHistoryEntry(
 							new Date().getTime(),
 							event.context().toString(),
-							"USER ID TO ZMIENIC",
+							userId,
 							new java.io.File(myDir.toString() + "/"	+ event.context().toString()).length(),
 							getMD5Checksum(listenedPath.toString() + "\\" + event.context().toString())
 							);
 					
 					filesAndTheirHistory.put(deFajl.getValue().getFileId(), deFajl.getValue());
-					
+					folderTree.addFile(deFajl.getValue(), userId);
 					
 //					setFileStateHistoryEntry(new Date().getTime(),
 //							event.context().toString(),
@@ -130,7 +147,7 @@ public class File {
 				if (event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
 					System.out.println("Delete: " + event.context().toString());
 						
-					deFajl.getValue().setFileStateHistoryEntry(new Date().getTime(), "deleted", "USER ID TO ZMIENIC",0,"");
+					deFajl.getValue().setFileStateHistoryEntry(new Date().getTime(), "deleted",userId,0,"");
 					
 					//Metoda ustawiaj�ca pola obiektu FileState na stan - DELETED
 					// To-Do PERSON ID podstawic prawdziwe dane
@@ -142,7 +159,7 @@ public class File {
 					
 					deFajl.getValue().setFileStateHistoryEntry(new Date().getTime(),
 							event.context().toString(),
-							"USER ID TO ZMIENIC",
+							userId,
 							new java.io.File(myDir.toString() + "/"	+ event.context().toString()).length(),
 							getMD5Checksum(listenedPath.toString() + "\\" + event.context().toString())
 							);
@@ -162,18 +179,26 @@ public class File {
 		}
 	}
 	
-	/**
-	 * Metoda ustawia obiekt typu FileState i dodaje go do  
-	 * historii zmian danego File
-	 *  
-	 * @param entryDate
-	 * @param fileName
-	 * @param userID
-	 * @param fileSize
-	 * @param fileMD5Hash
+	/***
 	 * 
+	 * Metoda sprawdzająca jakie pliki są w folderze i tworzyć je w drzewie
 	 * 
 	 */
+	public static java.io.File[] listAllTheFilesInDir(String directoryPath) {
+		String files;
+		java.io.File folder = new java.io.File(directoryPath);
+		java.io.File[] listOfFiles = folder.listFiles();
+		return listOfFiles;
+//		for (int i = 0; i < listOfFiles.length; i++) {
+//			if (listOfFiles[i].isFile()) {
+//				files = listOfFiles[i].getName();
+//				System.out.println(files);
+//				if (files.endsWith(".txt") || files.endsWith(".TXT")) {
+//					
+//				}
+//			}
+//		}
+	}
 	
 	private void setFileStateHistoryEntry(long entryDate, String fileName, String userID, long fileSize, String fileMD5Hash) {
 
@@ -188,9 +213,33 @@ public class File {
 		this.getSingleFileHistory().add(fileStateObj);
 	}
 
-	private String generateFileId(String userId) {
-		return userId+"_"+new Date().getTime();
+	/***
+	 * 
+	 * Generuje ID dla nowo tworzonego pliku.
+	 * 
+	 * @param userId
+	 * @param fileName 
+	 * @param myFile 
+	 * @return
+	 */
+	
+	public static String generateFileId(String userId, String fileName, File myFile) {
+		java.io.File file = new java.io.File(fileName);
+		myFile.setLastModified(file.lastModified());
+		return userId+"_"+file.lastModified();
 	}
+	
+	/***
+	 * Checking if the file is currently stored within our HashMaps.
+	 * What this method does is:
+	 * 1. It calculates MD5 checksum of a file with the specified fileName
+	 * 2. Goes through all the files within our system.
+	 * 3. Returns HashMap entry if the file had been found
+	 * 4. Returns NULL if the file does not exist in the system. 
+	 * 
+	 * @param fileName
+	 * @return
+	 */
 	
 	private static Entry<String, File> searchForFile(String fileName){
 		
@@ -283,4 +332,11 @@ public class File {
 		this.fileName = fileName;
 	}
 
+	public long getLastModified() {
+		return lastModified;
+	}
+
+	public void setLastModified(long lastModified) {
+		this.lastModified = lastModified;
+	}
 }

@@ -13,14 +13,20 @@ import folder.Nod;
 
 public class FileServer extends Thread {
 	public FolderTree tree;
-
-	public FileServer(FolderTree ft) {
+	public String uname;
+	public FileServer(FolderTree ft, String name) {
 		// create socket
-		tree = ft;
+		tree=ft;
+		uname=name;
 		this.start();
 
 	}
-
+	/***
+	 * 
+	 * @param os - Output Stream
+	 * @param path - Files path
+	 * @throws Exception - Nother Goddamn Exception
+	 */
 	public void send(OutputStream os, String path) throws Exception {
 		// sendfile
 		java.io.File myFile = new java.io.File(path);
@@ -50,21 +56,16 @@ public class FileServer extends Thread {
 				while (!s.hasNext()) {
 				}
 				String msg = s.next();
-				if (msg != null && tree != null) {
-					System.out.println(msg + "\n-----\n");
-					System.out.println(tree);
-					System.out.println("get(root): "+tree.getFolder().get("root")+"\ngetFolder: "+tree.getFolder());
-					String path = tree.getFolder().get("root").getValue();
-					System.out.println("n: "+tree.getFolder().get(msg));
-					System.out.println("n.getValue(): "+tree.getFolder().get(msg).getValue() );
-					Nod n = tree.getFolder().get(msg);
-					path += n.getName();
-					this.send(os, path);
-					sock.close();
-					break;
-				} else {
-					System.out.println("1 null znaleziony");
-				}
+				System.out.println(msg);
+				
+				String path = tree.getFolder().get(uname).getPath();
+				System.out.println(path);
+				//String path = tree.getFolder().get("root").getValue();
+				Nod n = tree.getFolder().get(msg);
+				System.err.println(n.getValue()+" "+n.getName());
+				path += n.getName();
+				this.send(os, path);
+				sock.close();
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

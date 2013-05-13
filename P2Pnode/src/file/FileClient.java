@@ -13,9 +13,14 @@ import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 
 public class FileClient{
-	  public FileClient (String host, String key, String name ) {
-
-
+	/***
+	 * 
+	 * @param host - Hosts IP
+	 * @param key - Key of file to transfer
+	 * @param path - Local Path to save
+	 * @param name - Files Name
+	 */
+	  public FileClient (String host, String key, String path, String name ) {
 	    long start = System.currentTimeMillis();
 
 	    // localhost for testing
@@ -29,7 +34,7 @@ public class FileClient{
 	    
 	    InputStream is = sock.getInputStream();
 	    // receive file
-	    this.receiveFile(is, name);
+	    this.receiveFile(is, path, name);
 	       long end = System.currentTimeMillis();
 	    System.out.println(end-start);
 
@@ -47,12 +52,19 @@ public class FileClient{
 		}
 	  }
 
-	  public void receiveFile(InputStream is, String name) throws Exception{
+	  /***
+	   * 
+	   * @param is - Input stream to save from
+	   * @param path - Files path
+	   * @param name - Files name
+	   * @throws Exception - Goddamn Exception
+	   */
+	  public void receiveFile(InputStream is, String path, String name ) throws Exception{
 		  try {
 				// read this file into InputStream
 		 
 				// write the inputStream to a FileOutputStream
-				FileOutputStream outputStream = new FileOutputStream(new java.io.File(name));
+				FileOutputStream outputStream = new FileOutputStream(new java.io.File(path+name));
 		 
 				int read = 0;
 				byte[] bytes = new byte[1024];

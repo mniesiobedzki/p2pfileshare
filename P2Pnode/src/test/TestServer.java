@@ -12,13 +12,13 @@ import folder.Nod;
 
 public class TestServer {
 
-	/**x`
+	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		PrintWriter writer;
 		try {
-			writer = new PrintWriter("c:\\test.txt", "UTF-8");
+			writer = new PrintWriter("kuku\\test.txt", "UTF-8");
 			writer.println("pierwsza linia testu");
 			writer.println("II linia testu");
 			writer.println("#3 linia testu");
@@ -32,11 +32,15 @@ public class TestServer {
 			e.printStackTrace();
 		}
 		// TODO Auto-generated method stub
-		FolderTree ft = new FolderTree("kuku\\");
-		ft.addUser("user1");
-		File f = new File("test.txt", "cokolwiek");
-		ft.addFile(f, "user1");
-		FileServer server = new FileServer(ft);
+		String fileName = "test.txt";
+		String path = "kuku\\";
+		String folderName = "kuku";
+		String uname = "user1";
+		FolderTree ft = new FolderTree(folderName);
+		ft.addUser(uname, path);
+		File f = new File(fileName, uname);
+		ft.addFile(f, uname);
+		FileServer server = new FileServer(ft, uname);
 	}
 
 }
