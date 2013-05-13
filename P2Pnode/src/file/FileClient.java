@@ -48,36 +48,23 @@ public class FileClient{
 	  }
 
 	  public void receiveFile(InputStream is, String name) throws Exception{
-		  try{
-			BufferedReader br = new BufferedReader(new InputStreamReader(is));
-	 
-			StringBuilder sb = new StringBuilder();
-	 
-			String line;
-			while ((line = br.readLine()) != null) {
-				sb.append(line);
-			}
-	 
-			System.out.println(sb.toString());
-			System.out.println("\nDone!");
-			if (br != null) {
-				try {
-					br.close();
-				} catch (IOException e) {
-					e.printStackTrace();
+		  try {
+				// read this file into InputStream
+		 
+				// write the inputStream to a FileOutputStream
+				FileOutputStream outputStream = new FileOutputStream(new java.io.File(name));
+		 
+				int read = 0;
+				byte[] bytes = new byte[1024];
+		 
+				while ((read = is.read(bytes)) != -1) {
+					outputStream.write(bytes, 0, read);
 				}
+		 
+				System.out.println("Done!");
+		 
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		}catch(IOException e) {
-			e.printStackTrace();
-		} finally {
-			if (is != null) {
-				try {
-					is.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			
-		}
 	  }
 	}
