@@ -18,7 +18,7 @@ public class TestServer {
 	public static void main(String[] args) {
 		PrintWriter writer;
 		try {
-			writer = new PrintWriter("c:\\test.txt", "UTF-8");
+			writer = new PrintWriter("kuku\\test.txt", "UTF-8");
 			writer.println("pierwsza linia testu");
 			writer.println("II linia testu");
 			writer.println("#3 linia testu");

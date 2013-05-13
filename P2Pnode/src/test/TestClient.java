@@ -19,7 +19,7 @@ public class TestClient {
 		ft.addUser(uname, path);
 		File f = new File(FileName, uname);
 		ft.addFile(f, uname);
-		FileClient client = new FileClient("1.1.1.20", uname+FileName,path, FileName);
+		FileClient client = new FileClient("1.1.1.12", uname+FileName,path, FileName);
 
 	}
 
