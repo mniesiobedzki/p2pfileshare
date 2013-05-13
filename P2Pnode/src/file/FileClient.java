@@ -61,10 +61,11 @@ public class FileClient{
 	   */
 	  public void receiveFile(InputStream is, String path, String name ) throws Exception{
 		  try {
+			  	String tempStamp = "^";
 				// read this file into InputStream
 		 
 				// write the inputStream to a FileOutputStream
-				FileOutputStream outputStream = new FileOutputStream(new java.io.File(path+name));
+				FileOutputStream outputStream = new FileOutputStream(new java.io.File(path+tempStamp+name));
 		 
 				int read = 0;
 				byte[] bytes = new byte[1024];
@@ -72,7 +73,14 @@ public class FileClient{
 				while ((read = is.read(bytes)) != -1) {
 					outputStream.write(bytes, 0, read);
 				}
+				
+				outputStream.close();
+				outputStream.flush();
 		 
+				//rename file to final name without tempStamp at the beginning of filename
+				java.io.File filenameWithTempStamp = new java.io.File(path+tempStamp+name); 
+				filenameWithTempStamp.renameTo(new java.io.File(path+name));
+				
 				System.out.println("Done!");
 		 
 			} catch (IOException e) {
