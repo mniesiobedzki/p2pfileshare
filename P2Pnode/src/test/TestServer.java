@@ -12,7 +12,7 @@ import folder.Nod;
 
 public class TestServer {
 
-	/**
+	/**x`
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -34,7 +34,7 @@ public class TestServer {
 		// TODO Auto-generated method stub
 		FolderTree ft = new FolderTree("kuku\\");
 		ft.addUser("user1");
-		File f = new File("test.txt");
+		File f = new File("test.txt", "cokolwiek");
 		ft.addFile(f, "user1");
 		FileServer server = new FileServer(ft);
 	}

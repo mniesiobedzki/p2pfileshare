@@ -13,9 +13,10 @@ import folder.Nod;
 
 public class FileServer extends Thread {
 	public FolderTree tree;
+
 	public FileServer(FolderTree ft) {
 		// create socket
-		tree=ft;
+		tree = ft;
 		this.start();
 
 	}
@@ -49,11 +50,21 @@ public class FileServer extends Thread {
 				while (!s.hasNext()) {
 				}
 				String msg = s.next();
-				String path = tree.getFolder().get("root").getValue();
-				Nod n = tree.getFolder().get(msg);
-				path += n.getValue();
-				this.send(os, path);
-				sock.close();
+				if (msg != null && tree != null) {
+					System.out.println(msg + "\n-----\n");
+					System.out.println(tree);
+					System.out.println("get(root): "+tree.getFolder().get("root")+"\ngetFolder: "+tree.getFolder());
+					String path = tree.getFolder().get("root").getValue();
+					System.out.println("n: "+tree.getFolder().get(msg));
+					System.out.println("n.getValue(): "+tree.getFolder().get(msg).getValue() );
+					Nod n = tree.getFolder().get(msg);
+					path += n.getName();
+					this.send(os, path);
+					sock.close();
+					break;
+				} else {
+					System.out.println("1 null znaleziony");
+				}
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

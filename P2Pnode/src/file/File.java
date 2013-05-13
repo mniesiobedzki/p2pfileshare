@@ -2,14 +2,19 @@ package file;
 
 import gui.GuiWindower;
 
+import java.security.MessageDigest;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardWatchEventKinds;
@@ -45,8 +50,10 @@ public class File {
 	public File(ClientP2Pnode clientP2Pnode) {
 		// TODO Auto-generated constructor stub
 	}
-	public File(String fileName){
+	
+	public File(String fileName, String fileId){
 		this.fileName = fileName;
+		this.fileId   = generateFileId(fileId);
 	}
 
 	/*******************REGION METOD**********************/
@@ -82,7 +89,7 @@ public class File {
 	}
 	
 	private static void handleDirectoryChangeEvent(Path myDir) {
-		searchForFile("blab");
+		
 		try 
 		{
 			WatchService watcher = myDir.getFileSystem().newWatchService();
@@ -94,10 +101,24 @@ public class File {
 
 			List<WatchEvent<?>> events = watchKey.pollEvents();
 			for (WatchEvent event : events) {
+				
+				Entry<String, File> deFajl = searchForFile(event.context().toString());
+				
 				if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
-					System.out.println("Created: " + event.context().toString());
+					System.out.println("Created: " + event.context().toString());				
 					
 					// To-Do PERSON ID podstawic prawdziwe dane
+					deFajl.getValue().setFileStateHistoryEntry(
+							new Date().getTime(),
+							event.context().toString(),
+							"USER ID TO ZMIENIC",
+							new java.io.File(myDir.toString() + "/"	+ event.context().toString()).length(),
+							getMD5Checksum(listenedPath.toString() + "\\" + event.context().toString())
+							);
+					
+					filesAndTheirHistory.put(deFajl.getValue().getFileId(), deFajl.getValue());
+					
+					
 //					setFileStateHistoryEntry(new Date().getTime(),
 //							event.context().toString(),
 //							"1111",
@@ -108,14 +129,23 @@ public class File {
 				}
 				if (event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
 					System.out.println("Delete: " + event.context().toString());
+						
+					deFajl.getValue().setFileStateHistoryEntry(new Date().getTime(), "deleted", "USER ID TO ZMIENIC",0,"");
 					
 					//Metoda ustawiaj�ca pola obiektu FileState na stan - DELETED
 					// To-Do PERSON ID podstawic prawdziwe dane
 //					setFileStateHistoryEntry(new Date().getTime(),"deleted","1111",0,"");
+					
 				}
 				if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
 					System.out.println("Modify: " + event.context().toString());
 					
+					deFajl.getValue().setFileStateHistoryEntry(new Date().getTime(),
+							event.context().toString(),
+							"USER ID TO ZMIENIC",
+							new java.io.File(myDir.toString() + "/"	+ event.context().toString()).length(),
+							getMD5Checksum(listenedPath.toString() + "\\" + event.context().toString())
+							);
 					//Metoda ustawiaj�ca pola obiektu FileState
 					// To-Do PERSON ID podstawic prawdziwe dane
 //					setFileStateHistoryEntry(new Date().getTime(),
@@ -162,27 +192,56 @@ public class File {
 		return userId+"_"+new Date().getTime();
 	}
 	
-	private static File searchForFile(String fileName){
-		//System.out.println(listenedPath.toString()+"\\"+fileName);
-
-		// dopisac wyszukiwanie plikow poprzez md5
+	private static Entry<String, File> searchForFile(String fileName){
 		
-//		try (BufferedReader br = new BufferedReader(new FileReader(listenedPath.toString()+"\\"+fileName)))
-//		{
-// 
-//			String sCurrentLine;
-// 
-//			while ((sCurrentLine = br.readLine()) != null) {
-//				System.out.println(sCurrentLine);
-//			}
-// 
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} 
-// 
+		 try {
+			String currentFileMD5 = getMD5Checksum(listenedPath.toString()+"\\"+fileName);
+			for (Entry<String, File> entry : filesAndTheirHistory.entrySet()) {
+			    if(currentFileMD5.equals(entry.getValue().singleFileHistory.getLast().getMd5())){
+			    	return entry;
+			    }
+			}
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return null;
 	}
 
+	/*****************************************************/
+	
+	 public static byte[] createChecksum(String filename) throws Exception {
+	       InputStream fis =  new FileInputStream(filename);
+
+	       byte[] buffer = new byte[1024];
+	       MessageDigest complete = MessageDigest.getInstance("MD5");
+	       int numRead;
+
+	       do {
+	           numRead = fis.read(buffer);
+	           if (numRead > 0) {
+	               complete.update(buffer, 0, numRead);
+	           }
+	       } while (numRead != -1);
+
+	       fis.close();
+	       return complete.digest();
+	   }
+
+	   // see this How-to for a faster way to convert
+	   // a byte array to a HEX string
+	   public static String getMD5Checksum(String filename) throws Exception {
+	       byte[] b = createChecksum(filename);
+	       String result = "";
+
+	       for (int i=0; i < b.length; i++) {
+	           result += Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring( 1 );
+	       }
+	       return result;
+	   }
+	
 	/*****************************************************/
 	
 	// Gettery i settery WszystkiePlikiHistorii
