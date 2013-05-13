@@ -17,7 +17,7 @@ public class TestClient {
 		String uname = "user1";
 		FolderTree ft = new FolderTree(folderName);
 		ft.addUser(uname, path);
-		File f = new File(FileName);
+		File f = new File(FileName, uname);
 		ft.addFile(f, uname);
 		FileClient client = new FileClient("1.1.1.20", uname+FileName,path, FileName);
 

@@ -38,7 +38,7 @@ public class TestServer {
 		String uname = "user1";
 		FolderTree ft = new FolderTree(folderName);
 		ft.addUser(uname, path);
-		File f = new File(fileName);
+		File f = new File(fileName, uname);
 		ft.addFile(f, uname);
 		FileServer server = new FileServer(ft, uname);
 	}
