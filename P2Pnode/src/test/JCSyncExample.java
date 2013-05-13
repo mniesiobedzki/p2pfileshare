@@ -1,6 +1,5 @@
 package test;
 
-//package pl.edu.pjwstk.mteam.p2pm.tests.examples;
 
 import org.apache.log4j.Logger;
 import pl.edu.pjwstk.mteam.core.NetworkObject;
