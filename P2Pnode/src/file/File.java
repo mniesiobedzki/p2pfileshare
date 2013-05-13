@@ -38,14 +38,16 @@ public class File {
 	// file hash pliku z pakietu P2PP
 	private String fileId; 
 	private String fileName;
+	private long lastModified;
 	
+
 	// historia zmian pliku 
 	private LinkedList<FileState> singleFileHistory;
 
 	public File(){
-		fileId 				= generateFileId("1111");
-		singleFileHistory 	= new LinkedList<FileState>();
-		fileName 			= "TO TRZEBA ZMIENIC";
+		this.fileName 			= "TO TRZEBA ZMIENIC";
+		this.fileId 			= generateFileId("1111", fileName, this);
+		this.singleFileHistory 	= new LinkedList<FileState>();
 	}
 	
 	public File(ClientP2Pnode clientP2Pnode) {
@@ -54,7 +56,7 @@ public class File {
 	
 	public File(String fileName, String userId){
 		this.fileName = fileName;
-		this.fileId   = generateFileId(userId);
+		this.fileId   = generateFileId(userId, fileName, this);
 		this.singleFileHistory 	= new LinkedList<FileState>();
 	}
 
@@ -122,7 +124,7 @@ public class File {
 					// Tutaj jest źle, bo przecież skoro plik jest dopiero tworzony
 					// to nie mamy go w żadnej bazie! 
 					// Więc tutaj jest zjebane, będzie null pointer exception
-					
+					System.err.println("to sie zaraz wypierdzieli");
 					deFajl.getValue().setFileStateHistoryEntry(
 							new Date().getTime(),
 							event.context().toString(),
@@ -216,11 +218,15 @@ public class File {
 	 * Generuje ID dla nowo tworzonego pliku.
 	 * 
 	 * @param userId
+	 * @param fileName 
+	 * @param myFile 
 	 * @return
 	 */
 	
-	public static String generateFileId(String userId) {
-		return userId+"_"+new Date().getTime();
+	public static String generateFileId(String userId, String fileName, File myFile) {
+		java.io.File file = new java.io.File(fileName);
+		myFile.setLastModified(file.lastModified());
+		return userId+"_"+file.lastModified();
 	}
 	
 	/***
@@ -326,4 +332,11 @@ public class File {
 		this.fileName = fileName;
 	}
 
+	public long getLastModified() {
+		return lastModified;
+	}
+
+	public void setLastModified(long lastModified) {
+		this.lastModified = lastModified;
+	}
 }
