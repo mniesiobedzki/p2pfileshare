@@ -71,7 +71,7 @@ public class FolderTree {
 	}
 
 	public void addFile(File f, String usr) {
-		Nod file = new Nod(f.getFileId(), folder.get(usr), f.getFileId(),f.getSingleFileHistory(), folder.get(usr), f.getFileName());
+		Nod file = new Nod(usr+f.getFileName(), folder.get(usr), f.getFileId(),f.getSingleFileHistory(), folder.get(usr), f.getFileName());
 		file.setParent(folder.get(usr));
 		folder.put(usr+file.getName(),file);
 	}
@@ -86,8 +86,9 @@ public class FolderTree {
 		Nod file = folder.get(usr + f.getFileName());
 		if (file == null) {
 			addFile(f, usr);
-		} else {
+		} else if(file.history.getLast().getData()<f.getSingleFileHistory().getLast().getData()){
 			file.history.add(f.getSingleFileHistory().getLast());
+			
 		}
 	}
 

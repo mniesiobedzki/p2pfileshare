@@ -11,16 +11,6 @@ public class Nod implements Serializable {
 	String parent;// klucz rodzica
 	String name;
 	String path;
-	public String getPath() {
-		return path;
-	}
-	public void setPath(String path) {
-		this.path = path;
-	}
-	public void setParent(String parent) {
-		this.parent = parent;
-	}
-
 	Nod owner;
 	LinkedList<FileState> history = new LinkedList<FileState>();
 
@@ -67,6 +57,16 @@ public class Nod implements Serializable {
 		owner = own;
 	}
 
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
+	public void setParent(String parent) {
+		this.parent = parent;
+	}
+	
 	public String getName() {
 		return name;
 	}
