@@ -10,13 +10,13 @@ public class TestFile {
 		FolderTree ft = new FolderTree("kuku\\");
 		String name = "test.txt";
 		String uname = "user1";
-		ft.addUser(uname);
-		File f = new File(name,File.generateFileId(uname));
-		ft.addFile(f, uname);
-		
-		File.runFolderListener("kuku\\");
-		
-		FileClient client = new FileClient("1.1.1.20", uname+name, name);		
+//		ft.addUser(uname);
+//		File f = new File(name, File.generateFileId(uname));
+//		ft.addFile(f, uname);
+//		
+//		File.runFolderListener("kuku\\");
+//		
+//		FileClient client = new FileClient("1.1.1.20", uname+name, name);		
 	}
 
 }

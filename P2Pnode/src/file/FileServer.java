@@ -51,10 +51,14 @@ public class FileServer extends Thread {
 				while (!s.hasNext()) {
 				}
 				String msg = s.next();
+				System.out.println(msg);
+				
 				String path = tree.getFolder().get(uname).getPath();
+				System.out.println(path);
 				//String path = tree.getFolder().get("root").getValue();
 				Nod n = tree.getFolder().get(msg);
-				path += n.getValue();
+				System.err.println(n.getValue()+" "+n.getName());
+				path += n.getName();
 				this.send(os, path);
 				sock.close();
 			}

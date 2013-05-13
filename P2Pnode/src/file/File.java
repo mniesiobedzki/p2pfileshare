@@ -51,9 +51,9 @@ public class File {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public File(String fileName, String fileId){
+	public File(String fileName, String userId){
 		this.fileName = fileName;
-		this.fileId   = generateFileId(fileId);
+		this.fileId   = generateFileId(userId);
 		this.singleFileHistory 	= new LinkedList<FileState>();
 	}
 
@@ -202,6 +202,14 @@ public class File {
 		this.getSingleFileHistory().add(fileStateObj);
 	}
 
+	/***
+	 * 
+	 * Generuje ID dla nowo tworzonego pliku.
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	
 	public static String generateFileId(String userId) {
 		return userId+"_"+new Date().getTime();
 	}
@@ -209,7 +217,7 @@ public class File {
 	/***
 	 * Checking if the file is currently stored within our HashMaps.
 	 * What this method does is:
-	 * 1. It calculated MD5 checksum of a file with the specified fileName
+	 * 1. It calculates MD5 checksum of a file with the specified fileName
 	 * 2. Goes through all the files within our system.
 	 * 3. Returns HashMap entry if the file had been found
 	 * 4. Returns NULL if the file does not exist in the system. 
