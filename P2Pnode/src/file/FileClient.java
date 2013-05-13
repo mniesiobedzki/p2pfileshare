@@ -47,7 +47,7 @@ public class FileClient{
 		}
 	  }
 
-	  public void receiveFile(InputStream is, String name, String path) throws Exception{
+	  public void receiveFile(InputStream is, String path, String name ) throws Exception{
 		  try {
 				// read this file into InputStream
 		 
