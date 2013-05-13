@@ -83,7 +83,7 @@ public class FolderTree {
 	 * @param usr - ID użytkownika
 	 */
 	public void updateFile(File f, String usr) {
-		Nod file = folder.get(usr + f.getFileId());
+		Nod file = folder.get(usr + f.getFileName());
 		if (file == null) {
 			addFile(f, usr);
 		} else {
@@ -99,8 +99,7 @@ public class FolderTree {
 	 */
 	public void updateAll(String usr) {
 		for (File f : File.filesAndTheirHistory.values()) {
-			if (!f.getSingleFileHistory().getLast()
-					.equals(this.folder.get(f.getFileId()))) {
+			if (!f.getSingleFileHistory().getLast().equals(this.folder.get(usr+f.getFileName()))) {
 				this.updateFile(f, usr);
 			}
 		}
