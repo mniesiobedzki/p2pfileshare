@@ -10,8 +10,8 @@ public class FolderTree {
 	
 	public TreeMap<String, Nod> folder = new TreeMap<String, Nod>();
 	// klucz to dla korzenia "root"
-	// dla u�ytkownika jego ID
-	// dla pliku ID u�ytkownika + ID pliku
+	// dla użytkownika jego ID
+	// dla pliku ID użytkownika + ID pliku
 	public Nod root;// nazwa folderu albo lokalizacja url
 
 	public FolderTree(){
@@ -80,8 +80,7 @@ public class FolderTree {
 	 * Metoda aktualizująca historie pliku o najnowszy wpis z listy lokalnej
 	 * 
 	 * @param f
-	 * @param usr
-	 *            - ID użytkownika
+	 * @param usr - ID użytkownika
 	 */
 	public void updateFile(File f, String usr) {
 		Nod file = folder.get(usr + f.getFileId());
@@ -96,8 +95,7 @@ public class FolderTree {
 	 * Metoda przechodzi po liscie lokalnych plików i ich historii porównując je
 	 * z plikami trzymanymi w drzewie synchronizowanym przez JCSync
 	 * 
-	 * @param usr
-	 *            - ID Użytkownika
+	 * @param usr - ID Użytkownika
 	 */
 	public void updateAll(String usr) {
 		for (File f : File.filesAndTheirHistory.values()) {
