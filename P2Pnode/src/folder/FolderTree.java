@@ -8,7 +8,7 @@ import file.File;
 
 public class FolderTree {
 	
-	public JCSyncTreeMap<String, Nod> folder = new JCSyncTreeMap<String, Nod>();
+	public TreeMap<String, Nod> folder = new TreeMap<String, Nod>();
 	// klucz to dla korzenia "root"
 	// dla użytkownika jego ID
 	// dla pliku ID użytkownika + ID pliku
@@ -23,7 +23,7 @@ public class FolderTree {
 		this.folder.put("root", root);
 	}
 
-	public JCSyncTreeMap<String, Nod> getFolder() {
+	public TreeMap<String, Nod> getFolder() {
 		return folder;
 	}
 
