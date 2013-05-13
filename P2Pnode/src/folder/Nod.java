@@ -10,6 +10,17 @@ public class Nod implements Serializable {
 	LinkedList<String> children = new LinkedList<String>();// klucze potomków
 	String parent;// klucz rodzica
 	String name;
+	String path;
+	public String getPath() {
+		return path;
+	}
+	public void setPath(String path) {
+		this.path = path;
+	}
+	public void setParent(String parent) {
+		this.parent = parent;
+	}
+
 	Nod owner;
 	LinkedList<FileState> history = new LinkedList<FileState>();
 

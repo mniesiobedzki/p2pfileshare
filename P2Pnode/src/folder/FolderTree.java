@@ -28,16 +28,17 @@ public class FolderTree {
 	}
 
 	/**
-	 * Metoda dodaj�ca u�ytkownika
+	 * Metoda dodająca użytkownika
 	 * 
-	 * @param usr
-	 *            - ID u�ytkownika
+	 * @param usr - ID użytkownika
+	 * @param path - ścieżka do folderu lokalna dla użytkownika
 	 */
-	public void addUser(String usr) {
+	public void addUser(String usr, String path) {
 		Nod n = new Nod(usr, root, usr);
 		System.out.println(n);
-		System.out.println(usr);
-		n.getValue();
+		System.out.println("Użytkownik :"+usr);
+		System.out.println("folder w :"+path);
+		n.setPath(path);
 		folder.put(usr, n);
 	}
 

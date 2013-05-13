@@ -12,7 +12,7 @@ import folder.Nod;
 
 public class TestServer {
 
-	/**x`
+	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -32,11 +32,15 @@ public class TestServer {
 			e.printStackTrace();
 		}
 		// TODO Auto-generated method stub
-		FolderTree ft = new FolderTree("kuku\\");
-		ft.addUser("user1");
-		File f = new File("test.txt", "cokolwiek");
-		ft.addFile(f, "user1");
-		FileServer server = new FileServer(ft);
+		String fileName = "test.txt";
+		String path = "kuku\\";
+		String folderName = "kuku";
+		String uname = "user1";
+		FolderTree ft = new FolderTree(folderName);
+		ft.addUser(uname, path);
+		File f = new File(fileName);
+		ft.addFile(f, uname);
+		FileServer server = new FileServer(ft, uname);
 	}
 
 }
