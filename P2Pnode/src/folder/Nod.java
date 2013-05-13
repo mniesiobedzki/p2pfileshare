@@ -25,7 +25,7 @@ public class Nod implements Serializable {
 	LinkedList<FileState> history = new LinkedList<FileState>();
 
 	/**
-	 * konstruktor dla korzenia i dla uï¿½ytkownikï¿½w
+	 * konstruktor dla korzenia i dla u¿ytkowników
 	 * 
 	 * @param val
 	 * @param par
@@ -46,20 +46,14 @@ public class Nod implements Serializable {
 	}
 
 	/**
-	 * konstruktor dla plikï¿½w
+	 * konstruktor dla plików
 	 * 
-	 * @param val
-	 *            - ID pliku
-	 * @param n
-	 *            - nazwa pliku
-	 * @param par
-	 *            - ID rodzica
-	 * @param key
-	 *            - Klucz
-	 * @param hist
-	 *            - Historia pliku
-	 * @param own
-	 *            - ID wï¿½aï¿½ciciela
+	 * @param val - ID pliku
+	 * @param n - nazwa pliku
+	 * @param par - ID rodzica
+	 * @param key - Klucz
+	 * @param hist - Historia pliku
+	 * @param own - ID w³aœciciela
 	 */
 	public Nod(String val, Nod par, String key, LinkedList<FileState> hist,
 			Nod own, String n) {
@@ -82,9 +76,9 @@ public class Nod implements Serializable {
 	}
 
 	/**
-	 * Metoda dodaje nastï¿½pnik wï¿½zï¿½a
+	 * Metoda dodaje nastêpnik do listy
 	 * 
-	 * @param ch
+	 * @param ch - Child
 	 */
 	public void addChlid(String ch) {
 		if (!children.contains(ch)) {
@@ -107,10 +101,9 @@ public class Nod implements Serializable {
 	}
 
 	/**
-	 * Metoda aktualizujï¿½ca historie pliku o nowy stan
+	 * Metoda aktualizuj¹ca historie pliku o nowy stan
 	 * 
-	 * @param state
-	 *            - nowy stan
+	 * @param state - nowy stan
 	 */
 	public void update(FileState state) {
 		if (!this.history.getLast().equals(state)) {

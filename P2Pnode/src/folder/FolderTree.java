@@ -77,11 +77,11 @@ public class FolderTree {
 	}
 
 	/**
-	 * Metoda aktualizuj�ca historie pliku o najnowszy wpis z listy lokalnej
+	 * Metoda aktualizująca historie pliku o najnowszy wpis z listy lokalnej
 	 * 
 	 * @param f
 	 * @param usr
-	 *            - ID u�ytkownika
+	 *            - ID użytkownika
 	 */
 	public void updateFile(File f, String usr) {
 		Nod file = folder.get(usr + f.getFileId());
@@ -93,7 +93,7 @@ public class FolderTree {
 	}
 
 	/**
-	 * Metoda przechodzi po liscie lokalnych plik�w i ich historii por�wnuj�c je
+	 * Metoda przechodzi po liscie lokalnych plików i ich historii porównując je
 	 * z plikami trzymanymi w drzewie synchronizowanym przez JCSync
 	 * 
 	 * @param usr
@@ -141,6 +141,6 @@ public class FolderTree {
 				}
 			}
 		}
-		// tu doda� kod wy�apuj�cy zmiany wymagaj�ce dodania
+		// tu dodać kod wyłapujący zmiany wymagające dodania
 	}
 }

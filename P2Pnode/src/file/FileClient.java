@@ -13,9 +13,14 @@ import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 
 public class FileClient{
+	/***
+	 * 
+	 * @param host - Hosts IP
+	 * @param key - Key of file to transfer
+	 * @param path - Local Path to save
+	 * @param name - Files Name
+	 */
 	  public FileClient (String host, String key, String path, String name ) {
-
-
 	    long start = System.currentTimeMillis();
 
 	    // localhost for testing
@@ -47,6 +52,13 @@ public class FileClient{
 		}
 	  }
 
+	  /***
+	   * 
+	   * @param is - Input stream to save from
+	   * @param path - Files path
+	   * @param name - Files name
+	   * @throws Exception - Goddamn Exception
+	   */
 	  public void receiveFile(InputStream is, String path, String name ) throws Exception{
 		  try {
 				// read this file into InputStream

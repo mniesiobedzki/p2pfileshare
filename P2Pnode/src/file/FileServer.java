@@ -21,7 +21,12 @@ public class FileServer extends Thread {
 		this.start();
 
 	}
-
+	/***
+	 * 
+	 * @param os - Output Stream
+	 * @param path - Files path
+	 * @throws Exception - Nother Goddamn Exception
+	 */
 	public void send(OutputStream os, String path) throws Exception {
 		// sendfile
 		java.io.File myFile = new java.io.File(path);
