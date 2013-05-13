@@ -54,9 +54,19 @@ public class File {
 	public File(String fileName, String fileId){
 		this.fileName = fileName;
 		this.fileId   = generateFileId(fileId);
+		this.singleFileHistory 	= new LinkedList<FileState>();
 	}
 
 	/*******************REGION METOD**********************/
+	
+	/***
+	 * 
+	 * Zwraca obiekt "File" z jednoelementową LinkedListą "FileState".
+	 * Lista ta zawiera tylko ostatni wpis z historii zmian pliku. 
+	 * 
+	 * @return
+	 */
+	
 	public File getCurrentFileWithLatestHistoryEntry(){
 		File file = new File();
 		file.setFileId(this.getFileId());
@@ -100,6 +110,7 @@ public class File {
 			WatchKey watchKey = watcher.take();
 
 			List<WatchEvent<?>> events = watchKey.pollEvents();
+			
 			for (WatchEvent event : events) {
 				
 				Entry<String, File> deFajl = searchForFile(event.context().toString());
@@ -107,7 +118,10 @@ public class File {
 				if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
 					System.out.println("Created: " + event.context().toString());				
 					
-					// To-Do PERSON ID podstawic prawdziwe dane
+					// Tutaj jest źle, bo przecież skoro plik jest dopiero tworzony
+					// to nie mamy go w żadnej bazie! 
+					// Więc tutaj jest zjebane, będzie null pointer exception
+					
 					deFajl.getValue().setFileStateHistoryEntry(
 							new Date().getTime(),
 							event.context().toString(),
@@ -191,6 +205,18 @@ public class File {
 	private String generateFileId(String userId) {
 		return userId+"_"+new Date().getTime();
 	}
+	
+	/***
+	 * Checking if the file is currently stored within our HashMaps.
+	 * What this method does is:
+	 * 1. It calculated MD5 checksum of a file with the specified fileName
+	 * 2. Goes through all the files within our system.
+	 * 3. Returns HashMap entry if the file had been found
+	 * 4. Returns NULL if the file does not exist in the system. 
+	 * 
+	 * @param fileName
+	 * @return
+	 */
 	
 	private static Entry<String, File> searchForFile(String fileName){
 		
