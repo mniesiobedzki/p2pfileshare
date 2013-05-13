@@ -97,7 +97,7 @@ public class FolderTree {
 	 * z plikami trzymanymi w drzewie synchronizowanym przez JCSync
 	 * 
 	 * @param usr
-	 *            - ID U�ytkownika
+	 *            - ID Użytkownika
 	 */
 	public void updateAll(String usr) {
 		for (File f : File.filesAndTheirHistory.values()) {
@@ -137,8 +137,7 @@ public class FolderTree {
 		for (Nod n : folder.values()) {
 			if (n.getHistory().size() > 0) {
 				if (!File.filesAndTheirHistory.containsKey(n.getValue())) {
-					conflicts
-							.add(folder.get(n.getOwner().value + n.getValue()));
+					conflicts.add(folder.get(n.getOwner().value + n.getValue()));
 				}
 			}
 		}
