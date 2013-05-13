@@ -7,16 +7,20 @@ import folder.FolderTree;
 public class TestFile {
 
 	public static void main(String[] args) {		
-		FolderTree ft = new FolderTree("kuku\\");
+		FolderTree ft = new FolderTree("kuku");
 		String name = "test.txt";
 		String uname = "user1";
-//		ft.addUser(uname);
-//		File f = new File(name, File.generateFileId(uname));
-//		ft.addFile(f, uname);
-//		
-//		File.runFolderListener("kuku\\");
-//		
-//		FileClient client = new FileClient("1.1.1.20", uname+name, name);		
+		ft.addUser(uname, "kuku\\");
+		//File fa = new File(name, File.generateFileId(uname));
+		java.io.File[] listaFajli = File.listAllTheFilesInDir("kuku\\");
+		
+		for (java.io.File file : listaFajli) {
+			File f = new File(file.getName(),uname);
+			ft.addFile(f, uname);
+		}
+		File.runFolderListener("kuku\\", ft, uname);
+		
+		//FileClient client = new FileClient("1.1.1.20", uname+name, name);		
 	}
 
 }

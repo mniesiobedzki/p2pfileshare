@@ -1,5 +1,6 @@
 package file;
 
+import folder.FolderTree;
 import gui.GuiWindower;
 
 import java.security.MessageDigest;
@@ -75,7 +76,7 @@ public class File {
 		return file; 
 	}
 	
-	public static void runFolderListener(String path){
+	public static void runFolderListener(String path, final FolderTree folderTree, final String userId){
 		//final Path myDir = Paths.get("C:/Programowanie"); // define a folder root
 		
 		final Path myDir = Paths.get(path); // define a folder root
@@ -85,7 +86,7 @@ public class File {
 				@Override
 				public void run() {
 					while (true) {
-						handleDirectoryChangeEvent(myDir);
+						handleDirectoryChangeEvent(myDir,folderTree,userId);
 					}
 				}
 			};
@@ -98,7 +99,7 @@ public class File {
 		}
 	}
 	
-	private static void handleDirectoryChangeEvent(Path myDir) {
+	private static void handleDirectoryChangeEvent(Path myDir, FolderTree folderTree, String userId) {
 		
 		try 
 		{
@@ -125,13 +126,13 @@ public class File {
 					deFajl.getValue().setFileStateHistoryEntry(
 							new Date().getTime(),
 							event.context().toString(),
-							"USER ID TO ZMIENIC",
+							userId,
 							new java.io.File(myDir.toString() + "/"	+ event.context().toString()).length(),
 							getMD5Checksum(listenedPath.toString() + "\\" + event.context().toString())
 							);
 					
 					filesAndTheirHistory.put(deFajl.getValue().getFileId(), deFajl.getValue());
-					
+					folderTree.addFile(deFajl.getValue(), userId);
 					
 //					setFileStateHistoryEntry(new Date().getTime(),
 //							event.context().toString(),
@@ -144,7 +145,7 @@ public class File {
 				if (event.kind() == StandardWatchEventKinds.ENTRY_DELETE) {
 					System.out.println("Delete: " + event.context().toString());
 						
-					deFajl.getValue().setFileStateHistoryEntry(new Date().getTime(), "deleted", "USER ID TO ZMIENIC",0,"");
+					deFajl.getValue().setFileStateHistoryEntry(new Date().getTime(), "deleted",userId,0,"");
 					
 					//Metoda ustawiaj�ca pola obiektu FileState na stan - DELETED
 					// To-Do PERSON ID podstawic prawdziwe dane
@@ -156,7 +157,7 @@ public class File {
 					
 					deFajl.getValue().setFileStateHistoryEntry(new Date().getTime(),
 							event.context().toString(),
-							"USER ID TO ZMIENIC",
+							userId,
 							new java.io.File(myDir.toString() + "/"	+ event.context().toString()).length(),
 							getMD5Checksum(listenedPath.toString() + "\\" + event.context().toString())
 							);
@@ -176,18 +177,26 @@ public class File {
 		}
 	}
 	
-	/**
-	 * Metoda ustawia obiekt typu FileState i dodaje go do  
-	 * historii zmian danego File
-	 *  
-	 * @param entryDate
-	 * @param fileName
-	 * @param userID
-	 * @param fileSize
-	 * @param fileMD5Hash
+	/***
 	 * 
+	 * Metoda sprawdzająca jakie pliki są w folderze i tworzyć je w drzewie
 	 * 
 	 */
+	public static java.io.File[] listAllTheFilesInDir(String directoryPath) {
+		String files;
+		java.io.File folder = new java.io.File(directoryPath);
+		java.io.File[] listOfFiles = folder.listFiles();
+		return listOfFiles;
+//		for (int i = 0; i < listOfFiles.length; i++) {
+//			if (listOfFiles[i].isFile()) {
+//				files = listOfFiles[i].getName();
+//				System.out.println(files);
+//				if (files.endsWith(".txt") || files.endsWith(".TXT")) {
+//					
+//				}
+//			}
+//		}
+	}
 	
 	private void setFileStateHistoryEntry(long entryDate, String fileName, String userID, long fileSize, String fileMD5Hash) {
 
