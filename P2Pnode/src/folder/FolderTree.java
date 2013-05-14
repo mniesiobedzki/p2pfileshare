@@ -117,25 +117,9 @@ public class FolderTree implements Serializable {
 		LinkedList<Nod> conflicts = new LinkedList<Nod>();
 		for (String u : users) {
 			if (!u.equals(usr)) {
-				for (File f : MFolderListener.filesAndTheirHistory.values()) {
-					System.out.println(folder);
-
-					System.out.println(f.getFileId());
-					for (File fff : MFolderListener.filesAndTheirHistory.values()) {
-						System.out.println("-"+fff.getFileId());
-					}
-					for (String s : MFolderListener.filesAndTheirHistory.keySet()) {
-						System.out.println("-"+s);
-					}
-					System.out.println(MFolderListener.filesAndTheirHistory.get(f.getFileId()));
-
-					System.out.println(MFolderListener.filesAndTheirHistory.get(f.getFileId())
-							.getSingleFileHistory().getLast() );
-					System.out.println(MFolderListener.filesAndTheirHistory.get(f.getFileId())
-							.getSingleFileHistory().getLast().getData());
-					
+				for (File f : MFolderListener.filesAndTheirHistory.values()) {					
 					 
-					
+					System.out.println(folder.get(usr + f.getFileName()).getHistory().getLast().getData());
 					if (MFolderListener.filesAndTheirHistory.get(f.getFileId())
 							.getSingleFileHistory().getLast().getData() < folder
 							.get(usr + f.getFileName()).getHistory().getLast()
@@ -149,13 +133,14 @@ public class FolderTree implements Serializable {
 		for (Nod n : folder.values()) {
 			if (n.getHistory().size() > 0) {
 				if (!MFolderListener.filesAndTheirHistory.containsKey(n.getValue())) {
-					conflicts.add(folder.get(n.getOwner().value + n.getValue()));
+					conflicts.add(folder.get(n.getOwner().value + n.name));
 				}
 			}
 		}
 		System.out.println("conflicts:");
 		for (Nod nod : conflicts) {
-			System.out.println(nod.getParent());
+			System.out.println(nod);
+			//System.out.println(nod.getParent());
 			System.out.println("\t"+nod.getName());
 			System.out.println("\t"+nod.getPath());
 			System.out.println("\t"+nod.getValue()+"\n");
