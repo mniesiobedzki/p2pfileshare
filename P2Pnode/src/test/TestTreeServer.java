@@ -29,8 +29,9 @@ public class TestTreeServer {
 			File.filesAndTheirHistory.put(uname + f.getFileName(), f);
 			System.out.println(f.getFileId());
 		}
+		System.out.println("teraz jestem tu");
 		File.runFolderListener("kuku\\", ft, uname);
-
+		System.out.println("jestem tu");
 		Socket connectionSocket = welcomeSocket.accept();
 		System.err.println("Connected");
 

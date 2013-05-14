@@ -98,14 +98,20 @@ public class File {
 				public void run() {
 					while (true) {
 						handleDirectoryChangeEvent(myDir,folderTree,userId);
+						try {
+							Thread.sleep(6000);
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 					}
 				}
 			};
 
 			Thread t = new Thread(r);
 			t.start();
-			t.join();
-		} catch (InterruptedException e) {
+			//t.join();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -114,6 +120,7 @@ public class File {
 		
 		try 
 		{
+			
 			WatchService watcher = myDir.getFileSystem().newWatchService();
 			myDir.register(watcher, StandardWatchEventKinds.ENTRY_CREATE,
 									StandardWatchEventKinds.ENTRY_DELETE,

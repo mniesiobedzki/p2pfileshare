@@ -1,12 +1,13 @@
 package folder;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.TreeMap;
 
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import file.File;
 
-public class FolderTree {
+public class FolderTree implements Serializable {
 	
 	public TreeMap<String, Nod> folder = new TreeMap<String, Nod>();
 	// klucz to dla korzenia "root"
