@@ -16,6 +16,8 @@ public class TestTreeClient implements Runnable{
 	 */
 	String 	serverIP;
 	int 	serverPort;
+	boolean changed=false;
+	FolderTree ft;
 
 	@Override
 	public void run() {
@@ -26,9 +28,11 @@ public class TestTreeClient implements Runnable{
 	    
 			InputStream socketStream = sock.getInputStream();
 			ObjectInputStream objectInput = new ObjectInputStream(socketStream);
-			FolderTree ft = (FolderTree) objectInput.readObject();
-			
-			System.out.println(ft);
+			while(true){//tu przetestowaæ co siê dzieje bo nie wiemy jak dzia³a objectinputstream 
+				ft = (FolderTree) objectInput.readObject();
+				changed = true;
+				System.out.println(ft);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
