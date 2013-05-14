@@ -15,16 +15,18 @@ public class TestTreeServer implements Runnable {
 	 *            - user name
 	 * @param path
 	 *            - file path
+	 * @param port - port
 	 */
 	String fname;
 	String uname;
 	String path;
+	int port;
 
 	@Override
 	public void run() {
 		ServerSocket welcomeSocket;
 		try {
-			welcomeSocket = new ServerSocket(6789);
+			welcomeSocket = new ServerSocket(port);
 
 			FolderTree ft = new FolderTree(fname);
 			ft.addUser(uname, path);
@@ -55,10 +57,11 @@ public class TestTreeServer implements Runnable {
 		}
 	}
 
-	public TestTreeServer(String fname, String uname, String path) {
+	public TestTreeServer(String fname, String uname, String path, int port) {
 		super();
 		this.fname = fname;
 		this.uname = uname;
 		this.path = path;
+		this.port = port;
 	}
 }
