@@ -17,7 +17,7 @@ public class BootstrapServerRunner extends Thread {
 	@Override
 	public void run() {
 		try {
-			this.manager = new P2PPManager(0, this.port, 0, 0, 0, "", "",
+			this.manager = new P2PPManager(this.port, this.port, 0, 0, 0, "", "",
 					new P2PPMessageFactory(), "myOverlayID".getBytes("UTF-8"));
 			String hashAlgorithm = "SHA-1";
 			byte hashLength = 20;
