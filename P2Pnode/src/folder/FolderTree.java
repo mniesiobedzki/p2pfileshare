@@ -13,10 +13,6 @@ public class FolderTree {
 	// dla użytkownika jego ID
 	// dla pliku ID użytkownika + ID pliku
 	public Nod root;// nazwa folderu albo lokalizacja url
-
-	public FolderTree(){
-		
-	}
 	
 	public FolderTree(String path) {
 		root = new Nod(path, "root");
@@ -88,7 +84,6 @@ public class FolderTree {
 			addFile(f, usr);
 		} else if(file.history.getLast().getData()<f.getSingleFileHistory().getLast().getData()){
 			file.history.add(f.getSingleFileHistory().getLast());
-			
 		}
 	}
 
@@ -144,7 +139,7 @@ public class FolderTree {
 			System.out.println(nod.getParent());
 			System.out.println("\t"+nod.getName());
 			System.out.println("\t"+nod.getPath());
-			System.out.println("\t"+nod.getValue());
+			System.out.println("\t"+nod.getValue()+"\n");
 			
 		}
 		// tu dodać kod wyłapujący zmiany wymagające dodania
