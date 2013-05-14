@@ -11,7 +11,10 @@ import pl.edu.pjwstk.mteam.jcsync.core.JCSyncStateListener;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncHashMap;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.SharedCollectionObject;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.util.JCSyncObservable;
+import pl.edu.pjwstk.mteam.jcsync.core.implementation.util.SharedObservableObject;
 import pl.edu.pjwstk.mteam.jcsync.exception.ObjectExistsException;
+import pl.edu.pjwstk.mteam.jcsync.exception.ObjectNotExistsException;
+import pl.edu.pjwstk.mteam.jcsync.exception.OperationForbiddenException;
 import pl.edu.pjwstk.mteam.p2p.P2PNode;
 import pl.edu.pjwstk.mteam.p2pm.tests.tests.tests.jcsyncbasic.ConsistencyManager;
 import pl.edu.pjwstk.mteam.p2pm.tests.tests.tests.jcsyncbasic.OperationDetails;
@@ -22,7 +25,7 @@ import java.util.Observer;
 
 public class JCSyncExample2 {
 
-    public static final Logger LOG = Logger.getLogger(JCSyncExample.class);
+    public static final Logger LOG = Logger.getLogger(JCSyncExample2.class);
 
     private P2PNode p2pNode;
     private NodeCallback p2pNodeCallback = new NodeCallback() {
@@ -53,6 +56,12 @@ public class JCSyncExample2 {
         @Override public boolean onDeliverRequest(List<NetworkObject> objectList) { return false; }
         @Override public boolean onForwardingRequest(List<NetworkObject> objectList) { return false; }
         @Override public void onBootstrapError(Node node, int errorCode) {}
+
+        @Override
+        public void onMessageDelivery(List<NetworkObject> networkObjects) {
+            //To change body of implemented methods use File | Settings | File Templates.
+            System.out.println("onMessageDelivery " + networkObjects.getClass().getName());
+        }
     };
 
     private JCSyncCore jcsyncCore;
@@ -75,11 +84,14 @@ public class JCSyncExample2 {
             LOG.debug("collection onLocalStateUpdated callback invoked method=" + methodName + ": " + collection);
             System.out.println(" LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL ");
         }
+
         public void onRemoteStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
             LOG.debug("collection onRemoteStateUpdated callback invoked method=" + methodName + ": " + collection);
             System.out.println(" REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE ");
         }
     };
+    private SharedObservableObject observable_so;
+    //private SharedObservableObject observable_so;
 
 
     public void initLayer(String bootIP, int bootPort, String userName, int tcpPort) throws Exception {
@@ -118,6 +130,8 @@ public class JCSyncExample2 {
                 LOG.debug("I got the collection: " + this.collection);
 
             }
+
+            this.observable = this.getObservable(jcsyncCore);
             
             this.observable.addObserver(this.collectionObserver);
             this.collection_so.addStateListener(this.collectionListener);
@@ -145,7 +159,7 @@ public class JCSyncExample2 {
 
     public static void main(String args[]) {
 
-        JCSyncExample example = new JCSyncExample();
+        JCSyncExample2 example = new JCSyncExample2();
 
         try {
            // example.initLayer(args[0], Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
@@ -156,4 +170,41 @@ public class JCSyncExample2 {
 
     }
 
+    public JCSyncObservable getObservable(JCSyncCore jcsynccore) {
+        JCSyncObservable jcSyncObservable = new JCSyncObservable();
+        try {
+            this.observable_so = new SharedObservableObject("myCollection_obs",
+                    jcSyncObservable, jcsynccore);
+        } catch (ObjectExistsException e) {
+            try {
+                this.observable_so = (SharedObservableObject) SharedObservableObject
+                        .getFromOverlay("myCollection_obs", jcsynccore);
+            } catch (ObjectNotExistsException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            } catch (OperationForbiddenException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            } catch (Exception e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
+            jcSyncObservable = (JCSyncObservable) this.observable_so
+                    .getNucleusObject();
+        } catch (Exception e) {
+            e.printStackTrace(); // To change body of catch statement use File |
+            // Settings | File Templates.
+        }
+		/*
+		 * try { this.jcSyncHashMap_sharedObject = new
+		 * SharedObservableObject("myMap", this.jcSyncHashMap, this.jcSyncCore,
+		 * ConsistencyManager.class); } catch (ObjectExistsException e) {
+		 * this.jcSyncHashMap_sharedObject =
+		 * SharedCollectionObject.getFromOverlay("myMap", this.jcs) }
+		 */
+
+        return jcSyncObservable;
+
+    }
 }

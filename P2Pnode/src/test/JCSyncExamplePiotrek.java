@@ -53,6 +53,11 @@ public class JCSyncExamplePiotrek {
         @Override public boolean onDeliverRequest(List<NetworkObject> objectList) { return false; }
         @Override public boolean onForwardingRequest(List<NetworkObject> objectList) { return false; }
         @Override public void onBootstrapError(Node node, int errorCode) {}
+
+        @Override
+        public void onMessageDelivery(List<NetworkObject> networkObjects) {
+            //To change body of implemented methods use File | Settings | File Templates.
+        }
     };
 
     private JCSyncCore jcsyncCore;

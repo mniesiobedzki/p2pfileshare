@@ -53,6 +53,11 @@ public class JCSyncExample3 {
         @Override public boolean onDeliverRequest(List<NetworkObject> objectList) { return false; }
         @Override public boolean onForwardingRequest(List<NetworkObject> objectList) { return false; }
         @Override public void onBootstrapError(Node node, int errorCode) {}
+
+        @Override
+        public void onMessageDelivery(List<NetworkObject> networkObjects) {
+            //To change body of implemented methods use File | Settings | File Templates.
+        }
     };
 
     private JCSyncCore jcsyncCore;
@@ -144,7 +149,7 @@ public class JCSyncExample3 {
 
     public static void main(String args[]) {
 
-        JCSyncExample2 example = new JCSyncExample2();
+        JCSyncExample3 example = new JCSyncExample3();
 
         try {
            // example.initLayer(args[0], Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
