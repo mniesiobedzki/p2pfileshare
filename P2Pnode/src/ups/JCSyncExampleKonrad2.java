@@ -1,5 +1,4 @@
-package test;
-
+package ups;
 
 import org.apache.log4j.Logger;
 import pl.edu.pjwstk.mteam.core.NetworkObject;
@@ -11,10 +10,7 @@ import pl.edu.pjwstk.mteam.jcsync.core.JCSyncStateListener;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncHashMap;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.SharedCollectionObject;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.util.JCSyncObservable;
-import pl.edu.pjwstk.mteam.jcsync.core.implementation.util.SharedObservableObject;
 import pl.edu.pjwstk.mteam.jcsync.exception.ObjectExistsException;
-import pl.edu.pjwstk.mteam.jcsync.exception.ObjectNotExistsException;
-import pl.edu.pjwstk.mteam.jcsync.exception.OperationForbiddenException;
 import pl.edu.pjwstk.mteam.p2p.P2PNode;
 import pl.edu.pjwstk.mteam.p2pm.tests.tests.tests.jcsyncbasic.ConsistencyManager;
 import pl.edu.pjwstk.mteam.p2pm.tests.tests.tests.jcsyncbasic.OperationDetails;
@@ -23,9 +19,9 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class JCSyncExample {
+public class JCSyncExampleKonrad2 {
 
-    public static final Logger LOG = Logger.getLogger(JCSyncExample.class);
+    public static final Logger LOG = Logger.getLogger(JCSyncExampleKonrad2.class);
 
     private P2PNode p2pNode;
     private NodeCallback p2pNodeCallback = new NodeCallback() {
@@ -56,44 +52,32 @@ public class JCSyncExample {
         @Override public boolean onDeliverRequest(List<NetworkObject> objectList) { return false; }
         @Override public boolean onForwardingRequest(List<NetworkObject> objectList) { return false; }
         @Override public void onBootstrapError(Node node, int errorCode) {}
-
-        @Override
-        public void onMessageDelivery(List<NetworkObject> networkObjects) {
-            //To change body of implemented methods use File | Settings | File Templates.
-        	System.out.println("******************************************");
-            System.out.println("onMessageDelivery " + networkObjects.getClass().getName());
-            System.out.println("******************************************");
-        }
+        @Override public void onMessageDelivery(List<NetworkObject> objectList) {System.out.println("MSG");}
     };
 
     private JCSyncCore jcsyncCore;
-    private JCSyncObservable observable;
     private JCSyncHashMap<String, OperationDetails> collection;
     private SharedCollectionObject collection_so;
-    
     private Observer collectionObserver = new Observer() {
+    	
+    
         @Override
         public void update(Observable o, Object arg) {
-        	System.out.println("UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE ");
-            if (o.equals(observable)) {
-                String args_ = (String)arg;
-                LOG.trace("[Update o=" + o + "] " + arg);
-            }
+        	
+        	System.out.println("UPDATE w OBSERWER");
+        	
+            //String args_ = (String)arg;
+            //LOG.trace("[Update o=" + o + "] " + arg);
         }
     };
-    
     private JCSyncStateListener collectionListener = new JCSyncStateListener() {
         public void onLocalStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
             LOG.debug("collection onLocalStateUpdated callback invoked method=" + methodName + ": " + collection);
-            System.out.println(" LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL ");
         }
         public void onRemoteStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
             LOG.debug("collection onRemoteStateUpdated callback invoked method=" + methodName + ": " + collection);
-            System.out.println(" REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE ");
         }
     };
-
-	private SharedObservableObject observable_so;
 
 
     public void initLayer(String bootIP, int bootPort, String userName, int tcpPort) throws Exception {
@@ -105,6 +89,7 @@ public class JCSyncExample {
         this.p2pNode.setBootPort(bootPort);
         this.p2pNode.setUserName(userName);
         this.p2pNode.setTcpPort(tcpPort);
+
         this.p2pNode.networkJoin();
 
     }
@@ -118,8 +103,6 @@ public class JCSyncExample {
             LOG.trace("Initializing JCSyncCore");
             this.jcsyncCore = new JCSyncCore(this.p2pNode, this.p2pNode.getTcpPort()+2);
             this.jcsyncCore.init();
-            //this.observable = new JCSyncObservable();
-            
             this.collection = new JCSyncHashMap<String, OperationDetails>();
             LOG.trace("Creating the collection");
             try {
@@ -131,13 +114,8 @@ public class JCSyncExample {
                 LOG.debug("I got the collection: " + this.collection);
 
             }
-            
-            this.observable = this.getObservable(jcsyncCore);
-            
-            this.observable.addObserver(this.collectionObserver);
-           
+            this.collection_so.addObserver(this.collectionObserver);
             this.collection_so.addStateListener(this.collectionListener);
-            
 
         } catch (Throwable e) {
             LOG.error("Error while initializing JCSync: " + e);
@@ -160,54 +138,15 @@ public class JCSyncExample {
 
     public static void main(String args[]) {
 
-        JCSyncExample example = new JCSyncExample();
+        JCSyncExampleKonrad2 example = new JCSyncExampleKonrad2();
 
         try {
            // example.initLayer(args[0], Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
-        	example.initLayer("127.0.0.1", 21000, "user1", 22011);
+        	example.initLayer("1.1.1.4", 21000, "Konrad3", 22232);
         } catch (Throwable e) {
             LOG.error("Error while initializing layer: " + e);
         }
 
     }
-    
-    public JCSyncObservable getObservable(JCSyncCore jcsynccore) {
-		JCSyncObservable jcSyncObservable = new JCSyncObservable();
-		try {
-			this.observable_so = new SharedObservableObject("myCollection_obs",
-					jcSyncObservable, jcsynccore);
-		} catch (ObjectExistsException e) {
-			try {
-				this.observable_so = (SharedObservableObject) SharedObservableObject
-						.getFromOverlay("myCollection_obs", jcsynccore);
-			} catch (ObjectNotExistsException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (OperationForbiddenException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-
-			jcSyncObservable = (JCSyncObservable) this.observable_so
-					.getNucleusObject();
-		} catch (Exception e) {
-			e.printStackTrace(); // To change body of catch statement use File |
-									// Settings | File Templates.
-		}
-		/*
-		 * try { this.jcSyncHashMap_sharedObject = new
-		 * SharedObservableObject("myMap", this.jcSyncHashMap, this.jcSyncCore,
-		 * ConsistencyManager.class); } catch (ObjectExistsException e) {
-		 * this.jcSyncHashMap_sharedObject =
-		 * SharedCollectionObject.getFromOverlay("myMap", this.jcs) }
-		 */
-
-		return jcSyncObservable;
-
-	}
-
 
 }

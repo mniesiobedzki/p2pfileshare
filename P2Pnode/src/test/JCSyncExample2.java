@@ -102,7 +102,7 @@ public class JCSyncExample2 {
         this.p2pNode.setBootIP(bootIP);
         this.p2pNode.setBootPort(bootPort);
         this.p2pNode.setUserName(userName);
-        this.p2pNode.setUdpPort(tcpPort);
+        this.p2pNode.setTcpPort(tcpPort);
         
 
         this.p2pNode.networkJoin();
@@ -163,7 +163,7 @@ public class JCSyncExample2 {
 
         try {
            // example.initLayer(args[0], Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
-        	example.initLayer("127.0.0.1", 21000, "user3", 22012);
+        	example.initLayer("127.0.0.1", 21000, "user3", 22021);
         } catch (Throwable e) {
             LOG.error("Error while initializing layer: " + e);
         }
