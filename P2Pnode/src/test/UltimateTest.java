@@ -7,9 +7,8 @@ public class UltimateTest {
 		TestTreeClient klient = new TestTreeClient("1.1.1.20", 6666);
 		TestTreeServer serwer = new TestTreeServer("kuku", "serwerMichala", "kuku//", 5555);
 		
-		serwer.run();
-		klient.run();
-		
+		new Thread(klient).start();
+		new Thread(serwer).start();
 	}
 	
 }
