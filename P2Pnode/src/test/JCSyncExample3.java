@@ -57,6 +57,7 @@ public class JCSyncExample3 {
         @Override
         public void onMessageDelivery(List<NetworkObject> networkObjects) {
             //To change body of implemented methods use File | Settings | File Templates.
+        	System.out.println("onMessageDelivery");
         }
     };
 
@@ -94,7 +95,7 @@ public class JCSyncExample3 {
         this.p2pNode.setBootIP(bootIP);
         this.p2pNode.setBootPort(bootPort);
         this.p2pNode.setUserName(userName);
-        this.p2pNode.setUdpPort(tcpPort);
+        this.p2pNode.setTcpPort(tcpPort);
         
 
         this.p2pNode.networkJoin();
@@ -153,7 +154,7 @@ public class JCSyncExample3 {
 
         try {
            // example.initLayer(args[0], Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
-        	example.initLayer("1.1.1.4", 21000, "user3", 22003);
+        	example.initLayer("1.1.1.4", 21000, "user33", 22031);
         } catch (Throwable e) {
             LOG.error("Error while initializing layer: " + e);
         }
