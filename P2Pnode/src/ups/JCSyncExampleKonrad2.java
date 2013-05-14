@@ -52,7 +52,7 @@ public class JCSyncExampleKonrad2 {
         @Override public boolean onDeliverRequest(List<NetworkObject> objectList) { return false; }
         @Override public boolean onForwardingRequest(List<NetworkObject> objectList) { return false; }
         @Override public void onBootstrapError(Node node, int errorCode) {}
-        @Override public void onMessageDelivery(List<NetworkObject> objectList) {System.out.println("MSG");}
+       @Override public void onMessageDelivery(List<NetworkObject> objectList) {System.out.println("MSG");}
     };
 
     private JCSyncCore jcsyncCore;
@@ -73,9 +73,12 @@ public class JCSyncExampleKonrad2 {
     private JCSyncStateListener collectionListener = new JCSyncStateListener() {
         public void onLocalStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
             LOG.debug("collection onLocalStateUpdated callback invoked method=" + methodName + ": " + collection);
+            System.out.println(" LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL ");
+        
         }
         public void onRemoteStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
             LOG.debug("collection onRemoteStateUpdated callback invoked method=" + methodName + ": " + collection);
+            System.out.println(" REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE ");
         }
     };
 
@@ -142,7 +145,7 @@ public class JCSyncExampleKonrad2 {
 
         try {
            // example.initLayer(args[0], Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
-        	example.initLayer("1.1.1.4", 21000, "Konrad3", 22232);
+        	example.initLayer("1.1.1.4", 21000, "Konrad2", 22221);
         } catch (Throwable e) {
             LOG.error("Error while initializing layer: " + e);
         }
