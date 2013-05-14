@@ -4,8 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 
+import org.apache.log4j.Logger;
+
 import pl.edu.pjwstk.mteam.core.Node;
+import pl.edu.pjwstk.mteam.jcsync.core.JCSyncAbstractSharedObject;
 import pl.edu.pjwstk.mteam.jcsync.core.JCSyncCore;
+import pl.edu.pjwstk.mteam.jcsync.core.JCSyncStateListener;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncArrayList;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncHashMap;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.SharedCollectionObject;
@@ -15,9 +19,12 @@ import pl.edu.pjwstk.mteam.jcsync.exception.ObjectExistsException;
 import pl.edu.pjwstk.mteam.jcsync.exception.ObjectNotExistsException;
 import pl.edu.pjwstk.mteam.jcsync.exception.OperationForbiddenException;
 import pl.edu.pjwstk.mteam.p2p.P2PNode;
+import ups.JCSyncExampleKonrad1;
 
 public class ClientP2Pnode {
 
+	public static final Logger LOG = Logger.getLogger(ClientP2Pnode.class);
+	
 	private P2PNode node;
 
 	// Podstawowa implementacja JCSync
@@ -65,7 +72,7 @@ public class ClientP2Pnode {
 		this.node.setBootIP(serverIP);
 		this.node.setBootPort(serverPort);
 		this.node.setUserName(nodeName);
-		this.node.setUdpPort(portOut);
+		this.node.setTcpPort(portOut);
 
 		this.node.networkJoin();
 
@@ -152,7 +159,20 @@ public class ClientP2Pnode {
 		this.jcSyncObservable = this.getObservable2(this.jcSyncCore);
 
 		CollectionListener cl = new CollectionListener(this.jcSyncObservable);
+		
+this.observable_so.addStateListener(collectionListener);
 	}
+	
+	 private JCSyncStateListener collectionListener = new JCSyncStateListener() {
+	        public void onLocalStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
+	            LOG.debug("collection onLocalStateUpdated callback invoked method=" + methodName + ": " + collection);
+	            System.out.println(" LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL ");
+	        }
+	        public void onRemoteStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
+	            LOG.debug("collection onRemoteStateUpdated callback invoked method=" + methodName + ": " + collection);
+	            System.out.println(" REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE ");
+	        }
+	    };
 
 	/**
 	 * Metoda tworzenia nowej czystej koleckji
