@@ -47,10 +47,16 @@ public class TestTreeServer implements Runnable {
 			OutputStream socketStream = connectionSocket.getOutputStream();
 			ObjectOutput objectOutput = new ObjectOutputStream(socketStream);
 			while (true) {
-				if (MFolderListener.fileCreated || MFolderListener.fileDeleted || MFolderListener.fileModified) {
+				if (MFolderListener.fileCreated) {
 					objectOutput.writeObject(ft);
 					MFolderListener.fileCreated = false;
+				}
+				if ( MFolderListener.fileDeleted) {
+					objectOutput.writeObject(ft);
 					MFolderListener.fileDeleted = false;
+				}
+				if (MFolderListener.fileModified) {
+					objectOutput.writeObject(ft);
 					MFolderListener.fileModified = false;
 				}
 			}
