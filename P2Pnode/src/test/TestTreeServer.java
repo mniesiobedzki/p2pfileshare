@@ -6,21 +6,28 @@ import file.File;
 import folder.FolderTree;
 import folder.MFolderListener;
 
-public class TestTreeServer {
+public class TestTreeServer implements Runnable{
 
-	/**
-	 * @param args
-	 * @throws IOException
+	/***
+	 * @param fname - folder name
+	 * @param uname - user name
+	 * @param path - file path
 	 */
-	public static void main(String[] args) throws IOException {
+	String fname;
+	String uname;
+	String path;
+	
 
-		ServerSocket welcomeSocket = new ServerSocket(6789);
+	@Override
+	public void run() {
+		ServerSocket welcomeSocket;
+		try {
+			welcomeSocket = new ServerSocket(6789);
 
-		FolderTree ft = new FolderTree("kuku");
-		String uname = "user1";
-		ft.addUser(uname, "kuku\\");
+		FolderTree ft = new FolderTree(fname);
+		ft.addUser(uname, path);
 		// File fa = new File(name, File.generateFileId(uname));
-		java.io.File[] listaFajli = File.listAllTheFilesInDir("kuku\\");
+		java.io.File[] listaFajli = File.listAllTheFilesInDir(path);
 
 		for (java.io.File file : listaFajli) {
 			File f = new File(file.getName(), uname);
@@ -28,14 +35,24 @@ public class TestTreeServer {
 			MFolderListener.filesAndTheirHistory.put(uname + f.getFileName(), f);
 			System.out.println(f.getFileId());
 		}
-		System.out.println("teraz jestem tu");
-		MFolderListener.runFolderListener("kuku\\", ft, uname);
-		System.out.println("jestem tu");
+		MFolderListener.runFolderListener(path, ft, uname);
 		Socket connectionSocket = welcomeSocket.accept();
 		System.err.println("Connected");
 
 		OutputStream socketStream = connectionSocket.getOutputStream();
 		ObjectOutput objectOutput = new ObjectOutputStream(socketStream);
 		objectOutput.writeObject(ft);
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public TestTreeServer(String fname, String uname, String path) {
+		super();
+		this.fname = fname;
+		this.uname = uname;
+		this.path = path;
 	}
 }
