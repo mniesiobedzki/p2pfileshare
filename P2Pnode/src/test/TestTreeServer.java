@@ -49,6 +49,9 @@ public class TestTreeServer implements Runnable {
 			while (true) {
 				if (MFolderListener.fileCreated || MFolderListener.fileDeleted || MFolderListener.fileModified) {
 					objectOutput.writeObject(ft);
+					MFolderListener.fileCreated = false;
+					MFolderListener.fileDeleted = false;
+					MFolderListener.fileModified = false;
 				}
 			}
 		} catch (IOException e) {
