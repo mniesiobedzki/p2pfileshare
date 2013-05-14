@@ -9,16 +9,19 @@ import java.util.zip.GZIPInputStream;
 
 import folder.FolderTree;
 
-public class TestTreeClient {
+public class TestTreeClient implements Runnable{
 
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	String 	serverIP;
+	int 	serverPort;
+
+	@Override
+	public void run() {
 		Socket sock;
 		try {
-			sock = new Socket("1.1.1.25",6789);
+			sock = new Socket(serverIP,serverPort);
 			System.out.println("Connecting...");
 	    
 			InputStream socketStream = sock.getInputStream();
@@ -31,6 +34,10 @@ public class TestTreeClient {
 			e.printStackTrace();
 		}
 		
+	}
+	public TestTreeClient(String serverIP, int serverPort){
+		this.serverPort = serverPort;
+		this.serverIP 	= serverIP;
 	}
 
 }
