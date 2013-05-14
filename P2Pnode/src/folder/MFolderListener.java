@@ -106,8 +106,10 @@ public class MFolderListener {
 					filesAndTheirHistory.put(userId+newlyCreatedFile.getFileName(),
 							newlyCreatedFile);
 					
+					
 					folderTree.addFile(newlyCreatedFile, userId);
 
+					System.err.println("Dodałem coś do drzewa \n" + folderTree.toString());
 					// setFileStateHistoryEntry(new Date().getTime(),
 					// event.context().toString(),
 					// "1111",

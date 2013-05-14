@@ -91,33 +91,21 @@ public class File implements Serializable{
 	 */
 	public static java.io.File[] listAllTheFilesInDir(String directoryPath) {
 		
-		String files;
 		java.io.File folder = new java.io.File(directoryPath);
 		java.io.File[] listOfFiles = folder.listFiles();
 		if(listOfFiles.length != 0){
 			int counter = 0;
+			
 			for (int i = 1; i < listOfFiles.length-counter; i++) {
 				if(listOfFiles[i-1].getName().startsWith("^")){
 					listOfFiles[i-1]=listOfFiles[i];
 					counter++;
 				}
 			}
-			return  Arrays.copyOfRange(listOfFiles, 0, listOfFiles.length-counter-1);
+			return  Arrays.copyOfRange(listOfFiles, 0, listOfFiles.length-counter);
 		}else{
 			return new java.io.File[0]; 
 		}
-
-		
-		
-//		for (int i = 0; i < listOfFiles.length; i++) {
-//			if (listOfFiles[i].isFile()) {
-//				files = listOfFiles[i].getName();
-//				System.out.println(files);
-//				if (files.endsWith(".txt") || files.endsWith(".TXT")) {
-//					
-//				}
-//			}
-//		}
 	}
 	
 	public void setFileStateHistoryEntry(long entryDate, String fileName, String userID, long fileSize, String fileMD5Hash) {
