@@ -7,13 +7,29 @@ import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.objenesis.instantiator.basic.NewInstanceInstantiator;
+
 import file.File;
 
 public class MFolderListener {
+	
+	/***
+	 * TUTAJ M***** WSTAWI KOMENTARZ
+	 */
+	
+	public static boolean fileCreated 	= false;
+	public static boolean fileDeleted	= false;
+	public static boolean fileModified 	= false;
+	
+	public static LinkedList<String> fileCreatedList 	= new LinkedList<String>();
+	public static LinkedList<String> fileDeletedList 	= new LinkedList<String>();
+	public static LinkedList<String> fileModifiedList 	= new LinkedList<String>();
+	
 	
 	// Lista obiektów typu FileState.
 	// Lista ta przechowuje informacje o wszystkich modyfikacjach
@@ -23,7 +39,6 @@ public class MFolderListener {
 	public static Path listenedPath;		// ścieżka folderu który jest nasłuchiwany
 	
 	public static void runFolderListener(String path, final FolderTree folderTree, final String userId){
-		//final Path myDir = Paths.get("C:/Programowanie"); // define a folder root
 		
 		final Path myDir = Paths.get(path); // define a folder root
 		listenedPath = myDir;
@@ -71,6 +86,10 @@ public class MFolderListener {
 				}
 
 				if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
+					
+					fileCreated = true;
+					
+					
 					System.out.println("Created: " + event.context().toString());
 					
 					java.io.File kuku = new java.io.File(event.context().toString());
@@ -84,6 +103,7 @@ public class MFolderListener {
 									+ event.context().toString()));
 					
 					System.err.println("putuje: "+userId+newlyCreatedFile.getFileName());
+					fileCreatedList.push(userId+newlyCreatedFile.getFileName());
 					
 					filesAndTheirHistory.put(userId+newlyCreatedFile.getFileName(),
 							newlyCreatedFile);
@@ -126,6 +146,8 @@ public class MFolderListener {
 						if (!exists) {
 							System.err.println("BUJA");
 							filesAndTheirHistory.get(userId+singleNod.getName()).getSingleFileHistory().add(null);
+							fileDeleted = true;
+							fileDeletedList.push(userId+singleNod.getName());
 							System.err.println("WYKASOWANO " + userId+singleNod.getName() +"\n");
 						}
 					}
@@ -140,8 +162,7 @@ public class MFolderListener {
 				if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
 					System.out.println("Modify: " + event.context().toString());
 
-					Entry<String, File> deFajl = searchForFile(event.context()
-							.toString());
+					Entry<String, File> deFajl = searchForFile(event.context().toString());
 					java.io.File kuku = new java.io.File(event.context().toString());
 					deFajl.getValue().setFileStateHistoryEntry(
 							kuku.lastModified(),
@@ -152,7 +173,8 @@ public class MFolderListener {
 							File.getMD5Checksum(listenedPath.toString() + "\\"
 									+ event.context().toString()));
 					
-					
+					fileModified = true;
+					fileModifiedList.push(event.context().toString());
 					// Metoda ustawiaj�ca pola obiektu FileState
 					// To-Do PERSON ID podstawic prawdziwe dane
 					// setFileStateHistoryEntry(new Date().getTime(),
