@@ -1,5 +1,6 @@
 package test;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutput;
@@ -21,20 +22,28 @@ public class TestTreeClient implements Runnable{
 
 	@Override
 	public void run() {
-		System.err.println("Buja");
-		Socket sock;
+		Socket sock = null;
+		boolean ok = false;
+		while(!ok){
+			try {	
+				sock = new Socket(serverIP,serverPort);
+				System.out.println("Connecting...");
+				ok = true;
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+			}
+		}
+		InputStream socketStream;
 		try {
-			Thread.sleep(5000);
-			System.err.println("Podejmuje probe");
-			sock = new Socket(serverIP,serverPort);
-			System.out.println("Connecting...");
-	    
-			InputStream socketStream = sock.getInputStream();
+			if(sock!=null){
+			socketStream = sock.getInputStream();
 			ObjectInputStream objectInput = new ObjectInputStream(socketStream);
 			while(true){//tu przetestowa� co si� dzieje bo nie wiemy jak dzia�a objectinputstream 
 				ft = (FolderTree) objectInput.readObject();
 				changed = true;
 				System.out.println(ft);
+			}
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
