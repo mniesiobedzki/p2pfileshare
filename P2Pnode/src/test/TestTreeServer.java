@@ -8,12 +8,19 @@ import folder.MFolderListener;
 
 public class TestTreeServer implements Runnable {
 
-	
+	/***
+	 * @param fname
+	 *            - folder name
+	 * @param uname
+	 *            - user name
+	 * @param path
+	 *            - file path
+	 * @param port - port
+	 */
 	String fname;
 	String uname;
 	String path;
 	int port;
-	public FolderTree ft;
 
 	@Override
 	public void run() {
@@ -21,13 +28,16 @@ public class TestTreeServer implements Runnable {
 		try {
 			welcomeSocket = new ServerSocket(port);
 
-			ft = new FolderTree(fname);
+			FolderTree ft = new FolderTree(fname);
 			ft.addUser(uname, path);
 			// File fa = new File(name, File.generateFileId(uname));
 			java.io.File[] listaFajli = File.listAllTheFilesInDir(path);
 
 			for (java.io.File file : listaFajli) {
 				File f = new File(file.getName(), uname);
+
+				System.out.println(f.getFileName());
+				
 				ft.addFile(f, uname);
 				MFolderListener.filesAndTheirHistory.put(
 						uname + f.getFileName(), f);
@@ -61,15 +71,7 @@ public class TestTreeServer implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	/***
-	 * @param fname
-	 *            - folder name
-	 * @param uname
-	 *            - user name
-	 * @param path
-	 *            - file path
-	 * @param port - port
-	 */
+
 	public TestTreeServer(String fname, String uname, String path, int port) {
 		super();
 		this.fname = fname;

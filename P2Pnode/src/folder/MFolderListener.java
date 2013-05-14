@@ -87,29 +87,33 @@ public class MFolderListener {
 					
 					fileCreated = true;
 					
+					if(event.context().toString().startsWith("^")){
+						System.out.println("ten plik nie jest przetwarzany");
+					}else{
 					
-					System.out.println("Created: " + event.context().toString());
-					
-					java.io.File kuku = new java.io.File(event.context().toString());
-					
-					File newlyCreatedFile = new File(event.context().toString(), userId);
-					
-					newlyCreatedFile.setFileStateHistoryEntry(
-							kuku.lastModified(), event.context().toString(),
-							userId, new java.io.File(event.context().toString()).length(),
-							File.getMD5Checksum(listenedPath.toString() + "\\"
-									+ event.context().toString()));
-					
-					System.err.println("putuje: "+userId+newlyCreatedFile.getFileName());
-					fileCreatedList.push(userId+newlyCreatedFile.getFileName());
-					
-					filesAndTheirHistory.put(userId+newlyCreatedFile.getFileName(),
-							newlyCreatedFile);
-					
-					
-					folderTree.addFile(newlyCreatedFile, userId);
-
-					System.err.println("Dodałem coś do drzewa \n" + folderTree.toString());
+						System.out.println("Created: " + event.context().toString());
+						
+						java.io.File kuku = new java.io.File(event.context().toString());
+						
+						File newlyCreatedFile = new File(event.context().toString(), userId);
+						
+						newlyCreatedFile.setFileStateHistoryEntry(
+								kuku.lastModified(), event.context().toString(),
+								userId, new java.io.File(event.context().toString()).length(),
+								File.getMD5Checksum(listenedPath.toString() + "\\"
+										+ event.context().toString()));
+						
+						System.err.println("putuje: "+userId+newlyCreatedFile.getFileName());
+						fileCreatedList.push(userId+newlyCreatedFile.getFileName());
+						
+						filesAndTheirHistory.put(userId+newlyCreatedFile.getFileName(),
+								newlyCreatedFile);
+						
+						
+						folderTree.addFile(newlyCreatedFile, userId);
+	
+						System.err.println("Dodałem coś do drzewa \n" + folderTree.toString());
+					}
 					// setFileStateHistoryEntry(new Date().getTime(),
 					// event.context().toString(),
 					// "1111",

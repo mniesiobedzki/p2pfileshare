@@ -97,14 +97,28 @@ public class File implements Serializable{
 			int counter = 0;
 			
 			for (int i = 1; i < listOfFiles.length-counter; i++) {
-				if(listOfFiles[i-1].getName().startsWith("^")){
-					listOfFiles[i-1]=listOfFiles[i];
+				if(listOfFiles[i].getName().contains("^")){
+					System.out.println("ptaszek wykryty");
 					counter++;
 				}
 			}
-			return  Arrays.copyOfRange(listOfFiles, 0, listOfFiles.length-counter);
-		}else{
+			java.io.File[] backupArray = new java.io.File[listOfFiles.length-counter];
+			
+			counter = 0;
+			
+			for (int i = 0; i < listOfFiles.length; i++) {
+				if(!listOfFiles[i].getName().contains("^")){
+					backupArray[counter] = listOfFiles[i];
+					counter++;
+				}
+			}
+			return backupArray;
+			
+		}
+		else{
+			
 			return new java.io.File[0]; 
+			
 		}
 	}
 	
