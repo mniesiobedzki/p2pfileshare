@@ -6,6 +6,7 @@ import java.util.TreeMap;
 
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import file.File;
+import file.FileClient;
 
 public class FolderTree implements Serializable {
 	
@@ -107,7 +108,7 @@ public class FolderTree implements Serializable {
 	 * 
 	 * @param folder2
 	 */
-	public void update(TreeMap<String, Nod> folder2, String usr) {
+	public void update(TreeMap<String, Nod> folder2, String usr, String ip, String path) {
 		folder.putAll(folder2);
 		LinkedList<String> users = new LinkedList<String>();
 		root = folder.get("root");
@@ -119,12 +120,13 @@ public class FolderTree implements Serializable {
 			if (!u.equals(usr)) {
 				for (File f : MFolderListener.filesAndTheirHistory.values()) {					
 					 
-					System.out.println(folder.get(usr + f.getFileName()).getHistory().getLast().getData());
+					System.out.println(folder.get(u + f.getFileName()).getHistory().getLast().getData());
 					if (MFolderListener.filesAndTheirHistory.get(f.getFileId())
 							.getSingleFileHistory().getLast().getData() < folder
-							.get(usr + f.getFileName()).getHistory().getLast()
+							.get(u + f.getFileName()).getHistory().getLast()
 							.getData()) {
-						conflicts.add(folder.get(usr + f.getFileName()));
+						folder.get(u + f.getFileName()).setParent(u);
+						conflicts.add(folder.get(u + f.getFileName()));
 					}
 
 				}
@@ -142,9 +144,8 @@ public class FolderTree implements Serializable {
 			System.out.println(nod);
 			//System.out.println(nod.getParent());
 			System.out.println("\t"+nod.getName());
-			System.out.println("\t"+nod.getPath());
 			System.out.println("\t"+nod.getValue()+"\n");
-			
+			FileClient fileClient = new FileClient(ip, nod.getParent(), path, usr);
 		}
 		// tu dodać kod wyłapujący zmiany wymagające dodania
 	}

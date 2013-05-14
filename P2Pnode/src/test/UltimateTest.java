@@ -1,5 +1,8 @@
 package test;
 
+import file.FileClient;
+import file.FileServer;
+
 public class UltimateTest {
 	
 	public static void main(String[] args) {
@@ -13,12 +16,12 @@ public class UltimateTest {
 		
 		TestTreeClient klient = new TestTreeClient(ip, portIn);
 		TestTreeServer serwer = new TestTreeServer(fname, usr, path, portOut);
-		
 		new Thread(klient).start();
 		new Thread(serwer).start();
+		FileServer server = new FileServer(serwer.ft, usr);
 		while(true){
 			if(klient.changed){
-				serwer.ft.update(klient.ft.getFolder(), usr);
+				serwer.ft.update(klient.ft.getFolder(), usr, ip, path);
 				klient.changed=false;
 			}
 		}
