@@ -4,11 +4,24 @@ public class UltimateTest {
 	
 	public static void main(String[] args) {
 		
-		TestTreeClient klient = new TestTreeClient("1.1.1.20", 6666);
-		TestTreeServer serwer = new TestTreeServer("kuku", "serwerMichala", "kuku//", 5555);
+		String usr = "user1";
+		String ip = "1.1.1.20";
+		int portIn = 6666;
+		int portOut= 5555;
+		String fname="kuku";
+		String path="kuku//";
+		
+		TestTreeClient klient = new TestTreeClient(ip, portIn);
+		TestTreeServer serwer = new TestTreeServer(fname, usr, path, portOut);
 		
 		new Thread(klient).start();
 		new Thread(serwer).start();
+		while(true){
+			if(klient.changed){
+				serwer.ft.update(klient.ft.getFolder(), usr);
+				klient.changed=false;
+			}
+		}
 	}
 	
 }
