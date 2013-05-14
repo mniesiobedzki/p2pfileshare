@@ -21,14 +21,17 @@ public class TestTreeClient implements Runnable{
 
 	@Override
 	public void run() {
+		System.err.println("Buja");
 		Socket sock;
 		try {
+			Thread.sleep(5000);
+			System.err.println("Podejmuje probe");
 			sock = new Socket(serverIP,serverPort);
 			System.out.println("Connecting...");
 	    
 			InputStream socketStream = sock.getInputStream();
 			ObjectInputStream objectInput = new ObjectInputStream(socketStream);
-			while(true){//tu przetestowaæ co siê dzieje bo nie wiemy jak dzia³a objectinputstream 
+			while(true){//tu przetestowaï¿½ co siï¿½ dzieje bo nie wiemy jak dziaï¿½a objectinputstream 
 				ft = (FolderTree) objectInput.readObject();
 				changed = true;
 				System.out.println(ft);
