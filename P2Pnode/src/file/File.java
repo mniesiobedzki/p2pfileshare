@@ -94,15 +94,20 @@ public class File implements Serializable{
 		String files;
 		java.io.File folder = new java.io.File(directoryPath);
 		java.io.File[] listOfFiles = folder.listFiles();
-		int counter = 0;
-		for (int i = 1; i < listOfFiles.length-counter; i++) {
-			if(listOfFiles[i-1].getName().startsWith("^")){
-				listOfFiles[i-1]=listOfFiles[i];
-				counter++;
+		if(listOfFiles.length != 0){
+			int counter = 0;
+			for (int i = 1; i < listOfFiles.length-counter; i++) {
+				if(listOfFiles[i-1].getName().startsWith("^")){
+					listOfFiles[i-1]=listOfFiles[i];
+					counter++;
+				}
 			}
+			return  Arrays.copyOfRange(listOfFiles, 0, listOfFiles.length-counter-1);
+		}else{
+			return new java.io.File[0]; 
 		}
 
-		return  Arrays.copyOfRange(listOfFiles, 0, listOfFiles.length-counter-1);
+		
 		
 //		for (int i = 0; i < listOfFiles.length; i++) {
 //			if (listOfFiles[i].isFile()) {
