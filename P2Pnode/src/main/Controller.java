@@ -1,14 +1,14 @@
 package main;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-
 import file.File;
 import folder.FolderTree;
 import gui.GuiWindower;
 import node.ClientP2Pnode;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 
 /**
  * Main Controller
@@ -49,7 +49,7 @@ public class Controller {
 			if (e.getActionCommand().equals("Rozpocznij")) {
 				// TODO: coś
 				startSync();
-				File.runFolderListener(gui.getFolderPath());
+				//MFolderListener.runFolderListener(gui.getFolderPath());
 				folderTree = new FolderTree(gui.getFolderPath());
 			}
 

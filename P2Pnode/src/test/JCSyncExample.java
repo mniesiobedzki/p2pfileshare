@@ -25,7 +25,7 @@ import java.util.Observer;
 
 public class JCSyncExample {
 
-    public static final Logger LOG = Logger.getLogger(JCSyncExample2.class);
+    public static final Logger LOG = Logger.getLogger(JCSyncExample.class);
 
     private P2PNode p2pNode;
     private NodeCallback p2pNodeCallback = new NodeCallback() {
@@ -56,6 +56,12 @@ public class JCSyncExample {
         @Override public boolean onDeliverRequest(List<NetworkObject> objectList) { return false; }
         @Override public boolean onForwardingRequest(List<NetworkObject> objectList) { return false; }
         @Override public void onBootstrapError(Node node, int errorCode) {}
+
+        @Override
+        public void onMessageDelivery(List<NetworkObject> networkObjects) {
+            //To change body of implemented methods use File | Settings | File Templates.
+            System.out.println("onMessageDelivery " + networkObjects.getClass().getName());
+        }
     };
 
     private JCSyncCore jcsyncCore;
@@ -152,7 +158,7 @@ public class JCSyncExample {
 
     public static void main(String args[]) {
 
-        JCSyncExample2 example = new JCSyncExample2();
+        JCSyncExample example = new JCSyncExample();
 
         try {
            // example.initLayer(args[0], Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
