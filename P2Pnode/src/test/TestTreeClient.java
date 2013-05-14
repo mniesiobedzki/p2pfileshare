@@ -18,7 +18,7 @@ public class TestTreeClient {
 		// TODO Auto-generated method stub
 		Socket sock;
 		try {
-			sock = new Socket("1.1.1.12",6789);
+			sock = new Socket("1.1.1.25",6789);
 			System.out.println("Connecting...");
 	    
 			InputStream socketStream = sock.getInputStream();

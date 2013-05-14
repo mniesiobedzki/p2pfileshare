@@ -2,10 +2,9 @@ package test;
 
 import java.io.*;
 import java.net.*;
-import java.util.zip.GZIPOutputStream;
-
 import file.File;
 import folder.FolderTree;
+import folder.MFolderListener;
 
 public class TestTreeServer {
 
@@ -26,11 +25,11 @@ public class TestTreeServer {
 		for (java.io.File file : listaFajli) {
 			File f = new File(file.getName(), uname);
 			ft.addFile(f, uname);
-			File.filesAndTheirHistory.put(uname + f.getFileName(), f);
+			MFolderListener.filesAndTheirHistory.put(uname + f.getFileName(), f);
 			System.out.println(f.getFileId());
 		}
 		System.out.println("teraz jestem tu");
-		File.runFolderListener("kuku\\", ft, uname);
+		MFolderListener.runFolderListener("kuku\\", ft, uname);
 		System.out.println("jestem tu");
 		Socket connectionSocket = welcomeSocket.accept();
 		System.err.println("Connected");

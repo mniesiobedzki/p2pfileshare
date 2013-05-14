@@ -3,6 +3,7 @@ package test;
 import file.File;
 import file.FileClient;
 import folder.FolderTree;
+import folder.MFolderListener;
 
 public class TestFile {
 
@@ -16,10 +17,10 @@ public class TestFile {
 		for (java.io.File file : listaFajli) {
 			File f = new File(file.getName(),uname);
 			ft.addFile(f, uname);
-			File.filesAndTheirHistory.put(uname+f.getFileName(),f);
+			MFolderListener.filesAndTheirHistory.put(uname+f.getFileName(),f);
 			System.out.println(f.getFileId());
 		}
-		File.runFolderListener("kuku\\", ft, uname);
+		MFolderListener.runFolderListener("kuku\\", ft, uname);
 		
 		//FileClient client = new FileClient("1.1.1.20", uname+name, name);		
 	}

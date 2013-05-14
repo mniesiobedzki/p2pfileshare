@@ -95,7 +95,7 @@ public class FolderTree implements Serializable {
 	 * @param usr - ID Użytkownika
 	 */
 	public void updateAll(String usr) {
-		for (File f : File.filesAndTheirHistory.values()) {
+		for (File f : MFolderListener.filesAndTheirHistory.values()) {
 			if (!f.getSingleFileHistory().getLast().equals(this.folder.get(usr+f.getFileName()))) {
 				this.updateFile(f, usr);
 			}
@@ -117,8 +117,8 @@ public class FolderTree implements Serializable {
 		LinkedList<Nod> conflicts = new LinkedList<Nod>();
 		for (String u : users) {
 			if (!u.equals(usr)) {
-				for (File f : File.filesAndTheirHistory.values()) {
-					if (File.filesAndTheirHistory.get(f.getFileId())
+				for (File f : MFolderListener.filesAndTheirHistory.values()) {
+					if (MFolderListener.filesAndTheirHistory.get(f.getFileId())
 							.getSingleFileHistory().getLast().getData() < folder
 							.get(usr + f.getFileId()).getHistory().getLast()
 							.getData()) {
@@ -130,7 +130,7 @@ public class FolderTree implements Serializable {
 		}
 		for (Nod n : folder.values()) {
 			if (n.getHistory().size() > 0) {
-				if (!File.filesAndTheirHistory.containsKey(n.getValue())) {
+				if (!MFolderListener.filesAndTheirHistory.containsKey(n.getValue())) {
 					conflicts.add(folder.get(n.getOwner().value + n.getValue()));
 				}
 			}
