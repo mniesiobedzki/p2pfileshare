@@ -139,6 +139,14 @@ public class FolderTree {
 				}
 			}
 		}
+		System.out.println("conflicts:");
+		for (Nod nod : conflicts) {
+			System.out.println(nod.getParent());
+			System.out.println("\t"+nod.getName());
+			System.out.println("\t"+nod.getPath());
+			System.out.println("\t"+nod.getValue());
+			
+		}
 		// tu dodać kod wyłapujący zmiany wymagające dodania
 	}
 }
