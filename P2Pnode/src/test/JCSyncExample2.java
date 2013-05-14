@@ -163,7 +163,7 @@ public class JCSyncExample2 {
 
         try {
            // example.initLayer(args[0], Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
-        	example.initLayer("127.0.0.1", 21000, "user2", 22002);
+        	example.initLayer("127.0.0.1", 21000, "user3", 22012);
         } catch (Throwable e) {
             LOG.error("Error while initializing layer: " + e);
         }
