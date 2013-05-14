@@ -1,12 +1,1 @@
-*.class
-*.classpath
 .classpath
-# Package Files #
-*.jar
-*.war
-*.ear
-.DS_Store
-/bin
-.iws
-workspace.xml
-tasks.xml
