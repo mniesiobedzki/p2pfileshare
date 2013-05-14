@@ -106,7 +106,7 @@ public class MFolderListener {
 						System.err.println("putuje: "+userId+newlyCreatedFile.getFileName());
 						fileCreatedList.push(userId+newlyCreatedFile.getFileName());
 						
-						filesAndTheirHistory.put(userId+newlyCreatedFile.getFileName(),
+						filesAndTheirHistory.put(newlyCreatedFile.getFileId(),
 								newlyCreatedFile);
 						
 						

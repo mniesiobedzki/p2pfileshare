@@ -118,11 +118,29 @@ public class FolderTree implements Serializable {
 		for (String u : users) {
 			if (!u.equals(usr)) {
 				for (File f : MFolderListener.filesAndTheirHistory.values()) {
+					System.out.println(folder);
+
+					System.out.println(f.getFileId());
+					for (File fff : MFolderListener.filesAndTheirHistory.values()) {
+						System.out.println("-"+fff.getFileId());
+					}
+					for (String s : MFolderListener.filesAndTheirHistory.keySet()) {
+						System.out.println("-"+s);
+					}
+					System.out.println(MFolderListener.filesAndTheirHistory.get(f.getFileId()));
+
+					System.out.println(MFolderListener.filesAndTheirHistory.get(f.getFileId())
+							.getSingleFileHistory().getLast() );
+					System.out.println(MFolderListener.filesAndTheirHistory.get(f.getFileId())
+							.getSingleFileHistory().getLast().getData());
+					
+					 
+					
 					if (MFolderListener.filesAndTheirHistory.get(f.getFileId())
 							.getSingleFileHistory().getLast().getData() < folder
-							.get(usr + f.getFileId()).getHistory().getLast()
+							.get(usr + f.getFileName()).getHistory().getLast()
 							.getData()) {
-						conflicts.add(folder.get(usr + f.getFileId()));
+						conflicts.add(folder.get(usr + f.getFileName()));
 					}
 
 				}
