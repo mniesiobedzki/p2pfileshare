@@ -2,6 +2,8 @@ package test;
 
 import java.io.InputStream;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.zip.GZIPInputStream;
 
@@ -20,7 +22,7 @@ public class TestTreeClient {
 			System.out.println("Connecting...");
 	    
 			InputStream socketStream = sock.getInputStream();
-			ObjectInputStream objectInput = new ObjectInputStream(new GZIPInputStream(socketStream));
+			ObjectInputStream objectInput = new ObjectInputStream(socketStream);
 			FolderTree ft = (FolderTree) objectInput.readObject();
 			
 			System.out.println(ft);
