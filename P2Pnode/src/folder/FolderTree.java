@@ -107,7 +107,7 @@ public class FolderTree implements Serializable {
 	 * 
 	 * @param folder2
 	 */
-	public void update(JCSyncTreeMap<String, Nod> folder2, String usr) {
+	public void update(TreeMap<String, Nod> folder2, String usr) {
 		folder.putAll(folder2);
 		LinkedList<String> users = new LinkedList<String>();
 		root = folder.get("root");
