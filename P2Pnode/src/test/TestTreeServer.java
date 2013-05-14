@@ -14,7 +14,7 @@ public class TestTreeServer implements Runnable {
 	String path;
 	int port;
 	public FolderTree ft;
-
+	
 	@Override
 	public void run() {
 		ServerSocket welcomeSocket;
@@ -28,6 +28,9 @@ public class TestTreeServer implements Runnable {
 
 			for (java.io.File file : listaFajli) {
 				File f = new File(file.getName(), uname);
+
+				System.out.println(f.getFileName());
+				
 				ft.addFile(f, uname);
 				MFolderListener.filesAndTheirHistory.put(
 						uname + f.getFileName(), f);
@@ -61,6 +64,7 @@ public class TestTreeServer implements Runnable {
 			e.printStackTrace();
 		}
 	}
+	
 	/***
 	 * @param fname
 	 *            - folder name
