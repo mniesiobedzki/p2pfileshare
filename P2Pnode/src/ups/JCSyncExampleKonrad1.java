@@ -73,9 +73,11 @@ public class JCSyncExampleKonrad1 {
     private JCSyncStateListener collectionListener = new JCSyncStateListener() {
         public void onLocalStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
             LOG.debug("collection onLocalStateUpdated callback invoked method=" + methodName + ": " + collection);
+            System.out.println(" LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL ");
         }
         public void onRemoteStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
             LOG.debug("collection onRemoteStateUpdated callback invoked method=" + methodName + ": " + collection);
+            System.out.println(" REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE ");
         }
     };
 
@@ -114,7 +116,7 @@ public class JCSyncExampleKonrad1 {
                 LOG.debug("I got the collection: " + this.collection);
 
             }
-            this.collection_so.addObserver(this.collectionObserver);
+           // this.collection_so.addObserver(collectionObserver);
             this.collection_so.addStateListener(this.collectionListener);
 
         } catch (Throwable e) {
