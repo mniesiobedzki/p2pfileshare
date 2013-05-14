@@ -18,6 +18,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardWatchEventKinds;
@@ -28,7 +29,7 @@ import java.util.List;
 
 import node.ClientP2Pnode;
 
-public class File {
+public class File implements Serializable{
 
 	// Lista obiektów typu FileState.
 	// Lista ta przechowuje informacje o wszystkich modyfikacjach
