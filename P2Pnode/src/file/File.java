@@ -209,6 +209,8 @@ public class File {
 									+ event.context().toString()).length(),
 							getMD5Checksum(listenedPath.toString() + "\\"
 									+ event.context().toString()));
+					
+					
 					// Metoda ustawiaj�ca pola obiektu FileState
 					// To-Do PERSON ID podstawic prawdziwe dane
 					// setFileStateHistoryEntry(new Date().getTime(),

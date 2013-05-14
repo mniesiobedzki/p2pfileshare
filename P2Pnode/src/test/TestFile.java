@@ -8,7 +8,6 @@ public class TestFile {
 
 	public static void main(String[] args) {		
 		FolderTree ft = new FolderTree("kuku");
-		String name = "test.txt";
 		String uname = "user1";
 		ft.addUser(uname, "kuku\\");
 		//File fa = new File(name, File.generateFileId(uname));

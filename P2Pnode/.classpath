@@ -2,12 +2,11 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry kind="lib" path="/Users/marek/IdeaProjects/p2pfileshare/bcprov-jdk15on-148.jar"/>
-	<classpathentry kind="lib" path="/Users/marek/IdeaProjects/p2pfileshare/cloning-1.9.0.jar"/>
-	<classpathentry kind="lib" path="/Users/marek/IdeaProjects/p2pfileshare/javasysmon-0.3.3.jar"/>
-	<classpathentry kind="lib" path="/Users/marek/IdeaProjects/p2pfileshare/jcsync-1.jar"/>
-	<classpathentry kind="lib" path="/Users/marek/IdeaProjects/p2pfileshare/log4j-1.2.17.jar"/>
-	<classpathentry kind="lib" path="/Users/marek/IdeaProjects/p2pfileshare/objenesis-tck-1.3.jar"/>
-	<classpathentry kind="lib" path="/Users/marek/IdeaProjects/p2pfileshare/p2pm.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Robert/Desktop/porzadki 2/Marek-Niesiobedzki-s6264-P2Pm-P2Pnode/P2Pnode/bcprov-jdk15on-148.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Robert/Desktop/porzadki 2/Marek-Niesiobedzki-s6264-P2Pm-P2Pnode/P2Pnode/cloning-1.9.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Robert/Desktop/porzadki 2/Marek-Niesiobedzki-s6264-P2Pm-P2Pnode/P2Pnode/javasysmon-0.3.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Robert/Desktop/porzadki 2/Marek-Niesiobedzki-s6264-P2Pm-P2Pnode/P2Pnode/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Robert/Desktop/porzadki 2/Marek-Niesiobedzki-s6264-P2Pm-P2Pnode/P2Pnode/objenesis-tck-1.3.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Robert/Desktop/p2pm.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
