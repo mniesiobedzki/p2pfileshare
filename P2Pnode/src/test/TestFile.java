@@ -8,9 +8,9 @@ import folder.MFolderListener;
 public class TestFile {
 
 	public static void main(String[] args) {		
-		FolderTree ft = new FolderTree("kuku");
 		String uname = "user1";
-		ft.addUser(uname, "kuku\\");
+		FolderTree ft = new FolderTree("kuku", uname, null);
+		ft.addUser(uname, "kuku\\", "1.1.1.1");
 		//File fa = new File(name, File.generateFileId(uname));
 		java.io.File[] listaFajli = File.listAllTheFilesInDir("kuku\\");
 		

@@ -16,7 +16,7 @@ public class UltimateTest {
 		String path="kuku//";
 		
 		TestTreeClient klient = new TestTreeClient(ip, portIn);
-		TestTreeServer serwer = new TestTreeServer(fname, usr, path, portOut, thisIp);
+		TestTreeServer serwer = new TestTreeServer(null,fname, usr, path, portOut, thisIp);
 		new Thread(klient).start();
 		new Thread(serwer).start();
 		try {
@@ -30,7 +30,7 @@ public class UltimateTest {
 		FileServer server = new FileServer(serwer.ft, usr);
 		while(true){
 			if(klient.changed){
-				serwer.ft.update(klient.ft.getFolder(), usr, path);
+				serwer.ft.update(klient.ft.getFolder());
 				klient.changed=false;
 			}
 		}

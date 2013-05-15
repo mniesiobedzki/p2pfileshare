@@ -2,6 +2,8 @@ package test;
 
 import java.io.*;
 import java.net.*;
+
+import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import file.File;
 import folder.FolderTree;
 import folder.MFolderListener;
@@ -15,6 +17,7 @@ public class TestTreeServer implements Runnable {
 	String ip;
 	int port;
 	public FolderTree ft;
+	JCSyncTreeMap syncTree;
 	
 	@Override
 	public void run() {
@@ -22,7 +25,7 @@ public class TestTreeServer implements Runnable {
 		try {
 			welcomeSocket = new ServerSocket(port);
 
-			ft = new FolderTree(fname);
+			ft = new FolderTree(fname,uname, syncTree);
 			ft.addUser(uname, path, ip);
 			// File fa = new File(name, File.generateFileId(uname));
 			java.io.File[] listaFajli = File.listAllTheFilesInDir(path);
@@ -78,8 +81,9 @@ public class TestTreeServer implements Runnable {
 	 *            - file path
 	 * @param port - port
 	 */
-	public TestTreeServer(String fname, String uname, String path, int port, String ip) {
+	public TestTreeServer(JCSyncTreeMap syncTree, String fname, String uname, String path, int port, String ip) {
 		super();
+		this.syncTree=syncTree;
 		this.fname = fname;
 		this.uname = uname;
 		this.path = path;

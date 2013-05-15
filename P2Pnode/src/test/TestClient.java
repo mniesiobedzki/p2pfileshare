@@ -15,11 +15,13 @@ public class TestClient {
 		String folderName = "kuku";
 		String FileName = "test.txt";
 		String uname = "user1";
-		FolderTree ft = new FolderTree(folderName);
-		ft.addUser(uname, path);
+		String thisIp = "1.1.1.11";
+		String ip = "1.1.1.12";
+		FolderTree ft = new FolderTree(folderName, uname, null);
+		ft.addUser(uname, path, thisIp );
 		File f = new File(FileName, uname);
 		ft.addFile(f, uname);
-		FileClient client = new FileClient("1.1.1.12", uname+FileName,path, FileName);
+		FileClient client = new FileClient(ip, uname+FileName,path, FileName);
 
 	}
 
