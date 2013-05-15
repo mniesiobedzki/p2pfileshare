@@ -6,6 +6,7 @@ import java.util.TreeMap;
 
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import file.File;
+import file.FileClient;
 
 public class FolderTree implements Serializable {
 	
@@ -16,7 +17,7 @@ public class FolderTree implements Serializable {
 	public Nod root;// nazwa folderu albo lokalizacja url
 	
 	public FolderTree(String path) {
-		root = new Nod(path, "root");
+		root = new Nod(path);
 		this.folder.put("root", root);
 	}
 
@@ -31,7 +32,7 @@ public class FolderTree implements Serializable {
 	 * @param path - ścieżka do folderu lokalna dla użytkownika
 	 */
 	public void addUser(String usr, String path) {
-		Nod n = new Nod(usr, root, usr);
+		Nod n = new Nod(usr, root);
 		System.out.println(n);
 		System.out.println("Użytkownik :"+usr);
 		System.out.println("folder w :"+path);
@@ -68,7 +69,7 @@ public class FolderTree implements Serializable {
 	}
 
 	public void addFile(File f, String usr) {
-		Nod file = new Nod(usr+f.getFileName(), folder.get(usr), f.getFileId(),f.getSingleFileHistory(), folder.get(usr), f.getFileName());
+		Nod file = new Nod(f.getFileId(), folder.get(usr),f.getSingleFileHistory(), folder.get(usr), f.getFileName());
 		file.setParent(folder.get(usr));
 		folder.put(usr+file.getName(),file);
 	}
@@ -107,7 +108,7 @@ public class FolderTree implements Serializable {
 	 * 
 	 * @param folder2
 	 */
-	public void update(TreeMap<String, Nod> folder2, String usr) {
+	public void update(TreeMap<String, Nod> folder2, String usr, String ip, String path) {
 		folder.putAll(folder2);
 		LinkedList<String> users = new LinkedList<String>();
 		root = folder.get("root");
@@ -117,30 +118,15 @@ public class FolderTree implements Serializable {
 		LinkedList<Nod> conflicts = new LinkedList<Nod>();
 		for (String u : users) {
 			if (!u.equals(usr)) {
-				for (File f : MFolderListener.filesAndTheirHistory.values()) {
-					System.out.println(folder);
-
-					System.out.println(f.getFileId());
-					for (File fff : MFolderListener.filesAndTheirHistory.values()) {
-						System.out.println("-"+fff.getFileId());
-					}
-					for (String s : MFolderListener.filesAndTheirHistory.keySet()) {
-						System.out.println("-"+s);
-					}
-					System.out.println(MFolderListener.filesAndTheirHistory.get(f.getFileId()));
-
-					System.out.println(MFolderListener.filesAndTheirHistory.get(f.getFileId())
-							.getSingleFileHistory().getLast() );
-					System.out.println(MFolderListener.filesAndTheirHistory.get(f.getFileId())
-							.getSingleFileHistory().getLast().getData());
-					
+				for (File f : MFolderListener.filesAndTheirHistory.values()) {					
 					 
-					
+					System.out.println(folder.get(u + f.getFileName()).getHistory().getLast().getData());
 					if (MFolderListener.filesAndTheirHistory.get(f.getFileId())
 							.getSingleFileHistory().getLast().getData() < folder
-							.get(usr + f.getFileName()).getHistory().getLast()
+							.get(u + f.getFileName()).getHistory().getLast()
 							.getData()) {
-						conflicts.add(folder.get(usr + f.getFileName()));
+						folder.get(u + f.getFileName()).setParent(u);
+						conflicts.add(folder.get(u + f.getFileName()));
 					}
 
 				}
@@ -148,17 +134,21 @@ public class FolderTree implements Serializable {
 		}
 		for (Nod n : folder.values()) {
 			if (n.getHistory().size() > 0) {
-				if (!MFolderListener.filesAndTheirHistory.containsKey(n.getValue())) {
-					conflicts.add(folder.get(n.getOwner().value + n.getValue()));
+				if (!MFolderListener.filesAndTheirHistory.containsKey(n.getParent()+n.getName())) {
+					conflicts.add(folder.get(n.getOwner().value + n.name));
 				}
 			}
 		}
 		System.out.println("conflicts:");
 		for (Nod nod : conflicts) {
-			System.out.println(nod.getParent());
+			System.out.println(nod);
+			//System.out.println(nod.getParent());
 			System.out.println("\t"+nod.getName());
-			System.out.println("\t"+nod.getPath());
 			System.out.println("\t"+nod.getValue()+"\n");
+			FileClient fileClient = new FileClient(ip, nod.getParent(), path, usr);
+			File f = new File(nod.getName(),usr);
+			f.setFileId(nod.getValue());
+			this.addFile(f, usr);
 			
 		}
 		// tu dodać kod wyłapujący zmiany wymagające dodania
