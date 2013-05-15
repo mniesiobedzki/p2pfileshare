@@ -3,8 +3,11 @@ package node;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
+import java.util.TreeMap;
 
 import org.apache.log4j.Logger;
+
+import folder.Nod;
 
 import pl.edu.pjwstk.mteam.core.Node;
 import pl.edu.pjwstk.mteam.jcsync.core.JCSyncAbstractSharedObject;
@@ -12,6 +15,7 @@ import pl.edu.pjwstk.mteam.jcsync.core.JCSyncCore;
 import pl.edu.pjwstk.mteam.jcsync.core.JCSyncStateListener;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncArrayList;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncHashMap;
+import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.SharedCollectionObject;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.util.JCSyncObservable;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.util.SharedObservableObject;
@@ -25,18 +29,18 @@ import ups.JCSyncExampleKonrad1;
  * Klasa odpowiedzialna za połączenie z platformą P2Pm
  * 
  * @author Marek Niesiobędzki
- *
+ * 
  */
 public class ClientP2Pnode {
 
 	public static final Logger LOG = Logger.getLogger(ClientP2Pnode.class);
-	
+
 	private P2PNode node;
 
 	// Podstawowa implementacja JCSync
 	private JCSyncCore jcSyncCore;
 
-	private JCSyncHashMap<String, String> jcSyncHashMap;
+	private JCSyncTreeMap<String, Nod> jcSyncTreeMap;
 	private JCSyncArrayList<String> jcSyncArrayList;
 
 	// KOLECKCJE APLIKACJI
@@ -69,18 +73,7 @@ public class ClientP2Pnode {
 			String nodeName) {
 		System.out.println("Node " + nodeName + ": Initializing");
 
-		this.nodeCallback = new ClientP2PnodeCallback();
-
-		this.node = new P2PNode(this.nodeCallback,
-				P2PNode.RoutingAlgorithm.SUPERPEER);
-		this.node.setServerReflexiveAddress(serverIP);
-		this.node.setServerReflexivePort(serverPort);
-		this.node.setBootIP(serverIP);
-		this.node.setBootPort(serverPort);
-		this.node.setUserName(nodeName);
-		this.node.setTcpPort(portOut);
-
-		this.node.networkJoin();
+		this.connect(serverIP, serverPort, nodeName, portOut);
 
 		// JCSyncObservable nn = new JCSyncObservable();
 		// nn.addObserver(o)
@@ -110,14 +103,14 @@ public class ClientP2Pnode {
 		// HASH MAP
 		String collID = "myMap";
 		try {
-			jcSyncHashMap = createHashMap(collID, this.jcSyncCore);
+			jcSyncTreeMap = createTreeMap(collID, this.jcSyncCore);
 			System.out.println("Node " + nodeName
 					+ ": Utworzono nową kolekcję o ID: " + collID);
 		} catch (ObjectExistsException e) {
 			System.out.println("Node " + nodeName + ": Kolekcja " + collID
 					+ " już istnieje, zatem spróbuję się podpiąć");
 			try {
-				jcSyncHashMap = (JCSyncHashMap<String, String>) subscribeCollection(
+				jcSyncTreeMap = (JCSyncTreeMap<String, Nod>) subscribeCollection(
 						collID, this.jcSyncCore).getNucleusObject();
 				System.out.println("Node " + nodeName + ": Kolekcja " + collID
 						+ " już istnieje i pomyślnie się do niej podpieliśmy");
@@ -165,22 +158,29 @@ public class ClientP2Pnode {
 		this.jcSyncObservable = this.getObservable2(this.jcSyncCore);
 
 		CollectionListener cl = new CollectionListener(this.jcSyncObservable);
-		
-this.observable_so.addStateListener(collectionListener);
+
+		this.observable_so.addStateListener(collectionListener);
 	}
-	
-	 private JCSyncStateListener collectionListener = new JCSyncStateListener() {
-	        public void onLocalStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
-	            LOG.debug("collection onLocalStateUpdated callback invoked method=" + methodName + ": " + object.getID());
-	            System.out.println(" LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL ");
-	        }
-	        public void onRemoteStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
-	            LOG.debug("collection onRemoteStateUpdated callback invoked method=" + methodName + ": " + object.getID());
-	            System.out.println(" REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE ");
-	            
-	            // TODO: Wywołanie metody sprawdzajacej zmiany
-	        }
-	    };
+
+	private JCSyncStateListener collectionListener = new JCSyncStateListener() {
+		public void onLocalStateUpdated(JCSyncAbstractSharedObject object,
+				String methodName, Object retVal) {
+			LOG.debug("collection onLocalStateUpdated callback invoked method="
+					+ methodName + ": " + object.getID());
+			System.out
+					.println(" LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL ");
+		}
+
+		public void onRemoteStateUpdated(JCSyncAbstractSharedObject object,
+				String methodName, Object retVal) {
+			LOG.debug("collection onRemoteStateUpdated callback invoked method="
+					+ methodName + ": " + object.getID());
+			System.out
+					.println(" REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE ");
+
+			// TODO: Wywołanie metody sprawdzajacej zmiany
+		}
+	};
 
 	/**
 	 * Metoda tworzenia nowej czystej koleckji
@@ -194,6 +194,23 @@ this.observable_so.addStateListener(collectionListener);
 	public JCSyncHashMap createHashMap(String collID, JCSyncCore jcSyncCore)
 			throws ObjectExistsException, Exception {
 		JCSyncHashMap map = new JCSyncHashMap();
+		SharedCollectionObject sharedCollectionObject_1 = new SharedCollectionObject(
+				collID, map, jcSyncCore);
+		return map;
+	}
+	
+	/**
+	 * Metoda tworzenia nowej czystej koleckji
+	 * 
+	 * @param collID
+	 * @param jcSyncCore
+	 * @return
+	 * @throws ObjectExistsException
+	 * @throws Exception
+	 */
+	public JCSyncTreeMap createTreeMap(String collID, JCSyncCore jcSyncCore)
+			throws ObjectExistsException, Exception {
+		JCSyncTreeMap map = new JCSyncTreeMap();
 		SharedCollectionObject sharedCollectionObject_1 = new SharedCollectionObject(
 				collID, map, jcSyncCore);
 		return map;
@@ -214,6 +231,15 @@ this.observable_so.addStateListener(collectionListener);
 			HashMap coreHashMap) throws ObjectExistsException, Exception {
 		// create collection
 		JCSyncHashMap map = new JCSyncHashMap(coreHashMap);
+		SharedCollectionObject sharedCollectionObject_1 = new SharedCollectionObject(
+				collID, map, jcSyncCore);
+		return map;
+	}
+	
+	public JCSyncTreeMap createTreeMap(String collID, JCSyncCore jcSyncCore,
+		TreeMap coreTreeMap) throws ObjectExistsException, Exception {
+		// create collection
+		JCSyncTreeMap map = new JCSyncTreeMap(coreTreeMap);
 		SharedCollectionObject sharedCollectionObject_1 = new SharedCollectionObject(
 				collID, map, jcSyncCore);
 		return map;
@@ -285,7 +311,7 @@ this.observable_so.addStateListener(collectionListener);
 
 	public static void main(String[] args) {
 		ClientP2Pnode nt = new ClientP2Pnode(6062, "1.1.1.4", 6060, "testowy2");
-		//nt.testWrite();
+		// nt.testWrite();
 
 	}
 
@@ -338,10 +364,10 @@ this.observable_so.addStateListener(collectionListener);
 		String key = "a";
 		String value = "b";
 		while (true) {
-			this.jcSyncHashMap.put(key, value);
+			//this.jcSyncTreeMap.put(key, value);
 			key += "a";
 			value += "b";
-			System.err.println("Rozmiar " + this.jcSyncHashMap.size());
+			System.err.println("Rozmiar " + this.jcSyncTreeMap.size());
 			snooze(2000);
 		}
 	}
@@ -397,8 +423,8 @@ this.observable_so.addStateListener(collectionListener);
 		this.node.networkJoin();
 	}
 
-	public JCSyncHashMap getJCsyncTreMap() {
-		return this.jcSyncHashMap;
+	public JCSyncTreeMap getJCSyncTreeMap() {
+		return this.jcSyncTreeMap;
 	}
 
 	public JCSyncCore getJCsyncCore() {
@@ -412,6 +438,25 @@ this.observable_so.addStateListener(collectionListener);
 	}
 
 	public void setServerIP(String serverIP) {
+
+	}
+
+
+
+	public void connect(String serverAddress, int serverPort,
+			String clientName, int clientPort) {
+		this.nodeCallback = new ClientP2PnodeCallback();
+
+		this.node = new P2PNode(this.nodeCallback,
+				P2PNode.RoutingAlgorithm.SUPERPEER);
+		this.node.setServerReflexiveAddress(serverAddress);
+		this.node.setServerReflexivePort(serverPort);
+		this.node.setBootIP(serverAddress);
+		this.node.setBootPort(serverPort);
+		this.node.setUserName(clientName);
+		this.node.setTcpPort(clientPort);
+
+		this.node.networkJoin();
 
 	}
 
