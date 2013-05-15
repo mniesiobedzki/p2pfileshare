@@ -55,7 +55,7 @@ import main.Controller;
 public class GuiWindower implements PropertyChangeListener {
 	
     protected final PopupFrame POPUP_FRAME = new PopupFrame();
-    JTextField idInput, ipInput, serverPortInput; 
+    JTextField idInput, ipInput, portInField, portOutField, serverPortInput; 
     String folderSynchronizowany;
     JButton generujIdInput, rozpocznijBt;
     Controller kontroler;
@@ -160,7 +160,7 @@ public class GuiWindower implements PropertyChangeListener {
             tytulPowitania.setFont(new Font("Segoe UI", Font.PLAIN, 22));
             panelPierwszegoUruchomienia.add(tytulPowitania);
             
-            RichJLabel podajIPJLabel = new RichJLabel("Podaj IP i port bootstrapa",0);
+            RichJLabel podajIPJLabel = new RichJLabel("IP i port bootstrapa",0);
             podajIPJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             panelPierwszegoUruchomienia.add(podajIPJLabel);
 
@@ -176,7 +176,36 @@ public class GuiWindower implements PropertyChangeListener {
             serverPortInput.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(serverPortInput);
             
-            RichJLabel podajIdJLabel = new RichJLabel("Podaj ID lub wygeneruj automatycznie",0);
+            RichJLabel podajPortyLabel = new RichJLabel("Porty dla po³¹czeñ przych. i wych.:",0);
+            podajPortyLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            panelPierwszegoUruchomienia.add(podajPortyLabel);
+
+            JPanel spacer2 = new JPanel();
+            spacer2.setPreferredSize(new Dimension(300,1));
+            spacer2.setBackground(new Color(0,0,0,0));
+            panelPierwszegoUruchomienia.add(spacer2);
+            
+            RichJLabel inLabel = new RichJLabel("in:",0);
+            inLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+            panelPierwszegoUruchomienia.add(inLabel);
+            
+            portInField = new JTextField();
+            portInField.setPreferredSize(new Dimension(60, 30));
+            portInField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            portInField.setHorizontalAlignment(JTextField.CENTER);
+            panelPierwszegoUruchomienia.add(portInField);
+            
+            RichJLabel outLabel = new RichJLabel("out:",0);
+            outLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+            panelPierwszegoUruchomienia.add(outLabel);
+            
+            portOutField = new JTextField();
+            portOutField.setPreferredSize(new Dimension(60, 30));
+            portOutField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            portOutField.setHorizontalAlignment(JTextField.CENTER);
+            panelPierwszegoUruchomienia.add(portOutField);
+            
+            RichJLabel podajIdJLabel = new RichJLabel("ID lub wygeneruj automatycznie",0);
             podajIdJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             panelPierwszegoUruchomienia.add(podajIdJLabel);
             
@@ -244,10 +273,10 @@ public class GuiWindower implements PropertyChangeListener {
 			});
             panelPierwszegoUruchomienia.add(wybierzFolderBt);
              
-            JPanel spacer3 = new JPanel();
-            spacer3.setPreferredSize(new Dimension(300,40));
-            spacer3.setBackground(new Color(0,0,0,0));
-            panelPierwszegoUruchomienia.add(spacer3);
+            JPanel spacer31 = new JPanel();
+            spacer31.setPreferredSize(new Dimension(300,40));
+            spacer31.setBackground(new Color(0,0,0,0));
+            panelPierwszegoUruchomienia.add(spacer31);
             
             rozpocznijBt = new JButton("Rozpocznij");
             rozpocznijBt.setEnabled(false);
@@ -362,6 +391,24 @@ public class GuiWindower implements PropertyChangeListener {
 	public void displayError(String string) {
 		// TODO WyÅ›wietl infromacjÄ™ o bÅ‚Ä™dzie
 		
+	}
+
+	public int getPortIn() {
+		int p = 0;
+		try {
+			p = Integer.parseInt(portInField.getText());
+		} catch (Exception e) {
+		}
+		return p;
+	}
+
+	public int getPortOut() {
+		int p = 0;
+		try {
+			p = Integer.parseInt(portOutField.getText());
+		} catch (Exception e) {
+		}
+		return p;
 	}
 
 	public String getClientPort() {
