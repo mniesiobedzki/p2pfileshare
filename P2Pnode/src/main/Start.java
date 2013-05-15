@@ -24,12 +24,12 @@ public class Start {
 		
 		// Local files on the computer
 		//FolderTree folderTree = new FolderTree();
-		File file = new File();
+		//File file = new File();
 
 		// ####### VIEW #######
 		GuiWindower gui = new GuiWindower();
 
-		controller = new Controller(gui, null, file, clientP2Pnode);
+		controller = new Controller(gui);
 
 	}
 	
