@@ -55,7 +55,7 @@ import main.Controller;
 public class GuiWindower implements PropertyChangeListener {
 	
     protected final PopupFrame POPUP_FRAME = new PopupFrame();
-    JTextField idInput, ipInput, portInField, portOutField, serverPortInput; 
+    JTextField nodeName, serverIPAdress, portInFieldFilesRequests, portOutField, serverPortInput; 
     String folderSynchronizowany;
     JButton generujIdInput, rozpocznijBt;
     Controller kontroler;
@@ -113,7 +113,10 @@ public class GuiWindower implements PropertyChangeListener {
 
     public class PopupFrame extends JDialog {
  
-        public PopupFrame() throws HeadlessException {
+      //  private JTextField serverPortInput;
+		//private JTextField ipInput;
+
+		public PopupFrame() throws HeadlessException {
             setLayout(null);
             setUndecorated(true);
             setBackground(new Color(0,0,0,0));
@@ -164,19 +167,19 @@ public class GuiWindower implements PropertyChangeListener {
             podajIPJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             panelPierwszegoUruchomienia.add(podajIPJLabel);
 
-            JTextField ipInput = new JTextField();
-            ipInput.setPreferredSize(new Dimension(180, 30));
-            ipInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-            ipInput.setHorizontalAlignment(JTextField.CENTER);
-            panelPierwszegoUruchomienia.add(ipInput);
+            serverIPAdress = new JTextField();
+            serverIPAdress.setPreferredSize(new Dimension(180, 30));
+            serverIPAdress.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            serverIPAdress.setHorizontalAlignment(JTextField.CENTER);
+            panelPierwszegoUruchomienia.add(serverIPAdress);
           
-            JTextField serverPortInput = new JTextField();
+            serverPortInput = new JTextField();
             serverPortInput.setPreferredSize(new Dimension(50, 30));
             serverPortInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             serverPortInput.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(serverPortInput);
             
-            RichJLabel podajPortyLabel = new RichJLabel("Porty dla po³¹czeñ przych. i wych.:",0);
+            RichJLabel podajPortyLabel = new RichJLabel("Porty dla poï¿½ï¿½czeï¿½ przych. i wych.:",0);
             podajPortyLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             panelPierwszegoUruchomienia.add(podajPortyLabel);
 
@@ -189,11 +192,11 @@ public class GuiWindower implements PropertyChangeListener {
             inLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             panelPierwszegoUruchomienia.add(inLabel);
             
-            portInField = new JTextField();
-            portInField.setPreferredSize(new Dimension(60, 30));
-            portInField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-            portInField.setHorizontalAlignment(JTextField.CENTER);
-            panelPierwszegoUruchomienia.add(portInField);
+            portInFieldFilesRequests = new JTextField();
+            portInFieldFilesRequests.setPreferredSize(new Dimension(60, 30));
+            portInFieldFilesRequests.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            portInFieldFilesRequests.setHorizontalAlignment(JTextField.CENTER);
+            panelPierwszegoUruchomienia.add(portInFieldFilesRequests);
             
             RichJLabel outLabel = new RichJLabel("out:",0);
             outLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
@@ -209,8 +212,8 @@ public class GuiWindower implements PropertyChangeListener {
             podajIdJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             panelPierwszegoUruchomienia.add(podajIdJLabel);
             
-            final JTextField idInput = new JTextField();
-            idInput.getDocument().addDocumentListener(new DocumentListener() {
+            nodeName = new JTextField();
+            nodeName.getDocument().addDocumentListener(new DocumentListener() {
 				public void changedUpdate(DocumentEvent e) {
 					generujIdInput.setEnabled(false);
 				}
@@ -224,10 +227,10 @@ public class GuiWindower implements PropertyChangeListener {
 				}
 			});
             
-            idInput.setPreferredSize(new Dimension(250, 30));
-            idInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-            idInput.setHorizontalAlignment(JTextField.CENTER);
-            panelPierwszegoUruchomienia.add(idInput);
+            nodeName.setPreferredSize(new Dimension(250, 30));
+            nodeName.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            nodeName.setHorizontalAlignment(JTextField.CENTER);
+            panelPierwszegoUruchomienia.add(nodeName);
             
             generujIdInput = new JButton("Generuj ID", null);
             generujIdInput.addActionListener(new ActionListener() {
@@ -235,7 +238,7 @@ public class GuiWindower implements PropertyChangeListener {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					Random random = new Random();
-					idInput.setText(random.nextInt(100000)+"");
+					nodeName.setText(random.nextInt(100000)+"");
 				}
 			});
             panelPierwszegoUruchomienia.add(generujIdInput);
@@ -396,7 +399,7 @@ public class GuiWindower implements PropertyChangeListener {
 	public int getPortIn() {
 		int p = 0;
 		try {
-			p = Integer.parseInt(portInField.getText());
+			p = Integer.parseInt(portInFieldFilesRequests.getText());
 		} catch (Exception e) {
 		}
 		return p;
@@ -412,17 +415,15 @@ public class GuiWindower implements PropertyChangeListener {
 	}
 
 	public String getClientPort() {
-		// TODO Auto-generated method stub
-		return null;
+		return portOutField.getText();
 	}
 
 	public String getClientName() {
-		// TODO Auto-generated method stub
-		return null;
+		return nodeName.getText();
 	}
 
 	public String getServerAddress() {
 		// TODO Auto-generated method stub
-		return null;
+		return serverIPAdress.getText();
 	}
 }
