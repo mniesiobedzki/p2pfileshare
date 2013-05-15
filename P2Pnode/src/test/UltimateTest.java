@@ -7,8 +7,8 @@ public class UltimateTest {
 	
 	public static void main(String[] args) {
 		
-		String usr = "heps";
-		String ip = "1.1.1.12";
+		String usr = "usr1";
+		String ip = "192.168.80.132";
 		int portIn = 5555;
 		int portOut= 6666;
 		String fname="kuku";
@@ -18,6 +18,14 @@ public class UltimateTest {
 		TestTreeServer serwer = new TestTreeServer(fname, usr, path, portOut);
 		new Thread(klient).start();
 		new Thread(serwer).start();
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		serwer.ft.addUser("usr2", path);
 		FileServer server = new FileServer(serwer.ft, usr);
 		while(true){
 			if(klient.changed){

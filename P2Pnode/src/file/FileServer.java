@@ -47,8 +47,8 @@ public class FileServer extends Thread {
 	public void run() {
 		ServerSocket servsock;
 		try {
+			servsock = new ServerSocket(13267);
 			while (true) {
-				servsock = new ServerSocket(13267);
 
 				System.out.println("Waiting...");
 
@@ -69,8 +69,12 @@ public class FileServer extends Thread {
 					System.out.println(path);
 					// String path = tree.getFolder().get("root").getValue();
 					Nod n = tree.getFolder().get(msg);
-					System.err.println(n.getValue() + " " + n.getName());
+					//System.err.println(n.getValue() + " " + n.getName());
+					System.out.println(n);
 					path += n.getName();
+					System.out.println("key: "+ msg);
+					System.out.println("path: "+path);
+					System.out.println("os: "+os);
 					this.send(os, path);
 					sock.close();
 					break;
