@@ -19,9 +19,8 @@ public class Nod implements Serializable {
 	 * 
 	 * @param val
 	 * @param par
-	 * @param key
 	 */
-	public Nod(String val, Nod par, String key) {
+	public Nod(String val, Nod par) {
 		value = val;
 		parent = par.getValue();
 		name= val;
@@ -29,7 +28,7 @@ public class Nod implements Serializable {
 			par.addChlid(this.value);
 		}
 	}
-	public Nod(String val, String key) {
+	public Nod(String val) {
 		value = val;
 		parent = "root";
 		name= val;
@@ -41,11 +40,10 @@ public class Nod implements Serializable {
 	 * @param val - ID pliku
 	 * @param n - nazwa pliku
 	 * @param par - ID rodzica
-	 * @param key - Klucz
 	 * @param hist - Historia pliku
 	 * @param own - ID w³aœciciela
 	 */
-	public Nod(String val, Nod par, String key, LinkedList<FileState> hist,
+	public Nod(String val, Nod par, LinkedList<FileState> hist,
 			Nod own, String n) {
 		value = val;
 		parent = par.getValue();
@@ -56,7 +54,6 @@ public class Nod implements Serializable {
 		history = hist;
 		owner = own;
 	}
-
 	public String getPath() {
 		return path;
 	}
