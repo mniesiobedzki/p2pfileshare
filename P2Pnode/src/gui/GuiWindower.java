@@ -152,7 +152,7 @@ public class GuiWindower implements PropertyChangeListener {
             panelPierwszegoUruchomienia.setBounds(0,0,300,400);
             
             JPanel spacer1 = new JPanel();
-            spacer1.setPreferredSize(new Dimension(300,20));
+            spacer1.setPreferredSize(new Dimension(300,5));
             spacer1.setBackground(new Color(0,0,0,0));
             panelPierwszegoUruchomienia.add(spacer1);
             
@@ -241,7 +241,7 @@ public class GuiWindower implements PropertyChangeListener {
             panelPierwszegoUruchomienia.add(generujIdInput);
             
             JPanel spacer30 = new JPanel();
-            spacer30.setPreferredSize(new Dimension(300,30));
+            spacer30.setPreferredSize(new Dimension(300,5));
             spacer30.setBackground(new Color(0,0,0,0));
             panelPierwszegoUruchomienia.add(spacer30);
             
@@ -274,7 +274,7 @@ public class GuiWindower implements PropertyChangeListener {
             panelPierwszegoUruchomienia.add(wybierzFolderBt);
              
             JPanel spacer31 = new JPanel();
-            spacer31.setPreferredSize(new Dimension(300,40));
+            spacer31.setPreferredSize(new Dimension(300,10));
             spacer31.setBackground(new Color(0,0,0,0));
             panelPierwszegoUruchomienia.add(spacer31);
             
