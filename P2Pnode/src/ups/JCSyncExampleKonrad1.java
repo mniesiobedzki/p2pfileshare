@@ -116,7 +116,7 @@ public class JCSyncExampleKonrad1 {
                 LOG.debug("I got the collection: " + this.collection);
 
             }
-           // this.collection_so.addObserver(collectionObserver);
+           this.collection_so.addObserver(collectionObserver);
             this.collection_so.addStateListener(this.collectionListener);
 
         } catch (Throwable e) {
