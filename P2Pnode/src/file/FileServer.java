@@ -63,6 +63,7 @@ public class FileServer extends Thread {
 					while (!s.hasNext()) {
 					}
 					String msg = s.next();
+					System.out.println("!!!");
 					System.out.println(msg);
 
 					String path = tree.getFolder().get(uname).getPath();
@@ -72,9 +73,9 @@ public class FileServer extends Thread {
 					//System.err.println(n.getValue() + " " + n.getName());
 					System.out.println(n);
 					path += n.getName();
+					System.err.println("wysy³am plik");
 					System.out.println("key: "+ msg);
 					System.out.println("path: "+path);
-					System.out.println("os: "+os);
 					this.send(os, path);
 					sock.close();
 					break;

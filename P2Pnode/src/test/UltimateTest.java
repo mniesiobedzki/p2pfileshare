@@ -8,6 +8,7 @@ public class UltimateTest {
 	public static void main(String[] args) {
 		
 		String usr = "usr1";
+		String thisIp = "192.168.80.131";
 		String ip = "192.168.80.132";
 		int portIn = 5555;
 		int portOut= 6666;
@@ -15,7 +16,7 @@ public class UltimateTest {
 		String path="kuku//";
 		
 		TestTreeClient klient = new TestTreeClient(ip, portIn);
-		TestTreeServer serwer = new TestTreeServer(fname, usr, path, portOut);
+		TestTreeServer serwer = new TestTreeServer(fname, usr, path, portOut, thisIp);
 		new Thread(klient).start();
 		new Thread(serwer).start();
 		try {
@@ -25,11 +26,11 @@ public class UltimateTest {
 			e.printStackTrace();
 		}
 
-		serwer.ft.addUser("usr2", path);
+		//serwer.ft.addUser("usr2", path);
 		FileServer server = new FileServer(serwer.ft, usr);
 		while(true){
 			if(klient.changed){
-				serwer.ft.update(klient.ft.getFolder(), usr, ip, path);
+				serwer.ft.update(klient.ft.getFolder(), usr, path);
 				klient.changed=false;
 			}
 		}

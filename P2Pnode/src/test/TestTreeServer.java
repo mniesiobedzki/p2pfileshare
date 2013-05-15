@@ -12,6 +12,7 @@ public class TestTreeServer implements Runnable {
 	String fname;
 	String uname;
 	String path;
+	String ip;
 	int port;
 	public FolderTree ft;
 	
@@ -22,11 +23,14 @@ public class TestTreeServer implements Runnable {
 			welcomeSocket = new ServerSocket(port);
 
 			ft = new FolderTree(fname);
-			ft.addUser(uname, path);
+			ft.addUser(uname, path, ip);
 			// File fa = new File(name, File.generateFileId(uname));
 			java.io.File[] listaFajli = File.listAllTheFilesInDir(path);
 
 			for (java.io.File file : listaFajli) {
+				if(file==null){
+					break;
+				}
 				File f = new File(file.getName(), uname);
 
 				System.out.println(f.getFileName());
@@ -74,11 +78,12 @@ public class TestTreeServer implements Runnable {
 	 *            - file path
 	 * @param port - port
 	 */
-	public TestTreeServer(String fname, String uname, String path, int port) {
+	public TestTreeServer(String fname, String uname, String path, int port, String ip) {
 		super();
 		this.fname = fname;
 		this.uname = uname;
 		this.path = path;
 		this.port = port;
+		this.ip = ip;
 	}
 }

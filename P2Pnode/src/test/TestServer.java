@@ -37,7 +37,7 @@ public class TestServer {
 		String folderName = "kuku";
 		String uname = "user1";
 		FolderTree ft = new FolderTree(folderName);
-		ft.addUser(uname, path);
+		ft.addUser(uname, path, "192.168.80.32");
 		File f = new File(fileName, uname);
 		ft.addFile(f, uname);
 		FileServer server = new FileServer(ft, uname);

@@ -9,7 +9,7 @@ import file.File;
 import file.FileClient;
 
 public class FolderTree implements Serializable {
-	
+
 	public TreeMap<String, Nod> folder = new TreeMap<String, Nod>();
 	// klucz to dla korzenia "root"
 	// dla użytkownika jego ID
@@ -31,8 +31,8 @@ public class FolderTree implements Serializable {
 	 * @param usr - ID użytkownika
 	 * @param path - ścieżka do folderu lokalna dla użytkownika
 	 */
-	public void addUser(String usr, String path) {
-		Nod n = new Nod(usr, root);
+	public void addUser(String usr, String path, String ip) {
+		Nod n = new Nod(usr, root, ip);
 		System.out.println(n);
 		System.out.println("Użytkownik :"+usr);
 		System.out.println("folder w :"+path);
@@ -108,11 +108,14 @@ public class FolderTree implements Serializable {
 	 * 
 	 * @param folder2
 	 */
-	public void update(TreeMap<String, Nod> folder2, String usr, String ip, String path) {
+	public void update(TreeMap<String, Nod> folder2, String usr, String path) {
 		folder.putAll(folder2);
 		LinkedList<String> users = new LinkedList<String>();
 		root = folder.get("root");
 		for (String u : root.children) {
+			if(!this.folder.containsKey(u)){
+				this.folder.put(u, folder.get(u));
+			}
 			users.add(folder.get(u).getValue());
 		}
 		LinkedList<Nod> conflicts = new LinkedList<Nod>();
@@ -145,7 +148,10 @@ public class FolderTree implements Serializable {
 			//System.out.println(nod.getParent());
 			System.out.println("\t"+nod.getName());
 			System.out.println("\t"+nod.getValue()+"\n");
-			FileClient fileClient = new FileClient(ip, nod.getParent()+nod.getName(), path, nod.getName());
+			System.out.println("parent: "+nod.getParent());
+			System.out.println("Parent obj: "+folder2.get(nod.getParent()));
+			System.out.println(folder2.get(nod.getParent()).ip);
+			FileClient fileClient = new FileClient(folder2.get(nod.getParent()).ip, nod.getParent()+nod.getName(), path, nod.getName());
 			File f = new File(nod.getName(),usr);
 			f.setFileId(nod.getValue());
 			this.addFile(f, usr);

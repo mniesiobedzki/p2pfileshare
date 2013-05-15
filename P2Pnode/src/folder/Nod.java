@@ -11,11 +11,12 @@ public class Nod implements Serializable {
 	String parent;// klucz rodzica
 	String name;
 	String path;
+	String ip;
 	Nod owner;
 	LinkedList<FileState> history = new LinkedList<FileState>();
 
 	/**
-	 * konstruktor dla korzenia i dla u¿ytkowników
+	 * konstruktor dla korzenia
 	 * 
 	 * @param val
 	 * @param par
@@ -24,6 +25,22 @@ public class Nod implements Serializable {
 		value = val;
 		parent = par.getValue();
 		name= val;
+		if (parent != null) {
+			par.addChlid(this.value);
+		}
+	}
+	/**
+	 * konstruktor dla u¿ytkownka
+	 * 
+	 * @param val
+	 * @param par
+	 * @param ip
+	 */
+	public Nod(String val, Nod par, String ip) {
+		value = val;
+		parent = par.getValue();
+		name= val;
+		this.ip=ip;
 		if (parent != null) {
 			par.addChlid(this.value);
 		}
