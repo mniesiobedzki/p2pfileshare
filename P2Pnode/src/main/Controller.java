@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.logging.Level;
+
+import org.apache.log4j.Logger;
 
 /**
  * Main Controller
@@ -17,6 +20,8 @@ import java.beans.PropertyChangeSupport;
  * 
  */
 public class Controller {
+	
+	public static final Logger LOG = Logger.getLogger(Controller.class);
 
 	private GuiWindower gui;
 	private FolderTree folderTree;
@@ -36,6 +41,12 @@ public class Controller {
 		this.addPropertyChangeListener(this.gui); // podpięcie zmian
 	}
 
+	public Controller(GuiWindower gui2) {
+		this.gui = gui2;
+		this.gui.addButtonActionListener(guziki); // podpięcie guzików
+		this.addPropertyChangeListener(this.gui); // podpięcie zmian
+	}
+
 	private void addPropertyChangeListener(PropertyChangeListener listener) {
 		propertyChangeSupport.addPropertyChangeListener(listener);
 	}
@@ -47,10 +58,17 @@ public class Controller {
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Akcja " + e.getActionCommand());
 			if (e.getActionCommand().equals("Rozpocznij")) {
+				
+				clientP2Pnode = new ClientP2Pnode( portStringToInt(gui.getClientPort()), gui.getServerAddress(), portStringToInt(gui.getServerPort()), gui.getClientName());
 				// TODO: coś
-				startSync();
+				while(!clientP2Pnode.isConnected()){
+					LOG.info("Node still connecting");
+					snooze(1000);
+				}
+				LOG.info("Node connected");
 				//MFolderListener.runFolderListener(gui.getFolderPath());
-				folderTree = new FolderTree(gui.getFolderPath());
+				folderTree = new FolderTree(gui.getFolderPath(), gui.getClientName(), clientP2Pnode.getJCSyncTreeMap());
+				folderTree.update();
 			}
 
 		}
@@ -126,5 +144,19 @@ public class Controller {
 		System.out.println(new String("1299serek.pjwstk.wp.pl.dupa")
 				.matches(ValidHostnameRegex));
 	}
+	
+	private int portStringToInt(String port){
+		return Integer.parseInt(port); 
+	}
 
+	public void snooze(long time) {
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException ex) {
+			/*
+			 * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
+			 * Level.SEVERE, null, ex);
+			 */
+		}
+	}
 }
