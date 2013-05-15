@@ -69,7 +69,7 @@ public class FolderTree implements Serializable {
 	}
 
 	public void addFile(File f, String usr) {
-		Nod file = new Nod(f.getFileId(), folder.get(usr),f.getSingleFileHistory(), folder.get(usr), f.getFileName());
+		Nod file = new Nod(usr+f.getFileName(), folder.get(usr),f.getSingleFileHistory(), folder.get(usr), f.getFileName());
 		file.setParent(folder.get(usr));
 		folder.put(usr+file.getName(),file);
 	}
@@ -145,7 +145,7 @@ public class FolderTree implements Serializable {
 			//System.out.println(nod.getParent());
 			System.out.println("\t"+nod.getName());
 			System.out.println("\t"+nod.getValue()+"\n");
-			FileClient fileClient = new FileClient(ip, nod.getParent(), path, usr);
+			FileClient fileClient = new FileClient(ip, nod.getParent()+nod.getName(), path, nod.getName());
 			File f = new File(nod.getName(),usr);
 			f.setFileId(nod.getValue());
 			this.addFile(f, usr);
