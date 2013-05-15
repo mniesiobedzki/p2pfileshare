@@ -21,6 +21,12 @@ import pl.edu.pjwstk.mteam.jcsync.exception.OperationForbiddenException;
 import pl.edu.pjwstk.mteam.p2p.P2PNode;
 import ups.JCSyncExampleKonrad1;
 
+/**
+ * Klasa odpowiedzialna za połączenie z platformą P2Pm
+ * 
+ * @author Marek Niesiobędzki
+ *
+ */
 public class ClientP2Pnode {
 
 	public static final Logger LOG = Logger.getLogger(ClientP2Pnode.class);
@@ -165,12 +171,14 @@ this.observable_so.addStateListener(collectionListener);
 	
 	 private JCSyncStateListener collectionListener = new JCSyncStateListener() {
 	        public void onLocalStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
-	            LOG.debug("collection onLocalStateUpdated callback invoked method=" + methodName + ": " + collection);
+	            LOG.debug("collection onLocalStateUpdated callback invoked method=" + methodName + ": " + object.getID());
 	            System.out.println(" LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL ");
 	        }
 	        public void onRemoteStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
-	            LOG.debug("collection onRemoteStateUpdated callback invoked method=" + methodName + ": " + collection);
+	            LOG.debug("collection onRemoteStateUpdated callback invoked method=" + methodName + ": " + object.getID());
 	            System.out.println(" REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE ");
+	            
+	            // TODO: Wywołanie metody sprawdzajacej zmiany
 	        }
 	    };
 
@@ -185,7 +193,6 @@ this.observable_so.addStateListener(collectionListener);
 	 */
 	public JCSyncHashMap createHashMap(String collID, JCSyncCore jcSyncCore)
 			throws ObjectExistsException, Exception {
-		// create collection
 		JCSyncHashMap map = new JCSyncHashMap();
 		SharedCollectionObject sharedCollectionObject_1 = new SharedCollectionObject(
 				collID, map, jcSyncCore);

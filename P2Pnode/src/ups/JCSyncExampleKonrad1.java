@@ -7,6 +7,7 @@ import pl.edu.pjwstk.mteam.core.NodeCallback;
 import pl.edu.pjwstk.mteam.jcsync.core.JCSyncAbstractSharedObject;
 import pl.edu.pjwstk.mteam.jcsync.core.JCSyncCore;
 import pl.edu.pjwstk.mteam.jcsync.core.JCSyncStateListener;
+import pl.edu.pjwstk.mteam.jcsync.core.consistencyManager.DefaultConsistencyManager;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncHashMap;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.SharedCollectionObject;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.util.JCSyncObservable;
@@ -108,7 +109,7 @@ public class JCSyncExampleKonrad1 {
             this.collection = new JCSyncHashMap<String, OperationDetails>();
             LOG.trace("Creating the collection");
             try {
-                this.collection_so = new SharedCollectionObject("collection", this.collection, this.jcsyncCore, ConsistencyManager.class);
+                this.collection_so = new SharedCollectionObject("collection", this.collection, this.jcsyncCore, DefaultConsistencyManager.class);
             } catch (ObjectExistsException e) {
                 LOG.debug("Collection already exists -- getting it...");
                 this.collection_so = (SharedCollectionObject) SharedCollectionObject.getFromOverlay("collection", this.jcsyncCore);
@@ -128,13 +129,18 @@ public class JCSyncExampleKonrad1 {
     }
 
     public void doStuff() {
+    	int i = 0;
 
         LOG.debug("Doing stuff");
 
+        do{
         String userName = this.p2pNode.getUserName();
         LOG.trace("Invoking operation: " + this.collection + " " + new OperationDetails(userName, userName+"@0", System.currentTimeMillis()));
-        this.collection.put("key", new OperationDetails(userName, userName+"@0", System.currentTimeMillis()));
+        this.collection.put("key"+i, new OperationDetails(userName, userName+"@0", System.currentTimeMillis()));
         LOG.info("Collection after the operation: " + this.collection);
+        snooze(4000);
+        i++;
+        } while(true);
 
     }
 
@@ -144,11 +150,22 @@ public class JCSyncExampleKonrad1 {
 
         try {
            // example.initLayer(args[0], Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
-        	example.initLayer("1.1.1.4", 21000, "Konrad", 22211);
+        	example.initLayer("192.168.128.96", 21000, "Konrad", 22211);
         } catch (Throwable e) {
             LOG.error("Error while initializing layer: " + e);
         }
 
     }
+    
+	public void snooze(long time) {
+		try {
+			Thread.sleep(time);
+		} catch (InterruptedException ex) {
+			/*
+			 * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
+			 * Level.SEVERE, null, ex);
+			 */
+		}
+	}
 
 }

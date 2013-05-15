@@ -6,6 +6,11 @@ import pl.edu.pjwstk.mteam.core.NodeCallback;
 
 import java.util.List;
 
+/**
+ * Callback-i
+ * @author marek niesiobędzki
+ *
+ */
 public class ClientP2PnodeCallback implements NodeCallback {
 
 	@Override
