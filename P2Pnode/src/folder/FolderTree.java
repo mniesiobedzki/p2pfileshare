@@ -146,40 +146,31 @@ public class FolderTree implements Serializable {
 			}
 			users.add(folder.get(u).getValue());
 		}
-		LinkedList<Nod> conflicts = new LinkedList<Nod>();
+		LinkedList<Nod> changes = new LinkedList<Nod>();
+		LinkedList<Nod> created = new LinkedList<Nod>();
+		
+		//ten for odpowiada za pliki które zostały zaktualizowane 
 		for (String u : users) {
 			if (!u.equals(usr)) {
 				for (File f : MFolderListener.filesAndTheirHistory.values()) {					
-					 
 					System.out.println(folder.get(u + f.getFileName()).getHistory().getLast().getData());
-					if (MFolderListener.filesAndTheirHistory.get(f.getFileId())
-							.getSingleFileHistory().getLast().getData() < folder
-							.get(u + f.getFileName()).getHistory().getLast()
-							.getData()) {
+					if (MFolderListener.filesAndTheirHistory.get(f.getFileId()).getSingleFileHistory().getLast().getData() < folder.get(u + f.getFileName()).getHistory().getLast().getData()) {
 						folder.get(u + f.getFileName()).setParent(u);
-						conflicts.add(folder.get(u + f.getFileName()));
+						changes.add(folder.get(u + f.getFileName()));
 					}
 
 				}
 			}
 		}
+		//ten for odpowiada za pliki które zostały utworzone
 		for (Nod n : folder.values()) {
 			if (n.getHistory().size() > 0) {
 				if (!MFolderListener.filesAndTheirHistory.containsKey(n.getParent()+n.getName())) {
-					conflicts.add(folder.get(n.getOwner().value + n.name));
+					created.add(folder.get(n.getOwner().value + n.name));
 				}
 			}
 		}
-		System.out.println("conflicts:");
-		for (Nod nod : conflicts) {
-			System.out.println(nod);
-			//System.out.println(nod.getParent());
-			System.out.println("\t"+nod.getName());
-			System.out.println("\t"+nod.getValue()+"\n");
-			System.out.println("parent: "+nod.getParent());
-			System.out.println("Parent obj: "+folder2.get(nod.getParent()));
-			System.out.println(folder2.get(nod.getParent()).ip);
-
+		for (Nod nod : created) {
 			if(nod.getHistory().getLast()!=null){
 				FileClient fileClient = new FileClient(this, nod, folder2.get(nod.getParent()).ip, nod.getParent()+nod.getName(), folder.get(usr).getPath(), nod.getName(), usr);
 			}else{
@@ -208,7 +199,8 @@ public class FolderTree implements Serializable {
 			}
 			users.add(folder.get(u).getValue());
 		}
-		LinkedList<Nod> conflicts = new LinkedList<Nod>();
+		LinkedList<Nod> changes = new LinkedList<Nod>();
+		LinkedList<Nod> created = new LinkedList<Nod>();
 		
 		//ten for odpowiada za pliki które zostały zaktualizowane 
 		for (String u : users) {
@@ -217,7 +209,7 @@ public class FolderTree implements Serializable {
 					System.out.println(folder.get(u + f.getFileName()).getHistory().getLast().getData());
 					if (MFolderListener.filesAndTheirHistory.get(f.getFileId()).getSingleFileHistory().getLast().getData() < folder.get(u + f.getFileName()).getHistory().getLast().getData()) {
 						folder.get(u + f.getFileName()).setParent(u);
-						conflicts.add(folder.get(u + f.getFileName()));
+						changes.add(folder.get(u + f.getFileName()));
 					}
 
 				}
@@ -227,19 +219,11 @@ public class FolderTree implements Serializable {
 		for (Nod n : folder.values()) {
 			if (n.getHistory().size() > 0) {
 				if (!MFolderListener.filesAndTheirHistory.containsKey(n.getParent()+n.getName())) {
-					conflicts.add(folder.get(n.getOwner().value + n.name));
+					created.add(folder.get(n.getOwner().value + n.name));
 				}
 			}
 		}
-		System.out.println("conflicts:");
-		for (Nod nod : conflicts) {
-			System.out.println(nod);
-			//System.out.println(nod.getParent());
-			System.out.println("\t"+nod.getName());
-			System.out.println("\t"+nod.getValue()+"\n");
-			System.out.println("parent: "+nod.getParent());
-			System.out.println("Parent obj: "+folder.get(nod.getParent()));
-			System.out.println(folder.get(nod.getParent()).ip);
+		for (Nod nod : created) {
 			if(nod.getHistory().getLast()!=null){
 				FileClient fileClient = new FileClient(this,nod,  folder.get(nod.getParent()).ip, nod.getParent()+nod.getName(), folder.get(usr).getPath(), nod.getName(), usr);
 			}else{
