@@ -196,6 +196,7 @@ public class MFolderListener {
 			System.out.println("Error: " + e.toString());
 		}
 	}
+	
 	private static Entry<String, File> searchForFile(String fileName){
 		
 		 try {
@@ -213,5 +214,22 @@ public class MFolderListener {
 		
 		return null;
 	}
-
+	
+	public static void deleteFileFromDisc(String filePathAndName){
+		try{
+ 
+    		java.io.File file = new java.io.File(filePathAndName);
+ 
+    		if(file.delete()){
+    			System.out.println(file.getName() + " is deleted!");
+    		}else{
+    			System.out.println("Delete operation has failed.");
+    		}
+ 
+    	}catch(Exception e){
+ 
+    		e.printStackTrace();
+ 
+    	}
+	}
 }
