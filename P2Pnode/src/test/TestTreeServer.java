@@ -65,6 +65,12 @@ public class TestTreeServer implements Runnable {
 					objectOutput.writeObject(ft);
 					MFolderListener.fileModified = false;
 				}
+				if (ft.updated){
+					ft.updated=false;
+					System.err.println(ft.toString());
+					objectOutput.writeObject(ft);
+					MFolderListener.fileModified = false;
+				}
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

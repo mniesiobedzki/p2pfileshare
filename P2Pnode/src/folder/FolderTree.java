@@ -10,6 +10,7 @@ import file.FileClient;
 
 public class FolderTree implements Serializable {
 
+	public boolean updated = false;
 	public TreeMap<String, Nod> folder = new TreeMap<String, Nod>();
 	public JCSyncTreeMap<String, Nod> syncFolder = new JCSyncTreeMap<String, Nod>();
 	// klucz to dla korzenia "root"
@@ -55,6 +56,7 @@ public class FolderTree implements Serializable {
 		if(syncFolder!=null){
 			syncFolder.put(usr, n);
 		}
+		updated= true;
 	}
 
 	public Nod getRoot() {
@@ -63,6 +65,7 @@ public class FolderTree implements Serializable {
 
 	public void setRoot(Nod root) {
 		this.root = root;
+		updated= true;
 	}
 
 	@Override
@@ -83,6 +86,7 @@ public class FolderTree implements Serializable {
 
 	public void setFolder(JCSyncTreeMap<String, Nod> folder) {
 		this.folder = folder;
+		updated = true;
 	}
 
 	public void addFile(File f, String usr) {
@@ -93,6 +97,7 @@ public class FolderTree implements Serializable {
 		if(syncFolder!=null){
 			syncFolder.put(usr+file.getName(),file);
 		}
+		updated = true;
 	}
 
 	/**
@@ -108,6 +113,7 @@ public class FolderTree implements Serializable {
 		} else if(file.history.getLast().getData()<f.getSingleFileHistory().getLast().getData()){
 			file.history.add(f.getSingleFileHistory().getLast());
 		}
+		updated = true;
 	}
 
 	/**
