@@ -58,7 +58,7 @@ public class File implements Serializable{
 		
 		try {
 			java.io.File kuku = new java.io.File(fileName);
-			this.singleFileHistory.add(new FileState(userId,kuku.lastModified(),fileName,kuku.length(),File.getMD5Checksum(fileName)));
+			this.singleFileHistory.add(new FileState(userId,kuku.lastModified(),fileName,kuku.length(),File.getMD5Checksum(fileName), this.getFileId()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -124,7 +124,7 @@ public class File implements Serializable{
 	
 	public void setFileStateHistoryEntry(long entryDate, String fileName, String userID, long fileSize, String fileMD5Hash) {
 
-		FileState fileStateObj = new FileState(userID,entryDate,fileName,fileSize,fileMD5Hash);
+		FileState fileStateObj = new FileState(userID,entryDate,fileName,fileSize,fileMD5Hash, this.getFileId());
 		this.getSingleFileHistory().add(fileStateObj);
 	}
 

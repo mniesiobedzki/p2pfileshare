@@ -13,16 +13,26 @@ public class FileState implements Serializable{
 	private long   data 	= 0;	// kiedy plik by� zmieniany		
 	private String fileName = "";	// nazwa zmienianego pliku
 	private double size		= 0;	// rozmiar pliku
-	private String md5		= "";	// suma kontrolna		
+	private String md5		= "";	// suma kontrolna	
+	private String fileId ="";
 	
 	public FileState(String personID, long data, String fileName, double size,
-			String md5) {
+			String md5, String fileId) {
 		super();
 		this.personID = personID;
 		this.data = data;
 		this.fileName = fileName;
 		this.size = size;
 		this.md5 = md5;
+		this.fileId=fileId;
+	}
+
+	public String getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(String fileId) {
+		this.fileId = fileId;
 	}
 
 	public String getMd5() {

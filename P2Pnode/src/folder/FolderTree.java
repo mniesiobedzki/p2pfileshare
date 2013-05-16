@@ -188,6 +188,10 @@ public class FolderTree implements Serializable {
 				if(this.getFolder().containsKey(usr+nod.getName())){
 					this.getFolder().get(usr+nod.getName()).history.add(null);
 					this.updated=true;
+				}else{
+					File deletedFile = new File(nod.getName(), usr);
+					deletedFile.setFileId(nod.history.getFirst().getFileId());
+					addFile(deletedFile, usr);
 				}
 			}
 		}
@@ -245,6 +249,10 @@ public class FolderTree implements Serializable {
 				if(this.getFolder().containsKey(usr+nod.getName())){
 					this.getFolder().get(usr+nod.getName()).history.add(null);
 					this.updated=true;
+				}else{
+					File deletedFile = new File(nod.getName(), usr);
+					deletedFile.setFileId(nod.history.getFirst().getFileId());
+					addFile(deletedFile, usr);
 				}
 			}
 		}
