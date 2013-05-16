@@ -172,11 +172,12 @@ public class FolderTree implements Serializable {
 			System.out.println("parent: "+nod.getParent());
 			System.out.println("Parent obj: "+folder2.get(nod.getParent()));
 			System.out.println(folder2.get(nod.getParent()).ip);
+
+			if(nod.getHistory().getLast()!=null){
 			FileClient fileClient = new FileClient(this, nod, folder2.get(nod.getParent()).ip, nod.getParent()+nod.getName(), folder.get(usr).getPath(), nod.getName(), usr);
-			File f = new File(nod.getName(),usr);
-			f.setFileId(nod.getValue());
-			this.addFile(f, usr);
-			
+			}else{
+				//kod kasujący plik
+			}
 		}
 		// tu dodać kod wyłapujący zmiany wymagające dodania
 	}
