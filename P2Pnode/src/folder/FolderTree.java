@@ -209,15 +209,13 @@ public class FolderTree implements Serializable {
 			users.add(folder.get(u).getValue());
 		}
 		LinkedList<Nod> conflicts = new LinkedList<Nod>();
+		
+		//ten for odpowiada za pliki które zostały zaktualizowane 
 		for (String u : users) {
 			if (!u.equals(usr)) {
 				for (File f : MFolderListener.filesAndTheirHistory.values()) {					
-					 
 					System.out.println(folder.get(u + f.getFileName()).getHistory().getLast().getData());
-					if (MFolderListener.filesAndTheirHistory.get(f.getFileId())
-							.getSingleFileHistory().getLast().getData() < folder
-							.get(u + f.getFileName()).getHistory().getLast()
-							.getData()) {
+					if (MFolderListener.filesAndTheirHistory.get(f.getFileId()).getSingleFileHistory().getLast().getData() < folder.get(u + f.getFileName()).getHistory().getLast().getData()) {
 						folder.get(u + f.getFileName()).setParent(u);
 						conflicts.add(folder.get(u + f.getFileName()));
 					}
@@ -225,6 +223,7 @@ public class FolderTree implements Serializable {
 				}
 			}
 		}
+		//ten for odpowiada za pliki które zostały utworzone
 		for (Nod n : folder.values()) {
 			if (n.getHistory().size() > 0) {
 				if (!MFolderListener.filesAndTheirHistory.containsKey(n.getParent()+n.getName())) {
