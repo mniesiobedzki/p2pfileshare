@@ -21,7 +21,7 @@ public class TestClient {
 		ft.addUser(uname, path, thisIp );
 		File f = new File(FileName, uname);
 		ft.addFile(f, uname);
-		FileClient client = new FileClient(ip, uname+FileName,path, FileName);
+		FileClient client = new FileClient(ft, null, ip, uname+FileName,path, FileName, uname);
 
 	}
 

@@ -89,11 +89,15 @@ public class FileClient{
 				filenameWithTempStamp.renameTo(new java.io.File(path+name));
 				File f = new File(n.getName(),usr);
 				f.setFileId(n.getValue());
-				ft.addFile(f, usr);
+				if(ft!=null){
+					ft.addFile(f, usr);
+				}
 				System.out.println("Done!");
-				System.out.println("updated Tree: ");
-				System.out.println(ft.toString());
-				System.out.println(" ");
+				if(ft!=null){
+					System.out.println("updated Tree: ");
+					System.out.println(ft.toString());
+					System.out.println(" ");
+				}
 		 
 			} catch (IOException e) {
 				e.printStackTrace();
