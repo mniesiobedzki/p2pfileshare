@@ -7,6 +7,7 @@ import java.util.TreeMap;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import file.File;
 import file.FileClient;
+import file.FileState;
 
 public class FolderTree implements Serializable {
 
@@ -180,9 +181,14 @@ public class FolderTree implements Serializable {
 			System.out.println(folder2.get(nod.getParent()).ip);
 
 			if(nod.getHistory().getLast()!=null){
-			FileClient fileClient = new FileClient(this, nod, folder2.get(nod.getParent()).ip, nod.getParent()+nod.getName(), folder.get(usr).getPath(), nod.getName(), usr);
+				FileClient fileClient = new FileClient(this, nod, folder2.get(nod.getParent()).ip, nod.getParent()+nod.getName(), folder.get(usr).getPath(), nod.getName(), usr);
 			}else{
 				//kod kasujący plik
+				MFolderListener.deleteFileFromDisc(folder.get(usr).getPath()+nod.getName());
+				if(this.getFolder().containsKey(usr+nod.getName())){
+					this.getFolder().get(usr+nod.getName()).history.add(null);
+					this.updated=true;
+				}
 			}
 		}
 		// tu dodać kod wyłapujący zmiany wymagające dodania
@@ -235,6 +241,11 @@ public class FolderTree implements Serializable {
 				FileClient fileClient = new FileClient(this,nod,  folder.get(nod.getParent()).ip, nod.getParent()+nod.getName(), folder.get(usr).getPath(), nod.getName(), usr);
 			}else{
 				//kod kasujący plik
+				MFolderListener.deleteFileFromDisc(folder.get(usr).getPath()+nod.getName());
+				if(this.getFolder().containsKey(usr+nod.getName())){
+					this.getFolder().get(usr+nod.getName()).history.add(null);
+					this.updated=true;
+				}
 			}
 		}
 		// tu dodać kod wyłapujący zmiany wymagające dodania
