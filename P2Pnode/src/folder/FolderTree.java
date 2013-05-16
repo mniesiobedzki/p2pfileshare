@@ -131,14 +131,33 @@ public class FolderTree implements Serializable {
 		}
 	}
 
+	public void putAll(TreeMap<String, Nod> f){
+		for (Nod n : f.values()) {
+			if(!folder.containsKey(n.value)){
+				folder.put(n.value, n);
+			}
+		}
+	}
+	public void putAll(){
+		for (Nod n : syncFolder.values()) {
+			if(!folder.containsKey(n.value)){
+				folder.put(n.value, n);
+			}
+		}
+	}
+	
 	/**
 	 * Aktualizacja drzewa
 	 * 
 	 * @param folder2
 	 */
 	public void update(TreeMap<String, Nod> folder2) {
-		folder.putAll(folder2);
+		this.putAll(folder2);//dodawanie nowych
+
 		LinkedList<String> users = new LinkedList<String>();
+		LinkedList<Nod> changes = new LinkedList<Nod>();
+		LinkedList<Nod> created = new LinkedList<Nod>();
+		
 		root = folder.get("root");
 		for (String u : root.children) {
 			if(!this.folder.containsKey(u)){
@@ -146,30 +165,41 @@ public class FolderTree implements Serializable {
 			}
 			users.add(folder.get(u).getValue());
 		}
-		LinkedList<Nod> changes = new LinkedList<Nod>();
-		LinkedList<Nod> created = new LinkedList<Nod>();
-		
+		//plik zaktualizowano
+		for (Nod n: folder2.values()){
+			if(folder.get(n.getValue()).getHistory().getLast().getData()<n.getHistory().getLast().getData()){
+				changes.add(n);
+			}
+		}
+		//pliki utworzone
+		for (Nod n: folder2.values()){
+			if(n.getValue()!="root" && !users.contains(n.getValue())){
+				if(!folder.containsKey(n.getName())){
+					changes.add(n);
+				}
+			}
+		}
 		//ten for odpowiada za pliki które zostały zaktualizowane 
-		for (String u : users) {
-			if (!u.equals(usr)) {
-				for (File f : MFolderListener.filesAndTheirHistory.values()) {					
-					System.out.println(folder.get(u + f.getFileName()).getHistory().getLast().getData());
-					if (MFolderListener.filesAndTheirHistory.get(f.getFileId()).getSingleFileHistory().getLast().getData() < folder.get(u + f.getFileName()).getHistory().getLast().getData()) {
-						folder.get(u + f.getFileName()).setParent(u);
-						changes.add(folder.get(u + f.getFileName()));
-					}
-
-				}
-			}
-		}
+//		for (String u : users) {
+//			if (!u.equals(usr)) {
+//				for (File f : MFolderListener.filesAndTheirHistory.values()) {					
+//					System.out.println(folder.get(u + f.getFileName()).getHistory().getLast().getData());
+//					if (MFolderListener.filesAndTheirHistory.get(f.getFileId()).getSingleFileHistory().getLast().getData() < folder.get(u + f.getFileName()).getHistory().getLast().getData()) {
+//						folder.get(u + f.getFileName()).setParent(u);
+//						changes.add(folder.get(u + f.getFileName()));
+//					}
+//
+//				}
+//			}
+//		}
 		//ten for odpowiada za pliki które zostały utworzone
-		for (Nod n : folder.values()) {
-			if (n.getHistory().size() > 0) {
-				if (!MFolderListener.filesAndTheirHistory.containsKey(n.getParent()+n.getName())) {
-					created.add(folder.get(n.getOwner().value + n.name));
-				}
-			}
-		}
+//		for (Nod n : folder.values()) {
+//			if (n.getHistory().size() > 0) {
+//				if (!MFolderListener.filesAndTheirHistory.containsKey(n.getParent()+n.getName())) {
+//					created.add(folder.get(n.getOwner().value + n.name));
+//				}
+//			}
+//		}
 		for (Nod nod : created) {
 			if(nod.getHistory().getLast()!=null){
 				FileClient fileClient = new FileClient(this, nod, folder2.get(nod.getParent()).ip, nod.getParent()+nod.getName(), folder.get(usr).getPath(), nod.getName(), usr);
@@ -206,8 +236,11 @@ public class FolderTree implements Serializable {
 	}
 	
 	public void update() {
-		folder.putAll(syncFolder);
+		this.putAll();//dodawanie nowych
 		LinkedList<String> users = new LinkedList<String>();
+		LinkedList<Nod> changes = new LinkedList<Nod>();
+		LinkedList<Nod> created = new LinkedList<Nod>();
+		
 		root = folder.get("root");
 		for (String u : root.children) {
 			if(!this.folder.containsKey(u)){
@@ -215,30 +248,41 @@ public class FolderTree implements Serializable {
 			}
 			users.add(folder.get(u).getValue());
 		}
-		LinkedList<Nod> changes = new LinkedList<Nod>();
-		LinkedList<Nod> created = new LinkedList<Nod>();
-		
+		//plik zaktualizowano
+		for (Nod n: syncFolder.values()){
+			if(folder.get(n.getValue()).getHistory().getLast().getData()<n.getHistory().getLast().getData()){
+				changes.add(n);
+			}
+		}
+		//pliki utworzone
+		for (Nod n: syncFolder.values()){
+			if(n.getValue()!="root" && !users.contains(n.getValue())){
+				if(!folder.containsKey(n.getName())){
+					changes.add(n);
+				}
+			}
+		}
 		//ten for odpowiada za pliki które zostały zaktualizowane 
-		for (String u : users) {
-			if (!u.equals(usr)) {
-				for (File f : MFolderListener.filesAndTheirHistory.values()) {					
-					System.out.println(folder.get(u + f.getFileName()).getHistory().getLast().getData());
-					if (MFolderListener.filesAndTheirHistory.get(f.getFileId()).getSingleFileHistory().getLast().getData() < folder.get(u + f.getFileName()).getHistory().getLast().getData()) {
-						folder.get(u + f.getFileName()).setParent(u);
-						changes.add(folder.get(u + f.getFileName()));
-					}
-
-				}
-			}
-		}
+//		for (String u : users) {
+//			if (!u.equals(usr)) {
+//				for (File f : MFolderListener.filesAndTheirHistory.values()) {					
+//					System.out.println(folder.get(u + f.getFileName()).getHistory().getLast().getData());
+//					if (MFolderListener.filesAndTheirHistory.get(f.getFileId()).getSingleFileHistory().getLast().getData() < folder.get(u + f.getFileName()).getHistory().getLast().getData()) {
+//						folder.get(u + f.getFileName()).setParent(u);
+//						changes.add(folder.get(u + f.getFileName()));
+//					}
+//
+//				}
+//			}
+//		}
 		//ten for odpowiada za pliki które zostały utworzone
-		for (Nod n : folder.values()) {
-			if (n.getHistory().size() > 0) {
-				if (!MFolderListener.filesAndTheirHistory.containsKey(n.getParent()+n.getName())) {
-					created.add(folder.get(n.getOwner().value + n.name));
-				}
-			}
-		}
+//		for (Nod n : folder.values()) {
+//			if (n.getHistory().size() > 0) {
+//				if (!MFolderListener.filesAndTheirHistory.containsKey(n.getParent()+n.getName())) {
+//					created.add(folder.get(n.getOwner().value + n.name));
+//				}
+//			}
+//		}
 		for (Nod nod : created) {
 			if(nod.getHistory().getLast()!=null){
 				FileClient fileClient = new FileClient(this,nod,  folder.get(nod.getParent()).ip, nod.getParent()+nod.getName(), folder.get(usr).getPath(), nod.getName(), usr);
