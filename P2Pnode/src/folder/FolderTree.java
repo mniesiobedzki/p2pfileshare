@@ -133,19 +133,22 @@ public class FolderTree implements Serializable {
 
 	public void putAll(TreeMap<String, Nod> f){
 		for (Nod n : f.values()) {
-			if(!folder.containsKey(n.value)){
-				folder.put(n.value, n);
-			}
+			addNod(n);
 		}
 	}
 	public void putAll(){
 		for (Nod n : syncFolder.values()) {
-			if(!folder.containsKey(n.value)){
-				folder.put(n.value, n);
-			}
+			addNod(n);
 		}
 	}
 	
+	public void addNod(Nod n){
+		if(!folder.containsKey(n.value)){
+			folder.put(n.value, n);
+		}else if (folder.get(n.value).getHistory().getLast().getData()<n.getHistory().getLast().getData()){
+			folder.get(n.value).getHistory().add(n.getHistory().getLast());
+		}
+	}
 	/**
 	 * Aktualizacja drzewa
 	 * 
@@ -179,27 +182,6 @@ public class FolderTree implements Serializable {
 				}
 			}
 		}
-		//ten for odpowiada za pliki które zostały zaktualizowane 
-//		for (String u : users) {
-//			if (!u.equals(usr)) {
-//				for (File f : MFolderListener.filesAndTheirHistory.values()) {					
-//					System.out.println(folder.get(u + f.getFileName()).getHistory().getLast().getData());
-//					if (MFolderListener.filesAndTheirHistory.get(f.getFileId()).getSingleFileHistory().getLast().getData() < folder.get(u + f.getFileName()).getHistory().getLast().getData()) {
-//						folder.get(u + f.getFileName()).setParent(u);
-//						changes.add(folder.get(u + f.getFileName()));
-//					}
-//
-//				}
-//			}
-//		}
-		//ten for odpowiada za pliki które zostały utworzone
-//		for (Nod n : folder.values()) {
-//			if (n.getHistory().size() > 0) {
-//				if (!MFolderListener.filesAndTheirHistory.containsKey(n.getParent()+n.getName())) {
-//					created.add(folder.get(n.getOwner().value + n.name));
-//				}
-//			}
-//		}
 		for (Nod nod : created) {
 			if(nod.getHistory().getLast()!=null){
 				FileClient fileClient = new FileClient(this, nod, folder2.get(nod.getParent()).ip, nod.getParent()+nod.getName(), folder.get(usr).getPath(), nod.getName(), usr);
@@ -232,7 +214,6 @@ public class FolderTree implements Serializable {
 				}
 			}
 		}
-		// tu dodać kod wyłapujący zmiany wymagające dodania
 	}
 	
 	public void update() {
@@ -262,27 +243,6 @@ public class FolderTree implements Serializable {
 				}
 			}
 		}
-		//ten for odpowiada za pliki które zostały zaktualizowane 
-//		for (String u : users) {
-//			if (!u.equals(usr)) {
-//				for (File f : MFolderListener.filesAndTheirHistory.values()) {					
-//					System.out.println(folder.get(u + f.getFileName()).getHistory().getLast().getData());
-//					if (MFolderListener.filesAndTheirHistory.get(f.getFileId()).getSingleFileHistory().getLast().getData() < folder.get(u + f.getFileName()).getHistory().getLast().getData()) {
-//						folder.get(u + f.getFileName()).setParent(u);
-//						changes.add(folder.get(u + f.getFileName()));
-//					}
-//
-//				}
-//			}
-//		}
-		//ten for odpowiada za pliki które zostały utworzone
-//		for (Nod n : folder.values()) {
-//			if (n.getHistory().size() > 0) {
-//				if (!MFolderListener.filesAndTheirHistory.containsKey(n.getParent()+n.getName())) {
-//					created.add(folder.get(n.getOwner().value + n.name));
-//				}
-//			}
-//		}
 		for (Nod nod : created) {
 			if(nod.getHistory().getLast()!=null){
 				FileClient fileClient = new FileClient(this,nod,  folder.get(nod.getParent()).ip, nod.getParent()+nod.getName(), folder.get(usr).getPath(), nod.getName(), usr);
@@ -315,6 +275,5 @@ public class FolderTree implements Serializable {
 				}
 			}
 		}
-		// tu dodać kod wyłapujący zmiany wymagające dodania
 	}
 }
