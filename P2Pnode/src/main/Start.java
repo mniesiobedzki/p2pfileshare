@@ -1,37 +1,30 @@
 package main;
 
-import file.File;
 import gui.GuiWindower;
-import node.ClientP2Pnode;
-import node.ClientP2PnodeCallback;
 
+/**
+ * Klasa uruchamiająca całą aplikację w MVC
+ *
+ * @author Marek Adam Niesiobędzki - Student PJWSTK s6264@pjwstk.edu.pl
+ * @version 0.9
+ */
 public class Start {
 
+    public static void main(String[] args) {
+        Start s = new Start();
+        s.runMVC();
+    }
 
-	private Controller controller;
+    public void runMVC() {
 
-	public static void main(String[] args) {
-		Start s = new Start();
-		s.runMVC();
-	}
+        // ####### MODEL #######
+        //TODO: Preferencje użytkownika,
 
-	public void runMVC() {
+        // ####### VIEW ########
+        GuiWindower gui = new GuiWindower();
 
-		// ####### MODEL #######
-		// P2P
-		ClientP2PnodeCallback clientP2PnodeCallback = new ClientP2PnodeCallback();
-		ClientP2Pnode clientP2Pnode = new ClientP2Pnode(clientP2PnodeCallback);
-		
-		// Local files on the computer
-		//FolderTree folderTree = new FolderTree();
-		//File file = new File();
+        // ####### CONTROLER ###
+        Controller controller = new Controller(gui);
 
-		// ####### VIEW #######
-		GuiWindower gui = new GuiWindower();
-
-		controller = new Controller(gui);
-
-	}
-	
-
+    }
 }
