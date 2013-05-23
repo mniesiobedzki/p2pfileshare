@@ -52,7 +52,7 @@ public class Controller {
             System.out.println("Akcja " + e.getActionCommand());
             if (e.getActionCommand().equals("Rozpocznij")) {
 
-                clientP2Pnode = new ClientP2Pnode(portStringToInt(gui.getClientPort()), gui.getServerAddress(), portStringToInt(gui.getServerPort()), gui.getClientName());
+                clientP2Pnode = new ClientP2Pnode(portStringToInt(gui.getClientPort()), gui.getServerAddress(), portStringToInt(gui.getServerPort()), gui.getClientName(), Controller.this);
                 // TODO: coś
                 while (!clientP2Pnode.isConnected()) {
                     LOG.info("Node still connecting");
@@ -165,10 +165,17 @@ public class Controller {
         try {
             Thread.sleep(time);
         } catch (InterruptedException ex) {
-			/*
+            /*
 			 * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
 			 * Level.SEVERE, null, ex);
 			 */
         }
+    }
+
+    /**
+     * Updates files in the folder
+     */
+    public void updateTree() {
+        folderTree.update();
     }
 }
