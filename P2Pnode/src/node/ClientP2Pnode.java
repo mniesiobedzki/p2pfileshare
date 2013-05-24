@@ -3,12 +3,10 @@ package node;
 import folder.Nod;
 import main.Controller;
 import org.apache.log4j.Logger;
-import pl.edu.pjwstk.mteam.core.Node;
 import pl.edu.pjwstk.mteam.jcsync.core.JCSyncAbstractSharedObject;
 import pl.edu.pjwstk.mteam.jcsync.core.JCSyncCore;
 import pl.edu.pjwstk.mteam.jcsync.core.JCSyncStateListener;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncArrayList;
-import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncHashMap;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.SharedCollectionObject;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.util.JCSyncObservable;
@@ -18,8 +16,6 @@ import pl.edu.pjwstk.mteam.jcsync.exception.ObjectNotExistsException;
 import pl.edu.pjwstk.mteam.jcsync.exception.OperationForbiddenException;
 import pl.edu.pjwstk.mteam.p2p.P2PNode;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Observable;
 import java.util.TreeMap;
 
@@ -33,46 +29,50 @@ public class ClientP2Pnode {
 
     public static final Logger LOG = Logger.getLogger(ClientP2Pnode.class);
     private Controller controller;
-
     private P2PNode node;
-
     // Podstawowa implementacja JCSync
     private JCSyncCore jcSyncCore;
-
     private JCSyncTreeMap<String, Nod> jcSyncTreeMap;
     private JCSyncArrayList<String> jcSyncArrayList;
 
     // KOLECKCJE APLIKACJI
     // private HashMap<String, String> myHashMap;
     // private ArrayList<String> myArrayList;
-
     // OBSERWACJA
-    @SuppressWarnings("unused")
     private Observable observable;
-    @SuppressWarnings("unused")
     private JCSyncObservable jcSyncObservable;
-
-    @SuppressWarnings("unused")
     private TestObserver testObserver;
-
     private ClientP2PnodeCallback nodeCallback;
-
     private SharedObservableObject observable_so;
+    private JCSyncStateListener collectionListener = new JCSyncStateListener() {
+        public void onLocalStateUpdated(JCSyncAbstractSharedObject object,
+                                        String methodName, Object retVal) {
+            LOG.debug("collection onLocalStateUpdated callback invoked method="
+                    + methodName + ": " + object.getID());
+            System.out
+                    .println(" LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL ");
+        }
 
-    public ClientP2Pnode() {
-        // TODO Auto-generated constructor stub
-    }
+        public void onRemoteStateUpdated(JCSyncAbstractSharedObject object,
+                                         String methodName, Object retVal) {
+            LOG.debug("collection onRemoteStateUpdated callback invoked method="
+                    + methodName + ": " + object.getID());
+            System.out
+                    .println(" REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE ");
 
-    public ClientP2Pnode(ClientP2PnodeCallback clientP2PnodeCallback) {
-        // TODO Auto-generated constructor stub
-    }
+            // aktualizacja plików na dysku. Chciałbym to zrobić ładnie przez obserwatora, ale niestety nie działa.
+            controller.updateTree();
+        }
+    };
 
     @SuppressWarnings("unchecked")
     public ClientP2Pnode(int portOut, String serverIP, int serverPort,
                          String nodeName, Controller controller) {
         System.out.println("Node " + nodeName + ": Initializing");
 
-        this.connect(serverIP, serverPort, nodeName, portOut);
+        this.nodeCallback = new ClientP2PnodeCallback();
+
+        this.node = this.connect(serverIP, serverPort, nodeName, portOut, this.nodeCallback);
 
         // JCSyncObservable nn = new JCSyncObservable();
         // nn.addObserver(o)
@@ -92,7 +92,7 @@ public class ClientP2Pnode {
         } catch (Exception e) {
             e.printStackTrace();
             /*
-			 * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
+             * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
 			 * Level.SEVERE, null, e);
 			 */
         }
@@ -130,31 +130,6 @@ public class ClientP2Pnode {
         }
 
         this.controller = controller;
-		/*
-		 * // ARRAYLIST String collIDa = "mojaLista"; try { jcSyncArrayList =
-		 * createArrayList(collIDa, jcSyncCore, null);
-		 * System.out.println("Node " + nodeName +
-		 * ": Utworzono nową kolekcję o ID: " + collIDa); } catch
-		 * (ObjectExistsException e) { System.out.println("Node " + nodeName +
-		 * ": Kolekcja " + collIDa +
-		 * " już istnieje, zatem spróbuję się podpiąć"); try { jcSyncArrayList =
-		 * (JCSyncArrayList<String>) subscribeCollection( collIDa,
-		 * this.jcSyncCore).getNucleusObject(); System.out.println("Node " +
-		 * nodeName + ": Kolekcja " + collIDa +
-		 * " już istnieje i pomyślnie się do niej podpieliśmy"); } catch
-		 * (ObjectNotExistsException e1) { System.err.println("Koleckcja od ID "
-		 * + collIDa + " jednak nie istnieje"); e1.printStackTrace(); } catch
-		 * (OperationForbiddenException e1) { System.err.println("Dziwny błąd");
-		 * e1.printStackTrace(); } catch (Exception e1) {
-		 * System.err.println("Dziwny błąd"); e1.printStackTrace(); } } catch
-		 * (Exception e) { System.err.println("Node " + nodeName +
-		 * ": Nienany błąd"); e.printStackTrace(); } //
-		 * this.getObservable(jcSyncCore);
-		 */
-
-        // testObserver = new TestObserver(this.getObservable(this.jcSyncCore));
-        // testClassCallback = new
-        // TestClassCallback(getObservable(node.getPubSubCoreAlgorithm().));
 
         this.jcSyncObservable = this.getObservable2(this.jcSyncCore);
 
@@ -163,43 +138,10 @@ public class ClientP2Pnode {
         this.observable_so.addStateListener(collectionListener);
     }
 
-    private JCSyncStateListener collectionListener = new JCSyncStateListener() {
-        public void onLocalStateUpdated(JCSyncAbstractSharedObject object,
-                                        String methodName, Object retVal) {
-            LOG.debug("collection onLocalStateUpdated callback invoked method="
-                    + methodName + ": " + object.getID());
-            System.out
-                    .println(" LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL ");
-        }
+    public static void main(String[] args) {
+        ClientP2Pnode nt = new ClientP2Pnode(6062, "1.1.1.4", 6060, "testowy2", null);
+        // nt.testWrite();
 
-        public void onRemoteStateUpdated(JCSyncAbstractSharedObject object,
-                                         String methodName, Object retVal) {
-            LOG.debug("collection onRemoteStateUpdated callback invoked method="
-                    + methodName + ": " + object.getID());
-            System.out
-                    .println(" REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE ");
-
-            // aktualizacja plików na dysku. Chciałbym to zrobić ładnie przez obserwatora, ale niestety nie działa.
-            controller.updateTree();
-        }
-    };
-
-
-    /**
-     * Metoda tworzenia nowej czystej koleckji
-     *
-     * @param collID
-     * @param jcSyncCore
-     * @return
-     * @throws ObjectExistsException
-     * @throws Exception
-     */
-    public JCSyncHashMap createHashMap(String collID, JCSyncCore jcSyncCore)
-            throws ObjectExistsException, Exception {
-        JCSyncHashMap map = new JCSyncHashMap();
-        SharedCollectionObject sharedCollectionObject_1 = new SharedCollectionObject(
-                collID, map, jcSyncCore);
-        return map;
     }
 
     /**
@@ -213,27 +155,7 @@ public class ClientP2Pnode {
      */
     public JCSyncTreeMap createTreeMap(String collID, JCSyncCore jcSyncCore)
             throws ObjectExistsException, Exception {
-        JCSyncTreeMap map = new JCSyncTreeMap();
-        SharedCollectionObject sharedCollectionObject_1 = new SharedCollectionObject(
-                collID, map, jcSyncCore);
-        return map;
-    }
-
-    /**
-     * Metoda tworzenia nowej koleckji i przekazania jej już istniewjącej
-     * kolekcji
-     *
-     * @param collID
-     * @param jcSyncCore
-     * @param coreHashMap
-     * @return
-     * @throws ObjectExistsException
-     * @throws Exception
-     */
-    public JCSyncHashMap createHashMap(String collID, JCSyncCore jcSyncCore,
-                                       HashMap coreHashMap) throws ObjectExistsException, Exception {
-        // create collection
-        JCSyncHashMap map = new JCSyncHashMap(coreHashMap);
+        JCSyncTreeMap map = new JCSyncTreeMap<String, Nod>();
         SharedCollectionObject sharedCollectionObject_1 = new SharedCollectionObject(
                 collID, map, jcSyncCore);
         return map;
@@ -241,38 +163,10 @@ public class ClientP2Pnode {
 
     public JCSyncTreeMap createTreeMap(String collID, JCSyncCore jcSyncCore,
                                        TreeMap coreTreeMap) throws ObjectExistsException, Exception {
-        // create collection
-        JCSyncTreeMap map = new JCSyncTreeMap(coreTreeMap);
+        JCSyncTreeMap map = new JCSyncTreeMap<String, Nod>(coreTreeMap);
         SharedCollectionObject sharedCollectionObject_1 = new SharedCollectionObject(
                 collID, map, jcSyncCore);
         return map;
-    }
-
-    /**
-     * Tworzenie nowej kolekcji ArrayList
-     *
-     * @param collectionID
-     * @param jcSyncCore
-     * @param incomingArrayList
-     * @return
-     * @throws ObjectExistsException
-     * @throws Exception
-     */
-    private JCSyncArrayList<String> createArrayList(String collectionID,
-                                                    JCSyncCore jcSyncCore, ArrayList<String> incomingArrayList)
-            throws ObjectExistsException, Exception {
-        // create collection instance
-        if (incomingArrayList == null) {
-            incomingArrayList = new ArrayList<String>();
-        }
-        JCSyncArrayList<String> arrayList = new JCSyncArrayList<String>(
-                incomingArrayList);
-        // we need c r e a t e an Shar edCol l e c t ionObj e c t , that wi l l
-        // be a s s i gned with -our c o l l e c t i o n .
-        SharedCollectionObject sharedCollectionObject = new SharedCollectionObject(
-                collectionID, arrayList, jcSyncCore);
-        return (JCSyncArrayList<String>) sharedCollectionObject
-                .getNucleusObject();
     }
 
     public SharedCollectionObject subscribeCollection(String collectionName,
@@ -283,6 +177,12 @@ public class ClientP2Pnode {
         return sharedCollectionObject;
     }
 
+    /**
+     * NIE DZIAŁA PRZEZ BLĄD PLATFROMY P2Pm
+     *
+     * @param jcSyncCore
+     * @return
+     */
     public JCSyncObservable getObservable(JCSyncCore jcSyncCore) {
         String observableID = "myMap";
         SharedObservableObject sharedObservableObject = null;
@@ -304,21 +204,8 @@ public class ClientP2Pnode {
     }
 
     /**
-     * @return
-     * @throws ObjectNotExistsException
-     */
-    public JCSyncObservable getObservable() throws ObjectNotExistsException {
-        return this.getObservable(jcSyncCore);
-    }
-
-    public static void main(String[] args) {
-        ClientP2Pnode nt = new ClientP2Pnode(6062, "1.1.1.4", 6060, "testowy2", null);
-        // nt.testWrite();
-
-    }
-
-    /**
-     * Metoda z JCSyncBasicTest
+     * Metoda z JCSyncBasicTest - OBSERWATOR
+     * NIE DZIAŁA PRZEZ BLĄD PLATFROMY P2Pm
      *
      * @param jcsynccore
      * @return
@@ -349,7 +236,7 @@ public class ClientP2Pnode {
             e.printStackTrace(); // To change body of catch statement use File |
             // Settings | File Templates.
         }
-		/*
+        /*
 		 * try { this.jcSyncHashMap_sharedObject = new
 		 * SharedObservableObject("myMap", this.jcSyncHashMap, this.jcSyncCore,
 		 * ConsistencyManager.class); } catch (ObjectExistsException e) {
@@ -361,29 +248,12 @@ public class ClientP2Pnode {
 
     }
 
-    private void testWrite() {
-        // TODO Auto-generated method stub
-        String key = "a";
-        String value = "b";
-        while (true) {
-            //this.jcSyncTreeMap.put(key, value);
-            key += "a";
-            value += "b";
-            System.err.println("Rozmiar " + this.jcSyncTreeMap.size());
-            snooze(2000);
-        }
-    }
-
-    public void testRead() {
-        while (true) {
-            System.out.print("AL: size:" + jcSyncArrayList.size());
-            if (jcSyncArrayList.size() > 0) {
-                System.out.print(" LAST:"
-                        + jcSyncArrayList.get(jcSyncArrayList.size() - 1));
-            }
-            System.out.println("");
-            snooze(1000);
-        }
+    /**
+     * @return
+     * @throws ObjectNotExistsException
+     */
+    public JCSyncObservable getObservable() throws ObjectNotExistsException {
+        return this.getObservable(jcSyncCore);
     }
 
     public void snooze(long time) {
@@ -398,15 +268,6 @@ public class ClientP2Pnode {
     }
 
     /**
-     * Zwraca ID podłączonego użytkownika
-     *
-     * @return
-     */
-    public String getUserID() {
-        return this.node.getID();
-    }
-
-    /**
      * Zwraca czy node jest podłączony do sieci P2P
      *
      * @return true - node połączony do sieci P2P
@@ -415,50 +276,35 @@ public class ClientP2Pnode {
         return this.node.isConnected();
     }
 
-    /**
-     * Restartuje połączenie. TRZEBA RESTARTOWAĆ SERVER
-     */
-    public void restartConnection() {
-        if (this.node.isConnected()) {
-            this.node.networkLeave();
-        }
-        this.node.networkJoin();
-    }
-
     public JCSyncTreeMap getJCSyncTreeMap() {
         return this.jcSyncTreeMap;
     }
 
-    public JCSyncCore getJCsyncCore() {
-        // TODO Auto-generated method stub
-        return this.jcSyncCore;
-    }
+    /**
+     * Initialize connection with bootstrap server.
+     *
+     * @param serverAddress         - server IP address or host
+     * @param serverPort            - server port
+     * @param clientName            - client name
+     * @param clientPort            - outgoing client port number (int)
+     * @param clientP2PnodeCallback - nodeCallback object
+     * @return node - P2Pnode connected (or not) to P2P network
+     */
+    public P2PNode connect(String serverAddress, int serverPort,
+                           String clientName, int clientPort, ClientP2PnodeCallback clientP2PnodeCallback) {
 
-    public Node getNode() {
-        // TODO Auto-generated method stub
-        return this.node;
-    }
-
-    public void setServerIP(String serverIP) {
-
-    }
-
-
-    public void connect(String serverAddress, int serverPort,
-                        String clientName, int clientPort) {
-        this.nodeCallback = new ClientP2PnodeCallback();
-
-        this.node = new P2PNode(this.nodeCallback,
+        P2PNode node = new P2PNode(clientP2PnodeCallback,
                 P2PNode.RoutingAlgorithm.SUPERPEER);
-        this.node.setServerReflexiveAddress(serverAddress);
-        this.node.setServerReflexivePort(serverPort);
-        this.node.setBootIP(serverAddress);
-        this.node.setBootPort(serverPort);
-        this.node.setUserName(clientName);
-        this.node.setTcpPort(clientPort);
+        node.setServerReflexiveAddress(serverAddress);
+        node.setServerReflexivePort(serverPort);
+        node.setBootIP(serverAddress);
+        node.setBootPort(serverPort);
+        node.setUserName(clientName);
+        node.setTcpPort(clientPort);
 
-        this.node.networkJoin();
+        node.networkJoin();
 
+        return node;
     }
 
 }
