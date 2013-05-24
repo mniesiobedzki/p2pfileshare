@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 import pl.edu.pjwstk.mteam.jcsync.core.JCSyncAbstractSharedObject;
 import pl.edu.pjwstk.mteam.jcsync.core.JCSyncCore;
 import pl.edu.pjwstk.mteam.jcsync.core.JCSyncStateListener;
+import pl.edu.pjwstk.mteam.jcsync.core.consistencyManager.DefaultConsistencyManager;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncArrayList;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.SharedCollectionObject;
@@ -17,6 +18,7 @@ import pl.edu.pjwstk.mteam.jcsync.exception.OperationForbiddenException;
 import pl.edu.pjwstk.mteam.p2p.P2PNode;
 
 import java.util.Observable;
+import java.util.Observer;
 import java.util.TreeMap;
 
 /**
@@ -28,13 +30,13 @@ import java.util.TreeMap;
 public class ClientP2Pnode {
 
     public static final Logger LOG = Logger.getLogger(ClientP2Pnode.class);
+    private SharedCollectionObject jcSyncTreeMap_sharedCollectionObject;
     private Controller controller;
     private P2PNode node;
     // Podstawowa implementacja JCSync
     private JCSyncCore jcSyncCore;
     private JCSyncTreeMap<String, Nod> jcSyncTreeMap;
     private JCSyncArrayList<String> jcSyncArrayList;
-
     // KOLECKCJE APLIKACJI
     // private HashMap<String, String> myHashMap;
     // private ArrayList<String> myArrayList;
@@ -64,6 +66,18 @@ public class ClientP2Pnode {
             controller.updateTree();
         }
     };
+    private String collID;
+
+    private Observer collectionObserver = new Observer() {
+        @Override
+        public void update(Observable o, Object arg) {
+            System.out.println("UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE UPDATE ");
+            if (o.equals(observable)) {
+                String args_ = (String) arg;
+                LOG.trace("[Update o=" + o + "] " + arg);
+            }
+        }
+    };
 
     @SuppressWarnings("unchecked")
     public ClientP2Pnode(int portOut, String serverIP, int serverPort,
@@ -81,14 +95,28 @@ public class ClientP2Pnode {
             System.out.println("Node " + nodeName + ": Not connected :(");
             snooze(1000);
         }
+        LOG.trace("Node " + nodeName + ": Connected !!");
 
-        System.out.println("Node " + nodeName + ": Connected !!");
-
-        // Jeżeli uda się połączyć to tworzę JCSyncCore
+        LOG.trace("Initializing JCSyncCore");
         this.jcSyncCore = new JCSyncCore(this.node, serverPort);
 
         try {
             this.jcSyncCore.init();
+            this.observable = new JCSyncObservable();
+            //initCollection1(nodeName, controller);
+            this.jcSyncTreeMap = new JCSyncTreeMap<String, Nod>();
+            LOG.trace("Creating the collection");
+            try {
+                this.jcSyncTreeMap_sharedCollectionObject = new SharedCollectionObject(collID, this.jcSyncTreeMap, this.jcSyncCore, DefaultConsistencyManager.class);
+            } catch (ObjectExistsException e) {
+                LOG.debug("Collection already exists");
+                LOG.trace("Connecting to the collection");
+                this.jcSyncTreeMap_sharedCollectionObject = (SharedCollectionObject) SharedCollectionObject.getFromOverlay(collID, this.jcSyncCore);
+                this.jcSyncTreeMap = (JCSyncTreeMap<String, Nod>) this.jcSyncTreeMap_sharedCollectionObject.getNucleusObject();
+            }
+
+            this.observable.addObserver(this.collectionObserver);
+            this.jcSyncTreeMap_sharedCollectionObject.addStateListener(this.collectionListener);
         } catch (Exception e) {
             e.printStackTrace();
             /*
@@ -97,19 +125,34 @@ public class ClientP2Pnode {
 			 */
         }
 
-        // Tworzenie lub podpinanie się pod kolekcję
 
-        // HASH MAP
-        String collID = "myMap";
+    }
+
+    public static void main(String[] args) {
+        ClientP2Pnode nt = new ClientP2Pnode(6062, "1.1.1.4", 6060, "testowy2", null);
+        // nt.testWrite();
+
+    }
+
+    /**
+     * Metoda z przykładu Simple chat, zastąpiona inną metodą
+     *
+     * @param nodeName
+     * @param controller
+     */
+    private void initCollection1(String nodeName, Controller controller) {
+        // TreeMap
+        LOG.trace("Creating the collection");
+        collID = "P2PfileshareTreeMap";
         try {
-            jcSyncTreeMap = createTreeMap(collID, this.jcSyncCore);
-            System.out.println("Node " + nodeName
-                    + ": Utworzono nową kolekcję o ID: " + collID);
+            this.jcSyncTreeMap = createTreeMap(collID, this.jcSyncCore);
+            LOG.trace("Node " + nodeName
+                    + ": Utworzono nowa kolekcje o ID: " + collID);
         } catch (ObjectExistsException e) {
             System.out.println("Node " + nodeName + ": Kolekcja " + collID
                     + " już istnieje, zatem spróbuję się podpiąć");
             try {
-                jcSyncTreeMap = (JCSyncTreeMap<String, Nod>) subscribeCollection(
+                this.jcSyncTreeMap = (JCSyncTreeMap<String, Nod>) subscribeCollection(
                         collID, this.jcSyncCore).getNucleusObject();
                 System.out.println("Node " + nodeName + ": Kolekcja " + collID
                         + " już istnieje i pomyślnie się do niej podpieliśmy");
@@ -136,12 +179,6 @@ public class ClientP2Pnode {
         CollectionListener cl = new CollectionListener(this.jcSyncObservable);
 
         this.observable_so.addStateListener(collectionListener);
-    }
-
-    public static void main(String[] args) {
-        ClientP2Pnode nt = new ClientP2Pnode(6062, "1.1.1.4", 6060, "testowy2", null);
-        // nt.testWrite();
-
     }
 
     /**
@@ -237,7 +274,7 @@ public class ClientP2Pnode {
             // Settings | File Templates.
         }
         /*
-		 * try { this.jcSyncHashMap_sharedObject = new
+         * try { this.jcSyncHashMap_sharedObject = new
 		 * SharedObservableObject("myMap", this.jcSyncHashMap, this.jcSyncCore,
 		 * ConsistencyManager.class); } catch (ObjectExistsException e) {
 		 * this.jcSyncHashMap_sharedObject =
@@ -260,7 +297,7 @@ public class ClientP2Pnode {
         try {
             Thread.sleep(time);
         } catch (InterruptedException ex) {
-			/*
+            /*
 			 * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
 			 * Level.SEVERE, null, ex);
 			 */
