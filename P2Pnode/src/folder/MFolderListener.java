@@ -109,10 +109,9 @@ public class MFolderListener {
 					
 					System.err.println("putuje: "+userId+newlyCreatedFile.getFileName());
 					fileCreatedList.push(userId+newlyCreatedFile.getFileName());
-					
-					filesAndTheirHistory.put(newlyCreatedFile.getFileId(),
+					System.out.println("id "+newlyCreatedFile.getFileId());
+					filesAndTheirHistory.put(userId+newlyCreatedFile.getFileName(),
 							newlyCreatedFile);
-					
 					
 					folderTree.addFile(newlyCreatedFile, userId);
 

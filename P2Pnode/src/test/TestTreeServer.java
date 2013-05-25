@@ -41,7 +41,7 @@ public class TestTreeServer implements Runnable {
 				ft.addFile(f, uname);
 				MFolderListener.filesAndTheirHistory.put(
 						uname + f.getFileName(), f);
-				System.out.println(f.getFileId());
+				System.out.println("** "+f.getFileId());
 			}
 			MFolderListener.runFolderListener(path, ft, uname);
 			Socket connectionSocket = welcomeSocket.accept();
