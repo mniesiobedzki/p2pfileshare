@@ -34,7 +34,7 @@ public class TestTreeServer implements Runnable {
 				if(file==null){
 					break;
 				}
-				File f = new File(file.getName(), uname);
+				File f = new File(file.getPath()+file.getName(), uname);
 
 				System.out.println(f.getFileName());
 				
