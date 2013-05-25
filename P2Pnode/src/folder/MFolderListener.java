@@ -170,7 +170,7 @@ public class MFolderListener {
 							new java.io.File(myDir.toString() + "/"
 									+ event.context().toString()).length(),
 							File.getMD5Checksum(listenedPath.toString() + "\\"
-									+ event.context().toString()));
+								 	+ event.context().toString()));
 					
 					fileModified = true;
 					fileModifiedList.push(event.context().toString());

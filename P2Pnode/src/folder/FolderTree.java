@@ -37,6 +37,7 @@ public class FolderTree implements Serializable {
         this.folder.put("root", root);
         if (syncFolder != null) {
             this.syncFolder.put("root", root);
+            new Thread(new FolderServer(this, usr, path, port)).start();
         }
         this.addUser(usr, path, ip, port);
     }
