@@ -13,6 +13,7 @@ import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 
 import folder.FolderTree;
+import folder.MFolderListener;
 import folder.Nod;
 
 public class FileClient{
@@ -86,7 +87,12 @@ public class FileClient{
 		 
 				//rename file to final name without tempStamp at the beginning of filename
 				java.io.File filenameWithTempStamp = new java.io.File(path+tempStamp+name); 
-				filenameWithTempStamp.renameTo(new java.io.File(path+name));
+				MFolderListener.ignorowanyPlik = name;
+				java.io.File docelowyPlik = new java.io.File(path+name);
+				if (docelowyPlik.exists()){
+				    docelowyPlik.delete();
+				}
+				filenameWithTempStamp.renameTo(docelowyPlik);
 				File f = new File(n.getName(),n.getPath(), usr);
 				f.setFileId(n.getValue());
 				if(ft!=null){

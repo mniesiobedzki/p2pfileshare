@@ -28,6 +28,7 @@ public class MFolderListener {
 	public static LinkedList<String> fileDeletedList 	= new LinkedList<String>();
 	public static LinkedList<String> fileModifiedList 	= new LinkedList<String>();
 	
+	public static String ignorowanyPlik; //ignorowanie potrzebne do poprawnej synchronizcji - zapobiega wykryciu modyfikacji pliku po tym jak zosta≥ zsynchronizowany od drugiego peera i jest zmieniana nazwa z ^nazwapliku do nazwapliku
 	
 	// Lista obiekt√≥w typu FileState.
 	// Lista ta przechowuje informacje o wszystkich modyfikacjach
@@ -86,6 +87,13 @@ public class MFolderListener {
 				if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
 					
 					fileCreated = true;
+					
+					if( ignorowanyPlik != null && event.context().toString().equals( ignorowanyPlik ) ) {
+						
+						System.out.println("Created - IGNORUJ !");
+						ignorowanyPlik = null;
+						return;
+					}
 					
 					System.out.println("Created: " + MFolderListener.listenedPath.toString()+ "\\"+event.context().toString());
 					
@@ -162,6 +170,7 @@ public class MFolderListener {
 					System.out.println("Modify: " + event.context().toString());
 
 					//Entry<String, File> deFajl = searchForFile(event.context().toString());
+					System.out.println("filesAndTheirHistory: "+filesAndTheirHistory);
 					File f = filesAndTheirHistory.get(userId+event.context().toString());
 					String currentFileMD5 = File.getMD5Checksum(listenedPath.toString()+"\\"+event.context().toString());
 					System.out.println(filesAndTheirHistory);
