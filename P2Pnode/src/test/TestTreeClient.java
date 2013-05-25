@@ -51,7 +51,7 @@ public class TestTreeClient implements Runnable{
 					objectInput.close();
 					socketStream.close();
 					sock.close();
-					this.wait(1000);
+					Thread.sleep(1000);
 				}
 
 			} catch (Exception e) {

@@ -77,7 +77,7 @@ public class TestTreeServer implements Runnable {
 				socketStream.flush();
 				socketStream.close();
 				welcomeSocket.close();
-				this.wait(1000);
+				Thread.sleep(1000);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
