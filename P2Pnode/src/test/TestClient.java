@@ -20,7 +20,7 @@ public class TestClient {
 		int port = 1234;
 		FolderTree ft = new FolderTree(folderName, uname, null, ip, port);
 		//ft.addUser(uname, path, thisIp, port );
-		File f = new File(FileName, uname);
+		File f = new File(FileName,path+FileName, uname);
 		ft.addFile(f, uname);
 		FileClient client = new FileClient(ft, null, ip, uname+FileName,path, FileName, uname);
 

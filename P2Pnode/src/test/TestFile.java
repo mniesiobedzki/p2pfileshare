@@ -15,7 +15,7 @@ public class TestFile {
 		java.io.File[] listaFajli = File.listAllTheFilesInDir("kuku\\");
 		
 		for (java.io.File file : listaFajli) {
-			File f = new File(file.getName(),uname);
+			File f = new File(file.getName(),file.getPath(), uname);
 			ft.addFile(f, uname);
 			MFolderListener.filesAndTheirHistory.put(uname+f.getFileName(),f);
 			System.out.println(f.getFileId());

@@ -62,10 +62,11 @@ public class Nod implements Serializable {
 	 * @param hist - Historia pliku
 	 * @param own - ID w�a�ciciela
 	 */
-	public Nod(String val, Nod par, LinkedList<FileState> hist, Nod own, String n) {
+	public Nod(String val, Nod par, LinkedList<FileState> hist, Nod own, String n, String path) {
 		value = val;
 		parent = par.getValue();
 		name = n;
+		this.path = path;
 		if (parent != null) {
 			par.addChlid(this.value);
 		}

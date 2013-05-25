@@ -97,7 +97,7 @@ public class FolderTree implements Serializable {
     }
 
     public void addFile(File f, String usr) {
-        Nod file = new Nod(usr + f.getFileName(), folder.get(usr), f.getSingleFileHistory(), folder.get(usr), f.getFileName());
+        Nod file = new Nod(usr + f.getFileName(), folder.get(usr), f.getSingleFileHistory(), folder.get(usr), f.getFileName(), f.getFilePath());
         file.setParent(folder.get(usr));
         folder.put(usr + file.getName(), file);
 
@@ -200,7 +200,7 @@ public class FolderTree implements Serializable {
                     this.getFolder().get(usr + nod.getName()).history.add(null);
                     this.updated = true;
                 } else {
-                    File deletedFile = new File(nod.getName(), usr);
+                    File deletedFile = new File(nod.getName(),nod.getPath(), usr);
                     deletedFile.setFileId(nod.history.getFirst().getFileId());
                     addFile(deletedFile, usr);
                 }
@@ -216,7 +216,7 @@ public class FolderTree implements Serializable {
                     this.getFolder().get(usr + nod.getName()).history.add(null);
                     this.updated = true;
                 } else {
-                    File deletedFile = new File(nod.getName(), usr);
+                    File deletedFile = new File(nod.getName(),nod.getPath(), usr);
                     deletedFile.setFileId(nod.history.getFirst().getFileId());
                     addFile(deletedFile, usr);
                 }
@@ -261,7 +261,7 @@ public class FolderTree implements Serializable {
                     this.getFolder().get(usr + nod.getName()).history.add(null);
                     this.updated = true;
                 } else {
-                    File deletedFile = new File(nod.getName(), usr);
+                    File deletedFile = new File(nod.getName(),nod.getPath(), usr);
                     deletedFile.setFileId(nod.history.getFirst().getFileId());
                     addFile(deletedFile, usr);
                 }
@@ -277,7 +277,7 @@ public class FolderTree implements Serializable {
                     this.getFolder().get(usr + nod.getName()).history.add(null);
                     this.updated = true;
                 } else {
-                    File deletedFile = new File(nod.getName(), usr);
+                    File deletedFile = new File(nod.getName(),nod.getPath(), usr);
                     deletedFile.setFileId(nod.history.getFirst().getFileId());
                     addFile(deletedFile, usr);
                 }

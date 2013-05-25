@@ -87,7 +87,7 @@ public class FileClient{
 				//rename file to final name without tempStamp at the beginning of filename
 				java.io.File filenameWithTempStamp = new java.io.File(path+tempStamp+name); 
 				filenameWithTempStamp.renameTo(new java.io.File(path+name));
-				File f = new File(n.getName(),usr);
+				File f = new File(n.getName(),n.getPath(), usr);
 				f.setFileId(n.getValue());
 				if(ft!=null){
 					ft.addFile(f, usr);

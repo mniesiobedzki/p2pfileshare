@@ -87,11 +87,11 @@ public class MFolderListener {
 					
 					fileCreated = true;
 					
-					System.out.println("Created: " + event.context().toString());
+					System.out.println("Created: " + MFolderListener.listenedPath.toString()+ "\\"+event.context().toString());
 					
 					java.io.File kuku = new java.io.File(event.context().toString());
 					
-					File newlyCreatedFile = new File(event.context().toString(), userId);
+					File newlyCreatedFile = new File(event.context().toString(),MFolderListener.listenedPath.toString()+ "\\"+event.context().toString(), userId);
 					
 					newlyCreatedFile.setFileStateHistoryEntry(
 							kuku.lastModified(), event.context().toString(),
@@ -161,19 +161,30 @@ public class MFolderListener {
 				if (event.kind() == StandardWatchEventKinds.ENTRY_MODIFY) {
 					System.out.println("Modify: " + event.context().toString());
 
-					Entry<String, File> deFajl = searchForFile(event.context().toString());
-					java.io.File kuku = new java.io.File(event.context().toString());
-					deFajl.getValue().setFileStateHistoryEntry(
-							kuku.lastModified(),
-							event.context().toString(),
-							userId,
-							new java.io.File(myDir.toString() + "/"
-									+ event.context().toString()).length(),
-							File.getMD5Checksum(listenedPath.toString() + "\\"
-								 	+ event.context().toString()));
+					//Entry<String, File> deFajl = searchForFile(event.context().toString());
+					File f = filesAndTheirHistory.get(userId+event.context().toString());
+					String currentFileMD5 = File.getMD5Checksum(listenedPath.toString()+"\\"+event.context().toString());
+					System.out.println(filesAndTheirHistory);
+					System.out.println(event.context().toString());
+					System.out.println(f);
+					if(f!=null && !currentFileMD5.equals(f.getSingleFileHistory().getLast().getMd5())){
+						System.out.println("bangla");
+						java.io.File kuku = new java.io.File(event.context().toString());
+						f.setFileStateHistoryEntry(
+								kuku.lastModified(),
+								event.context().toString(),
+								userId,
+								new java.io.File(myDir.toString() + "/"
+										+ event.context().toString()).length(),
+								File.getMD5Checksum(listenedPath.toString() + "\\"
+									 	+ event.context().toString()));
+						
+						fileModified = true;
+						fileModifiedList.push(event.context().toString());
+					}
 					
-					fileModified = true;
-					fileModifiedList.push(event.context().toString());
+					
+					
 					// Metoda ustawiaj�ca pola obiektu FileState
 					// To-Do PERSON ID podstawic prawdziwe dane
 					// setFileStateHistoryEntry(new Date().getTime(),

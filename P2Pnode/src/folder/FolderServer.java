@@ -25,7 +25,7 @@ public class FolderServer implements Runnable {
 				if(file==null){
 					break;
 				}
-				File f = new File(file.getName(), uname);
+				File f = new File(file.getName(),file.getPath(), uname);
 
 				System.out.println(f.getFileName());
 				

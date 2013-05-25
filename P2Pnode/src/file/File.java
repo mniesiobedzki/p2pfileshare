@@ -40,25 +40,36 @@ public class File implements Serializable{
 
 	// historia zmian pliku 
 	private LinkedList<FileState> singleFileHistory;
+	private String filePath;
 
 	public File(){
 		this.fileName 			= "TO TRZEBA ZMIENIC";
 		this.fileId 			= generateFileId("1111", fileName, this);
 		this.singleFileHistory 	= new LinkedList<FileState>();
+		this.filePath			= "to te¿ trzeba zminiæ i czemu do cholery podawa³eœ name jako path?";
 	}
 	
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
 	public File(ClientP2Pnode clientP2Pnode) {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public File(String fileName, String userId){
+	public File(String fileName, String filePath, String userId){
 		this.fileName = fileName;
+		this.filePath = filePath;
 		this.fileId   = generateFileId(userId, fileName, this);
 		this.singleFileHistory 	= new LinkedList<FileState>();
 		
 		try {
 			java.io.File kuku = new java.io.File(fileName);
-			this.singleFileHistory.add(new FileState(userId,kuku.lastModified(),fileName,kuku.length(),File.getMD5Checksum(fileName), this.getFileId()));
+			this.singleFileHistory.add(new FileState(userId,kuku.lastModified(),fileName,kuku.length(),File.getMD5Checksum(filePath), this.getFileId()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
