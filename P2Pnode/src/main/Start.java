@@ -4,6 +4,7 @@ import gui.GuiWindower;
 
 /**
  * Klasa uruchamiająca całą aplikację w MVC
+ * ąļć
  *
  * @author Marek Adam Niesiobędzki - Student PJWSTK s6264@pjwstk.edu.pl
  * @version 0.9
