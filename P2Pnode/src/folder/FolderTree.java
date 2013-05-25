@@ -177,7 +177,7 @@ public class FolderTree implements Serializable {
         }
         //plik zaktualizowano
         for (Nod n : folder2.values()) {
-            if (folder.get(n.getValue()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
+            if (folder.get(n.getValue()).getHistory().size()>0 && folder.get(n.getValue()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
                 changes.add(n);
             }
         }
