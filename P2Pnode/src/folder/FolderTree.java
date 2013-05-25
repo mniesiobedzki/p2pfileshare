@@ -172,19 +172,16 @@ public class FolderTree implements Serializable {
         LinkedList<Nod> created = new LinkedList<Nod>();
 
         root = folder2.get("root");
-        System.out.println(folder.keySet());
         for (String u : root.children) {
             if (!this.folder.containsKey(u)) {
-            	System.out.println("new usr " + u);
             	this.addUser(u, folder2.get(u).getPath(), folder2.get(u).getIp(), folder2.get(u).getPort());
+            	this.folder.get("root").children.add(u);
             }else{
-            	System.out.println("old usr " + u);
             }
         }
-        System.out.println("foreigh usrs "+ root.getChildren());
         Nod rootLocal = folder.get("root");        
         System.out.println("usrs "+ rootLocal.getChildren());
-        
+        System.out.println(folder);
         //plik zaktualizowano
         for (Nod n : folder2.values()) {
             if (folder.get(n.getValue()).getHistory().size()>0 && folder.get(n.getValue()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
