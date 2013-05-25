@@ -22,7 +22,6 @@ public class FolderTree implements Serializable {
     // klucz to dla korzenia "root"
     // dla użytkownika jego ID
     // dla pliku ID użytkownika + ID pliku
-    public Nod root;// nazwa folderu albo lokalizacja url
     public String usr;
 
     /**
@@ -31,12 +30,11 @@ public class FolderTree implements Serializable {
      * @param tree -
      */
     public FolderTree(String path, String usr, JCSyncTreeMap<String, Nod> tree, String ip, int port) {
-        root = new Nod(path);
         syncFolder = tree;
         this.usr = usr;
-        this.folder.put("root", root);
+        this.folder.put("root", new Nod(path));
         if (syncFolder != null) {
-            this.syncFolder.put("root", root);
+            this.syncFolder.put("root", folder.get("root"));
             new Thread(new FolderServer(this, usr, path, port)).start();
         }
         this.addUser(usr, path, ip, port);
@@ -53,7 +51,7 @@ public class FolderTree implements Serializable {
      * @param path - ścieżka do folderu lokalna dla użytkownika
      */
     public void addUser(String usr, String path, String ip, int port) {
-        Nod n = new Nod(usr, root, ip, port);
+        Nod n = new Nod(usr, folder.get("root"), ip, port);
         System.out.println(n);
         System.out.println("Użytkownik :" + usr);
         System.out.println("folder w :" + path);
@@ -67,17 +65,17 @@ public class FolderTree implements Serializable {
     }
 
     public Nod getRoot() {
-        return root;
+        return folder.get("root");
     }
 
     public void setRoot(Nod root) {
-        this.root = root;
+    	this.getFolder().put("root",root);
         updated = true;
     }
 
     @Override
     public String toString() {
-        String s = "FolderTree [root=" + root.getName() + "]" + "\n";
+        String s = "FolderTree [root=" + this.getFolder().get("root").getName() + "]" + "\n";
 
         for (String k : this.getFolder().get("root").getChildren()) {
             Nod n = this.getFolder().get(k);
@@ -237,13 +235,9 @@ public class FolderTree implements Serializable {
         LinkedList<Nod> changes = new LinkedList<Nod>();
         LinkedList<Nod> created = new LinkedList<Nod>();
 
-        root = syncFolder.get("root");
-        for (String u : root.children) {
-            if (!this.folder.containsKey(u)) {
-                this.folder.put(u, syncFolder.get(u));
-            }
-            users.add(folder.get(u).getValue());
-        }
+        Nod rootLocal = folder.get("root");        
+        System.out.println("\nusrs "+ rootLocal.getChildren());
+        System.out.println(this);
         //plik zaktualizowano
         for (Nod n : syncFolder.values()) {
             if (folder.get(n.getValue()).getHistory().size()>0 && folder.get(n.getValue()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
