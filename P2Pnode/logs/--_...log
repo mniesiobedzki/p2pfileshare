@@ -11839,3 +11839,1214 @@ java.lang.Throwable: OnOverlayError
 23:18:22.758 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - 54538 -Received response associated with the transaction 3'[4]-OPERATION_PUBLISH-([1413]-no-named_event)' 
 23:18:22.762 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - 54538 - forwarding indication to children, size: 1
 23:18:22.762 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - 54538: forwarding notifyIndication with tID: 1to child: 54538
+15:58:56.603 DEBUG [main.Controller] - Controller - created
+15:59:28.014 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Method invoked with overlayAddress=1.1.1.6:21000 in 0 state.
+15:59:28.021 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Joining begins. Bootstrap server at 1.1.1.6:21000
+15:59:28.025 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - state changed to BOOTSTRAPPING
+15:59:28.452 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.responses.BootstrapResponse
+15:59:28.453 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.responses.BootstrapResponse type, state=1
+15:59:28.456 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Bootstrap response received. PeerID=9f0b5894ec546d2df2866519bb32d23db69dda5e
+15:59:28.457 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - This peer doesn't know of a peer that is closer to id=9f0b5894ec546d2df2866519bb32d23db69dda5e
+15:59:28.457 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Adding trusted EA list
+15:59:32.637 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Sending request for:P2PFileshareTreeMapCollection@[1]-no-named_operation
+15:59:32.638 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Creating transaction transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' 
+15:59:32.638 DEBUG [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay: source: qwfeda, destination: , msgType: 1
+15:59:32.644 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Publishing id="P2PFileshareTreeMapCollection" resource=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[null], unhashedID=[null], owner=[null], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+15:59:32.645 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Resource object put header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=0] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], unhashedID=[50325046696c657368617265547265654d6170436f6c6c656374696f6e], owner=[header=[type=15; AB=00; reserved=00000000; length=0] value=[Owner=[peerIDValue=9f0b5894ec546d2df2866519bb32d23db69dda5e]]], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+15:59:32.647 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Adding resource header=[type=11; AB=00; reserved=00000000; length=0] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba] to resourceIndex with header=[type=0; AB=00; reserved=00000000; length=0] value=PeerInfo=[peerID=[header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=9f0b5894ec546d2df2866519bb32d23db69dda5e, peerIDHashCode=-1049248225]]], uptime=[header=[type=4; AB=00; reserved=00000000; length=0] value=[Uptime=6184]], resourceTypes=[], addresses=[header=[type=2; AB=00; reserved=00000000; length=0] value=[AddressInfo=[num=0, 0, reserved=000, ipVer=0100, foundation=0, componendID=0, priority=0, tt=0001, tt=0000, port=6543, address=1.1.1.25]]], unhashedID=[header=[type=3; AB=00; reserved=00000000; length=0] value=[UnhashedID=717766656461]]]
+15:59:32.648 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Adding peerInfo to reverseResourceIndex header=[type=0; AB=00; reserved=00000000; length=0] value=PeerInfo=[peerID=[header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=9f0b5894ec546d2df2866519bb32d23db69dda5e, peerIDHashCode=-1049248225]]], uptime=[header=[type=4; AB=00; reserved=00000000; length=0] value=[Uptime=6184]], resourceTypes=[], addresses=[header=[type=2; AB=00; reserved=00000000; length=0] value=[AddressInfo=[num=0, 0, reserved=000, ipVer=0100, foundation=0, componendID=0, priority=0, tt=0001, tt=0000, port=6543, address=1.1.1.25]]], unhashedID=[header=[type=3; AB=00; reserved=00000000; length=0] value=[UnhashedID=717766656461]]]
+15:59:32.654 DEBUG [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - qwfeda - received request:PubSubRequest type: 1, topicID: P2PFileshareTreeMapCollection, transID: 1, sourceName: qwfeda
+15:59:32.655 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - qwfeda - Topic 'P2PFileshareTreeMapCollection' not found...
+15:59:32.656 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - qwfeda -Accepting create topic request (P2PFileshareTreeMapCollection)...
+15:59:33.776 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - qwfeda: Topic 'P2PFileshareTreeMapCollection' successfully created....
+15:59:34.237 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+15:59:34.241 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+15:59:34.242 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+15:59:34.242 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+15:59:34.972 INFO  [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay sendMessage: source: qwfeda, destination: qwfeda, msgType: 0
+15:59:34.973 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Sending message protocol=  messageLength=200 to peerID=header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=9f0b5894ec546d2df2866519bb32d23db69dda5e, peerIDHashCode=-1049248225]]
+15:59:34.974 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Passing message protocol=  messageLength=200 directly to callback (own id)
+15:59:34.977 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - Response (200) for: P2PFileshareTreeMapCollection@[1]-OPERATION_CREATETOPIC, tID: 1 sent to 'qwfeda(9f0b5894ec546d2df2866519bb32d23db69dda5e)@fe80:0:0:0:8d4:e2e:2b4b:1ab9:21000'
+15:59:36.187 DEBUG [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - qwfeda - OnDeliverResponse, topicID: P2PFileshareTreeMapCollection, type: 0, respCode: 200, source name: qwfeda, destination name: qwfeda
+15:59:37.485 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - qwfeda -Received response associated with the transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' 
+15:59:38.750 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - qwfeda: Completing transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' ...
+15:59:38.750 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Invoking callback for: P2PFileshareTreeMapCollection@[1]-OPERATION_CREATETOPIC , respCode: 200
+15:59:51.693 INFO  [pl.edu.pjwstk.mteam.jcsync.core.JCSyncCore] - qwfeda - object successfully created: P2PFileshareTreeMapCollection@pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.SharedCollectionObject, currentOperationID:0
+15:59:52.852 INFO  [main.Controller] - Node connected
+15:59:56.290 INFO  [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay sendMessage: source: qwfeda, destination: qwfeda, msgType: 4
+15:59:56.291 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Sending message protocol=  messageLength=983 to peerID=header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=9f0b5894ec546d2df2866519bb32d23db69dda5e, peerIDHashCode=-1049248225]]
+15:59:56.292 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Passing message protocol=  messageLength=983 directly to callback (own id)
+15:59:56.293 DEBUG [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - qwfeda - received request:PublishRequest type: 1413, topicID: P2PFileshareTreeMapCollection, transID: 2, sourceName: qwfeda
+16:00:01.293 INFO  [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay sendMessage: source: qwfeda, destination: qwfeda, msgType: 0
+16:00:01.294 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Sending message protocol=  messageLength=200 to peerID=header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=9f0b5894ec546d2df2866519bb32d23db69dda5e, peerIDHashCode=-1049248225]]
+16:00:01.295 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Passing message protocol=  messageLength=200 directly to callback (own id)
+16:00:01.295 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - Response (200) for: P2PFileshareTreeMapCollection@[4]-OPERATION_PUBLISH - event: [1413]-no-named_event, tID: 2 sent to 'qwfeda(9f0b5894ec546d2df2866519bb32d23db69dda5e)@fe80:0:0:0:8d4:e2e:2b4b:1ab9:21000'
+16:00:02.353 DEBUG [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - qwfeda - OnDeliverResponse, topicID: P2PFileshareTreeMapCollection, type: 0, respCode: 200, source name: qwfeda, destination name: qwfeda
+16:00:03.457 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - qwfeda -Received response associated with the transaction 2'[4]-OPERATION_PUBLISH-([1413]-no-named_event)' 
+16:00:05.292 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:00:05.294 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:00:05.295 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:00:05.295 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:00:05.762 DEBUG [node.ClientP2Pnode] - collection onLocalStateUpdated callback invoked method=put: P2PFileshareTreeMapCollection
+16:00:14.077 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - qwfeda - forwarding indication to children, size: 1
+16:00:15.063 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - qwfeda: forwarding notifyIndication with tID: 1to child: qwfeda
+16:00:18.106 INFO  [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay sendMessage: source: qwfeda, destination: qwfeda, msgType: 4
+16:00:18.107 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Sending message protocol=  messageLength=998 to peerID=header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=9f0b5894ec546d2df2866519bb32d23db69dda5e, peerIDHashCode=-1049248225]]
+16:00:18.107 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Passing message protocol=  messageLength=998 directly to callback (own id)
+16:00:18.108 DEBUG [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - qwfeda - received request:PublishRequest type: 1413, topicID: P2PFileshareTreeMapCollection, transID: 3, sourceName: qwfeda
+16:00:23.005 INFO  [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay sendMessage: source: qwfeda, destination: qwfeda, msgType: 0
+16:00:23.006 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Sending message protocol=  messageLength=200 to peerID=header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=9f0b5894ec546d2df2866519bb32d23db69dda5e, peerIDHashCode=-1049248225]]
+16:00:23.006 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Passing message protocol=  messageLength=200 directly to callback (own id)
+16:00:23.007 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - Response (200) for: P2PFileshareTreeMapCollection@[4]-OPERATION_PUBLISH - event: [1413]-no-named_event, tID: 3 sent to 'qwfeda(9f0b5894ec546d2df2866519bb32d23db69dda5e)@fe80:0:0:0:8d4:e2e:2b4b:1ab9:21000'
+16:00:24.062 DEBUG [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - qwfeda - OnDeliverResponse, topicID: P2PFileshareTreeMapCollection, type: 0, respCode: 200, source name: qwfeda, destination name: qwfeda
+16:00:25.140 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - qwfeda -Received response associated with the transaction 3'[4]-OPERATION_PUBLISH-([1413]-no-named_event)' 
+16:00:27.213 DEBUG [node.ClientP2Pnode] - collection onLocalStateUpdated callback invoked method=put: P2PFileshareTreeMapCollection
+16:00:35.273 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - qwfeda - forwarding indication to children, size: 1
+16:00:36.254 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - qwfeda: forwarding notifyIndication with tID: 2to child: qwfeda
+16:00:36.338 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:00:36.339 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:00:36.339 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:00:36.339 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:01:07.408 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:01:07.409 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:01:07.409 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:01:07.410 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:01:38.490 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:01:38.493 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:01:38.493 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:01:38.493 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:02:09.552 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:02:09.553 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:02:09.553 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:02:09.554 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:02:40.597 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:02:40.598 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:02:40.598 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:02:40.599 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:03:11.669 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:03:11.670 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:03:11.671 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:03:11.671 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:03:42.738 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:03:42.739 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:03:42.739 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:03:42.740 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:04:13.787 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:04:13.788 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:04:13.788 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:04:13.789 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:04:44.862 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:04:44.863 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:04:44.864 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:04:44.864 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:05:15.910 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:05:15.911 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:05:15.912 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:05:15.912 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:05:46.975 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:05:46.976 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:05:46.976 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:05:46.977 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:06:18.045 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:06:18.046 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:06:18.046 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:06:18.047 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:06:49.089 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:06:49.090 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:06:49.090 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:06:49.090 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:07:20.133 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:07:20.135 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:07:20.136 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:07:20.136 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:07:51.190 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:07:51.191 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:07:51.191 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:07:51.192 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:08:22.246 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:08:22.247 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:08:22.248 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:08:22.248 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:08:53.295 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:08:53.296 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:08:53.296 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:08:53.297 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:09:24.325 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:09:24.327 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:09:24.328 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:09:24.328 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:09:55.361 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:09:55.362 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:09:55.362 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:09:55.362 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:10:26.423 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:10:26.424 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:10:26.424 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:10:26.424 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:10:57.465 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:10:57.466 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:10:57.467 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:10:57.467 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:11:28.505 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:11:28.506 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:11:28.507 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:11:28.507 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:11:59.545 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:11:59.546 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:11:59.546 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:11:59.547 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:12:30.582 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:12:30.583 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:12:30.583 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:12:30.584 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:13:01.824 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:13:01.825 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:13:01.825 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:13:01.825 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:13:32.666 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:13:32.667 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:13:32.667 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:13:32.667 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:14:03.711 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:14:03.712 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:14:03.713 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:14:03.713 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:14:34.760 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:14:34.761 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:14:34.761 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:14:34.761 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:15:07.283 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:15:07.284 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:15:07.284 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:15:07.285 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:15:36.836 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:15:36.837 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:15:36.837 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=00000000
+16:15:36.838 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:24:30.240 DEBUG [main.Controller] - Controller - created
+16:27:59.863 DEBUG [main.Controller] - Controller - created
+16:28:59.154 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Method invoked with overlayAddress=1.1.1.6:21000 in 0 state.
+16:28:59.159 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Joining begins. Bootstrap server at 1.1.1.6:21000
+16:28:59.165 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - state changed to BOOTSTRAPPING
+16:29:01.028 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message BootstrapRequest=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=8765; receiverAddress=1.1.1.6; receiverPort=21000; protocol=TCP]], header=[V=01, type=00, APR=010, reservedOrResponseCode=000000000, reqType=2, ttl=255, cookie=1500167949, transactionID=00000000, length=0, sourceID=00000000, responseID=null], request originator=[header=[type=0; AB=00; reserved=00000000; length=0] value=PeerInfo=[peerID=[header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=00000000, peerIDHashCode=1477632]]], uptime=[header=[type=4; AB=00; reserved=00000000; length=0] value=[Uptime=1343]], resourceTypes=[], addresses=[header=[type=2; AB=00; reserved=00000000; length=0] value=[AddressInfo=[num=0, 0, reserved=000, ipVer=0100, foundation=0, componendID=0, priority=0, tt=0001, tt=0000, port=8765, address=1.1.1.25]]], unhashedID=[header=[type=3; AB=00; reserved=00000000; length=0] value=[UnhashedID=4a61204d617263696e]]]]]
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:29:01.036 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.messages.requests.BootstrapRequest to 1.1.1.6:21000
+16:30:46.008 DEBUG [main.Controller] - Controller - created
+16:31:15.374 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Method invoked with overlayAddress=1.1.1.6:21000 in 0 state.
+16:31:15.380 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Joining begins. Bootstrap server at 1.1.1.6:21000
+16:31:15.385 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - state changed to BOOTSTRAPPING
+16:31:15.625 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.responses.BootstrapResponse
+16:31:15.626 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.responses.BootstrapResponse type, state=1
+16:31:15.629 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Bootstrap response received. PeerID=7ab515d12bd2cf431745511ac4ee13fed15ab578
+16:31:15.630 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - Peer=b2c64ac4b85a91b6658c433e16ed40fceec0b935 is the closest known to id=7ab515d12bd2cf431745511ac4ee13fed15ab578
+16:31:15.631 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Adding trusted EA list
+16:31:15.631 INFO  [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Indexing peer at the super peer
+16:31:15.705 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.responses.JoinResponse
+16:31:15.705 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.responses.JoinResponse type, state=1
+16:31:15.706 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.messages.responses.JoinResponse in BOOTSTRAPPING state. It can't handle it now.
+16:31:18.003 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:31:18.007 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:31:18.007 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:31:18.007 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:31:19.580 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Sending request for:P2PFileshareTreeMapCollection@[1]-no-named_operation
+16:31:19.580 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Creating transaction transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' 
+16:31:19.581 DEBUG [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay: source: asdfgh, destination: , msgType: 1
+16:31:19.587 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Publishing id="P2PFileshareTreeMapCollection" resource=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[null], unhashedID=[null], owner=[null], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:31:19.588 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Resource object put header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=0] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], unhashedID=[50325046696c657368617265547265654d6170436f6c6c656374696f6e], owner=[header=[type=15; AB=00; reserved=00000000; length=0] value=[Owner=[peerIDValue=7ab515d12bd2cf431745511ac4ee13fed15ab578]]], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:31:39.031 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message LookupPeerResponse=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=6543; receiverAddress=192.168.243.1; receiverPort=5432; protocol=TCP]header=[V=01, type=10, APR=010, reservedOrResponseCode=011001000, reqType=6, ttl=255, cookie=1500167949, transactionID=00000001, length=0, sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935, responseID=7ab515d12bd2cf431745511ac4ee13fed15ab578]]
+java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:31:39.039 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.messages.responses.LookupPeerResponse to 192.168.243.1:5432
+16:31:39.094 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Index response message
+16:31:39.100 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse
+16:31:39.101 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse type, state=9
+16:31:39.101 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state.
+16:31:39.102 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state. It can't handle it now.
+16:31:39.309 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Send message request message
+16:31:39.313 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.SendMessageRequest
+16:31:39.313 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received SendMessageRequest is checked whether can be satisfied. sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:31:39.313 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.SendMessageRequest type, state=9
+16:31:40.440 DEBUG [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - asdfgh - OnDeliverResponse, topicID: P2PFileshareTreeMapCollection, type: 0, respCode: 409, source name: 95160, destination name: asdfgh
+16:31:41.509 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - asdfgh -Received response associated with the transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' 
+16:31:42.558 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - asdfgh: Completing transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' ...
+16:31:43.643 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Invoking onPubSubError callback for: P2PFileshareTreeMapCollection@[1]-OPERATION_CREATETOPIC , respCode: 409
+16:31:44.037 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:31:44.041 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:31:44.044 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:31:44.044 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:31:45.820 DEBUG [node.ClientP2Pnode] - Collection already exists
+16:31:48.000 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:31:48.001 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:31:48.002 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:31:48.002 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:31:48.022 DEBUG [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay: source: asdfgh, destination: , msgType: 2
+16:31:48.024 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Publishing id="P2PFileshareTreeMapCollection" resource=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[null], unhashedID=[null], owner=[null], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:31:48.025 DEBUG [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Already stored here - ResourceObject=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=0] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], unhashedID=[50325046696c657368617265547265654d6170436f6c6c656374696f6e], owner=[header=[type=15; AB=00; reserved=00000000; length=0] value=[Owner=[peerIDValue=7ab515d12bd2cf431745511ac4ee13fed15ab578]]], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]] contentType=7 contentSubtType=6 resourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]
+16:32:45.156 DEBUG [main.Controller] - Controller - created
+16:33:30.761 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Method invoked with overlayAddress=1.1.1.7:21000 in 0 state.
+16:33:30.768 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Joining begins. Bootstrap server at 1.1.1.7:21000
+16:33:30.774 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - state changed to BOOTSTRAPPING
+16:33:31.821 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message BootstrapRequest=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=8765; receiverAddress=1.1.1.7; receiverPort=21000; protocol=TCP]], header=[V=01, type=00, APR=010, reservedOrResponseCode=000000000, reqType=2, ttl=255, cookie=1500167949, transactionID=00000000, length=0, sourceID=00000000, responseID=null], request originator=[header=[type=0; AB=00; reserved=00000000; length=0] value=PeerInfo=[peerID=[header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=00000000, peerIDHashCode=1477632]]], uptime=[header=[type=4; AB=00; reserved=00000000; length=0] value=[Uptime=1451]], resourceTypes=[], addresses=[header=[type=2; AB=00; reserved=00000000; length=0] value=[AddressInfo=[num=0, 0, reserved=000, ipVer=0100, foundation=0, componendID=0, priority=0, tt=0001, tt=0000, port=8765, address=1.1.1.25]]], unhashedID=[header=[type=3; AB=00; reserved=00000000; length=0] value=[UnhashedID=4d617263696e]]]]]
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:33:31.834 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.messages.requests.BootstrapRequest to 1.1.1.7:21000
+16:33:43.642 DEBUG [main.Controller] - Controller - created
+16:34:18.701 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Method invoked with overlayAddress=1.1.1.6:21000 in 0 state.
+16:34:18.709 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Joining begins. Bootstrap server at 1.1.1.6:21000
+16:34:18.713 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - state changed to BOOTSTRAPPING
+16:34:19.006 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.responses.BootstrapResponse
+16:34:19.007 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.responses.BootstrapResponse type, state=1
+16:34:19.009 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Bootstrap response received. PeerID=1cf52227958603e9cfb4ae0794790e148035ce40
+16:34:19.010 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - Peer=b2c64ac4b85a91b6658c433e16ed40fceec0b935 is the closest known to id=1cf52227958603e9cfb4ae0794790e148035ce40
+16:34:19.010 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Adding trusted EA list
+16:34:19.011 INFO  [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Indexing peer at the super peer
+16:34:19.067 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.responses.JoinResponse
+16:34:19.068 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.responses.JoinResponse type, state=1
+16:34:19.068 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.messages.responses.JoinResponse in BOOTSTRAPPING state. It can't handle it now.
+16:34:22.933 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Sending request for:P2PFileshareTreeMapCollection@[1]-no-named_operation
+16:34:22.934 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Creating transaction transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' 
+16:34:22.935 DEBUG [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay: source: Marcin, destination: , msgType: 1
+16:34:22.941 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Publishing id="P2PFileshareTreeMapCollection" resource=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[null], unhashedID=[null], owner=[null], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:34:22.942 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Resource object put header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=0] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], unhashedID=[50325046696c657368617265547265654d6170436f6c6c656374696f6e], owner=[header=[type=15; AB=00; reserved=00000000; length=0] value=[Owner=[peerIDValue=1cf52227958603e9cfb4ae0794790e148035ce40]]], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:34:23.003 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Index response message
+16:34:23.005 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse
+16:34:23.005 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse type, state=9
+16:34:23.006 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state.
+16:34:23.006 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state. It can't handle it now.
+16:34:23.294 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Send message request message
+16:34:23.298 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.SendMessageRequest
+16:34:23.299 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received SendMessageRequest is checked whether can be satisfied. sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:34:23.299 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.SendMessageRequest type, state=9
+16:34:24.337 DEBUG [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - Marcin - OnDeliverResponse, topicID: P2PFileshareTreeMapCollection, type: 0, respCode: 409, source name: 95160, destination name: Marcin
+16:34:25.376 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - Marcin -Received response associated with the transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' 
+16:34:26.401 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Marcin: Completing transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' ...
+16:34:27.451 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Invoking onPubSubError callback for: P2PFileshareTreeMapCollection@[1]-OPERATION_CREATETOPIC , respCode: 409
+16:34:29.509 DEBUG [node.ClientP2Pnode] - Collection already exists
+16:34:31.723 DEBUG [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay: source: Marcin, destination: , msgType: 2
+16:34:31.724 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Publishing id="P2PFileshareTreeMapCollection" resource=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[null], unhashedID=[null], owner=[null], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:34:31.725 DEBUG [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Already stored here - ResourceObject=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=0] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], unhashedID=[50325046696c657368617265547265654d6170436f6c6c656374696f6e], owner=[header=[type=15; AB=00; reserved=00000000; length=0] value=[Owner=[peerIDValue=1cf52227958603e9cfb4ae0794790e148035ce40]]], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]] contentType=7 contentSubtType=6 resourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]
+16:34:44.318 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message SendMessageResponse=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=5432; receiverAddress=192.168.243.1; receiverPort=5432; protocol=TCP]], header=[V=01, type=11, APR=010, reservedOrResponseCode=011001000, reqType=17, ttl=255, cookie=1500167949, transactionID=00000005, length=0, sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935, responseID=1cf52227958603e9cfb4ae0794790e148035ce40], responseOriginatorPeerInfo=[header=[type=0; AB=00; reserved=00000000; length=0] value=PeerInfo=[peerID=[header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=1cf52227958603e9cfb4ae0794790e148035ce40, peerIDHashCode=-383952645]]], uptime=[header=[type=4; AB=00; reserved=00000000; length=0] value=[Uptime=5904]], resourceTypes=[], addresses=[header=[type=2; AB=00; reserved=00000000; length=0] value=[AddressInfo=[num=0, 0, reserved=000, ipVer=0100, foundation=0, componendID=0, priority=0, tt=0001, tt=0000, port=5432, address=1.1.1.25]]], unhashedID=[header=[type=3; AB=00; reserved=00000000; length=0] value=[UnhashedID=4d617263696e]]]]]
+java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:34:44.325 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.messages.responses.SendMessageResponse to 192.168.243.1:5432
+16:34:44.367 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Index response message
+16:34:44.371 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse
+16:34:44.371 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse type, state=9
+16:34:44.372 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state.
+16:34:44.372 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state. It can't handle it now.
+16:34:44.877 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Send message request message
+16:34:44.878 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.SendMessageRequest
+16:34:44.878 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received SendMessageRequest is checked whether can be satisfied. sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:34:44.879 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.SendMessageRequest type, state=9
+16:34:45.505 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Send message request message
+16:34:45.506 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.SendMessageRequest
+16:34:45.507 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received SendMessageRequest is checked whether can be satisfied. sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:34:45.507 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.SendMessageRequest type, state=9
+16:34:45.907 DEBUG [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - Marcin - OnDeliverResponse, topicID: P2PFileshareTreeMapCollection, type: 0, respCode: 200, source name: 95160, destination name: Marcin
+16:34:46.939 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - Marcin -Received response associated with the transaction 2'[2]-OPERATION_SUBSCRIBE-([3]-EVENT_ALL)' 
+16:34:47.387 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:34:47.390 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:34:47.392 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:34:47.393 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:34:47.968 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Invoking callback for: P2PFileshareTreeMapCollection@[2]-OPERATION_SUBSCRIBE
+16:34:48.009 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:34:48.012 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:34:48.013 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:34:48.013 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:34:50.014 DEBUG [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - Marcin - received request:TopicID: P2PFileshareTreeMapCollection, Internal EventType: STORE_NEW_NEIGHBOUR_NODE_TO_CACHE , source: 95160, destination: Marcin, g-parent: Marcin, parent: 95160, involved nodes: []
+16:34:51.139 DEBUG [pl.edu.pjwstk.mteam.pubsub.topology.maintenance] - [MAINT] Marcin - onDeliverCacheUpdate for topic: TopicID: P2PFileshareTreeMapCollection, Internal EventType: STORE_NEW_NEIGHBOUR_NODE_TO_CACHE , source: 95160, destination: Marcin, g-parent: Marcin, parent: 95160, involved nodes: []
+16:34:53.156 INFO  [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay sendMessage: source: Marcin, destination: 95160, msgType: 4
+16:34:53.158 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Sending message protocol=  messageLength=256 to peerID=header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=b2c64ac4b85a91b6658c433e16ed40fceec0b935, peerIDHashCode=409988189]]
+16:34:53.158 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Sending message protocol=  messageLength=256 directly to the super peer
+16:35:05.893 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message SendMessageResponse=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=5432; receiverAddress=192.168.243.1; receiverPort=5432; protocol=TCP]], header=[V=01, type=11, APR=010, reservedOrResponseCode=011001000, reqType=17, ttl=255, cookie=1500167949, transactionID=00000006, length=0, sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935, responseID=1cf52227958603e9cfb4ae0794790e148035ce40], responseOriginatorPeerInfo=[header=[type=0; AB=00; reserved=00000000; length=0] value=PeerInfo=[peerID=[header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=1cf52227958603e9cfb4ae0794790e148035ce40, peerIDHashCode=-383952645]]], uptime=[header=[type=4; AB=00; reserved=00000000; length=0] value=[Uptime=27482]], resourceTypes=[], addresses=[header=[type=2; AB=00; reserved=00000000; length=0] value=[AddressInfo=[num=0, 0, reserved=000, ipVer=0100, foundation=0, componendID=0, priority=0, tt=0001, tt=0000, port=5432, address=1.1.1.25]]], unhashedID=[header=[type=3; AB=00; reserved=00000000; length=0] value=[UnhashedID=4d617263696e]]]]]
+java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:35:05.895 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.messages.responses.SendMessageResponse to 192.168.243.1:5432
+16:35:05.936 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup index response message
+16:35:05.938 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse
+16:35:05.938 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse type, state=9
+16:35:05.939 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state.
+16:35:05.939 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state. It can't handle it now.
+16:35:27.931 DEBUG [main.Controller] - Controller - created
+16:36:21.102 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Method invoked with overlayAddress=1.1.1.6:21000 in 0 state.
+16:36:21.108 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Joining begins. Bootstrap server at 1.1.1.6:21000
+16:36:21.112 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - state changed to BOOTSTRAPPING
+16:36:21.484 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.responses.BootstrapResponse
+16:36:21.484 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.responses.BootstrapResponse type, state=1
+16:36:21.487 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Bootstrap response received. PeerID=1cf52227958603e9cfb4ae0794790e148035ce40
+16:36:21.488 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - Peer=b2c64ac4b85a91b6658c433e16ed40fceec0b935 is the closest known to id=1cf52227958603e9cfb4ae0794790e148035ce40
+16:36:21.489 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Adding trusted EA list
+16:36:21.489 INFO  [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Indexing peer at the super peer
+16:36:21.551 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.responses.JoinResponse
+16:36:21.552 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.responses.JoinResponse type, state=1
+16:36:21.552 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.messages.responses.JoinResponse in BOOTSTRAPPING state. It can't handle it now.
+16:36:25.463 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Sending request for:P2PFileshareTreeMapCollection@[1]-no-named_operation
+16:36:25.464 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Creating transaction transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' 
+16:36:25.464 DEBUG [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay: source: Marcin, destination: , msgType: 1
+16:36:25.470 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Publishing id="P2PFileshareTreeMapCollection" resource=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[null], unhashedID=[null], owner=[null], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:36:25.472 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Resource object put header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=0] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], unhashedID=[50325046696c657368617265547265654d6170436f6c6c656374696f6e], owner=[header=[type=15; AB=00; reserved=00000000; length=0] value=[Owner=[peerIDValue=1cf52227958603e9cfb4ae0794790e148035ce40]]], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:36:25.517 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Index response message
+16:36:25.519 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse
+16:36:25.520 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse type, state=9
+16:36:25.520 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state.
+16:36:25.521 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state. It can't handle it now.
+16:36:25.794 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Send message request message
+16:36:25.798 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.SendMessageRequest
+16:36:25.799 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received SendMessageRequest is checked whether can be satisfied. sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:36:25.800 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.SendMessageRequest type, state=9
+16:36:26.947 DEBUG [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - Marcin - OnDeliverResponse, topicID: P2PFileshareTreeMapCollection, type: 0, respCode: 409, source name: 95160, destination name: Marcin
+16:36:28.173 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - Marcin -Received response associated with the transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' 
+16:36:29.460 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Marcin: Completing transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' ...
+16:36:30.624 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Invoking onPubSubError callback for: P2PFileshareTreeMapCollection@[1]-OPERATION_CREATETOPIC , respCode: 409
+16:36:32.995 DEBUG [node.ClientP2Pnode] - Collection already exists
+16:36:35.241 DEBUG [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay: source: Marcin, destination: , msgType: 2
+16:36:35.242 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Publishing id="P2PFileshareTreeMapCollection" resource=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[null], unhashedID=[null], owner=[null], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:36:35.243 DEBUG [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Already stored here - ResourceObject=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=0] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], unhashedID=[50325046696c657368617265547265654d6170436f6c6c656374696f6e], owner=[header=[type=15; AB=00; reserved=00000000; length=0] value=[Owner=[peerIDValue=1cf52227958603e9cfb4ae0794790e148035ce40]]], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]] contentType=7 contentSubtType=6 resourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]
+16:36:46.837 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message SendMessageResponse=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=5432; receiverAddress=192.168.243.1; receiverPort=5432; protocol=TCP]], header=[V=01, type=11, APR=010, reservedOrResponseCode=011001000, reqType=17, ttl=255, cookie=1500167949, transactionID=0000000a, length=0, sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935, responseID=1cf52227958603e9cfb4ae0794790e148035ce40], responseOriginatorPeerInfo=[header=[type=0; AB=00; reserved=00000000; length=0] value=PeerInfo=[peerID=[header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=1cf52227958603e9cfb4ae0794790e148035ce40, peerIDHashCode=-383952645]]], uptime=[header=[type=4; AB=00; reserved=00000000; length=0] value=[Uptime=6000]], resourceTypes=[], addresses=[header=[type=2; AB=00; reserved=00000000; length=0] value=[AddressInfo=[num=0, 0, reserved=000, ipVer=0100, foundation=0, componendID=0, priority=0, tt=0001, tt=0000, port=5432, address=1.1.1.25]]], unhashedID=[header=[type=3; AB=00; reserved=00000000; length=0] value=[UnhashedID=4d617263696e]]]]]
+java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:36:46.845 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.messages.responses.SendMessageResponse to 192.168.243.1:5432
+16:36:46.894 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Index response message
+16:36:46.898 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse
+16:36:46.898 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse type, state=9
+16:36:46.898 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state.
+16:36:46.899 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state. It can't handle it now.
+16:36:47.992 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:36:47.994 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:36:47.994 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:36:47.995 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:36:49.791 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:36:49.795 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:36:49.796 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:36:49.797 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:37:09.008 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message LookupPeerResponse=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=5432; receiverAddress=192.168.243.1; receiverPort=5432; protocol=TCP]header=[V=01, type=10, APR=010, reservedOrResponseCode=011001000, reqType=6, ttl=255, cookie=1500167949, transactionID=0000000b, length=0, sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935, responseID=1cf52227958603e9cfb4ae0794790e148035ce40]]
+java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:37:09.010 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.messages.responses.LookupPeerResponse to 192.168.243.1:5432
+16:37:09.069 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup index response message
+16:37:09.071 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse
+16:37:09.071 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse type, state=9
+16:37:09.071 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state.
+16:37:09.072 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state. It can't handle it now.
+16:37:17.984 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:37:17.985 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:37:17.985 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:37:17.986 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:37:19.796 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:37:19.796 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:37:19.797 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:37:19.797 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:37:39.002 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message LookupPeerResponse=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=5432; receiverAddress=192.168.243.1; receiverPort=5432; protocol=TCP]header=[V=01, type=10, APR=010, reservedOrResponseCode=011001000, reqType=6, ttl=255, cookie=1500167949, transactionID=0000000c, length=0, sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935, responseID=1cf52227958603e9cfb4ae0794790e148035ce40]]
+java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:37:39.004 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.messages.responses.LookupPeerResponse to 192.168.243.1:5432
+16:37:39.046 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup index response message
+16:37:39.047 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse
+16:37:39.048 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse type, state=9
+16:37:39.048 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state.
+16:37:39.048 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state. It can't handle it now.
+16:37:47.988 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:37:47.989 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:37:47.989 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:37:47.990 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:37:49.797 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:37:49.797 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:37:49.798 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:37:49.798 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:38:09.004 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message LookupPeerResponse=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=5432; receiverAddress=192.168.243.1; receiverPort=5432; protocol=TCP]header=[V=01, type=10, APR=010, reservedOrResponseCode=011001000, reqType=6, ttl=255, cookie=1500167949, transactionID=0000000d, length=0, sourceID=b2c64ac4b85a91b6658c433e16ed40fceec0b935, responseID=1cf52227958603e9cfb4ae0794790e148035ce40]]
+java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:38:09.006 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.messages.responses.LookupPeerResponse to 192.168.243.1:5432
+16:38:09.052 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup index response message
+16:38:09.053 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse
+16:38:09.053 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse type, state=9
+16:38:09.054 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state.
+16:38:09.054 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state. It can't handle it now.
+16:38:19.800 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:38:19.800 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:38:19.801 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:38:19.801 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:38:20.825 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message LookupIndexRequest=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=5432; receiverAddress=1.1.1.12; receiverPort=5432; protocol=TCP]], header=[V=01, type=00, APR=010, reservedOrResponseCode=000000000, reqType=32, ttl=255, cookie=1500167949, transactionID=00000007, length=0, sourceID=1cf52227958603e9cfb4ae0794790e148035ce40, responseID=null], peerInfo=[header=[type=0; AB=00; reserved=00000000; length=0] value=PeerInfo=[peerID=[header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=1cf52227958603e9cfb4ae0794790e148035ce40, peerIDHashCode=-383952645]]], uptime=[header=[type=4; AB=00; reserved=00000000; length=0] value=[Uptime=119998]], resourceTypes=[], addresses=[header=[type=2; AB=00; reserved=00000000; length=0] value=[AddressInfo=[num=0, 0, reserved=000, ipVer=0100, foundation=0, componendID=0, priority=0, tt=0001, tt=0000, port=5432, address=1.1.1.25]]], unhashedID=[header=[type=3; AB=00; reserved=00000000; length=0] value=[UnhashedID=4d617263696e]]]], requestOptions=[null], resourceLookup=[header=[type=12; AB=00; reserved=00000000; length=0] value=RLookup=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=20] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], owner=[header=[type=15; AB=00; reserved=00000000; length=20] value=[Owner=[peerIDValue=1cf52227958603e9cfb4ae0794790e148035ce40]]]]]]
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:38:20.827 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.superpeer.messages.requests.LookupIndexRequest to 1.1.1.12:5432
+16:38:20.837 ERROR [pl.edu.pjwstk.mteam.jcsync.core.pubsub.PubSubCustomisableAlgorithm] - onOverlayError, node:Marcin, object:null, errorCode: -3
+java.lang.Throwable: OnOverlayError
+	at pl.edu.pjwstk.mteam.jcsync.core.pubsub.PubSubCustomisableAlgorithm$1.onOverlayError(PubSubCustomisableAlgorithm.java:596)
+	at pl.edu.pjwstk.mteam.p2p.P2PNode$1.errorCallback(P2PNode.java:308)
+	at pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer$14.transactionEnded(SuperPeerPeer.java:1397)
+	at pl.edu.pjwstk.p2pp.transactions.Transaction.timeSlotForReliableRequest(Transaction.java:601)
+	at pl.edu.pjwstk.p2pp.transactions.Transaction.onTimeSlot(Transaction.java:317)
+	at pl.edu.pjwstk.p2pp.transactions.TransactionTable.timeSlotsForTransactions(TransactionTable.java:410)
+	at pl.edu.pjwstk.p2pp.transactions.TransactionTable.onTimeSlot(TransactionTable.java:379)
+	at pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer.onTimeSlot(SuperPeerPeer.java:1246)
+	at pl.edu.pjwstk.p2pp.P2PPManager$2.run(P2PPManager.java:126)
+	at java.lang.Thread.run(Unknown Source)
+16:38:49.803 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:38:49.803 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:38:49.804 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:38:49.804 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:38:50.847 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message LookupIndexRequest=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=5432; receiverAddress=1.1.1.12; receiverPort=5432; protocol=TCP]], header=[V=01, type=00, APR=010, reservedOrResponseCode=000000000, reqType=32, ttl=255, cookie=1500167949, transactionID=00000008, length=0, sourceID=1cf52227958603e9cfb4ae0794790e148035ce40, responseID=null], peerInfo=[header=[type=0; AB=00; reserved=00000000; length=0] value=PeerInfo=[peerID=[header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=1cf52227958603e9cfb4ae0794790e148035ce40, peerIDHashCode=-383952645]]], uptime=[header=[type=4; AB=00; reserved=00000000; length=0] value=[Uptime=150001]], resourceTypes=[], addresses=[header=[type=2; AB=00; reserved=00000000; length=0] value=[AddressInfo=[num=0, 0, reserved=000, ipVer=0100, foundation=0, componendID=0, priority=0, tt=0001, tt=0000, port=5432, address=1.1.1.25]]], unhashedID=[header=[type=3; AB=00; reserved=00000000; length=0] value=[UnhashedID=4d617263696e]]]], requestOptions=[null], resourceLookup=[header=[type=12; AB=00; reserved=00000000; length=0] value=RLookup=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=20] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], owner=[header=[type=15; AB=00; reserved=00000000; length=20] value=[Owner=[peerIDValue=1cf52227958603e9cfb4ae0794790e148035ce40]]]]]]
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:38:50.854 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.superpeer.messages.requests.LookupIndexRequest to 1.1.1.12:5432
+16:38:50.857 ERROR [pl.edu.pjwstk.mteam.jcsync.core.pubsub.PubSubCustomisableAlgorithm] - onOverlayError, node:Marcin, object:null, errorCode: -3
+java.lang.Throwable: OnOverlayError
+	at pl.edu.pjwstk.mteam.jcsync.core.pubsub.PubSubCustomisableAlgorithm$1.onOverlayError(PubSubCustomisableAlgorithm.java:596)
+	at pl.edu.pjwstk.mteam.p2p.P2PNode$1.errorCallback(P2PNode.java:308)
+	at pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer$14.transactionEnded(SuperPeerPeer.java:1397)
+	at pl.edu.pjwstk.p2pp.transactions.Transaction.timeSlotForReliableRequest(Transaction.java:601)
+	at pl.edu.pjwstk.p2pp.transactions.Transaction.onTimeSlot(Transaction.java:317)
+	at pl.edu.pjwstk.p2pp.transactions.TransactionTable.timeSlotsForTransactions(TransactionTable.java:410)
+	at pl.edu.pjwstk.p2pp.transactions.TransactionTable.onTimeSlot(TransactionTable.java:379)
+	at pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer.onTimeSlot(SuperPeerPeer.java:1246)
+	at pl.edu.pjwstk.p2pp.P2PPManager$2.run(P2PPManager.java:126)
+	at java.lang.Thread.run(Unknown Source)
+16:39:19.807 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:39:19.807 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:39:19.808 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:39:19.809 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:39:20.828 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message LookupIndexRequest=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=5432; receiverAddress=1.1.1.12; receiverPort=5432; protocol=TCP]], header=[V=01, type=00, APR=010, reservedOrResponseCode=000000000, reqType=32, ttl=255, cookie=1500167949, transactionID=00000009, length=0, sourceID=1cf52227958603e9cfb4ae0794790e148035ce40, responseID=null], peerInfo=[header=[type=0; AB=00; reserved=00000000; length=0] value=PeerInfo=[peerID=[header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=1cf52227958603e9cfb4ae0794790e148035ce40, peerIDHashCode=-383952645]]], uptime=[header=[type=4; AB=00; reserved=00000000; length=0] value=[Uptime=180005]], resourceTypes=[], addresses=[header=[type=2; AB=00; reserved=00000000; length=0] value=[AddressInfo=[num=0, 0, reserved=000, ipVer=0100, foundation=0, componendID=0, priority=0, tt=0001, tt=0000, port=5432, address=1.1.1.25]]], unhashedID=[header=[type=3; AB=00; reserved=00000000; length=0] value=[UnhashedID=4d617263696e]]]], requestOptions=[null], resourceLookup=[header=[type=12; AB=00; reserved=00000000; length=0] value=RLookup=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=20] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], owner=[header=[type=15; AB=00; reserved=00000000; length=20] value=[Owner=[peerIDValue=1cf52227958603e9cfb4ae0794790e148035ce40]]]]]]
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:39:20.830 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.superpeer.messages.requests.LookupIndexRequest to 1.1.1.12:5432
+16:39:20.836 ERROR [pl.edu.pjwstk.mteam.jcsync.core.pubsub.PubSubCustomisableAlgorithm] - onOverlayError, node:Marcin, object:null, errorCode: -3
+java.lang.Throwable: OnOverlayError
+	at pl.edu.pjwstk.mteam.jcsync.core.pubsub.PubSubCustomisableAlgorithm$1.onOverlayError(PubSubCustomisableAlgorithm.java:596)
+	at pl.edu.pjwstk.mteam.p2p.P2PNode$1.errorCallback(P2PNode.java:308)
+	at pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer$14.transactionEnded(SuperPeerPeer.java:1397)
+	at pl.edu.pjwstk.p2pp.transactions.Transaction.timeSlotForReliableRequest(Transaction.java:601)
+	at pl.edu.pjwstk.p2pp.transactions.Transaction.onTimeSlot(Transaction.java:317)
+	at pl.edu.pjwstk.p2pp.transactions.TransactionTable.timeSlotsForTransactions(TransactionTable.java:410)
+	at pl.edu.pjwstk.p2pp.transactions.TransactionTable.onTimeSlot(TransactionTable.java:379)
+	at pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer.onTimeSlot(SuperPeerPeer.java:1246)
+	at pl.edu.pjwstk.p2pp.P2PPManager$2.run(P2PPManager.java:126)
+	at java.lang.Thread.run(Unknown Source)
+16:39:49.813 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:39:49.813 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:39:49.814 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:39:49.814 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:39:50.840 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message LookupIndexRequest=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=5432; receiverAddress=1.1.1.12; receiverPort=5432; protocol=TCP]], header=[V=01, type=00, APR=010, reservedOrResponseCode=000000000, reqType=32, ttl=255, cookie=1500167949, transactionID=0000000a, length=0, sourceID=1cf52227958603e9cfb4ae0794790e148035ce40, responseID=null], peerInfo=[header=[type=0; AB=00; reserved=00000000; length=0] value=PeerInfo=[peerID=[header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=1cf52227958603e9cfb4ae0794790e148035ce40, peerIDHashCode=-383952645]]], uptime=[header=[type=4; AB=00; reserved=00000000; length=0] value=[Uptime=210011]], resourceTypes=[], addresses=[header=[type=2; AB=00; reserved=00000000; length=0] value=[AddressInfo=[num=0, 0, reserved=000, ipVer=0100, foundation=0, componendID=0, priority=0, tt=0001, tt=0000, port=5432, address=1.1.1.25]]], unhashedID=[header=[type=3; AB=00; reserved=00000000; length=0] value=[UnhashedID=4d617263696e]]]], requestOptions=[null], resourceLookup=[header=[type=12; AB=00; reserved=00000000; length=0] value=RLookup=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=20] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], owner=[header=[type=15; AB=00; reserved=00000000; length=20] value=[Owner=[peerIDValue=1cf52227958603e9cfb4ae0794790e148035ce40]]]]]]
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:39:50.844 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.superpeer.messages.requests.LookupIndexRequest to 1.1.1.12:5432
+16:39:50.845 ERROR [pl.edu.pjwstk.mteam.jcsync.core.pubsub.PubSubCustomisableAlgorithm] - onOverlayError, node:Marcin, object:null, errorCode: -3
+java.lang.Throwable: OnOverlayError
+	at pl.edu.pjwstk.mteam.jcsync.core.pubsub.PubSubCustomisableAlgorithm$1.onOverlayError(PubSubCustomisableAlgorithm.java:596)
+	at pl.edu.pjwstk.mteam.p2p.P2PNode$1.errorCallback(P2PNode.java:308)
+	at pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer$14.transactionEnded(SuperPeerPeer.java:1397)
+	at pl.edu.pjwstk.p2pp.transactions.Transaction.timeSlotForReliableRequest(Transaction.java:601)
+	at pl.edu.pjwstk.p2pp.transactions.Transaction.onTimeSlot(Transaction.java:317)
+	at pl.edu.pjwstk.p2pp.transactions.TransactionTable.timeSlotsForTransactions(TransactionTable.java:410)
+	at pl.edu.pjwstk.p2pp.transactions.TransactionTable.onTimeSlot(TransactionTable.java:379)
+	at pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer.onTimeSlot(SuperPeerPeer.java:1246)
+	at pl.edu.pjwstk.p2pp.P2PPManager$2.run(P2PPManager.java:126)
+	at java.lang.Thread.run(Unknown Source)
+16:40:19.820 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:40:19.820 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:40:19.821 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:40:19.821 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=b2c64ac4b85a91b6658c433e16ed40fceec0b935
+16:40:20.847 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message LookupIndexRequest=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=5432; receiverAddress=1.1.1.12; receiverPort=5432; protocol=TCP]], header=[V=01, type=00, APR=010, reservedOrResponseCode=000000000, reqType=32, ttl=255, cookie=1500167949, transactionID=0000000b, length=0, sourceID=1cf52227958603e9cfb4ae0794790e148035ce40, responseID=null], peerInfo=[header=[type=0; AB=00; reserved=00000000; length=0] value=PeerInfo=[peerID=[header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=1cf52227958603e9cfb4ae0794790e148035ce40, peerIDHashCode=-383952645]]], uptime=[header=[type=4; AB=00; reserved=00000000; length=0] value=[Uptime=240018]], resourceTypes=[], addresses=[header=[type=2; AB=00; reserved=00000000; length=0] value=[AddressInfo=[num=0, 0, reserved=000, ipVer=0100, foundation=0, componendID=0, priority=0, tt=0001, tt=0000, port=5432, address=1.1.1.25]]], unhashedID=[header=[type=3; AB=00; reserved=00000000; length=0] value=[UnhashedID=4d617263696e]]]], requestOptions=[null], resourceLookup=[header=[type=12; AB=00; reserved=00000000; length=0] value=RLookup=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=20] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], owner=[header=[type=15; AB=00; reserved=00000000; length=20] value=[Owner=[peerIDValue=1cf52227958603e9cfb4ae0794790e148035ce40]]]]]]
+java.net.ConnectException: Connection refused: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:40:20.849 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.superpeer.messages.requests.LookupIndexRequest to 1.1.1.12:5432
+16:40:20.854 ERROR [pl.edu.pjwstk.mteam.jcsync.core.pubsub.PubSubCustomisableAlgorithm] - onOverlayError, node:Marcin, object:null, errorCode: -3
+java.lang.Throwable: OnOverlayError
+	at pl.edu.pjwstk.mteam.jcsync.core.pubsub.PubSubCustomisableAlgorithm$1.onOverlayError(PubSubCustomisableAlgorithm.java:596)
+	at pl.edu.pjwstk.mteam.p2p.P2PNode$1.errorCallback(P2PNode.java:308)
+	at pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer$14.transactionEnded(SuperPeerPeer.java:1397)
+	at pl.edu.pjwstk.p2pp.transactions.Transaction.timeSlotForReliableRequest(Transaction.java:601)
+	at pl.edu.pjwstk.p2pp.transactions.Transaction.onTimeSlot(Transaction.java:317)
+	at pl.edu.pjwstk.p2pp.transactions.TransactionTable.timeSlotsForTransactions(TransactionTable.java:410)
+	at pl.edu.pjwstk.p2pp.transactions.TransactionTable.onTimeSlot(TransactionTable.java:379)
+	at pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer.onTimeSlot(SuperPeerPeer.java:1246)
+	at pl.edu.pjwstk.p2pp.P2PPManager$2.run(P2PPManager.java:126)
+	at java.lang.Thread.run(Unknown Source)
+16:43:33.559 DEBUG [main.Controller] - Controller - created
+16:49:08.338 DEBUG [main.Controller] - Controller - created
+16:49:40.130 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Method invoked with overlayAddress=1.1.1.6:21000 in 0 state.
+16:49:40.140 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Joining begins. Bootstrap server at 1.1.1.6:21000
+16:49:40.145 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - state changed to BOOTSTRAPPING
+16:49:40.484 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.responses.BootstrapResponse
+16:49:40.485 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.responses.BootstrapResponse type, state=1
+16:49:40.486 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Bootstrap response received. PeerID=1cf52227958603e9cfb4ae0794790e148035ce40
+16:49:40.488 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - Peer=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9 is the closest known to id=1cf52227958603e9cfb4ae0794790e148035ce40
+16:49:40.488 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Adding trusted EA list
+16:49:40.488 INFO  [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Indexing peer at the super peer
+16:49:40.557 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.responses.JoinResponse
+16:49:40.557 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.responses.JoinResponse type, state=1
+16:49:40.558 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.messages.responses.JoinResponse in BOOTSTRAPPING state. It can't handle it now.
+16:49:42.038 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:49:42.043 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:49:42.043 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:49:42.044 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:49:44.527 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Sending request for:P2PFileshareTreeMapCollection@[1]-no-named_operation
+16:49:44.528 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Creating transaction transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' 
+16:49:44.528 DEBUG [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay: source: Marcin, destination: , msgType: 1
+16:49:44.535 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Publishing id="P2PFileshareTreeMapCollection" resource=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[null], unhashedID=[null], owner=[null], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:49:44.536 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Resource object put header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=0] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], unhashedID=[50325046696c657368617265547265654d6170436f6c6c656374696f6e], owner=[header=[type=15; AB=00; reserved=00000000; length=0] value=[Owner=[peerIDValue=1cf52227958603e9cfb4ae0794790e148035ce40]]], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:50:03.057 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message LookupPeerResponse=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=3245; receiverAddress=192.168.243.1; receiverPort=4321; protocol=TCP]header=[V=01, type=10, APR=010, reservedOrResponseCode=011001000, reqType=6, ttl=255, cookie=1500167949, transactionID=00000001, length=0, sourceID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9, responseID=1cf52227958603e9cfb4ae0794790e148035ce40]]
+java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:50:03.064 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.messages.responses.LookupPeerResponse to 192.168.243.1:4321
+16:50:03.107 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Index response message
+16:50:03.110 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse
+16:50:03.110 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse type, state=9
+16:50:03.111 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state.
+16:50:03.111 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state. It can't handle it now.
+16:50:03.344 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Send message request message
+16:50:03.346 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.SendMessageRequest
+16:50:03.346 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received SendMessageRequest is checked whether can be satisfied. sourceID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:50:03.347 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.SendMessageRequest type, state=9
+16:50:04.557 DEBUG [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - Marcin - OnDeliverResponse, topicID: P2PFileshareTreeMapCollection, type: 0, respCode: 409, source name: 2873, destination name: Marcin
+16:50:05.576 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - Marcin -Received response associated with the transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' 
+16:50:06.600 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Marcin: Completing transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' ...
+16:50:07.571 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Invoking onPubSubError callback for: P2PFileshareTreeMapCollection@[1]-OPERATION_CREATETOPIC , respCode: 409
+16:50:08.757 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:50:08.760 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:50:08.762 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:50:08.763 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:50:09.731 DEBUG [node.ClientP2Pnode] - Collection already exists
+16:50:11.888 DEBUG [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay: source: Marcin, destination: , msgType: 2
+16:50:11.889 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Publishing id="P2PFileshareTreeMapCollection" resource=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[null], unhashedID=[null], owner=[null], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:50:11.890 DEBUG [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Already stored here - ResourceObject=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=0] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], unhashedID=[50325046696c657368617265547265654d6170436f6c6c656374696f6e], owner=[header=[type=15; AB=00; reserved=00000000; length=0] value=[Owner=[peerIDValue=1cf52227958603e9cfb4ae0794790e148035ce40]]], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]] contentType=7 contentSubtType=6 resourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]
+16:50:12.043 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:50:12.044 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:50:12.045 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:50:12.045 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:50:24.465 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message SendMessageResponse=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=3245; receiverAddress=192.168.243.1; receiverPort=4321; protocol=TCP]], header=[V=01, type=11, APR=010, reservedOrResponseCode=011001000, reqType=17, ttl=255, cookie=1500167949, transactionID=00000002, length=0, sourceID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9, responseID=1cf52227958603e9cfb4ae0794790e148035ce40], responseOriginatorPeerInfo=[header=[type=0; AB=00; reserved=00000000; length=0] value=PeerInfo=[peerID=[header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=1cf52227958603e9cfb4ae0794790e148035ce40, peerIDHashCode=-383952645]]], uptime=[header=[type=4; AB=00; reserved=00000000; length=0] value=[Uptime=24578]], resourceTypes=[], addresses=[header=[type=2; AB=00; reserved=00000000; length=0] value=[AddressInfo=[num=0, 0, reserved=000, ipVer=0100, foundation=0, componendID=0, priority=0, tt=0001, tt=0000, port=3245, address=1.1.1.25]]], unhashedID=[header=[type=3; AB=00; reserved=00000000; length=0] value=[UnhashedID=4d617263696e]]]]]
+java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:50:24.467 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.messages.responses.SendMessageResponse to 192.168.243.1:4321
+16:50:38.766 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:50:38.767 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:50:38.767 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:50:38.767 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:50:42.045 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:50:42.046 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:50:42.046 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:50:42.047 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:50:45.473 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message LookupPeerResponse=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=3245; receiverAddress=192.168.243.1; receiverPort=4321; protocol=TCP]header=[V=01, type=10, APR=010, reservedOrResponseCode=011001000, reqType=6, ttl=255, cookie=1500167949, transactionID=00000003, length=0, sourceID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9, responseID=1cf52227958603e9cfb4ae0794790e148035ce40]]
+java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:50:45.475 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.messages.responses.LookupPeerResponse to 192.168.243.1:4321
+16:50:45.528 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Index response message
+16:50:45.529 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse
+16:50:45.531 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse type, state=9
+16:50:45.531 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state.
+16:50:45.531 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state. It can't handle it now.
+16:50:45.539 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup index response message
+16:50:45.540 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup index response message
+16:50:45.541 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse
+16:50:45.541 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse type, state=9
+16:50:45.542 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state.
+16:50:45.542 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state. It can't handle it now.
+16:50:45.542 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse
+16:50:45.543 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse type, state=9
+16:50:45.543 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state.
+16:50:45.543 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state. It can't handle it now.
+16:51:06.504 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message LookupPeerResponse=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=3245; receiverAddress=192.168.243.1; receiverPort=4321; protocol=TCP]header=[V=01, type=10, APR=010, reservedOrResponseCode=011001000, reqType=6, ttl=255, cookie=1500167949, transactionID=00000004, length=0, sourceID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9, responseID=1cf52227958603e9cfb4ae0794790e148035ce40]]
+java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:51:06.506 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.messages.responses.LookupPeerResponse to 192.168.243.1:4321
+16:51:08.775 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:51:08.775 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:51:08.776 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:51:08.776 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:51:08.837 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup index response message
+16:51:08.838 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse
+16:51:08.838 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse type, state=9
+16:51:08.839 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state.
+16:51:08.839 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state. It can't handle it now.
+16:51:38.784 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:51:38.785 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:51:38.785 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:51:38.785 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:51:38.846 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup index response message
+16:51:38.847 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse
+16:51:38.847 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse type, state=9
+16:51:38.848 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state.
+16:51:38.848 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state. It can't handle it now.
+16:52:08.784 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:52:08.784 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:52:08.785 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:52:08.785 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:52:08.842 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup index response message
+16:52:08.843 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse
+16:52:08.843 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse type, state=9
+16:52:08.843 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state.
+16:52:08.844 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state. It can't handle it now.
+16:52:38.784 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:52:38.784 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:52:38.785 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:52:38.785 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:52:38.856 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup index response message
+16:52:38.857 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse
+16:52:38.857 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse type, state=9
+16:52:38.858 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state.
+16:52:38.858 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state. It can't handle it now.
+16:53:08.790 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:53:08.790 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:53:08.791 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:53:08.791 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:53:08.851 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup index response message
+16:53:08.852 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse
+16:53:08.852 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse type, state=9
+16:53:08.853 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state.
+16:53:08.853 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state. It can't handle it now.
+16:53:38.793 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:53:38.793 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:53:38.794 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:53:38.794 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:53:38.855 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup index response message
+16:53:38.856 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse
+16:53:38.856 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse type, state=9
+16:53:38.856 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state.
+16:53:38.857 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state. It can't handle it now.
+16:54:08.799 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:54:08.799 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:54:08.800 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:54:08.800 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:54:08.869 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup index response message
+16:54:08.870 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse
+16:54:08.870 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse type, state=9
+16:54:08.871 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state.
+16:54:08.871 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state. It can't handle it now.
+16:54:38.804 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:54:38.804 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:54:38.805 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:54:38.805 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:54:38.863 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup index response message
+16:54:38.866 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse
+16:54:38.866 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse type, state=9
+16:54:38.866 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state.
+16:54:38.867 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state. It can't handle it now.
+16:55:08.813 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:55:08.813 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:55:08.814 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:55:08.814 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:55:08.875 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup index response message
+16:55:08.876 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse
+16:55:08.876 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse type, state=9
+16:55:08.877 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state.
+16:55:08.877 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state. It can't handle it now.
+16:55:18.533 DEBUG [main.Controller] - Controller - created
+16:55:56.600 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Method invoked with overlayAddress=1.1.1.6:21000 in 0 state.
+16:55:56.607 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Joining begins. Bootstrap server at 1.1.1.6:21000
+16:55:56.612 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - state changed to BOOTSTRAPPING
+16:55:57.053 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.responses.BootstrapResponse
+16:55:57.054 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.responses.BootstrapResponse type, state=1
+16:55:57.055 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Bootstrap response received. PeerID=1cf52227958603e9cfb4ae0794790e148035ce40
+16:55:57.056 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - Peer=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9 is the closest known to id=1cf52227958603e9cfb4ae0794790e148035ce40
+16:55:57.057 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Adding trusted EA list
+16:55:57.057 INFO  [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Indexing peer at the super peer
+16:55:57.122 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.responses.JoinResponse
+16:55:57.122 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.responses.JoinResponse type, state=1
+16:55:57.123 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.messages.responses.JoinResponse in BOOTSTRAPPING state. It can't handle it now.
+16:56:00.821 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Sending request for:P2PFileshareTreeMapCollection@[1]-no-named_operation
+16:56:00.822 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Creating transaction transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' 
+16:56:00.822 DEBUG [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay: source: Marcin, destination: , msgType: 1
+16:56:00.829 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Publishing id="P2PFileshareTreeMapCollection" resource=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[null], unhashedID=[null], owner=[null], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:56:00.830 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Resource object put header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=0] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], unhashedID=[50325046696c657368617265547265654d6170436f6c6c656374696f6e], owner=[header=[type=15; AB=00; reserved=00000000; length=0] value=[Owner=[peerIDValue=1cf52227958603e9cfb4ae0794790e148035ce40]]], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:56:00.898 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Index response message
+16:56:00.900 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse
+16:56:00.900 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse type, state=9
+16:56:00.901 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state.
+16:56:00.901 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state. It can't handle it now.
+16:56:01.112 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Send message request message
+16:56:01.122 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.SendMessageRequest
+16:56:01.122 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received SendMessageRequest is checked whether can be satisfied. sourceID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:56:01.123 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.SendMessageRequest type, state=9
+16:56:02.120 DEBUG [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - Marcin - OnDeliverResponse, topicID: P2PFileshareTreeMapCollection, type: 0, respCode: 409, source name: 2873, destination name: Marcin
+16:56:03.123 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - Marcin -Received response associated with the transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' 
+16:56:04.126 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Marcin: Completing transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' ...
+16:56:05.126 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Invoking onPubSubError callback for: P2PFileshareTreeMapCollection@[1]-OPERATION_CREATETOPIC , respCode: 409
+16:56:07.128 DEBUG [node.ClientP2Pnode] - Collection already exists
+16:56:09.098 DEBUG [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay: source: Marcin, destination: , msgType: 2
+16:56:09.099 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Publishing id="P2PFileshareTreeMapCollection" resource=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[null], unhashedID=[null], owner=[null], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:56:09.099 DEBUG [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Already stored here - ResourceObject=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=0] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], unhashedID=[50325046696c657368617265547265654d6170436f6c6c656374696f6e], owner=[header=[type=15; AB=00; reserved=00000000; length=0] value=[Owner=[peerIDValue=1cf52227958603e9cfb4ae0794790e148035ce40]]], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]] contentType=7 contentSubtType=6 resourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]
+16:56:22.139 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message SendMessageResponse=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=6453; receiverAddress=192.168.243.1; receiverPort=4321; protocol=TCP]], header=[V=01, type=11, APR=010, reservedOrResponseCode=011001000, reqType=17, ttl=255, cookie=1500167949, transactionID=00000009, length=0, sourceID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9, responseID=1cf52227958603e9cfb4ae0794790e148035ce40], responseOriginatorPeerInfo=[header=[type=0; AB=00; reserved=00000000; length=0] value=PeerInfo=[peerID=[header=[type=1; AB=00; reserved=00000000; length=0] value=[PeerID=[peerIDBytes=1cf52227958603e9cfb4ae0794790e148035ce40, peerIDHashCode=-383952645]]], uptime=[header=[type=4; AB=00; reserved=00000000; length=0] value=[Uptime=5854]], resourceTypes=[], addresses=[header=[type=2; AB=00; reserved=00000000; length=0] value=[AddressInfo=[num=0, 0, reserved=000, ipVer=0100, foundation=0, componendID=0, priority=0, tt=0001, tt=0000, port=6453, address=1.1.1.25]]], unhashedID=[header=[type=3; AB=00; reserved=00000000; length=0] value=[UnhashedID=4d617263696e]]]]]
+java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:56:22.147 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.messages.responses.SendMessageResponse to 192.168.243.1:4321
+16:56:25.246 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:56:25.250 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:56:25.252 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:56:25.252 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:56:33.044 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:56:33.047 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Index response message
+16:56:33.048 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:56:33.048 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:56:33.049 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:56:33.051 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse
+16:56:33.051 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse type, state=9
+16:56:33.052 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state.
+16:56:33.052 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state. It can't handle it now.
+16:56:33.060 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup index response message
+16:56:33.062 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse
+16:56:33.062 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse type, state=9
+16:56:33.062 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state.
+16:56:33.063 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.LookupIndexResponse in JOINED state. It can't handle it now.
+16:56:42.045 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:56:42.046 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:56:42.047 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:56:42.047 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:56:54.068 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message LookupPeerResponse=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=6453; receiverAddress=192.168.243.1; receiverPort=4321; protocol=TCP]header=[V=01, type=10, APR=010, reservedOrResponseCode=011001000, reqType=6, ttl=255, cookie=1500167949, transactionID=0000000a, length=0, sourceID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9, responseID=1cf52227958603e9cfb4ae0794790e148035ce40]]
+java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:56:54.070 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.messages.responses.LookupPeerResponse to 192.168.243.1:4321
+16:56:55.254 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:56:55.254 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:56:55.255 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:56:55.255 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:57:03.104 DEBUG [main.Controller] - Controller - created
+16:58:10.126 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Method invoked with overlayAddress=1.1.1.6:21000 in 0 state.
+16:58:10.132 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Joining begins. Bootstrap server at 1.1.1.6:21000
+16:58:10.136 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - state changed to BOOTSTRAPPING
+16:58:10.325 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.responses.BootstrapResponse
+16:58:10.326 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.responses.BootstrapResponse type, state=1
+16:58:10.338 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Bootstrap response received. PeerID=0462a2262a10a07e3c6ca672f5d3a234cf6db6b4
+16:58:10.339 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - Peer=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9 is the closest known to id=0462a2262a10a07e3c6ca672f5d3a234cf6db6b4
+16:58:10.340 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Adding trusted EA list
+16:58:10.340 INFO  [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Indexing peer at the super peer
+16:58:10.404 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.responses.JoinResponse
+16:58:10.404 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.responses.JoinResponse type, state=1
+16:58:10.406 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.messages.responses.JoinResponse in BOOTSTRAPPING state. It can't handle it now.
+16:58:14.744 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Sending request for:P2PFileshareTreeMapCollection@[1]-no-named_operation
+16:58:14.744 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Creating transaction transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' 
+16:58:14.745 DEBUG [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay: source: MegaMarcinKolejnaInstancja, destination: , msgType: 1
+16:58:14.751 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Publishing id="P2PFileshareTreeMapCollection" resource=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[null], unhashedID=[null], owner=[null], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:58:14.752 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Resource object put header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=0] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], unhashedID=[50325046696c657368617265547265654d6170436f6c6c656374696f6e], owner=[header=[type=15; AB=00; reserved=00000000; length=0] value=[Owner=[peerIDValue=0462a2262a10a07e3c6ca672f5d3a234cf6db6b4]]], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:58:33.055 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:58:33.060 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Send message request message
+16:58:33.072 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:58:33.073 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:58:33.074 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.SendMessageRequest
+16:58:33.074 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:58:33.074 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received SendMessageRequest is checked whether can be satisfied. sourceID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:58:33.075 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.SendMessageRequest type, state=9
+16:58:33.084 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Index response message
+16:58:33.088 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse
+16:58:33.089 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse type, state=9
+16:58:33.090 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state.
+16:58:33.092 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Peer received pl.edu.pjwstk.p2pp.superpeer.messages.responses.IndexResponse in JOINED state. It can't handle it now.
+16:58:34.271 DEBUG [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - MegaMarcinKolejnaInstancja - OnDeliverResponse, topicID: P2PFileshareTreeMapCollection, type: 0, respCode: 409, source name: 2873, destination name: MegaMarcinKolejnaInstancja
+16:58:35.463 TRACE [pl.edu.pjwstk.mteam.pubsub.core.PubSubManager] - MegaMarcinKolejnaInstancja -Received response associated with the transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' 
+16:58:36.636 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - MegaMarcinKolejnaInstancja: Completing transaction 1'[1]-OPERATION_CREATETOPIC-([4]-EVENT_NEWTOPIC)' ...
+16:58:37.825 TRACE [pl.edu.pjwstk.mteam.pubsub.algorithm.implementation.DefaultAlgorithm] - Invoking onPubSubError callback for: P2PFileshareTreeMapCollection@[1]-OPERATION_CREATETOPIC , respCode: 409
+16:58:38.589 TRACE [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Returns all the resource objects.
+16:58:38.594 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Checking Super-Peer for my resources
+16:58:38.595 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() invoked with id=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba
+16:58:38.598 TRACE [pl.edu.pjwstk.p2pp.superpeer.SuperPeerRoutingTable] - getNextHop() returns superPeerID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:58:40.194 DEBUG [node.ClientP2Pnode] - Collection already exists
+16:58:42.041 DEBUG [pl.edu.pjwstk.p2pp.util.P2PPMessageFactory] - Lookup peer request message
+16:58:42.043 DEBUG [pl.edu.pjwstk.p2pp.entities.P2PPEntity] - pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer received a message of type pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest
+16:58:42.043 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Received LookupPeerRequest is checked whether can be satisfied. sourceID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9
+16:58:42.043 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - SuperPeerPeer starts consumption of a message of pl.edu.pjwstk.p2pp.messages.requests.LookupPeerRequest type, state=9
+16:58:42.554 DEBUG [pl.edu.pjwstk.mteam.pubsub.transport.PubSubTransport] - Sending mesage through overlay: source: MegaMarcinKolejnaInstancja, destination: , msgType: 2
+16:58:42.555 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Publishing id="P2PFileshareTreeMapCollection" resource=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[null], unhashedID=[null], owner=[null], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]]
+16:58:42.556 DEBUG [pl.edu.pjwstk.p2pp.resources.ResourceManager] - Already stored here - ResourceObject=header=[type=13; AB=00; reserved=00000000; length=0] value=ResourceObject=[contType=7, contSubtype=6, resourceID=[header=[type=11; AB=00; reserved=00000000; length=0] value=[ResourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]], unhashedID=[50325046696c657368617265547265654d6170436f6c6c656374696f6e], owner=[header=[type=15; AB=00; reserved=00000000; length=0] value=[Owner=[peerIDValue=0462a2262a10a07e3c6ca672f5d3a234cf6db6b4]]], expires=[null], signature=[null], certificate=[], resourceValue=[TODO Message Value As String]] contentType=7 contentSubtType=6 resourceID=c5474a46d90e8625af0f1fccb9c67e0e5ce5f8ba]
+16:58:54.103 ERROR [pl.edu.pjwstk.net.proto.TCP.TCPWorker] - Error while sending message LookupPeerResponse=[message=[Message=[senderAddress=0.0.0.0/0.0.0.0; senderPort=2426; receiverAddress=192.168.243.1; receiverPort=4321; protocol=TCP]header=[V=01, type=10, APR=010, reservedOrResponseCode=011001000, reqType=6, ttl=255, cookie=1500167949, transactionID=00000011, length=0, sourceID=c5262fa6fb9e715e7d2cfaf3da63faacd55da1a9, responseID=0462a2262a10a07e3c6ca672f5d3a234cf6db6b4]]
+java.net.ConnectException: Connection timed out: connect
+	at java.net.DualStackPlainSocketImpl.connect0(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.doConnect(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connectToAddress(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.connect(Unknown Source)
+	at java.net.PlainSocketImpl.connect(Unknown Source)
+	at java.net.SocksSocketImpl.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.connect(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at java.net.Socket.<init>(Unknown Source)
+	at javax.net.DefaultSocketFactory.createSocket(Unknown Source)
+	at pl.edu.pjwstk.net.proto.TCP.TCPWorker.SendMessage(TCPWorker.java:129)
+	at pl.edu.pjwstk.net.proto.SendTask.run(SendTask.java:33)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Unknown Source)
+	at java.util.concurrent.FutureTask$Sync.innerRun(Unknown Source)
+	at java.util.concurrent.FutureTask.run(Unknown Source)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.runTask(TransportThreadPoolExecutor.java:909)
+	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
+	at java.lang.Thread.run(Unknown Source)
+16:58:54.110 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.messages.responses.LookupPeerResponse to 192.168.243.1:4321
