@@ -148,7 +148,7 @@ public class GuiWindower implements PropertyChangeListener {
             serverPortInput.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(serverPortInput);
 
-            RichJLabel podajPortyLabel = new RichJLabel("Porty dla po��cze� przych. i wych.:", 0);
+            RichJLabel podajPortyLabel = new RichJLabel("Porty dla gniazd:", 0);
             podajPortyLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             panelPierwszegoUruchomienia.add(podajPortyLabel);
 
@@ -157,7 +157,7 @@ public class GuiWindower implements PropertyChangeListener {
             spacer2.setBackground(new Color(0, 0, 0, 0));
             panelPierwszegoUruchomienia.add(spacer2);
 
-            RichJLabel inLabel = new RichJLabel("in:", 0);
+            RichJLabel inLabel = new RichJLabel("filesync:", 0);
             inLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             panelPierwszegoUruchomienia.add(inLabel);
 
@@ -167,7 +167,7 @@ public class GuiWindower implements PropertyChangeListener {
             portInFieldFilesRequests.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(portInFieldFilesRequests);
 
-            RichJLabel outLabel = new RichJLabel("out:", 0);
+            RichJLabel outLabel = new RichJLabel("bootstrap conn:", 0);
             outLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             panelPierwszegoUruchomienia.add(outLabel);
 
