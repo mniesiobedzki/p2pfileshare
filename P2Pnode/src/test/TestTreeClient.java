@@ -22,32 +22,42 @@ public class TestTreeClient implements Runnable{
 
 	@Override
 	public void run() {
-		Socket sock = null;
-		boolean ok = false;
-		while(!ok){
-			try {	
-				sock = new Socket(serverIP,serverPort);
-				System.out.println("Connecting...");
-				ok = true;
+		while (true) {
+			Socket sock = null;
+			boolean ok = false;
+			while (!ok) {
+				try {
+					sock = new Socket(serverIP, serverPort);
+					System.out.println("Connecting...");
+					ok = true;
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					// e.printStackTrace();
+				}
+			}
+			InputStream socketStream;
+			try {
+				if (sock != null) {
+
+					socketStream = sock.getInputStream();
+					ObjectInputStream objectInput = new ObjectInputStream(
+							socketStream);
+					// tu przetestowa� co si� dzieje bo nie wiemy
+					// jak dzia�a objectinputstream
+					ft = null;
+					ft = (FolderTree) objectInput.readObject();
+					changed = true;
+					System.out.println(">>>" + ft);
+					objectInput.close();
+					socketStream.close();
+					sock.close();
+					this.wait(1000);
+				}
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				//e.printStackTrace();
+				e.printStackTrace();
 			}
-		}
-		InputStream socketStream;
-		try {
-			if(sock!=null){
-			socketStream = sock.getInputStream();
-			ObjectInputStream objectInput = new ObjectInputStream(socketStream);
-			while(true){//tu przetestowa� co si� dzieje bo nie wiemy jak dzia�a objectinputstream 
-				ft = (FolderTree) objectInput.readObject();
-				changed = true;
-				System.out.println(ft);
-			}
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 		
 	}

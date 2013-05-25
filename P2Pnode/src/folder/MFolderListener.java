@@ -93,6 +93,10 @@ public class MFolderListener {
 						System.out.println("Created - IGNORUJÊ!");
 						ignorowanyPlik = null;
 						return;
+					} else {
+						
+						System.out.println("NIE ignorujê "+ignorowanyPlik+" != "+event.context().toString());
+						
 					}
 					
 					System.out.println("Created: " + MFolderListener.listenedPath.toString()+ "\\"+event.context().toString());
