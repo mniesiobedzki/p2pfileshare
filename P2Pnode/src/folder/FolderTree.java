@@ -139,12 +139,14 @@ public class FolderTree implements Serializable {
 
     public void putAll(TreeMap<String, Nod> f) {
         for (Nod n : f.values()) {
+        	if(!f.get("root").getChildren().contains(n.getName()))
             addNod(n);
         }
     }
 
     public void putAll() {
         for (Nod n : syncFolder.values()) {
+        	if(!syncFolder.get("root").getChildren().contains(n.getName()))
             addNod(n);
         }
     }
@@ -170,17 +172,19 @@ public class FolderTree implements Serializable {
         LinkedList<Nod> created = new LinkedList<Nod>();
 
         root = folder2.get("root");
+        System.out.println(folder.keySet());
         for (String u : root.children) {
             if (!this.folder.containsKey(u)) {
+            	System.out.println("new usr " + u);
             	this.addUser(u, folder2.get(u).getPath(), folder2.get(u).getIp(), folder2.get(u).getPort());
+            }else{
+            	System.out.println("old usr " + u);
             }
         }
-        Nod rootLocal = folder.get("root");
-        for(String u: rootLocal.children){
-            users.add(folder.get(u).getValue());
-        }
+        System.out.println("foreigh usrs "+ root.getChildren());
+        Nod rootLocal = folder.get("root");        
+        System.out.println("usrs "+ rootLocal.getChildren());
         
-        System.out.println("usrs "+users);
         //plik zaktualizowano
         for (Nod n : folder2.values()) {
             if (folder.get(n.getValue()).getHistory().size()>0 && folder.get(n.getValue()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
