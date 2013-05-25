@@ -95,9 +95,13 @@ public class FileClient{
 				filenameWithTempStamp.renameTo(docelowyPlik);
 				File f = new File(n.getName(),n.getPath(), usr);
 				f.setFileId(n.getValue());
+				long data = n.getHistory().getLast().getData();//ostatnia modyfikacja
+				f.setLastModified(data);
+				f.getCurrentFileWithLatestHistoryEntry().getSingleFileHistory().getLast().setData(data);
 				if(ft!=null){
 					ft.addFile(f, usr);
 				}
+				filenameWithTempStamp.setLastModified(data);//to powinno ustawiæ date modyfikacji 
 				System.out.println("Done!");
 				if(ft!=null){
 					System.out.println("updated Tree: ");
