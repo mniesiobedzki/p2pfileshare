@@ -9,8 +9,8 @@ public class TestFile {
 
 	public static void main(String[] args) {		
 		String uname = "user1";
-		FolderTree ft = new FolderTree("kuku", uname, null);
-		ft.addUser(uname, "kuku\\", "1.1.1.1", 1234);
+		FolderTree ft = new FolderTree("kuku", uname, null, "1.1.1.1", 1234);
+		//ft.addUser(uname, "kuku\\", "1.1.1.1", 1234);
 		//File fa = new File(name, File.generateFileId(uname));
 		java.io.File[] listaFajli = File.listAllTheFilesInDir("kuku\\");
 		

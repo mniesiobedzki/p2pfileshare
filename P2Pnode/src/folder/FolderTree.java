@@ -30,7 +30,7 @@ public class FolderTree implements Serializable {
      * @param usr  - nazwa użytkownika uruchamiającego udział
      * @param tree -
      */
-    public FolderTree(String path, String usr, JCSyncTreeMap<String, Nod> tree) {
+    public FolderTree(String path, String usr, JCSyncTreeMap<String, Nod> tree, String ip, int port) {
         root = new Nod(path);
         syncFolder = tree;
         this.usr = usr;
@@ -38,6 +38,7 @@ public class FolderTree implements Serializable {
         if (syncFolder != null) {
             this.syncFolder.put("root", root);
         }
+        this.addUser(usr, path, ip, port);
     }
 
     public TreeMap<String, Nod> getFolder() {

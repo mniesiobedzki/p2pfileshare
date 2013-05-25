@@ -25,8 +25,8 @@ public class TestTreeServer implements Runnable {
 		try {
 			welcomeSocket = new ServerSocket(port);
 
-			ft = new FolderTree(fname,uname, syncTree);
-			ft.addUser(uname, path, ip, 1234);
+			ft = new FolderTree(fname,uname, syncTree,ip, port);
+			ft.addUser(uname, path, ip, port);
 			// File fa = new File(name, File.generateFileId(uname));
 			java.io.File[] listaFajli = File.listAllTheFilesInDir(path);
 

@@ -36,8 +36,8 @@ public class TestServer {
 		String path = "kuku\\";
 		String folderName = "kuku";
 		String uname = "user1";
-		FolderTree ft = new FolderTree(folderName, uname, null);
-		ft.addUser(uname, path, "192.168.80.32", 1234);
+		FolderTree ft = new FolderTree(folderName, uname, null, "192.168.80.32", 1234);
+		//ft.addUser(uname, path, "192.168.80.32", 1234);
 		File f = new File(fileName, uname);
 		ft.addFile(f, uname);
 		FileServer server = new FileServer(ft, uname);

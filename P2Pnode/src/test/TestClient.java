@@ -18,8 +18,8 @@ public class TestClient {
 		String thisIp = "1.1.1.11";
 		String ip = "1.1.1.12";
 		int port = 1234;
-		FolderTree ft = new FolderTree(folderName, uname, null);
-		ft.addUser(uname, path, thisIp, port );
+		FolderTree ft = new FolderTree(folderName, uname, null, ip, port);
+		//ft.addUser(uname, path, thisIp, port );
 		File f = new File(FileName, uname);
 		ft.addFile(f, uname);
 		FileClient client = new FileClient(ft, null, ip, uname+FileName,path, FileName, uname);
