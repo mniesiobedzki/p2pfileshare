@@ -1,23 +1,10 @@
 package gui;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.EventQueue;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.HeadlessException;
-import java.awt.Insets;
-import java.awt.LayoutManager;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.SystemTray;
-import java.awt.Toolkit;
-import java.awt.TrayIcon;
+
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -30,48 +17,26 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JRootPane;
-import javax.swing.JTextField;
-import javax.swing.JTextPane;
-import javax.swing.LookAndFeel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.filechooser.FileSystemView;
-
-import main.Controller;
-
 
 public class GuiWindower implements PropertyChangeListener {
-	
+
     protected final PopupFrame POPUP_FRAME = new PopupFrame();
-    JTextField nodeName, serverIPAdress, portInFieldFilesRequests, portOutField, serverPortInput; 
+    JTextField nodeName, serverIPAdress, portInFieldFilesRequests, portOutField, serverPortInput;
     String folderSynchronizowany;
     JButton generujIdInput, rozpocznijBt;
-    Controller kontroler;
-    
+
     public GuiWindower() {
-    	//kontroler = k;
-    	createGUI();
+        //kontroler = k;
+        createGUI();
     }
-    
+
     public static void main(String[] args) {
-    	GuiWindower g = new GuiWindower();
-    	g.createGUI();
-   	}
-    
-	private void createGUI() {
-		EventQueue.invokeLater(new Runnable() {
+        GuiWindower g = new GuiWindower();
+        g.createGUI();
+    }
+
+    private void createGUI() {
+        EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
 
@@ -109,61 +74,65 @@ public class GuiWindower implements PropertyChangeListener {
                 }
             }
         });
-	}
+    }
+
+    public String getClientIp() {
+        return "1.1.1.5";
+    }
 
     public class PopupFrame extends JDialog {
- 
-      //  private JTextField serverPortInput;
-		//private JTextField ipInput;
 
-		public PopupFrame() throws HeadlessException {
+        //  private JTextField serverPortInput;
+        //private JTextField ipInput;
+
+        public PopupFrame() throws HeadlessException {
             setLayout(null);
             setUndecorated(true);
-            setBackground(new Color(0,0,0,0));
+            setBackground(new Color(0, 0, 0, 0));
             setBounds(200, 200, 200, 200);
             setPreferredSize(new Dimension(300, 400));
             try {
-				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-			} catch (ClassNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (InstantiationException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IllegalAccessException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (UnsupportedLookAndFeelException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-            
+                UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            } catch (ClassNotFoundException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            } catch (InstantiationException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            } catch (IllegalAccessException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            } catch (UnsupportedLookAndFeelException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+
             BufferedImage obrazTla = null;
-			try {
-				obrazTla = ImageIO.read(new File("bg.png"));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			JLabel tloRamki = new JLabel(new ImageIcon( obrazTla ));
+            try {
+                obrazTla = ImageIO.read(new File("bg.png"));
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            JLabel tloRamki = new JLabel(new ImageIcon(obrazTla));
             tloRamki.setBounds(0, 0, 300, 400);
-			add( tloRamki, new Integer(0), 0 );
-            	
+            add(tloRamki, new Integer(0), 0);
+
             JPanel panelPierwszegoUruchomienia = new JPanel();
             panelPierwszegoUruchomienia.setLayout(new FlowLayout());
-            panelPierwszegoUruchomienia.setBackground(new Color(0,0,0,0));
-            panelPierwszegoUruchomienia.setBounds(0,0,300,400);
-            
+            panelPierwszegoUruchomienia.setBackground(new Color(0, 0, 0, 0));
+            panelPierwszegoUruchomienia.setBounds(0, 0, 300, 400);
+
             JPanel spacer1 = new JPanel();
-            spacer1.setPreferredSize(new Dimension(300,5));
-            spacer1.setBackground(new Color(0,0,0,0));
+            spacer1.setPreferredSize(new Dimension(300, 5));
+            spacer1.setBackground(new Color(0, 0, 0, 0));
             panelPierwszegoUruchomienia.add(spacer1);
-            
-            RichJLabel tytulPowitania = new RichJLabel("P2PDropbox - Witaj!",0);
+
+            RichJLabel tytulPowitania = new RichJLabel("P2PDropbox - Witaj!", 0);
             tytulPowitania.setFont(new Font("Segoe UI", Font.PLAIN, 22));
             panelPierwszegoUruchomienia.add(tytulPowitania);
-            
-            RichJLabel podajIPJLabel = new RichJLabel("IP i port bootstrapa",0);
+
+            RichJLabel podajIPJLabel = new RichJLabel("IP i port bootstrapa", 0);
             podajIPJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             panelPierwszegoUruchomienia.add(podajIPJLabel);
 
@@ -172,82 +141,82 @@ public class GuiWindower implements PropertyChangeListener {
             serverIPAdress.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             serverIPAdress.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(serverIPAdress);
-          
+
             serverPortInput = new JTextField();
             serverPortInput.setPreferredSize(new Dimension(50, 30));
             serverPortInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             serverPortInput.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(serverPortInput);
-            
-            RichJLabel podajPortyLabel = new RichJLabel("Porty dla po��cze� przych. i wych.:",0);
+
+            RichJLabel podajPortyLabel = new RichJLabel("Porty dla po��cze� przych. i wych.:", 0);
             podajPortyLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             panelPierwszegoUruchomienia.add(podajPortyLabel);
 
             JPanel spacer2 = new JPanel();
-            spacer2.setPreferredSize(new Dimension(300,1));
-            spacer2.setBackground(new Color(0,0,0,0));
+            spacer2.setPreferredSize(new Dimension(300, 1));
+            spacer2.setBackground(new Color(0, 0, 0, 0));
             panelPierwszegoUruchomienia.add(spacer2);
-            
-            RichJLabel inLabel = new RichJLabel("in:",0);
+
+            RichJLabel inLabel = new RichJLabel("in:", 0);
             inLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             panelPierwszegoUruchomienia.add(inLabel);
-            
+
             portInFieldFilesRequests = new JTextField();
             portInFieldFilesRequests.setPreferredSize(new Dimension(60, 30));
             portInFieldFilesRequests.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             portInFieldFilesRequests.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(portInFieldFilesRequests);
-            
-            RichJLabel outLabel = new RichJLabel("out:",0);
+
+            RichJLabel outLabel = new RichJLabel("out:", 0);
             outLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             panelPierwszegoUruchomienia.add(outLabel);
-            
+
             portOutField = new JTextField();
             portOutField.setPreferredSize(new Dimension(60, 30));
             portOutField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             portOutField.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(portOutField);
-            
-            RichJLabel podajIdJLabel = new RichJLabel("ID lub wygeneruj automatycznie",0);
+
+            RichJLabel podajIdJLabel = new RichJLabel("ID lub wygeneruj automatycznie", 0);
             podajIdJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             panelPierwszegoUruchomienia.add(podajIdJLabel);
-            
+
             nodeName = new JTextField();
             nodeName.getDocument().addDocumentListener(new DocumentListener() {
-				public void changedUpdate(DocumentEvent e) {
-					generujIdInput.setEnabled(false);
-				}
+                public void changedUpdate(DocumentEvent e) {
+                    generujIdInput.setEnabled(false);
+                }
 
-				public void removeUpdate(DocumentEvent e) {
-					generujIdInput.setEnabled(false);
-				}
+                public void removeUpdate(DocumentEvent e) {
+                    generujIdInput.setEnabled(false);
+                }
 
-				public void insertUpdate(DocumentEvent e) {
-					generujIdInput.setEnabled(false);
-				}
-			});
-            
+                public void insertUpdate(DocumentEvent e) {
+                    generujIdInput.setEnabled(false);
+                }
+            });
+
             nodeName.setPreferredSize(new Dimension(250, 30));
             nodeName.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             nodeName.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(nodeName);
-            
+
             generujIdInput = new JButton("Generuj ID", null);
             generujIdInput.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					Random random = new Random();
-					nodeName.setText(random.nextInt(100000)+"");
-				}
-			});
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    Random random = new Random();
+                    nodeName.setText(random.nextInt(100000) + "");
+                }
+            });
             panelPierwszegoUruchomienia.add(generujIdInput);
-            
+
             JPanel spacer30 = new JPanel();
-            spacer30.setPreferredSize(new Dimension(300,5));
-            spacer30.setBackground(new Color(0,0,0,0));
+            spacer30.setPreferredSize(new Dimension(300, 5));
+            spacer30.setBackground(new Color(0, 0, 0, 0));
             panelPierwszegoUruchomienia.add(spacer30);
-            
+
 
 //            File root = new File("c:/java/jdk6.7");
 //            FileSystemView fsv = new SingleRootFileSystemView( root );
@@ -263,69 +232,69 @@ public class GuiWindower implements PropertyChangeListener {
             chooser.setPreferredSize(new Dimension(300, 150));
             chooser.setSize(300, 150);
             panelPierwszegoUruchomienia.add(chooser);*/
-            
+
             JButton wybierzFolderBt = new JButton("Wybierz folder synchronizacji", null);
             wybierzFolderBt.setFont(new Font("Segoe UI", Font.PLAIN, 16));
             wybierzFolderBt.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					wyborFolderu();
-					rozpocznijBt.setEnabled(true);
-				}
-			});
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    wyborFolderu();
+                    rozpocznijBt.setEnabled(true);
+                }
+            });
             panelPierwszegoUruchomienia.add(wybierzFolderBt);
-             
+
             JPanel spacer31 = new JPanel();
-            spacer31.setPreferredSize(new Dimension(300,10));
-            spacer31.setBackground(new Color(0,0,0,0));
+            spacer31.setPreferredSize(new Dimension(300, 10));
+            spacer31.setBackground(new Color(0, 0, 0, 0));
             panelPierwszegoUruchomienia.add(spacer31);
-            
+
             rozpocznijBt = new JButton("Rozpocznij");
             rozpocznijBt.setEnabled(false);
             rozpocznijBt.setFont(new Font("Segoe UI", Font.PLAIN, 22));
             /*rozpocznijBt.addActionListener(new ActionListener() {
-				
+
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					//kontroler.setFolderTreePath(folderSynchronizowany);
 				}
 			});*/
             panelPierwszegoUruchomienia.add(rozpocznijBt);
-            
+
             JPanel panelLoga = new JPanel();
             panelLoga.setLayout(null);
-            panelLoga.setBackground(new Color(0,0,0,0));
-            panelLoga.setBounds(0,0,300,400);
-            
+            panelLoga.setBackground(new Color(0, 0, 0, 0));
+            panelLoga.setBounds(0, 0, 300, 400);
+
             JTextPane logPane = new JTextPane();
             logPane.setBounds(8, 5, 285, 385);
             logPane.setEditable(false);
             logPane.setText("To jest test");
             panelLoga.add(logPane);
-            
-            add(panelPierwszegoUruchomienia, new Integer(1), 0);            
+
+            add(panelPierwszegoUruchomienia, new Integer(1), 0);
             //getRootPane().setWindowDecorationStyle(JRootPane.INFORMATION_DIALOG);
             pack();
         }
     }
 
     public void wyborFolderu() {
-    	JFileChooser chooser = new JFileChooser();
+        JFileChooser chooser = new JFileChooser();
         chooser.setDialogTitle("Wybierz folder do synchronizacji");
         chooser.setFileHidingEnabled(true);
         chooser.setMultiSelectionEnabled(false);
         chooser.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
         chooser.setDialogType(JFileChooser.SAVE_DIALOG);
         Component parentComponent = null; // is not null in the real world 
-        int state=chooser.showDialog(parentComponent, "Wybierz");
+        int state = chooser.showDialog(parentComponent, "Wybierz");
         if (state == JFileChooser.CANCEL_OPTION) return;
 
         File dest = chooser.getSelectedFile();
 
         try {
             folderSynchronizowany = dest.getCanonicalPath();
-            	
+
         } catch (IOException ex) { // getCanonicalPath() threw IOException
 
         }
@@ -370,60 +339,60 @@ public class GuiWindower implements PropertyChangeListener {
         return device;
     }
 
-	@Override
-	public void propertyChange(PropertyChangeEvent evt) {
-		if(evt.getPropertyName().equals("nazwa")) {
-			//TODO: coś
-		}
-	}
-	
-	/* Action Listeners */
-	public void addButtonActionListener(ActionListener listener){
-		rozpocznijBt.addActionListener(listener);
-	}
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("nazwa")) {
+            //TODO: coś
+        }
+    }
 
-	public String getFolderPath() {
-		return this.folderSynchronizowany;
-		
-	}
+    /* Action Listeners */
+    public void addButtonActionListener(ActionListener listener) {
+        rozpocznijBt.addActionListener(listener);
+    }
 
-	public String getServerPort() {
-		return this.serverPortInput.getText();
-	}
+    public String getFolderPath() {
+        return this.folderSynchronizowany;
 
-	public void displayError(String string) {
-		// TODO Wyświetl infromację o błędzie
-		
-	}
+    }
 
-	public int getPortIn() {
-		int p = 0;
-		try {
-			p = Integer.parseInt(portInFieldFilesRequests.getText());
-		} catch (Exception e) {
-		}
-		return p;
-	}
+    public String getServerPort() {
+        return this.serverPortInput.getText();
+    }
 
-	public int getPortOut() {
-		int p = 0;
-		try {
-			p = Integer.parseInt(portOutField.getText());
-		} catch (Exception e) {
-		}
-		return p;
-	}
+    public void displayError(String string) {
+        // TODO Wyświetl infromację o błędzie
 
-	public String getClientPort() {
-		return portOutField.getText();
-	}
+    }
 
-	public String getClientName() {
-		return nodeName.getText();
-	}
+    public int getPortIn() {
+        int p = 0;
+        try {
+            p = Integer.parseInt(portInFieldFilesRequests.getText());
+        } catch (Exception e) {
+        }
+        return p;
+    }
 
-	public String getServerAddress() {
-		// TODO Auto-generated method stub
-		return serverIPAdress.getText();
-	}
+    public int getPortOut() {
+        int p = 0;
+        try {
+            p = Integer.parseInt(portOutField.getText());
+        } catch (Exception e) {
+        }
+        return p;
+    }
+
+    public String getClientPort() {
+        return portOutField.getText();
+    }
+
+    public String getClientName() {
+        return nodeName.getText();
+    }
+
+    public String getServerAddress() {
+        // TODO Auto-generated method stub
+        return serverIPAdress.getText();
+    }
 }

@@ -61,7 +61,7 @@ public class Controller {
                 LOG.info("Node connected");
 
                 // Podpięcie foleru do wymiany plików
-                folderTree = new FolderTree(gui.getFolderPath(), gui.getClientName(), clientP2Pnode.getJCSyncTreeMap());
+                folderTree = new FolderTree(gui.getFolderPath(), gui.getClientName(), clientP2Pnode.getJCSyncTreeMap(), gui.getClientIp(), getClientPort());
                 folderTree.update();
             }
 
@@ -166,7 +166,7 @@ public class Controller {
             Thread.sleep(time);
         } catch (InterruptedException ex) {
             /*
-			 * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
+             * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
 			 * Level.SEVERE, null, ex);
 			 */
         }
