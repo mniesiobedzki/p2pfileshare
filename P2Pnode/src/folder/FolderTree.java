@@ -50,8 +50,8 @@ public class FolderTree implements Serializable {
      * @param usr  - ID użytkownika
      * @param path - ścieżka do folderu lokalna dla użytkownika
      */
-    public void addUser(String usr, String path, String ip) {
-        Nod n = new Nod(usr, root, ip);
+    public void addUser(String usr, String path, String ip, int port) {
+        Nod n = new Nod(usr, root, ip, port);
         System.out.println(n);
         System.out.println("Użytkownik :" + usr);
         System.out.println("folder w :" + path);
