@@ -142,7 +142,7 @@ public class FolderTree implements Serializable {
         for (Nod n : f.values()) {
         	if(f.get("root").getChildren().contains(n.getName())){
         		usrs.add(n.getName());
-        		folder.put(n.getName(), n);
+        		folder.put(n.value, n);
         		if(folder.get("root").children.contains(n.getName())){
         			folder.get("root").children.add(n.getName());
         		}
@@ -179,14 +179,7 @@ public class FolderTree implements Serializable {
         LinkedList<Nod> changes = new LinkedList<Nod>();
         LinkedList<Nod> created = new LinkedList<Nod>();
 
-        root = folder2.get("root");
-        for (String u : root.children) {
-            if (!this.folder.containsKey(u)) {
-            	this.addUser(u, folder2.get(u).getPath(), folder2.get(u).getIp(), folder2.get(u).getPort());
-            	this.folder.get("root").children.add(u);
-            }else{
-            }
-        }
+
         Nod rootLocal = folder.get("root");        
         System.out.println("\nusrs "+ rootLocal.getChildren());
         System.out.println(this);
