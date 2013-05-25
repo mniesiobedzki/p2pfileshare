@@ -23,6 +23,8 @@ public class TestTreeServer implements Runnable {
 	public void run() {
 		ServerSocket welcomeSocket;
 		try {
+
+			while (true) {
 			welcomeSocket = new ServerSocket(port);
 
 			ft = new FolderTree(fname,uname, syncTree,ip, port);
@@ -49,7 +51,6 @@ public class TestTreeServer implements Runnable {
 
 			OutputStream socketStream = connectionSocket.getOutputStream();
 			ObjectOutput objectOutput = new ObjectOutputStream(socketStream);
-			while (true) {
 				if (MFolderListener.fileCreated) {
 					System.err.println(ft.toString());
 					objectOutput.writeObject(ft);
@@ -71,6 +72,12 @@ public class TestTreeServer implements Runnable {
 					objectOutput.writeObject(ft);
 					MFolderListener.fileModified = false;
 				}
+
+				objectOutput.flush();
+				objectOutput.close();
+				socketStream.flush();
+				socketStream.close();
+				welcomeSocket.close();
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
