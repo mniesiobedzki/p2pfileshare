@@ -79,7 +79,7 @@ public class FolderTree implements Serializable {
     public String toString() {
         String s = "FolderTree [root=" + root.getName() + "]" + "\n";
 
-        for (String k : root.getChildren()) {
+        for (String k : this.getFolder().get("root").getChildren()) {
             Nod n = this.getFolder().get(k);
             s += "\n\t";
             s += n.name;
