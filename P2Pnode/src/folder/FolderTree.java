@@ -151,7 +151,7 @@ public class FolderTree implements Serializable {
     public void addNod(Nod n) {
         if (!folder.containsKey(n.value)) {
             folder.put(n.value, n);
-        } else if (folder.get(n.value).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
+        } else if (folder.get(n.value).getHistory().size()>0 && (folder.get(n.value).getHistory().getLast().getData() < n.getHistory().getLast().getData())) {
             folder.get(n.value).getHistory().add(n.getHistory().getLast());
         }
     }
@@ -238,7 +238,7 @@ public class FolderTree implements Serializable {
         }
         //plik zaktualizowano
         for (Nod n : syncFolder.values()) {
-            if (folder.get(n.getValue()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
+            if (folder.get(n.getValue()).getHistory().size()>0 && folder.get(n.getValue()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
                 changes.add(n);
             }
         }

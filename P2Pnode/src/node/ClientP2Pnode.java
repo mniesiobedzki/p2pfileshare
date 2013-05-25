@@ -33,19 +33,15 @@ public class ClientP2Pnode {
     private SharedCollectionObject jcSyncTreeMap_sharedCollectionObject;
     private Controller controller;
     private P2PNode node;
-    // Podstawowa implementacja JCSync
     private JCSyncCore jcSyncCore;
     private JCSyncTreeMap<String, Nod> jcSyncTreeMap;
     private JCSyncArrayList<String> jcSyncArrayList;
-    // KOLECKCJE APLIKACJI
-    // private HashMap<String, String> myHashMap;
-    // private ArrayList<String> myArrayList;
-    // OBSERWACJA
     private Observable observable;
     private JCSyncObservable jcSyncObservable;
-    private TestObserver testObserver;
     private ClientP2PnodeCallback nodeCallback;
     private SharedObservableObject observable_so;
+    private String collID = "P2PFileshareTreeMapCollection";
+
     private JCSyncStateListener collectionListener = new JCSyncStateListener() {
         public void onLocalStateUpdated(JCSyncAbstractSharedObject object,
                                         String methodName, Object retVal) {
@@ -66,7 +62,7 @@ public class ClientP2Pnode {
             controller.updateTree();
         }
     };
-    private String collID;
+
 
     private Observer collectionObserver = new Observer() {
         @Override
@@ -143,7 +139,7 @@ public class ClientP2Pnode {
     private void initCollection1(String nodeName, Controller controller) {
         // TreeMap
         LOG.trace("Creating the collection");
-        collID = "P2PfileshareTreeMap";
+        //collID = "P2PfileshareTreeMap";
         try {
             this.jcSyncTreeMap = createTreeMap(collID, this.jcSyncCore);
             LOG.trace("Node " + nodeName
@@ -298,7 +294,7 @@ public class ClientP2Pnode {
             Thread.sleep(time);
         } catch (InterruptedException ex) {
             /*
-			 * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
+             * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
 			 * Level.SEVERE, null, ex);
 			 */
         }
