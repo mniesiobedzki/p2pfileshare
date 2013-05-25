@@ -138,9 +138,17 @@ public class FolderTree implements Serializable {
     }
 
     public void putAll(TreeMap<String, Nod> f) {
+    	LinkedList<String> usrs= new LinkedList<String>();
         for (Nod n : f.values()) {
-        	if(!f.get("root").getChildren().contains(n.getName()))
-            addNod(n);
+        	if(f.get("root").getChildren().contains(n.getName())){
+        		usrs.add(n.getName());
+        		folder.put(n.getName(), n);
+        		if(folder.get("root").children.contains(n.getName())){
+        			folder.get("root").children.add(n.getName());
+        		}
+        	}else if(!n.getName().equals("root")){
+        		addNod(n);
+        	}
         }
     }
 
@@ -180,8 +188,8 @@ public class FolderTree implements Serializable {
             }
         }
         Nod rootLocal = folder.get("root");        
-        System.out.println("usrs "+ rootLocal.getChildren());
-        System.out.println(folder);
+        System.out.println("\nusrs "+ rootLocal.getChildren());
+        System.out.println(this);
         //plik zaktualizowano
         for (Nod n : folder2.values()) {
             if (folder.get(n.getValue()).getHistory().size()>0 && folder.get(n.getValue()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
