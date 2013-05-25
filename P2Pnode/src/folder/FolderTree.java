@@ -151,9 +151,17 @@ public class FolderTree implements Serializable {
     }
 
     public void putAll() {
+    	LinkedList<String> usrs= new LinkedList<String>();
         for (Nod n : syncFolder.values()) {
-        	if(!syncFolder.get("root").getChildren().contains(n.getName()))
-            addNod(n);
+        	if(syncFolder.get("root").getChildren().contains(n.getName())){
+        		usrs.add(n.getName());
+        		folder.put(n.value, n);
+        		if(folder.get("root").children.contains(n.getName())){
+        			folder.get("root").children.add(n.getName());
+        		}
+        	}else if(!n.getName().equals("root")){
+        		addNod(n);
+        	}
         }
     }
 
@@ -188,6 +196,8 @@ public class FolderTree implements Serializable {
             	changes.add(n);
             }
         }
+        users.addAll(folder.get("root").getChildren());
+        
         //pliki utworzone
         for (Nod n : folder2.values()) {
             if (n.getValue() != "root" && !users.contains(n.getValue())) {
@@ -243,9 +253,11 @@ public class FolderTree implements Serializable {
         //plik zaktualizowano
         for (Nod n : syncFolder.values()) {
             if (folder.get(n.getValue()).getHistory().size()>0 && folder.get(n.getValue()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
-                changes.add(n);
+            	System.out.println("zmieniono "+ n.name);
+            	changes.add(n);
             }
         }
+        users.addAll(folder.get("root").getChildren());
         //pliki utworzone
         for (Nod n : syncFolder.values()) {
             if (n.getValue() != "root" && !users.contains(n.getValue())) {
