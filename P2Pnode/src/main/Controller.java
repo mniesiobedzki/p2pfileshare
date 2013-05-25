@@ -61,7 +61,7 @@ public class Controller {
                 LOG.info("Node connected");
 
                 // Podpięcie foleru do wymiany plików
-                folderTree = new FolderTree(gui.getFolderPath(), gui.getClientName(), clientP2Pnode.getJCSyncTreeMap(), gui.getClientIp(), getClientPort());
+                folderTree = new FolderTree(gui.getFolderPath(), gui.getClientName(), clientP2Pnode.getJCSyncTreeMap(), gui.getClientIp(), gui.getPortIn());
                 folderTree.update();
             }
 
