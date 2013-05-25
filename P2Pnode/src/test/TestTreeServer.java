@@ -67,10 +67,9 @@ public class TestTreeServer implements Runnable {
 					MFolderListener.fileModified = false;
 				}
 				if (ft.updated){
-					ft.updated=false;
 					System.err.println(ft.toString());
 					objectOutput.writeObject(ft);
-					MFolderListener.fileModified = false;
+					ft.updated=false;
 				}
 
 				objectOutput.flush();
@@ -78,8 +77,12 @@ public class TestTreeServer implements Runnable {
 				socketStream.flush();
 				socketStream.close();
 				welcomeSocket.close();
+				this.wait(1000);
 			}
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
