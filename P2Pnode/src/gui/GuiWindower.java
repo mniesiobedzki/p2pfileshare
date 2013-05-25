@@ -14,7 +14,13 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.LinkedList;
 import java.util.Random;
 
 
@@ -24,6 +30,8 @@ public class GuiWindower implements PropertyChangeListener {
     JTextField nodeName, serverIPAdress, portInFieldFilesRequests, portOutField, serverPortInput;
     String folderSynchronizowany;
     JButton generujIdInput, rozpocznijBt;
+    String[] dostepneIP;
+    String wybraneIP = "127.0.0.1";
 
     public GuiWindower() {
         //kontroler = k;
@@ -77,7 +85,7 @@ public class GuiWindower implements PropertyChangeListener {
     }
 
     public String getClientIp() {
-        return "1.1.1.5";
+        return wybraneIP;
     }
 
     public class PopupFrame extends JDialog {
@@ -130,8 +138,46 @@ public class GuiWindower implements PropertyChangeListener {
 
             RichJLabel tytulPowitania = new RichJLabel("P2PDropbox - Witaj!", 0);
             tytulPowitania.setFont(new Font("Segoe UI", Font.PLAIN, 22));
-            panelPierwszegoUruchomienia.add(tytulPowitania);
+            //panelPierwszegoUruchomienia.add(tytulPowitania);
 
+            Enumeration<NetworkInterface> nets = null;
+			try {
+				nets = NetworkInterface.getNetworkInterfaces();
+			} catch (SocketException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	
+			LinkedList<String> prawidloweInterfejsySiecioweInterfaces = new LinkedList<String>();
+			for (NetworkInterface netint : Collections.list(nets)) {
+				Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
+				for (InetAddress inetAddress : Collections.list(inetAddresses)) {
+                	if( inetAddress.getHostAddress().indexOf(".") > 0 ) {
+                		prawidloweInterfejsySiecioweInterfaces.add( inetAddress.getHostAddress() );
+                	}
+                }				
+            }
+			
+			dostepneIP = new String[ prawidloweInterfejsySiecioweInterfaces.size() ];
+            
+			int i=-1;
+			for (String ip : prawidloweInterfejsySiecioweInterfaces) {
+				dostepneIP[++i]= ip; 
+			}
+			
+            //Create the combo box, select item at index 4.
+            //Indices start at 0, so 4 specifies the pig.
+            JComboBox comboboxKartSieciowych = new JComboBox(dostepneIP);
+            comboboxKartSieciowych.setPreferredSize(new Dimension(200, 20));
+            comboboxKartSieciowych.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					wybraneIP = (String)((JComboBox)e.getSource()).getSelectedItem();
+				}
+			});
+            panelPierwszegoUruchomienia.add(comboboxKartSieciowych);
+            
             RichJLabel podajIPJLabel = new RichJLabel("IP i port bootstrapa", 0);
             podajIPJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             panelPierwszegoUruchomienia.add(podajIPJLabel);
