@@ -24,29 +24,28 @@ public class TestTreeClient implements Runnable{
 			while (!ok) {
 				try {
 					sock = new Socket(serverIP, serverPort);
-					System.out.println("Connecting...");
+					System.out.println("TestTreeClient: Connecting...");
 					ok = true;
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					// e.printStackTrace();
 				}
 			}
-			InputStream socketStream;
+
+			System.out.println("TestTreeClient: Connected");
 			try {
 				if (sock != null) {
 
-					socketStream = sock.getInputStream();
-					ObjectInputStream objectInput = new ObjectInputStream(
-							socketStream);
-					// tu przetestowa� co si� dzieje bo nie wiemy
-					// jak dzia�a objectinputstream
-					ft = null;
+					InputStream socketStream = sock.getInputStream();
+					ObjectInputStream objectInput = new ObjectInputStream(socketStream);
 					ft = (FolderTree) objectInput.readObject();
-					changed = true;
-					System.out.println(">>>" + ft);
-					objectInput.close();
-					socketStream.close();
-					sock.close();
+					if(ft!=null){
+						changed = true;
+						System.out.println(">>>" + ft);
+						objectInput.close();
+						socketStream.close();
+						sock.close();
+					}
 					Thread.sleep(1000);
 				}
 

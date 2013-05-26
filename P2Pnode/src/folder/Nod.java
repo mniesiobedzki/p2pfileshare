@@ -16,12 +16,7 @@ public class Nod implements Serializable {
 	int  port;
 	LinkedList<FileState> history = new LinkedList<FileState>();
 
-	/**
-	 * konstruktor dla korzenia
-	 * 
-	 * @param val
-	 * @param par
-	 */
+	
 	public Nod(String val, Nod par) {
 		value = val;
 		parent = par.getValue();
@@ -47,14 +42,19 @@ public class Nod implements Serializable {
 			par.addChlid(this.value);
 		}
 	}
+	/**
+	 * konstruktor dla korzenia
+	 * 
+	 * @param val- folder path
+	 */
 	public Nod(String val) {
-		value = val;
+		value = "root";
 		parent = "root";
 		name= val;
 	}
 
 	/**
-	 * konstruktor dla plikï¿½w
+	 * konstruktor dla plików
 	 * 
 	 * @param val - ID pliku
 	 * @param n - nazwa pliku

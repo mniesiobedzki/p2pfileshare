@@ -32,6 +32,11 @@ public class FileClient{
 	    System.out.println("Connecting...");
 	    OutputStream os = sock.getOutputStream();
 	    key+='\n';
+	    System.out.println(ft.getFolder().get(key));
+	    System.out.println(ft.getFolder().get(key).getHistory());
+	    System.out.println(ft.getFolder().get(key).getHistory().getLast());
+	    System.out.println(ft.getFolder().get(key).getHistory().getLast().getData());
+	    System.out.println("wysy³am rz¹danie udostêpnienia pliku: " + key +" modyfikowanego o "+ ft.getFolder().get(key).getHistory().getLast().getData());
 	    os.write(key.getBytes(Charset.forName("UTF-8")));
 	    
 	    InputStream is = sock.getInputStream();

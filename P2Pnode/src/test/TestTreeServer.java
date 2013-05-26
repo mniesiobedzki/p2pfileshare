@@ -24,7 +24,6 @@ public class TestTreeServer implements Runnable {
 		ServerSocket welcomeSocket;
 		try {
 
-			welcomeSocket = new ServerSocket(port);
 
 			ft = new FolderTree(fname,uname, syncTree,ip, port);
 			ft.addUser(uname, path, ip, port);
@@ -50,38 +49,42 @@ public class TestTreeServer implements Runnable {
 			MFolderListener.runFolderListener(path, ft, uname);
 
 			while (true) {
+
+			welcomeSocket = new ServerSocket(port);
 			Socket connectionSocket = welcomeSocket.accept();
-			System.err.println("Connected");
+			System.err.println("TestTreeServer: Connected");
 
 			OutputStream socketStream = connectionSocket.getOutputStream();
 			ObjectOutput objectOutput = new ObjectOutputStream(socketStream);
 				if (MFolderListener.fileCreated) {
-					System.err.println(ft.toString());
+					System.err.println("TestTreeServer: "+ft.toString());
 					objectOutput.writeObject(ft);
 					MFolderListener.fileCreated = false;
 				}
-				if ( MFolderListener.fileDeleted) {
-					System.err.println(ft.toString());
+				else if ( MFolderListener.fileDeleted) {
+					System.err.println("TestTreeServer: "+ft.toString());
 					objectOutput.writeObject(ft);
 					MFolderListener.fileDeleted = false;
 				}
-				if (MFolderListener.fileModified) {
-					System.err.println(ft.toString());
+				else if (MFolderListener.fileModified) {
+					System.err.println("TestTreeServer: "+ft.toString());
 					objectOutput.writeObject(ft);
 					MFolderListener.fileModified = false;
 				}
-				if (ft.updated){
-					System.err.println(ft.toString());
+				else if (ft.updated){
+					System.err.println("TestTreeServer: "+ft.toString());
 					objectOutput.writeObject(ft);
 					ft.updated=false;
+				}else {
+					objectOutput.writeObject(null);
 				}
-
+				Thread.sleep(500);
 				objectOutput.flush();
-				objectOutput.close();
 				socketStream.flush();
+				objectOutput.close();
 				socketStream.close();
 				welcomeSocket.close();
-				Thread.sleep(1000);
+				Thread.sleep(500);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -89,7 +92,7 @@ public class TestTreeServer implements Runnable {
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 	}
 	
 	/***
