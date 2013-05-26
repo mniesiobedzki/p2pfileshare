@@ -92,9 +92,21 @@ public class FileClient{
 				File f = new File(n.getName(),n.getPath(), usr);
 				f.setFileId(n.getValue());
 				long data = n.getHistory().getLast().getData();//ostatnia modyfikacja
+				System.out.println("%$$$ data modyfikacji"+ data);
 				f.setLastModified(data);
-				f.getCurrentFileWithLatestHistoryEntry().getSingleFileHistory().getLast().setData(data);
-				filenameWithTempStamp.setLastModified(data);//to powinno ustawiæ date modyfikacji
+				f.getSingleFileHistory().getLast().setData(data);
+				docelowyPlik = new java.io.File(path+name);
+				if (docelowyPlik.exists()){
+				    docelowyPlik.setLastModified(data);
+				}//to powinno ustawiæ date modyfikacji
+				System.out.println(docelowyPlik.getAbsolutePath());
+				if(docelowyPlik.lastModified()==data){
+					System.out.println("czas modyfikacji poprawnie zmieniony");
+				}else{
+					System.out.println("uj!");
+					System.out.println("czas modyfikaci mia³ byæ: "+data);
+					System.out.println("czas modyfikacji jest: "+ docelowyPlik.lastModified());
+				}
 				if(ft!=null){
 					ft.addFile(f, usr);
 				} 

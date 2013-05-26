@@ -24,7 +24,6 @@ public class TestTreeServer implements Runnable {
 		ServerSocket welcomeSocket;
 		try {
 
-			while (true) {
 			welcomeSocket = new ServerSocket(port);
 
 			ft = new FolderTree(fname,uname, syncTree,ip, port);
@@ -39,13 +38,18 @@ public class TestTreeServer implements Runnable {
 				
 				File f = new File(file.getName(), file.getPath(), uname);
 				System.out.println(f.getFileName());
-				
+				long data = file.lastModified();
+				System.out.println(data);
 				ft.addFile(f, uname);
+				ft.getFolder().get(uname+f.getFileName()).getHistory().getLast().setData(data);
 				MFolderListener.filesAndTheirHistory.put(
 						uname + f.getFileName(), f);
-				System.out.println("** "+f.getFileId());
+				System.out.println("** "+f.getFileId()+ " zmodyfikowany: "+ ft.getFolder().get(uname+f.getFileName()).getHistory().getLast().getData());
 			}
+			
 			MFolderListener.runFolderListener(path, ft, uname);
+
+			while (true) {
 			Socket connectionSocket = welcomeSocket.accept();
 			System.err.println("Connected");
 
