@@ -1,12 +1,8 @@
 package test;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.zip.GZIPInputStream;
 
 import folder.FolderTree;
 
@@ -60,6 +56,30 @@ public class TestTreeClient implements Runnable{
 			}
 		}
 		
+	}
+	public String getServerIP() {
+		return serverIP;
+	}
+	public void setServerIP(String serverIP) {
+		this.serverIP = serverIP;
+	}
+	public int getServerPort() {
+		return serverPort;
+	}
+	public void setServerPort(int serverPort) {
+		this.serverPort = serverPort;
+	}
+	public boolean isChanged() {
+		return changed;
+	}
+	public void setChanged(boolean changed) {
+		this.changed = changed;
+	}
+	public FolderTree getFt() {
+		return ft;
+	}
+	public void setFt(FolderTree ft) {
+		this.ft = ft;
 	}
 	public TestTreeClient(String serverIP, int serverPort){
 		this.serverPort = serverPort;

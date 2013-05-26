@@ -134,7 +134,7 @@ public class MFolderListener {
 					// searchForFile(event.context().toString());
 					// deFajl.getValue().setFileStateHistoryEntry(new
 					// Date().getTime(), "deleted",userId,0,"");
-					int licznik = 0;
+					//int licznik = 0;
 					
 					java.io.File[] listaPlikowWFolderze = File.listAllTheFilesInDir(myDir.toString());
 					

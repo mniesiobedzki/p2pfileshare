@@ -16,7 +16,11 @@ import java.util.TreeMap;
  */
 public class FolderTree implements Serializable {
 
-    public boolean updated = false;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7730198483613602338L;
+	public boolean updated = false;
     public TreeMap<String, Nod> folder = new TreeMap<String, Nod>();
     public JCSyncTreeMap<String, Nod> syncFolder = new JCSyncTreeMap<String, Nod>();
     // klucz to dla korzenia "root"
