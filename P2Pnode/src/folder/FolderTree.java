@@ -245,6 +245,14 @@ public class FolderTree implements Serializable {
             	System.out.println("FolderTree: żądanie pliku "+  nod.getParent() + nod.getName());
             	System.out.println("FolderTree: czas zmiany zdalnego: "+  folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
             	System.out.println("przez port: "+  folder.get(nod.getParent()).port);
+            	System.err.println(this);
+            	System.err.println(nod);
+            	System.err.println(folder2.get(nod.getParent()).ip);
+            	System.err.println(nod.getParent() + nod.getName());
+            	System.err.println(folder.get(usr).getPath());
+            	System.err.println(nod.getName());
+            	System.err.println(usr);
+            	System.err.println(folder.get(nod.parent).getPort());
                 FileClient fileClient = new FileClient(this, nod, folder2.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
             } else {
                 //kod kasujący plik
