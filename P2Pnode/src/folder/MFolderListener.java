@@ -107,26 +107,26 @@ public class MFolderListener {
 					
 					File newlyCreatedFile = new File(event.context().toString(),MFolderListener.listenedPath.toString()+ "\\"+event.context().toString(), userId);
 					
-					if(kuku.lastModified() == 0){
-						Date dt = new Date();
-						System.err.println("Wszedłem i: " +dt.getTime() );
-						
-						newlyCreatedFile.setFileStateHistoryEntry(
-								dt.getTime(), event.context().toString(),
-								userId, new java.io.File(event.context().toString()).length(),
-								File.getMD5Checksum(listenedPath.toString() + "\\"
-										+ event.context().toString()));
-					} else {
-						
-						newlyCreatedFile.setFileStateHistoryEntry(
-								kuku.lastModified(), event.context().toString(),
-								userId, new java.io.File(event.context().toString()).length(),
-								File.getMD5Checksum(listenedPath.toString() + "\\"
-										+ event.context().toString()));
-						
-					}
-					
-					
+//					if(kuku.lastModified() == 0){
+//						Date dt = new Date();
+//						System.err.println("Wszedłem i: " +dt.getTime() );
+//						
+//						newlyCreatedFile.setFileStateHistoryEntry(
+//								dt.getTime(), event.context().toString(),
+//								userId, new java.io.File(event.context().toString()).length(),
+//								File.getMD5Checksum(listenedPath.toString() + "\\"
+//										+ event.context().toString()));
+//					} else {
+//						
+//						
+//					}
+//					
+
+					newlyCreatedFile.setFileStateHistoryEntry(
+							kuku.lastModified(), event.context().toString(),
+							userId, new java.io.File(event.context().toString()).length(),
+							File.getMD5Checksum(listenedPath.toString() + "\\"
+									+ event.context().toString()));
 					
 					System.err.println("putuje: "+userId+newlyCreatedFile.getFileName());
 					fileCreatedList.push(userId+newlyCreatedFile.getFileName());
