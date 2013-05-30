@@ -207,7 +207,7 @@ public class FolderTree implements Serializable {
         for (Nod n : folder2.values()) {
             if (!n.getParent().equals(usr)&&folder.get(n.getValue()).getHistory().size()>0 && folder.get(usr+n.getName())!=null){
             	
-            	if(n.getHistory().getLast()==null){
+            	if(n.getHistory().getLast()==null && folder.get(usr+n.getName()).getHistory().getLast()!=null){
             		changes.add(n);
             	}
             	else if(folder.get(usr+n.getName()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
@@ -295,7 +295,7 @@ public class FolderTree implements Serializable {
         //plik zaktualizowano
         for (Nod n : syncFolder.values()) {
             if (!n.getParent().equals(usr)&&folder.get(n.getValue()).getHistory().size()>0 && folder.get(usr+n.getName())!=null){
-            	if(n.getHistory().getLast()==null){
+            	if(n.getHistory().getLast()==null && folder.get(usr+n.getName()).getHistory().getLast()!=null){
             		changes.add(n);
             	}
             	else if(folder.get(usr+n.getName()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
