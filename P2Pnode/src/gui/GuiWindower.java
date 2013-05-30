@@ -134,7 +134,7 @@ public class GuiWindower implements PropertyChangeListener {
             spacer1.setBackground(new Color(0, 0, 0, 0));
             panelPierwszegoUruchomienia.add(spacer1);
 
-            RichJLabel tytulPowitania = new RichJLabel(":::::::::::::: P2PDropbox ::::::::::::::", 0);
+            RichJLabel tytulPowitania = new RichJLabel(":::::::::::::: P2P fileshare ::::::::::::::", 0);
             tytulPowitania.setFont(new Font("Segoe UI", Font.PLAIN, 18));
             panelPierwszegoUruchomienia.add(tytulPowitania);
 
@@ -171,7 +171,7 @@ public class GuiWindower implements PropertyChangeListener {
             //Indices start at 0, so 4 specifies the pig.
             serverIPAdress = new JTextField();
             JComboBox comboboxKartSieciowych = new JComboBox(dostepneIP);
-            comboboxKartSieciowych.setPreferredSize(new Dimension(100, 20));
+            comboboxKartSieciowych.setPreferredSize(new Dimension(160, 20));
             comboboxKartSieciowych.addActionListener(new ActionListener() {
 
                 @Override
@@ -210,7 +210,7 @@ public class GuiWindower implements PropertyChangeListener {
             spacer31.setBackground(new Color(0, 0, 0, 0));
             panelPierwszegoUruchomienia.add(spacer31);
 
-            RichJLabel inLabel = new RichJLabel("Port dla wymiany plikÛw:", 0);
+            RichJLabel inLabel = new RichJLabel("Port dla wymiany plików:", 0);
             inLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             panelPierwszegoUruchomienia.add(inLabel);
 
@@ -224,7 +224,7 @@ public class GuiWindower implements PropertyChangeListener {
             portInFieldFilesRequests.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(portInFieldFilesRequests);
 
-            RichJLabel outLabel = new RichJLabel("Port dla po≥πczenia z bootstrapem:", 0);
+            RichJLabel outLabel = new RichJLabel("Port dla połączenia z bootstrapem:", 0);
             outLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             panelPierwszegoUruchomienia.add(outLabel);
 
@@ -407,7 +407,7 @@ public class GuiWindower implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("nazwa")) {
-            //TODO: co≈õ
+            //TODO: coś
         }
     }
 
@@ -426,7 +426,7 @@ public class GuiWindower implements PropertyChangeListener {
     }
 
     public void displayError(String string) {
-        // TODO Wy≈õwietl infromacjƒô o b≈Çƒôdzie
+        // TODO Wyświetl infromacjƒô o błędzie
 
     }
 
