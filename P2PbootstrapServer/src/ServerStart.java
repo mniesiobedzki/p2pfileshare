@@ -1,3 +1,5 @@
+import org.apache.log4j.Logger;
+
 /**
  * Created with IntelliJ IDEA.
  * User: marek
@@ -7,6 +9,7 @@
  */
 public class ServerStart {
 
+    public static final Logger LOG = Logger.getLogger(ServerStart.class);
     private int serverPort;
 
     private BootstrapServerRunner bootstrapServerRunner;
@@ -32,5 +35,11 @@ public class ServerStart {
 
     public int getServerPort() {
         return serverPort;
+    }
+
+    public void machineInfo(){
+        LOG.info("Operating system name: " + System.getProperty("os.name"));
+        LOG.info("Operating system version: " + System.getProperty("os.version"));
+        LOG.info("Java version: " +  System.getProperty("java.version"));
     }
 }
