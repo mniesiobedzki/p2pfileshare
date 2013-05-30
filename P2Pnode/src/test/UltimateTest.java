@@ -12,7 +12,7 @@ public class UltimateTest {
 		String ip = "192.168.1.105";
 		int portIn = 5555;
 		int portOut= 6666;
-		int portFile= 7777;
+		int portFile= 13267;
 		String fname="kuku";
 		String path="kuku//";
 		
