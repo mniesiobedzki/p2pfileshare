@@ -198,8 +198,9 @@ public class FolderTree implements Serializable {
         //plik zaktualizowano
         for (Nod n : folder2.values()) {
             if (folder.get(n.getValue()).getHistory().size()>0){
-        		System.out.println(n.getHistory());
         		System.out.println(n.getHistory().getLast());
+        		System.out.println("data sprawdzanego: "+n.getHistory().getLast().getData());
+        		System.out.println("data zewnetrznego: "+folder.get(n.getValue()).getHistory().getLast().getData());
             	if(folder.get(n.getValue()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
             		System.out.println("zmieniono "+ n.name);
             		changes.add(n);
