@@ -38,7 +38,7 @@ public class MFolderListener {
 	public static Path listenedPath;		// ścieżka folderu który jest nasłuchiwany
 	
 	public static void runFolderListener(String path, final FolderTree folderTree, final String userId){
-		
+		System.out.println("MFolderListener dziala");
 		final Path myDir = Paths.get(path); // define a folder root
 		listenedPath = myDir;
 		try {

@@ -22,13 +22,13 @@ public class FileClient{
 	 * @param path - path of folder
 	 * @param name - name of file
 	 */
-	  public FileClient (FolderTree ft, Nod n, String host, String key, String path, String name , String usr) {
+	  public FileClient (FolderTree ft, Nod n, String host, String key, String path, String name , String usr, int port) {
 	    long start = System.currentTimeMillis();
 	    
 	    // localhost for testing
 	    Socket sock;
 		try {
-			sock = new Socket(host,13267);
+			sock = new Socket(host,port);
 	    System.out.println("Connecting...");
 	    OutputStream os = sock.getOutputStream();
 	    key+='\n';

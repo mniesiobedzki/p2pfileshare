@@ -40,7 +40,7 @@ public class TestServer {
 		//ft.addUser(uname, path, "192.168.80.32", 1234);
 		File f = new File(fileName,path+fileName, uname);
 		ft.addFile(f, uname);
-		FileServer server = new FileServer(ft, uname);
+		FileServer server = new FileServer(ft, uname, 1234);
 	}
 
 }

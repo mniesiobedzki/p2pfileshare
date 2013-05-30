@@ -1,6 +1,7 @@
 package main;
 
 import file.File;
+import file.FileServer;
 import folder.FolderTree;
 import gui.GuiWindower;
 import node.ClientP2Pnode;
@@ -62,6 +63,7 @@ public class Controller {
 
                 // Podpięcie foleru do wymiany plików
                 folderTree = new FolderTree(gui.getFolderPath(), gui.getClientName(), clientP2Pnode.getJCSyncTreeMap(), gui.getClientIp(), gui.getPortIn());
+        		FileServer server = new FileServer(folderTree, gui.getClientName(),gui.getPortIn());
                 folderTree.update();
             }
 

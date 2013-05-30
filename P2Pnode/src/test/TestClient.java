@@ -22,7 +22,7 @@ public class TestClient {
 		//ft.addUser(uname, path, thisIp, port );
 		File f = new File(FileName,path+FileName, uname);
 		ft.addFile(f, uname);
-		FileClient client = new FileClient(ft, null, ip, uname+FileName,path, FileName, uname);
+		FileClient client = new FileClient(ft, null, ip, uname+FileName,path, FileName, uname, port);
 
 	}
 

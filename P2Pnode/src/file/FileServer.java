@@ -14,8 +14,9 @@ import folder.Nod;
 public class FileServer extends Thread {
 	public FolderTree tree;
 	public String uname;
+	public int  port;
 
-	public FileServer(FolderTree ft, String name) {
+	public FileServer(FolderTree ft, String name, int port) {
 		// create socket
 		tree = ft;
 		uname = name;
@@ -47,7 +48,7 @@ public class FileServer extends Thread {
 	public void run() {
 		ServerSocket servsock;
 		try {
-			servsock = new ServerSocket(13267);
+			servsock = new ServerSocket(port);
 			while (true) {
 
 				System.out.println("Waiting...");

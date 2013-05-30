@@ -27,7 +27,7 @@ public class UltimateTest {
 		}
 
 		//serwer.ft.addUser("usr2", path);
-		FileServer server = new FileServer(serwer.ft, usr);
+		FileServer server = new FileServer(serwer.ft, usr, 1234);
 		while(true){
 			if(klient.changed){
 				serwer.ft.update(klient.ft.getFolder());
