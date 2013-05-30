@@ -48,7 +48,7 @@ public class MFolderListener {
 					while (true) {
 						handleDirectoryChangeEvent(myDir,folderTree,userId);
 						try {
-							Thread.sleep(6000);
+							Thread.sleep(300);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
