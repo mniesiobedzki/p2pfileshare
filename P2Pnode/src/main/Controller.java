@@ -33,9 +33,9 @@ public class Controller {
             System.out.println("Akcja " + e.getActionCommand());
             if (e.getActionCommand().equals("Rozpocznij")) {
 
-                //clientP2Pnode = new ClientP2Pnode(Integer.parseInt(gui.getClientPort()), gui.getServerAddress(), Integer.parseInt(gui.getServerPort()), gui.getClientName(), Controller.this);
+
                 clientP2Pnode.initializeJCSyncHashMap(Integer.parseInt(gui.getClientPort()), gui.getServerAddress(), Integer.parseInt(gui.getServerPort()), gui.getClientName());
-                // TODO: coś
+
                 while (!clientP2Pnode.isConnected()) {
                     LOG.info("Node still connecting");
                     snooze(1000);
@@ -50,22 +50,17 @@ public class Controller {
                 folderTree.update();
 
             }
-
         }
     };
 
 
-    public Controller(GuiWindower gui2) {
-        this.gui = gui2;
+    public Controller(GuiWindower guiWindower) {
+        this.gui = guiWindower;
         this.gui.addButtonActionListener(guziki); // podpięcie guzików
         this.addPropertyChangeListener(this.gui); // podpięcie zmian
         LOG.debug("Controller - created");
 
         clientP2Pnode = new ClientP2Pnode(this);
-    }
-
-    public static void main(String[] args) {
-
     }
 
     private void addPropertyChangeListener(PropertyChangeListener listener) {
