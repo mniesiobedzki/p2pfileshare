@@ -197,9 +197,13 @@ public class FolderTree implements Serializable {
         System.out.println(this);
         //plik zaktualizowano
         for (Nod n : folder2.values()) {
-            if (folder.get(n.getValue()).getHistory().size()>0 && folder.get(n.getValue()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
-            	System.out.println("zmieniono "+ n.name);
-            	changes.add(n);
+            if (folder.get(n.getValue()).getHistory().size()>0){
+        		System.out.println(n.getHistory());
+        		System.out.println(n.getHistory().getLast());
+            	if(folder.get(n.getValue()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
+            		System.out.println("zmieniono "+ n.name);
+            		changes.add(n);
+            	}
             }
         }
         users.addAll(folder.get("root").getChildren());
