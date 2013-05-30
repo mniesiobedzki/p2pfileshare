@@ -140,15 +140,16 @@ public class MFolderListener {
 					
 					for (String nodek : folderTree.getFolder().get(userId).getChildren()) {
 						Nod singleNod = folderTree.getFolder().get(nodek); // Jeden plik u usera
-						
-						if(filesAndTheirHistory.get(userId+singleNod.getName()).getSingleFileHistory().getLast() == null){
-							break;
-						}
+//						if(filesAndTheirHistory.get(userId+singleNod.getName()).getSingleFileHistory().getLast() == null){
+//							System.out.println(singleNod.getHistory());
+//							break;
+//						}
 						
 						boolean exists = false;
 						for (java.io.File file : listaPlikowWFolderze) {
 							if (file.getName().equals(singleNod.getName())) {
 								exists = true;
+								System.out.println(file.getName());
 							}
 						}
 						if (!exists) {
