@@ -8,10 +8,10 @@ public class UltimateTest {
 	public static void main(String[] args) {
 		
 		String usr = "Marcin";
-		String thisIp = "1.1.1.25";
-		String ip = "1.1.1.21";
-		int portIn = 6666;
-		int portOut= 5555;
+		String thisIp = "192.168.1.103";
+		String ip = "192.168.1.105";
+		int portIn = 5555;
+		int portOut= 6666;
 		String fname="kuku";
 		String path="kuku//";
 		

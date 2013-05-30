@@ -31,7 +31,9 @@ public class FileClient{
 			sock = new Socket(host,port);
 	    System.out.println("Connecting...");
 	    OutputStream os = sock.getOutputStream();
-	    key+='\n';
+	    System.out.println(key);
+	    System.out.println(ft.getFolder().keySet());
+	    System.out.println(ft.getFolder().values());
 	    System.out.println(ft.getFolder().get(key));
 	    System.out.println(ft.getFolder().get(key).getHistory());
 	    System.out.println(ft.getFolder().get(key).getHistory().getLast());
