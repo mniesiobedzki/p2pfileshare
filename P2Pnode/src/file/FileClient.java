@@ -77,7 +77,7 @@ public class FileClient{
 				// read this file into InputStream
 		 
 				// write the inputStream to a FileOutputStream
-				FileOutputStream outputStream = new FileOutputStream(new java.io.File(path+tempStamp+name));
+				FileOutputStream outputStream = new FileOutputStream(new java.io.File(path+"\\"+tempStamp+name));
 		 
 				int read = 0;
 				byte[] bytes = new byte[1024];
@@ -90,9 +90,9 @@ public class FileClient{
 				outputStream.flush();
 		 
 				//rename file to final name without tempStamp at the beginning of filename
-				java.io.File filenameWithTempStamp = new java.io.File(path+tempStamp+name); 
+				java.io.File filenameWithTempStamp = new java.io.File(path+"\\"+tempStamp+name); 
 				MFolderListener.ignorowanyPlik = name;
-				java.io.File docelowyPlik = new java.io.File(path+name);
+				java.io.File docelowyPlik = new java.io.File(path+"\\"+name);
 				if (docelowyPlik.exists()){
 				    docelowyPlik.delete();
 				}
