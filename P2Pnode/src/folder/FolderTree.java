@@ -206,9 +206,11 @@ public class FolderTree implements Serializable {
         //plik zaktualizowano
         for (Nod n : folder2.values()) {
             if (!n.getParent().equals(usr)&&folder.get(n.getValue()).getHistory().size()>0 && folder.get(usr+n.getName())!=null){
-            	System.out.println(folder.get(usr+n.getName()).getHistory().getLast().getData());
-            	System.out.println(n.getHistory().getLast().getData());
-            	if(folder.get(usr+n.getName()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
+            	
+            	if(n.getHistory().getLast()==null){
+            		changes.add(n);
+            	}
+            	else if(folder.get(usr+n.getName()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
             		System.out.println("zmieniono "+ n.name);
             		changes.add(n);
             	}
@@ -291,9 +293,10 @@ public class FolderTree implements Serializable {
         //plik zaktualizowano
         for (Nod n : syncFolder.values()) {
             if (!n.getParent().equals(usr)&&folder.get(n.getValue()).getHistory().size()>0 && folder.get(usr+n.getName())!=null){
-            	System.out.println(folder.get(usr+n.getName()).getHistory().getLast().getData());
-            	System.out.println(n.getHistory().getLast().getData());
-            	if(folder.get(usr+n.getName()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
+            	if(n.getHistory().getLast()==null){
+            		changes.add(n);
+            	}
+            	else if(folder.get(usr+n.getName()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
             		System.out.println("zmieniono "+ n.name);
             		changes.add(n);
             	}
