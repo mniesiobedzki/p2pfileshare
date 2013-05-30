@@ -217,10 +217,18 @@ public class MFolderListener {
 						
 						fileModified = true;
 						fileModifiedList.push(event.context().toString());
-						folderTree.folder.get(userId+f.getFileName()).history.add(f.getSingleFileHistory().getLast());
-						folderTree.folder.get(userId+f.getFileName()).getHistory().getLast().setData(kuku.lastModified());
-						System.out.println(folderTree.folder.get(userId+f.getFileName()).getHistory());
-						folderTree.updated=true;
+						if(folderTree.syncFolder!=null){
+							folderTree.syncFolder.get(userId+f.getFileName()).history.add(f.getSingleFileHistory().getLast());
+							folderTree.syncFolder.get(userId+f.getFileName()).getHistory().getLast().setData(kuku.lastModified());
+							System.out.println(folderTree.folder.get(userId+f.getFileName()).getHistory());
+							folderTree.update();
+							folderTree.updated=true;
+						}else{
+							folderTree.folder.get(userId+f.getFileName()).history.add(f.getSingleFileHistory().getLast());
+							folderTree.folder.get(userId+f.getFileName()).getHistory().getLast().setData(kuku.lastModified());
+							System.out.println(folderTree.folder.get(userId+f.getFileName()).getHistory());
+							folderTree.updated=true;
+						}
 					}
 					
 					
