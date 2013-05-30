@@ -21,6 +21,8 @@ public class Start {
 
     public void runMVC() {
 
+        machineInfo();
+
         // ####### MODEL #######
         //TODO: Preferencje użytkownika,
 
@@ -32,9 +34,9 @@ public class Start {
 
     }
 
-    public void machineInfo(){
+    public void machineInfo() {
         LOG.info("Operating system name: " + System.getProperty("os.name"));
         LOG.info("Operating system version: " + System.getProperty("os.version"));
-        LOG.info("Java version: " +  System.getProperty("java.version"));
+        LOG.info("Java version: " + System.getProperty("java.version"));
     }
 }
