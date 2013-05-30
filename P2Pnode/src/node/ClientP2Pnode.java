@@ -75,6 +75,7 @@ public class ClientP2Pnode {
         }
     };
 
+
     @SuppressWarnings("unchecked")
     public ClientP2Pnode(int portOut, String serverIP, int serverPort,
                          String nodeName, Controller controller) {
@@ -123,6 +124,56 @@ public class ClientP2Pnode {
 
 
     }
+
+    public ClientP2Pnode(Controller controller) {
+
+        this.controller = controller;
+        this.nodeCallback = new ClientP2PnodeCallback();
+
+
+    }
+
+    public void initializeJCSync(int portOut, String serverIP, int serverPort, String nodeName) {
+        this.node = this.connect(serverIP, serverPort, nodeName, portOut, this.nodeCallback);
+
+        // JCSyncObservable nn = new JCSyncObservable();
+        // nn.addObserver(o)
+
+        while (!this.node.isConnected()) {
+            System.out.println("Node " + nodeName + ": Not connected :(");
+            snooze(1000);
+        }
+        LOG.trace("Node " + nodeName + ": Connected !!");
+
+        LOG.trace("Initializing JCSyncCore");
+        this.jcSyncCore = new JCSyncCore(this.node, serverPort);
+
+        try {
+            this.jcSyncCore.init();
+            this.observable = new JCSyncObservable();
+            //initCollection1(nodeName, controller);
+            this.jcSyncTreeMap = new JCSyncTreeMap<String, Nod>();
+            LOG.trace("Creating the collection");
+            try {
+                this.jcSyncTreeMap_sharedCollectionObject = new SharedCollectionObject(collID, this.jcSyncTreeMap, this.jcSyncCore, DefaultConsistencyManager.class);
+            } catch (ObjectExistsException e) {
+                LOG.debug("Collection already exists");
+                LOG.trace("Connecting to the collection");
+                this.jcSyncTreeMap_sharedCollectionObject = (SharedCollectionObject) SharedCollectionObject.getFromOverlay(collID, this.jcSyncCore);
+                this.jcSyncTreeMap = (JCSyncTreeMap<String, Nod>) this.jcSyncTreeMap_sharedCollectionObject.getNucleusObject();
+            }
+
+            this.observable.addObserver(this.collectionObserver);
+            this.jcSyncTreeMap_sharedCollectionObject.addStateListener(this.collectionListener);
+        } catch (Exception e) {
+            e.printStackTrace();
+            /*
+             * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
+			 * Level.SEVERE, null, e);
+			 */
+        }
+    }
+
 
     public static void main(String[] args) {
         ClientP2Pnode nt = new ClientP2Pnode(6062, "1.1.1.4", 6060, "testowy2", null);
