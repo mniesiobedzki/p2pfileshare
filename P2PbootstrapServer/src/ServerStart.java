@@ -7,12 +7,19 @@
  */
 public class ServerStart {
 
+    private int serverPort;
 
     private BootstrapServerRunner bootstrapServerRunner;
 
     public ServerStart() {
-        int bsPort = 21000;
-        this.bootstrapServerRunner = new BootstrapServerRunner(bsPort);
+        this.serverPort  = 21000;
+        this.bootstrapServerRunner = new BootstrapServerRunner(this.serverPort);
+        this.bootstrapServerRunner.start();
+    }
+
+    public ServerStart(int serverPort) {
+        this.serverPort = serverPort;
+        this.bootstrapServerRunner = new BootstrapServerRunner(this.serverPort);
         this.bootstrapServerRunner.start();
     }
 
@@ -20,9 +27,10 @@ public class ServerStart {
     public static void main(String[] args) {
         System.out.println("Server STARTING");
         ServerStart server = new ServerStart();
-        System.out.println("Server Started");
-
+        System.out.println("Server Started at port: " + server.getServerPort());
     }
 
-
+    public int getServerPort() {
+        return serverPort;
+    }
 }
