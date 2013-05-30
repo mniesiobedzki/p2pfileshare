@@ -177,7 +177,7 @@ public class MFolderListener {
 					System.out.println(filesAndTheirHistory);
 					System.out.println(event.context().toString());
 					System.out.println(f);
-					if(f!=null && !currentFileMD5.equals(f.getSingleFileHistory().getLast().getMd5())){
+					if(f.getLastModified()==0&&(f!=null && !currentFileMD5.equals(f.getSingleFileHistory().getLast().getMd5()))){
 						System.out.println("bangla");
 						java.io.File kuku = new java.io.File(listenedPath.toString()+"\\"+event.context().toString());
 						System.out.println(event.context().toString());
