@@ -21,7 +21,7 @@ public class FileServer extends Thread {
 		tree = ft;
 		uname = name;
 		this.start();
-
+		this.port=port;
 	}
 
 	/***
