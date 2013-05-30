@@ -24,7 +24,7 @@ public class TestTreeClient implements Runnable{
 			while (!ok) {
 				try {
 					sock = new Socket(serverIP, serverPort);
-					System.out.println("TestTreeClient: Connecting...");
+					//System.out.println("TestTreeClient: Connecting...");
 					ok = true;
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
