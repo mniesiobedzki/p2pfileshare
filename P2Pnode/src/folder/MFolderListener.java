@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import file.File;
+import file.FileState;
 
 public class MFolderListener {
 	
@@ -140,10 +141,12 @@ public class MFolderListener {
 					
 					for (String nodek : folderTree.getFolder().get(userId).getChildren()) {
 						Nod singleNod = folderTree.getFolder().get(nodek); // Jeden plik u usera
-//						if(filesAndTheirHistory.get(userId+singleNod.getName()).getSingleFileHistory().getLast() == null){
-//							System.out.println(singleNod.getHistory());
-//							break;
-//						}
+						if(filesAndTheirHistory.get(userId+singleNod.getName()).getSingleFileHistory().getLast() == null){
+							for (FileState fs : singleNod.getHistory()) {
+								System.out.println(fs.getFileName()+" "+fs.getData());
+							}
+							break;
+						}
 						
 						boolean exists = false;
 						for (java.io.File file : listaPlikowWFolderze) {
