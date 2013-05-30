@@ -267,8 +267,8 @@ public class FolderTree implements Serializable {
             } else {
                 //kod kasujący plik
             	System.out.println("Kasuje plik: "+ nod.name);
-            	System.out.println("Ścieżka: "+ folder.get(usr).getPath() + nod.getName());
-                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + nod.getName());
+            	System.out.println("Ścieżka: "+ folder.get(usr).getPath() +"\\"+ nod.getName());
+                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() +"\\"+ nod.getName());
                 if (this.getFolder().containsKey(usr + nod.getName())) {
                     this.getFolder().get(usr + nod.getName()).history.add(null);
                     this.updated = true;
@@ -345,7 +345,7 @@ public class FolderTree implements Serializable {
                 FileClient fileClient = new FileClient(this, nod, syncFolder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
             } else {
                 //kod kasujący plik
-                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + nod.getName());
+                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() +"\\"+ nod.getName());
                 if (this.getFolder().containsKey(usr + nod.getName())) {
                     this.getFolder().get(usr + nod.getName()).history.add(null);
                     this.updated = true;
