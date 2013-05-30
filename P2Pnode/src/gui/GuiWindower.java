@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.StringTokenizer;
 
 
 public class GuiWindower implements PropertyChangeListener {
@@ -169,6 +170,7 @@ public class GuiWindower implements PropertyChangeListener {
 			
             //Create the combo box, select item at index 4.
             //Indices start at 0, so 4 specifies the pig.
+			serverIPAdress = new JTextField();
             JComboBox comboboxKartSieciowych = new JComboBox(dostepneIP);
             comboboxKartSieciowych.setPreferredSize(new Dimension(200, 20));
             comboboxKartSieciowych.addActionListener(new ActionListener() {
@@ -176,21 +178,25 @@ public class GuiWindower implements PropertyChangeListener {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					wybraneIP = (String)((JComboBox)e.getSource()).getSelectedItem();
+					StringTokenizer stringtokenizer = new StringTokenizer(wybraneIP, ".");
+					serverIPAdress.setText( stringtokenizer.nextToken()+"."+stringtokenizer.nextToken()+"."+stringtokenizer.nextToken()+"." );
 				}
 			});
+            comboboxKartSieciowych.setSelectedIndex(1);
             panelPierwszegoUruchomienia.add(comboboxKartSieciowych);
             
             RichJLabel podajIPJLabel = new RichJLabel("IP i port bootstrapa", 0);
             podajIPJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             panelPierwszegoUruchomienia.add(podajIPJLabel);
 
-            serverIPAdress = new JTextField();
+            
             serverIPAdress.setPreferredSize(new Dimension(180, 30));
             serverIPAdress.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             serverIPAdress.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(serverIPAdress);
 
             serverPortInput = new JTextField();
+            serverPortInput.setText("21000");
             serverPortInput.setPreferredSize(new Dimension(50, 30));
             serverPortInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             serverPortInput.setHorizontalAlignment(JTextField.CENTER);
@@ -210,6 +216,8 @@ public class GuiWindower implements PropertyChangeListener {
             panelPierwszegoUruchomienia.add(inLabel);
 
             portInFieldFilesRequests = new JTextField();
+            Random random1 = new Random();
+            portInFieldFilesRequests.setText(random1.nextInt(10000) + "");
             portInFieldFilesRequests.setPreferredSize(new Dimension(60, 30));
             portInFieldFilesRequests.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             portInFieldFilesRequests.setHorizontalAlignment(JTextField.CENTER);
@@ -220,6 +228,8 @@ public class GuiWindower implements PropertyChangeListener {
             panelPierwszegoUruchomienia.add(outLabel);
 
             portOutField = new JTextField();
+            Random random2 = new Random();
+            portOutField.setText(random2.nextInt(10000) + "");
             portOutField.setPreferredSize(new Dimension(60, 30));
             portOutField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             portOutField.setHorizontalAlignment(JTextField.CENTER);
@@ -230,6 +240,8 @@ public class GuiWindower implements PropertyChangeListener {
             panelPierwszegoUruchomienia.add(podajIdJLabel);
 
             nodeName = new JTextField();
+            Random random3 = new Random();
+            nodeName.setText(random3.nextInt(100000) + "");
             nodeName.getDocument().addDocumentListener(new DocumentListener() {
                 public void changedUpdate(DocumentEvent e) {
                     generujIdInput.setEnabled(false);
