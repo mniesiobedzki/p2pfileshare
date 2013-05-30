@@ -73,6 +73,7 @@ public class FileServer extends Thread {
 					Nod n = tree.getFolder().get(msg);
 					//System.err.println(n.getValue() + " " + n.getName());
 					System.out.println(n);
+					path +="\\";
 					path += n.getName();
 					System.err.println("wysy³am plik");
 					System.out.println("key: "+ msg);
