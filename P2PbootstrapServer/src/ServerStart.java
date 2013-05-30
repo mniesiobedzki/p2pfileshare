@@ -2,7 +2,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Created with IntelliJ IDEA.
- * User: marek
+ * User: marek niesiobedzki
  * Date: 5/30/13
  * Time: 14:54
  * To change this template use File | Settings | File Templates.
