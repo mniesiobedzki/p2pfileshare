@@ -209,6 +209,8 @@ public class FolderTree implements Serializable {
             	
             	if(n.getHistory().getLast()==null && folder.get(usr+n.getName()).getHistory().getLast()!=null){
             		changes.add(n);
+            	}else if(folder.get(usr+n.getName()).getHistory().getLast()==null){
+            	//raz wykasowany jest ignorowany	
             	}
             	else if(folder.get(usr+n.getName()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
             		System.out.println("zmieniono "+ n.name);
@@ -297,6 +299,8 @@ public class FolderTree implements Serializable {
             if (!n.getParent().equals(usr)&&folder.get(n.getValue()).getHistory().size()>0 && folder.get(usr+n.getName())!=null){
             	if(n.getHistory().getLast()==null && folder.get(usr+n.getName()).getHistory().getLast()!=null){
             		changes.add(n);
+            	}else if(folder.get(usr+n.getName()).getHistory().getLast()==null){
+            	//raz wykasowany jest ignorowany	
             	}
             	else if(folder.get(usr+n.getName()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
             		System.out.println("zmieniono "+ n.name);
