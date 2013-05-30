@@ -318,5 +318,6 @@ public class FolderTree implements Serializable {
                 }
             }
         }
+        this.syncFolder.putAll(folder);
     }
 }
