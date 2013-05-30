@@ -62,7 +62,9 @@ public class Controller {
                 LOG.info("Node connected");
 
                 // Podpięcie foleru do wymiany plików
+                LOG.info("Tworzę nowy obiekt folder Tree z argumentami("+gui.getFolderPath()+", "+gui.getClientName()+", drzewo-JCSync, "+gui.getClientIp()+", "+gui.getPortIn()+")");
                 folderTree = new FolderTree(gui.getFolderPath(), gui.getClientName(), clientP2Pnode.getJCSyncTreeMap(), gui.getClientIp(), gui.getPortIn());
+                LOG.info("Tworze nowy obiekt FileServer z argumentami(folderTree" +", "+gui.getClientName()+", "+ gui.getPortIn()+")");
         		FileServer server = new FileServer(folderTree, gui.getClientName(),gui.getPortIn());
                 folderTree.update();
             }
