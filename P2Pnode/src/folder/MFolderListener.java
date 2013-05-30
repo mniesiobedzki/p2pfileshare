@@ -6,6 +6,7 @@ import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class MFolderListener {
 	public static LinkedList<String> fileDeletedList 	= new LinkedList<String>();
 	public static LinkedList<String> fileModifiedList 	= new LinkedList<String>();
 	
-	public static String ignorowanyPlik; //ignorowanie potrzebne do poprawnej synchronizcji - zapobiega wykryciu modyfikacji pliku po tym jak zosta³ zsynchronizowany od drugiego peera i jest zmieniana nazwa z ^nazwapliku do nazwapliku
+	public static String ignorowanyPlik; //ignorowanie potrzebne do poprawnej synchronizcji - zapobiega wykryciu modyfikacji pliku po tym jak zostaï¿½ zsynchronizowany od drugiego peera i jest zmieniana nazwa z ^nazwapliku do nazwapliku
 	
 	// Lista obiektÃ³w typu FileState.
 	// Lista ta przechowuje informacje o wszystkich modyfikacjach
@@ -49,7 +50,7 @@ public class MFolderListener {
 					while (true) {
 						handleDirectoryChangeEvent(myDir,folderTree,userId);
 						try {
-							Thread.sleep(10);
+							Thread.sleep(100);
 						} catch (InterruptedException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -91,12 +92,12 @@ public class MFolderListener {
 					
 					if( ignorowanyPlik != null && event.context().toString().equals( ignorowanyPlik ) ) {
 						
-						System.out.println("Created - IGNORUJÊ!");
+						System.out.println("Created - IGNORUJï¿½!");
 						ignorowanyPlik = null;
 						return;
 					} else {
 						
-						System.out.println("NIE ignorujê "+ignorowanyPlik+" != "+event.context().toString());
+						System.out.println("NIE ignorujï¿½ "+ignorowanyPlik+" != "+event.context().toString());
 						
 					}
 					
@@ -106,6 +107,21 @@ public class MFolderListener {
 					
 					File newlyCreatedFile = new File(event.context().toString(),MFolderListener.listenedPath.toString()+ "\\"+event.context().toString(), userId);
 					
+//					if(kuku.lastModified() == 0){
+//						Date dt = new Date();
+//						System.err.println("WszedÅ‚em i: " +dt.getTime() );
+//						
+//						newlyCreatedFile.setFileStateHistoryEntry(
+//								dt.getTime(), event.context().toString(),
+//								userId, new java.io.File(event.context().toString()).length(),
+//								File.getMD5Checksum(listenedPath.toString() + "\\"
+//										+ event.context().toString()));
+//					} else {
+//						
+//						
+//					}
+//					
+
 					newlyCreatedFile.setFileStateHistoryEntry(
 							kuku.lastModified(), event.context().toString(),
 							userId, new java.io.File(event.context().toString()).length(),
@@ -118,7 +134,7 @@ public class MFolderListener {
 					
 					folderTree.addFile(newlyCreatedFile, userId);
 
-					System.err.println("Doda³em do drzewa \n" + folderTree.toString());
+					System.err.println("Dodaï¿½em do drzewa \n" + folderTree.toString());
 					// setFileStateHistoryEntry(new Date().getTime(),
 					// event.context().toString(),
 					// "1111",
@@ -143,7 +159,11 @@ public class MFolderListener {
 						Nod singleNod = folderTree.getFolder().get(nodek); // Jeden plik u usera
 						if(filesAndTheirHistory.get(userId+singleNod.getName()).getSingleFileHistory().getLast() == null){
 							for (FileState fs : singleNod.getHistory()) {
-								System.out.println(fs.getFileName()+" "+fs.getData());
+								if(fs!=null && fs.getFileName()!=null){
+									System.out.println(fs.getFileName()+" "+fs.getData());
+								}else{
+									System.out.println("null");
+								}
 							}
 							break;
 						}
