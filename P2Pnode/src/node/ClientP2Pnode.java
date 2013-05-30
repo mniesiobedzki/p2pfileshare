@@ -76,7 +76,7 @@ public class ClientP2Pnode {
             }
         }
     };
-    private pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncHashMap<String, Nod> JCSyncHashMap;
+
     private JCSyncHashMap<String, Nod> jcSyncHashMap;
     private SharedCollectionObject jcSyncHashMap_sharedCollectionObject;
 
@@ -496,6 +496,6 @@ public class ClientP2Pnode {
     }
 
     public JCSyncHashMap<String, Nod> getJCSyncHashMap() {
-        return JCSyncHashMap;
+        return this.jcSyncHashMap;
     }
 }
