@@ -48,6 +48,7 @@ public class FileServer extends Thread {
 	public void run() {
 		ServerSocket servsock;
 		try {
+			System.out.println("Server plików na porcie: "+port);
 			servsock = new ServerSocket(port);
 			while (true) {
 
@@ -83,9 +84,6 @@ public class FileServer extends Thread {
 					break;
 				}
 			}
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
