@@ -13050,3 +13050,8 @@ java.net.ConnectException: Connection timed out: connect
 	at pl.edu.pjwstk.p2pp.transport.TransportThreadPoolExecutor$Worker.run(TransportThreadPoolExecutor.java:942)
 	at java.lang.Thread.run(Unknown Source)
 16:58:54.110 WARN  [pl.edu.pjwstk.net.proto.SendTask] - Could not send message class pl.edu.pjwstk.p2pp.messages.responses.LookupPeerResponse to 192.168.243.1:4321
+14:24:09.572 DEBUG [main.Controller] - Controller - created
+14:59:33.467 DEBUG [main.Controller] - Controller - created
+15:00:17.516 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Method invoked with overlayAddress=192.168.1.155:21000 in 0 state.
+15:00:17.518 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - Joining begins. Bootstrap server at 192.168.1.155:21000
+15:00:17.519 DEBUG [pl.edu.pjwstk.p2pp.superpeer.SuperPeerPeer] - state changed to BOOTSTRAPPING

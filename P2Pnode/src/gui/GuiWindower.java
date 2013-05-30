@@ -117,7 +117,9 @@ public class GuiWindower implements PropertyChangeListener {
 
             BufferedImage obrazTla = null;
             try {
-                obrazTla = ImageIO.read(new File("bg.png"));
+                File file = new File("bg.png");
+                System.out.println(file.getAbsolutePath() +" " +file.canRead());
+                obrazTla = ImageIO.read(file);
             } catch (IOException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
