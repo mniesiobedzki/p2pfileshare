@@ -1,7 +1,5 @@
 package gui;
 
-import org.apache.log4j.Logger;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -23,8 +21,6 @@ import java.util.*;
 
 
 public class GuiWindower implements PropertyChangeListener {
-
-    public static final Logger LOG = Logger.getLogger(GuiWindower.class);
 
     protected final PopupFrame POPUP_FRAME = new PopupFrame();
     JTextField nodeName, serverIPAdress, portInFieldFilesRequests, portOutField, serverPortInput;
@@ -138,9 +134,13 @@ public class GuiWindower implements PropertyChangeListener {
             spacer1.setBackground(new Color(0, 0, 0, 0));
             panelPierwszegoUruchomienia.add(spacer1);
 
-            RichJLabel tytulPowitania = new RichJLabel("P2PDropbox - Witaj!", 0);
-            tytulPowitania.setFont(new Font("Segoe UI", Font.PLAIN, 22));
-            //panelPierwszegoUruchomienia.add(tytulPowitania);
+            RichJLabel tytulPowitania = new RichJLabel(":::::::::::::: P2PDropbox ::::::::::::::", 0);
+            tytulPowitania.setFont(new Font("Segoe UI", Font.PLAIN, 18));
+            panelPierwszegoUruchomienia.add(tytulPowitania);
+
+            RichJLabel wybierzInterf = new RichJLabel("Interfejs sieciowy:", 0);
+            wybierzInterf.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+            panelPierwszegoUruchomienia.add(wybierzInterf);
 
             Enumeration<NetworkInterface> nets = null;
             try {
@@ -171,7 +171,7 @@ public class GuiWindower implements PropertyChangeListener {
             //Indices start at 0, so 4 specifies the pig.
             serverIPAdress = new JTextField();
             JComboBox comboboxKartSieciowych = new JComboBox(dostepneIP);
-            comboboxKartSieciowych.setPreferredSize(new Dimension(200, 20));
+            comboboxKartSieciowych.setPreferredSize(new Dimension(100, 20));
             comboboxKartSieciowych.addActionListener(new ActionListener() {
 
                 @Override
@@ -188,58 +188,60 @@ public class GuiWindower implements PropertyChangeListener {
             }
             panelPierwszegoUruchomienia.add(comboboxKartSieciowych);
 
-            RichJLabel podajIPJLabel = new RichJLabel("IP i port bootstrapa", 0);
-            podajIPJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            RichJLabel podajIPJLabel = new RichJLabel("IP+port bootstrapa:", 0);
+            podajIPJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             panelPierwszegoUruchomienia.add(podajIPJLabel);
 
 
-            serverIPAdress.setPreferredSize(new Dimension(180, 30));
-            serverIPAdress.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            serverIPAdress.setPreferredSize(new Dimension(80, 25));
+            serverIPAdress.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             serverIPAdress.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(serverIPAdress);
 
             serverPortInput = new JTextField();
             serverPortInput.setText("21000");
-            serverPortInput.setPreferredSize(new Dimension(50, 30));
-            serverPortInput.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            serverPortInput.setPreferredSize(new Dimension(60, 25));
+            serverPortInput.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             serverPortInput.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(serverPortInput);
 
-            RichJLabel podajPortyLabel = new RichJLabel("Porty dla gniazd:", 0);
-            podajPortyLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-            panelPierwszegoUruchomienia.add(podajPortyLabel);
+            JPanel spacer31 = new JPanel();
+            spacer31.setPreferredSize(new Dimension(300, 15));
+            spacer31.setBackground(new Color(0, 0, 0, 0));
+            panelPierwszegoUruchomienia.add(spacer31);
 
-            JPanel spacer2 = new JPanel();
-            spacer2.setPreferredSize(new Dimension(300, 1));
-            spacer2.setBackground(new Color(0, 0, 0, 0));
-            panelPierwszegoUruchomienia.add(spacer2);
-
-            RichJLabel inLabel = new RichJLabel("filesync:", 0);
+            RichJLabel inLabel = new RichJLabel("Port dla wymiany plikÛw:", 0);
             inLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             panelPierwszegoUruchomienia.add(inLabel);
 
             portInFieldFilesRequests = new JTextField();
             Random random1 = new Random();
-            portInFieldFilesRequests.setText(random1.nextInt(10000) + "");
-            portInFieldFilesRequests.setPreferredSize(new Dimension(60, 30));
-            portInFieldFilesRequests.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            int rand1 = 666;
+            while (rand1 < 1024 || rand1 > 11000) rand1 = random1.nextInt(10000);
+            portInFieldFilesRequests.setText(rand1 + "");
+            portInFieldFilesRequests.setPreferredSize(new Dimension(60, 20));
+            portInFieldFilesRequests.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             portInFieldFilesRequests.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(portInFieldFilesRequests);
 
-            RichJLabel outLabel = new RichJLabel("bootstrap conn:", 0);
+            RichJLabel outLabel = new RichJLabel("Port dla po≥πczenia z bootstrapem:", 0);
             outLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             panelPierwszegoUruchomienia.add(outLabel);
 
             portOutField = new JTextField();
-            Random random2 = new Random();
-            portOutField.setText(random2.nextInt(10000) + "");
-            portOutField.setPreferredSize(new Dimension(60, 30));
-            portOutField.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            portOutField.setText((rand1 + 645) + "");
+            portOutField.setPreferredSize(new Dimension(60, 20));
+            portOutField.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             portOutField.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(portOutField);
 
+            JPanel spacer32 = new JPanel();
+            spacer32.setPreferredSize(new Dimension(300, 15));
+            spacer32.setBackground(new Color(0, 0, 0, 0));
+            panelPierwszegoUruchomienia.add(spacer32);
+
             RichJLabel podajIdJLabel = new RichJLabel("ID lub wygeneruj automatycznie", 0);
-            podajIdJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            podajIdJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             panelPierwszegoUruchomienia.add(podajIdJLabel);
 
             nodeName = new JTextField();
@@ -260,7 +262,7 @@ public class GuiWindower implements PropertyChangeListener {
             });
 
             nodeName.setPreferredSize(new Dimension(250, 30));
-            nodeName.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+            nodeName.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             nodeName.setHorizontalAlignment(JTextField.CENTER);
             panelPierwszegoUruchomienia.add(nodeName);
 
@@ -308,10 +310,10 @@ public class GuiWindower implements PropertyChangeListener {
             });
             panelPierwszegoUruchomienia.add(wybierzFolderBt);
 
-            JPanel spacer31 = new JPanel();
-            spacer31.setPreferredSize(new Dimension(300, 10));
-            spacer31.setBackground(new Color(0, 0, 0, 0));
-            panelPierwszegoUruchomienia.add(spacer31);
+            JPanel spacer34 = new JPanel();
+            spacer34.setPreferredSize(new Dimension(300, 10));
+            spacer34.setBackground(new Color(0, 0, 0, 0));
+            panelPierwszegoUruchomienia.add(spacer34);
 
             rozpocznijBt = new JButton("Rozpocznij");
             rozpocznijBt.setEnabled(false);
@@ -357,7 +359,6 @@ public class GuiWindower implements PropertyChangeListener {
 
         try {
             folderSynchronizowany = dest.getCanonicalPath();
-            LOG.info("Wybrano nowy folder: " + folderSynchronizowany);
 
         } catch (IOException ex) { // getCanonicalPath() threw IOException
 
@@ -406,7 +407,7 @@ public class GuiWindower implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("nazwa")) {
-            //TODO: coś
+            //TODO: co≈õ
         }
     }
 
@@ -425,7 +426,7 @@ public class GuiWindower implements PropertyChangeListener {
     }
 
     public void displayError(String string) {
-        // TODO Wyświetl infromację o błędzie
+        // TODO Wy≈õwietl infromacjƒô o b≈Çƒôdzie
 
     }
 
