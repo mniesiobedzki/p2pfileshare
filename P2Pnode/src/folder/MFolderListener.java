@@ -192,7 +192,7 @@ public class MFolderListener {
 						fileModified = true;
 						fileModifiedList.push(event.context().toString());
 						folderTree.folder.get(userId+f.getFileName()).history.add(f.getSingleFileHistory().getLast());
-						folderTree.folder.get(userId+f.getFileName()).getHistory().getLast().setData(f.getLastModified());
+						folderTree.folder.get(userId+f.getFileName()).getHistory().getLast().setData(kuku.lastModified());
 						folderTree.updated=true;
 					}
 					
