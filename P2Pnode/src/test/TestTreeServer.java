@@ -16,6 +16,7 @@ public class TestTreeServer implements Runnable {
 	String path;
 	String ip;
 	int port;
+	int portT;
 	public FolderTree ft;
 	JCSyncTreeMap syncTree;
 	
@@ -26,7 +27,6 @@ public class TestTreeServer implements Runnable {
 
 
 			ft = new FolderTree(fname,uname, syncTree,ip, port);
-			ft.addUser(uname, path, ip, port);
 			// File fa = new File(name, File.generateFileId(uname));
 			java.io.File[] listaFajli = File.listAllTheFilesInDir(path);
 
@@ -50,7 +50,7 @@ public class TestTreeServer implements Runnable {
 
 			while (true) {
 
-			welcomeSocket = new ServerSocket(port);
+			welcomeSocket = new ServerSocket(portT);
 			Socket connectionSocket = welcomeSocket.accept();
 			System.err.println("TestTreeServer: Connected");
 
@@ -104,13 +104,14 @@ public class TestTreeServer implements Runnable {
 	 *            - file path
 	 * @param port - port
 	 */
-	public TestTreeServer(JCSyncTreeMap syncTree, String fname, String uname, String path, int port, String ip) {
+	public TestTreeServer(JCSyncTreeMap syncTree, String fname, String uname, String path, int port, int portT, String ip) {
 		super();
 		this.syncTree=syncTree;
 		this.fname = fname;
 		this.uname = uname;
 		this.path = path;
 		this.port = port;
+		this.portT = portT;
 		this.ip = ip;
 	}
 }

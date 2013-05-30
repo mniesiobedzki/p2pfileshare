@@ -12,11 +12,12 @@ public class UltimateTest {
 		String ip = "192.168.1.105";
 		int portIn = 5555;
 		int portOut= 6666;
+		int portFile= 7777;
 		String fname="kuku";
 		String path="kuku//";
 		
 		TestTreeClient klient = new TestTreeClient(ip, portIn);
-		TestTreeServer serwer = new TestTreeServer(null,fname, usr, path, portOut, thisIp);
+		TestTreeServer serwer = new TestTreeServer(null,fname, usr, path, portFile, portOut, thisIp);
 		new Thread(klient).start();
 		new Thread(serwer).start();
 		try {
@@ -27,7 +28,7 @@ public class UltimateTest {
 		}
 
 		//serwer.ft.addUser("usr2", path);
-		FileServer server = new FileServer(serwer.ft, usr, 1234);
+		FileServer server = new FileServer(serwer.ft, usr, portFile);
 		while(true){
 			if(klient.changed){
 				serwer.ft.update(klient.ft.getFolder());
