@@ -43,6 +43,8 @@ public class FileServer extends Thread {
 		System.out.println("Sending...");
 		os.write(mybytearray, 0, mybytearray.length);
 		os.flush();
+		os.close();
+		bis.close();
 	}
 
 	public void run() {
