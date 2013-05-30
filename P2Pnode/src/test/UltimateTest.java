@@ -42,7 +42,7 @@ public class UltimateTest {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.err.println("Nie było zmiany w pliku. FolderTree -> changed = false");
+				//System.err.println("Nie było zmiany w pliku. FolderTree -> changed = false");
 			}
 		}
 	}
