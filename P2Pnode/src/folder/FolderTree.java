@@ -86,6 +86,7 @@ public class FolderTree implements Serializable {
             s += "\n\t";
             s += n.name;
             for (String c : n.getChildren()) {
+            	s += folder.get(c).getHistory().getLast().getData();
                 s += "\n\t\t";
                 s += c;
             }
