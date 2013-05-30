@@ -117,6 +117,8 @@ public class FileClient{
 				}
 				if(ft!=null){
 					ft.addFile(f, usr);
+					System.out.println("Dodaje do plikow i historii element o nazwie: "+(usr+n.getName()));
+					MFolderListener.filesAndTheirHistory.put(usr+n.getName(), f);
 				} 
 				System.out.println("Done!");
 				if(ft!=null){
