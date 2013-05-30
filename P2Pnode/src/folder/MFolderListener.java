@@ -158,8 +158,9 @@ public class MFolderListener {
 					for (String nodek : folderTree.getFolder().get(userId).getChildren()) {
 						Nod singleNod = folderTree.getFolder().get(nodek); // Jeden plik u usera
 						if(filesAndTheirHistory.get(userId+singleNod.getName()).getSingleFileHistory().getLast() == null){
+							int counter = 0;
 							for (FileState fs : singleNod.getHistory()) {
-								System.out.println(fs.getFileName()+" "+fs.getData());
+								System.out.println(counter+++": "+fs.getFileName()+" "+fs.getData());
 							}
 							break;
 						}
