@@ -31,13 +31,13 @@ public class FileClient{
 			sock = new Socket(host,port);
 	    System.out.println("Connecting...");
 	    OutputStream os = sock.getOutputStream();
-	    System.out.println(key);
-	    System.out.println(ft.getFolder().keySet());
-	    System.out.println(ft.getFolder().values());
-	    System.out.println(ft.getFolder().get(key));
-	    System.out.println(ft.getFolder().get(key).getHistory());
-	    System.out.println(ft.getFolder().get(key).getHistory().getLast());
-	    System.out.println(ft.getFolder().get(key).getHistory().getLast().getData());
+	    System.out.println("klucz: "+key);
+	    System.out.println("klucze: "+ft.getFolder().keySet());
+	    System.out.println("wartoœæ pliku: "+ft.getFolder().values());
+	    System.out.println("plik: "+ft.getFolder().get(key));
+	    System.out.println("historia pliku: "+ft.getFolder().get(key).getHistory());
+	    System.out.println("ostatni element historii: "+ft.getFolder().get(key).getHistory().getLast());
+	    System.out.println("data modyfikacji: "+ft.getFolder().get(key).getHistory().getLast().getData());
 	    System.out.println("wysy³am rz¹danie udostêpnienia pliku: " + key +" modyfikowanego o "+ ft.getFolder().get(key).getHistory().getLast().getData());
 	    os.write(key.getBytes(Charset.forName("UTF-8")));
 	    
