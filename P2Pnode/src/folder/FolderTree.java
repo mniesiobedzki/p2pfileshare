@@ -2,9 +2,11 @@ package folder;
 
 import file.File;
 import file.FileClient;
+import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncHashMap;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.TreeMap;
 
@@ -21,8 +23,8 @@ public class FolderTree implements Serializable {
 	 */
 	private static final long serialVersionUID = -7730198483613602338L;
 	public boolean updated = false;
-    public TreeMap<String, Nod> folder = new TreeMap<String, Nod>();
-    public JCSyncTreeMap<String, Nod> syncFolder = new JCSyncTreeMap<String, Nod>();
+    public HashMap<String, Nod> folder = new HashMap<String, Nod>();
+    public JCSyncHashMap<String, Nod> syncFolder = new JCSyncHashMap<String, Nod>();
     // klucz to dla korzenia "root"
     // dla użytkownika jego ID
     // dla pliku ID użytkownika + ID pliku
@@ -33,7 +35,7 @@ public class FolderTree implements Serializable {
      * @param usr  - nazwa użytkownika uruchamiającego udział
      * @param tree -
      */
-    public FolderTree(String path, String usr, JCSyncTreeMap<String, Nod> tree, String ip, int port) {
+    public FolderTree(String path, String usr, JCSyncHashMap<String, Nod> tree, String ip, int port) {
         syncFolder = tree;
         this.usr = usr;
         this.folder.put("root", new Nod(path));
@@ -44,7 +46,7 @@ public class FolderTree implements Serializable {
         this.addUser(usr, path, ip, port);
     }
 
-    public TreeMap<String, Nod> getFolder() {
+    public HashMap<String, Nod> getFolder() {
         return folder;
     }
 
@@ -98,7 +100,7 @@ public class FolderTree implements Serializable {
         return s;
     }
 
-    public void setFolder(JCSyncTreeMap<String, Nod> folder) {
+    public void setFolder(JCSyncHashMap<String, Nod> folder) {
         this.folder = folder;
         updated = true;
     }
@@ -145,7 +147,7 @@ public class FolderTree implements Serializable {
         }
     }
 
-    public void putAll(TreeMap<String, Nod> f) {
+    public void putAll(HashMap<String, Nod> f) {
     	LinkedList<String> usrs= new LinkedList<String>();
         for (Nod n : f.values()) {
         	if(f.get("root").getChildren().contains(n.getName())){
@@ -192,7 +194,7 @@ public class FolderTree implements Serializable {
      *
      * @param folder2
      */
-    public void update(TreeMap<String, Nod> folder2) {
+    public void update(HashMap<String, Nod> folder2) {
         this.putAll(folder2);//dodawanie nowych
 
         LinkedList<String> users = new LinkedList<String>();

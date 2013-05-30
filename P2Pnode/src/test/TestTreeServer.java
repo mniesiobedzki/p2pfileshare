@@ -3,6 +3,7 @@ package test;
 import java.io.*;
 import java.net.*;
 
+import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncHashMap;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import file.File;
 import folder.FolderTree;
@@ -18,7 +19,7 @@ public class TestTreeServer implements Runnable {
 	int port;
 	int portT;
 	public FolderTree ft;
-	JCSyncTreeMap syncTree;
+	JCSyncHashMap syncTree;
 	
 	@Override
 	public void run() {
@@ -104,7 +105,7 @@ public class TestTreeServer implements Runnable {
 	 *            - file path
 	 * @param port - port
 	 */
-	public TestTreeServer(JCSyncTreeMap syncTree, String fname, String uname, String path, int port, int portT, String ip) {
+	public TestTreeServer(JCSyncHashMap syncTree, String fname, String uname, String path, int port, int portT, String ip) {
 		super();
 		this.syncTree=syncTree;
 		this.fname = fname;
