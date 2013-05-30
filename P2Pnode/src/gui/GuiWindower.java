@@ -1,5 +1,7 @@
 package gui;
 
+import org.apache.log4j.Logger;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -17,15 +19,12 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.Random;
-import java.util.StringTokenizer;
+import java.util.*;
 
 
 public class GuiWindower implements PropertyChangeListener {
+
+    public static final Logger LOG = Logger.getLogger(GuiWindower.class);
 
     protected final PopupFrame POPUP_FRAME = new PopupFrame();
     JTextField nodeName, serverIPAdress, portInFieldFilesRequests, portOutField, serverPortInput;
@@ -119,7 +118,7 @@ public class GuiWindower implements PropertyChangeListener {
             BufferedImage obrazTla = null;
             try {
                 File file = new File("bg.png");
-                System.out.println(file.getAbsolutePath() +" " +file.canRead());
+                System.out.println(file.getAbsolutePath() + " " + file.canRead());
                 obrazTla = ImageIO.read(file);
             } catch (IOException e) {
                 // TODO Auto-generated catch block
@@ -144,57 +143,56 @@ public class GuiWindower implements PropertyChangeListener {
             //panelPierwszegoUruchomienia.add(tytulPowitania);
 
             Enumeration<NetworkInterface> nets = null;
-			try {
-				nets = NetworkInterface.getNetworkInterfaces();
-			} catch (SocketException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-	
-			LinkedList<String> prawidloweInterfejsySiecioweInterfaces = new LinkedList<String>();
-			for (NetworkInterface netint : Collections.list(nets)) {
-				Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
-				for (InetAddress inetAddress : Collections.list(inetAddresses)) {
-                	if( inetAddress.getHostAddress().indexOf(".") > 0 ) {
-                		prawidloweInterfejsySiecioweInterfaces.add( inetAddress.getHostAddress() );
-                	}
-                }				
+            try {
+                nets = NetworkInterface.getNetworkInterfaces();
+            } catch (SocketException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
             }
-			
-			dostepneIP = new String[ prawidloweInterfejsySiecioweInterfaces.size() ];
-            
-			int i=-1;
-			for (String ip : prawidloweInterfejsySiecioweInterfaces) {
-				dostepneIP[++i]= ip; 
-			}
-			
+
+            LinkedList<String> prawidloweInterfejsySiecioweInterfaces = new LinkedList<String>();
+            for (NetworkInterface netint : Collections.list(nets)) {
+                Enumeration<InetAddress> inetAddresses = netint.getInetAddresses();
+                for (InetAddress inetAddress : Collections.list(inetAddresses)) {
+                    if (inetAddress.getHostAddress().indexOf(".") > 0) {
+                        prawidloweInterfejsySiecioweInterfaces.add(inetAddress.getHostAddress());
+                    }
+                }
+            }
+
+            dostepneIP = new String[prawidloweInterfejsySiecioweInterfaces.size()];
+
+            int i = -1;
+            for (String ip : prawidloweInterfejsySiecioweInterfaces) {
+                dostepneIP[++i] = ip;
+            }
+
             //Create the combo box, select item at index 4.
             //Indices start at 0, so 4 specifies the pig.
-			serverIPAdress = new JTextField();
+            serverIPAdress = new JTextField();
             JComboBox comboboxKartSieciowych = new JComboBox(dostepneIP);
             comboboxKartSieciowych.setPreferredSize(new Dimension(200, 20));
             comboboxKartSieciowych.addActionListener(new ActionListener() {
-				
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					wybraneIP = (String)((JComboBox)e.getSource()).getSelectedItem();
-					StringTokenizer stringtokenizer = new StringTokenizer(wybraneIP, ".");
-					serverIPAdress.setText( stringtokenizer.nextToken()+"."+stringtokenizer.nextToken()+"."+stringtokenizer.nextToken()+"." );
-				}
-			});
+
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    wybraneIP = (String) ((JComboBox) e.getSource()).getSelectedItem();
+                    StringTokenizer stringtokenizer = new StringTokenizer(wybraneIP, ".");
+                    serverIPAdress.setText(stringtokenizer.nextToken() + "." + stringtokenizer.nextToken() + "." + stringtokenizer.nextToken() + ".");
+                }
+            });
             try {
-            	comboboxKartSieciowych.setSelectedIndex(1);
+                comboboxKartSieciowych.setSelectedIndex(1);
+            } catch (IllegalArgumentException e) {
+                System.err.println("-> NIE ZNALAZLEM ZADNEGO AKTYWNEGO INTERFEJSU SIECIOWEGO POZA LOOPBACKIEM. Wiec sobie crashne");
             }
-            catch (IllegalArgumentException e) {
-				System.err.println("-> NIE ZNALAZLEM ZADNEGO AKTYWNEGO INTERFEJSU SIECIOWEGO POZA LOOPBACKIEM. Wiec sobie crashne");
-			}
             panelPierwszegoUruchomienia.add(comboboxKartSieciowych);
-            
+
             RichJLabel podajIPJLabel = new RichJLabel("IP i port bootstrapa", 0);
             podajIPJLabel.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             panelPierwszegoUruchomienia.add(podajIPJLabel);
 
-            
+
             serverIPAdress.setPreferredSize(new Dimension(180, 30));
             serverIPAdress.setFont(new Font("Segoe UI", Font.PLAIN, 14));
             serverIPAdress.setHorizontalAlignment(JTextField.CENTER);
@@ -359,6 +357,7 @@ public class GuiWindower implements PropertyChangeListener {
 
         try {
             folderSynchronizowany = dest.getCanonicalPath();
+            LOG.info("Wybrano nowy folder: " + folderSynchronizowany);
 
         } catch (IOException ex) { // getCanonicalPath() threw IOException
 
