@@ -33,12 +33,12 @@ public class FileClient{
 	    OutputStream os = sock.getOutputStream();
 //	    System.out.println("klucz: "+key);
 //	    System.out.println("klucze: "+ft.getFolder().keySet());
-//	    System.out.println("wartoœæ pliku: "+ft.getFolder().values());
+//	    System.out.println("wartoï¿½ï¿½ pliku: "+ft.getFolder().values());
 //	    System.out.println("plik: "+ft.getFolder().get(key));
 //	    System.out.println("historia pliku: "+ft.getFolder().get(key).getHistory());
 //	    System.out.println("ostatni element historii: "+ft.getFolder().get(key).getHistory().getLast());
 //	    System.out.println("data modyfikacji: "+ft.getFolder().get(key).getHistory().getLast().getData());
-//	    System.out.println("wysy³am ¿¹danie udostêpnienia pliku: " + key +" modyfikowanego o "+ ft.getFolder().get(key).getHistory().getLast().getData());
+//	    System.out.println("wysyï¿½am ï¿½ï¿½danie udostï¿½pnienia pliku: " + key +" modyfikowanego o "+ ft.getFolder().get(key).getHistory().getLast().getData());
 	    key+="\n";
 	    os.write(key.getBytes(Charset.forName("UTF-8")));
 	    
@@ -47,7 +47,9 @@ public class FileClient{
 	    this.receiveFile(ft, n, is, path, name, usr);
 	       long end = System.currentTimeMillis();
 	    System.out.println(end-start);
-
+	    os.flush();
+	    os.close();
+	    
 	    sock.close();
 
 		} catch (UnknownHostException e) {
@@ -85,9 +87,9 @@ public class FileClient{
 				while ((read = is.read(bytes)) != -1) {
 					outputStream.write(bytes, 0, read);
 				}
-				
-				outputStream.close();
+
 				outputStream.flush();
+				outputStream.close();
 		 
 				//rename file to final name without tempStamp at the beginning of filename
 				java.io.File filenameWithTempStamp = new java.io.File(path+"\\"+tempStamp+name); 
@@ -108,13 +110,13 @@ public class FileClient{
 				docelowyPlik = new java.io.File(path+"\\"+name);
 				if (docelowyPlik.exists()){
 				    docelowyPlik.setLastModified(data);
-				}//to powinno ustawiæ date modyfikacji
+				}//to powinno ustawiï¿½ date modyfikacji
 				System.out.println(docelowyPlik.getAbsolutePath());
 				if(docelowyPlik.lastModified()==data){
 					System.out.println("czas modyfikacji poprawnie zmieniony");
 				}else{
 					System.out.println("uj!");
-					System.out.println("czas modyfikaci mia³ byæ: "+data);
+					System.out.println("czas modyfikaci miaï¿½ byï¿½: "+data);
 					System.out.println("czas modyfikacji jest: "+ docelowyPlik.lastModified());
 				}
 				if(ft!=null){
