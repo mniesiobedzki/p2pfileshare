@@ -38,8 +38,8 @@ public class FolderTree implements Serializable {
         this.usr = usr;
         this.folder.put("root", new Nod(path));
         if (syncFolder != null) {
-            this.syncFolder.put("root", folder.get("root"));
-            new Thread(new FolderServer(this, usr, path, port)).start();
+            syncFolder.put("root", folder.get("root"));
+            new Thread(new FolderServer(this, usr, path)).start();
         }
         this.addUser(usr, path, ip, port);
     }
@@ -272,7 +272,9 @@ public class FolderTree implements Serializable {
             }
         }
         users.addAll(folder.get("root").getChildren());
-        
+        System.out.println("usrs: "+users);
+        System.out.println("usrs jcsync: "+syncFolder.get("root").getChildren());
+        System.out.println("usrs: "+folder.get("root").getChildren());
         //pliki utworzone
         for (Nod n : syncFolder.values()) {
             if (!n.getValue().equals("root") && !users.contains(n.getName())) {
@@ -286,6 +288,7 @@ public class FolderTree implements Serializable {
                 }
             }
         }
+        
         for (Nod nod : created) {
             if (nod.getHistory().getLast() != null) {
             	System.out.println("FolderTree: rządanie pliku "+  nod.getParent() + nod.getName());

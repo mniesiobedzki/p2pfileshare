@@ -103,7 +103,9 @@ public class FileClient{
 				System.out.println("%$$$ data modyfikacji"+ data);
 				f.setLastModified(data);
 				f.getSingleFileHistory().getLast().setData(data);
-				docelowyPlik = new java.io.File(path+name);
+				System.out.println("%$$$ data modyfikacji"+ f.getSingleFileHistory().getLast().getData());
+				System.out.println(path+"\\"+name);
+				docelowyPlik = new java.io.File(path+"\\"+name);
 				if (docelowyPlik.exists()){
 				    docelowyPlik.setLastModified(data);
 				}//to powinno ustawiæ date modyfikacji
