@@ -178,7 +178,11 @@ public class FolderTree implements Serializable {
     public void addNod(Nod n) {
         if (!folder.containsKey(n.value)) {
             folder.put(n.value, n);
-        } else if (folder.get(n.value).getHistory().size()>0 && (folder.get(n.value).getHistory().getLast().getData() < n.getHistory().getLast().getData())) {
+        }
+        else if(n.getHistory().size()>0 && n.getHistory().getLast() == null){
+        	folder.get(n.getValue()).getHistory().add(null);
+        }
+        else if (folder.get(n.value).getHistory().size()>0 && (folder.get(n.value).getHistory().getLast().getData() < n.getHistory().getLast().getData())) {
             folder.get(n.value).getHistory().add(n.getHistory().getLast());
         }
     }
