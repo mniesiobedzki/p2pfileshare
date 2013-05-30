@@ -105,7 +105,7 @@ public class ClientP2Pnode {
         try {
             this.jcSyncCore.init();
             this.observable = new JCSyncObservable();
-            //initCollection1(nodeName, controller);
+            //initCollectionTreeMap(nodeName, controller);
             this.jcSyncTreeMap = new JCSyncTreeMap<String, Nod>();
             LOG.trace("Creating the collection");
             try {
@@ -156,7 +156,7 @@ public class ClientP2Pnode {
         try {
             this.jcSyncCore.init();
             this.observable = new JCSyncObservable();
-            //initCollection1(nodeName, controller);
+            //initCollectionTreeMap(nodeName, controller);
             this.jcSyncTreeMap = new JCSyncTreeMap<String, Nod>();
             LOG.trace("Creating the collection");
             try {
@@ -197,7 +197,7 @@ public class ClientP2Pnode {
         try {
             this.jcSyncCore.init();
             this.observable = new JCSyncObservable();
-            //initCollection1(nodeName, controller);
+            //initCollectionTreeMap(nodeName, controller);
             this.jcSyncHashMap = new JCSyncHashMap<String, Nod>();
             LOG.trace("Creating the collection");
             try {
@@ -233,7 +233,7 @@ public class ClientP2Pnode {
      * @param nodeName
      * @param controller
      */
-    private void initCollection1(String nodeName, Controller controller) {
+    private void initCollectionTreeMap(String nodeName, Controller controller) {
         // TreeMap
         LOG.trace("Creating the collection");
         //collID = "P2PfileshareTreeMap";
