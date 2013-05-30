@@ -191,6 +191,8 @@ public class MFolderListener {
 						
 						fileModified = true;
 						fileModifiedList.push(event.context().toString());
+						folderTree.folder.get(userId+f.getFileName()).history.add(f.getSingleFileHistory().getLast());
+						folderTree.updated=true;
 					}
 					
 					
