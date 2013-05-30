@@ -34,7 +34,7 @@ public class Controller {
             if (e.getActionCommand().equals("Rozpocznij")) {
 
                 //clientP2Pnode = new ClientP2Pnode(Integer.parseInt(gui.getClientPort()), gui.getServerAddress(), Integer.parseInt(gui.getServerPort()), gui.getClientName(), Controller.this);
-                clientP2Pnode.initializeJCSync(Integer.parseInt(gui.getClientPort()), gui.getServerAddress(), Integer.parseInt(gui.getServerPort()), gui.getClientName());
+                clientP2Pnode.initializeJCSyncHashMap(Integer.parseInt(gui.getClientPort()), gui.getServerAddress(), Integer.parseInt(gui.getServerPort()), gui.getClientName());
                 // TODO: coś
                 while (!clientP2Pnode.isConnected()) {
                     LOG.info("Node still connecting");
@@ -44,7 +44,7 @@ public class Controller {
 
                 // Podpięcie foleru do wymiany plików
                 LOG.info("Tworzę nowy obiekt folder Tree z argumentami(" + gui.getFolderPath() + ", " + gui.getClientName() + ", drzewo-JCSync, " + gui.getClientIp() + ", " + gui.getPortIn() + ")");
-                folderTree = new FolderTree(gui.getFolderPath(), gui.getClientName(), clientP2Pnode.getJCSyncTreeMap(), gui.getClientIp(), gui.getPortIn());
+                folderTree = new FolderTree(gui.getFolderPath(), gui.getClientName(), clientP2Pnode.getJCSyncHashMap(), gui.getClientIp(), gui.getPortIn());
                 LOG.info("Tworze nowy obiekt FileServer z argumentami(folderTree" + ", " + gui.getClientName() + ", " + gui.getPortIn() + ")");
                 FileServer server = new FileServer(folderTree, gui.getClientName(), gui.getPortIn());
                 folderTree.update();
