@@ -53,7 +53,7 @@ public class TestTreeServer implements Runnable {
 
 			welcomeSocket = new ServerSocket(portT);
 			Socket connectionSocket = welcomeSocket.accept();
-			System.err.println("TestTreeServer: Connected");
+			//System.err.println("TestTreeServer: Connected");
 
 			OutputStream socketStream = connectionSocket.getOutputStream();
 			ObjectOutput objectOutput = new ObjectOutputStream(socketStream);

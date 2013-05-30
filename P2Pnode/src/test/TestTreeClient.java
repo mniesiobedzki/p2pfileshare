@@ -32,7 +32,7 @@ public class TestTreeClient implements Runnable{
 				}
 			}
 
-			System.out.println("TestTreeClient: Connected");
+			//System.out.println("TestTreeClient: Connected");
 			try {
 				if (sock != null) {
 
