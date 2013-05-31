@@ -16,15 +16,20 @@ public class TestTreeClientHandler implements Runnable{
 				e.printStackTrace();
 			}
 			
-			
+			System.out.println("users "+nod.users.keySet());
 			for(User u: nod.users.values()){
-
-				TestTreeClientWBootstrap klient = new TestTreeClientWBootstrap(u.ip, u.treePort);
-				clients.add(klient);
+				if(!u.name.equals(nod.u.name)){
+					TestTreeClientWBootstrap klient = new TestTreeClientWBootstrap(u.ip, u.treePort);
+					clients.add(klient);
+				}
 			}
-			
-			
-			
+			LinkedList<TestTreeClientWBootstrap> remove = new LinkedList<TestTreeClientWBootstrap>();
+			for (TestTreeClientWBootstrap c : clients) {
+				if(c.kill){
+					remove.add(c);
+				}
+			}
+			clients.removeAll(remove);
 		}
 	}
 	public TestTreeClientHandler(NodTest nod) {

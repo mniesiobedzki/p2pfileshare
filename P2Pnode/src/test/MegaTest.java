@@ -8,10 +8,8 @@ public class MegaTest {
 	public static void main(String[] args) {
 		
 		String usr = "Marcin";
-		String thisIp = "192.168.14.121";
-		String ip = "192.168.14.127";
-		String bootstrapIp = "192.168.14.127";
-		int portIn = 5555;
+		String thisIp = "192.168.80.132";
+		String bootstrapIp = "192.168.80.131";
 		int portOut= 6666;
 		int portFile= 13267;
 		int bootstrapPort= 2024;
@@ -24,8 +22,6 @@ public class MegaTest {
 		NodTest nod = new NodTest(bootstrapIp, bootstrapPort, users, u);
 		
 		TestTreeClientHandler klient = new TestTreeClientHandler(nod);
-		
-		
 		
 		TestTreeServer serwer = new TestTreeServer(null,fname, usr, path, portFile, portOut, thisIp);
 		new Thread(klient).start();

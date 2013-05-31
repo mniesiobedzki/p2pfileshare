@@ -14,6 +14,7 @@ public class TestTreeClientWBootstrap implements Runnable{
 	String 	serverIP;
 	int 	serverPort;
 	boolean changed=false;
+	boolean kill = false;
 	FolderTree ft;
 
 	@Override
@@ -54,7 +55,7 @@ public class TestTreeClientWBootstrap implements Runnable{
 				e.printStackTrace();
 			}
 		//}
-		
+	kill = true;	
 	}
 	public String getServerIP() {
 		return serverIP;
