@@ -12,7 +12,7 @@ public class MegaTest {
 		String bootstrapIp = "192.168.80.131";
 		int portOut= 6666;
 		int portFile= 13267;
-		int bootstrapPort= 2024;
+		int bootstrapPort= 1027;
 		String fname="kuku";
 		String path="kuku//";
 		HashMap<String,User> users= new HashMap<String,User>();
