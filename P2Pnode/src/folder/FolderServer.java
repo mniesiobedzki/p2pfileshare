@@ -28,8 +28,7 @@ public class FolderServer implements Runnable {
 				System.out.println(f.getFileName());
 				
 				ft.addFile(f, uname);
-				MFolderListener.filesAndTheirHistory.put(
-						uname + f.getFileName(), f);
+				MFolderListener.filesAndTheirHistory.put(uname + f.getFileName(), f);
 				System.out.println(f.getFileId());
 			}
 			MFolderListener.runFolderListener(path, ft, uname);
