@@ -21,52 +21,54 @@ public class BootstrapThread implements Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-
+		
 		ServerSocket welcomeSocket;
-		while (true) {
-			try {
-				welcomeSocket = new ServerSocket(port);
-				Socket sock = welcomeSocket.accept();
+		 while (true) {
+		try {
+			System.out.println("new bootstrap thread on port " + port);
+			welcomeSocket = new ServerSocket(port);
+			Socket sock = welcomeSocket.accept();
 
-				System.out.println("Accepted connection : " + sock);
-				OutputStream os = sock.getOutputStream();
-				InputStream is = sock.getInputStream();
-				java.util.Scanner s = new java.util.Scanner(is)
-						.useDelimiter("\n");
+			System.out.println("Accepted connection : " + sock);
+			OutputStream os = sock.getOutputStream();
+			InputStream is = sock.getInputStream();
 
-				while (true) {
-					while (!s.hasNext()) {
-					}
-					String msg = s.next();
-					System.out.println(msg);
-					if (msg.equals("get")) {
-						ObjectOutput objectOutput = new ObjectOutputStream(os);
-						objectOutput.writeObject(Bootrstraper.users);
-						objectOutput.flush();
+			while (true) {
+				ObjectInputStream objectInput = new ObjectInputStream(is);
+				User u;
+				try {
+					u = (User) objectInput.readObject();
+					if(u!=null){
+						System.out.println(u);
+						Bootrstraper.users.put(u.name, u);
 						os.flush();
-						objectOutput.close();
 						os.close();
 						welcomeSocket.close();
 						break;
-					} else if (msg.equals("push")) {
-						ObjectInputStream objectInput = new ObjectInputStream(
-								is);
-						User u;
-						try {
-							u = (User) objectInput.readObject();
-							Bootrstraper.users.put(u.name, u);
-							break;
-						} catch (ClassNotFoundException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+					}else{
+
+						ObjectOutput objectOutput = new ObjectOutputStream(os);
+						objectOutput.writeObject(Bootrstraper.users);
+						objectOutput.flush();
+						objectOutput.close();
+						os.flush();
+						os.close();
+						welcomeSocket.close();
+						break;
 					}
-					sock.close();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					//e.printStackTrace();
 				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
+
 			}
+			sock.close();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		}
 	}
 

@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 public class TestTreeClientHandler implements Runnable{
 	public static LinkedList<TestTreeClientWBootstrap> clients = new LinkedList<TestTreeClientWBootstrap>();
+	NodTest nod;
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -16,7 +17,7 @@ public class TestTreeClientHandler implements Runnable{
 			}
 			
 			
-			for(User u: MegaTest.users.values()){
+			for(User u: nod.users.values()){
 
 				TestTreeClientWBootstrap klient = new TestTreeClientWBootstrap(u.ip, u.treePort);
 				clients.add(klient);
@@ -25,6 +26,10 @@ public class TestTreeClientHandler implements Runnable{
 			
 			
 		}
+	}
+	public TestTreeClientHandler(NodTest nod) {
+		super();
+		this.nod = nod;
 	}
 
 }

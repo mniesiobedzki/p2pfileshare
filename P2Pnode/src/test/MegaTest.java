@@ -5,8 +5,6 @@ import java.util.HashMap;
 import file.FileServer;
 
 public class MegaTest {
-	public static User u;
-	public static HashMap<String,User> users= new HashMap<String,User>();
 	public static void main(String[] args) {
 		
 		String usr = "Marcin";
@@ -19,12 +17,13 @@ public class MegaTest {
 		int bootstrapPort= 2024;
 		String fname="kuku";
 		String path="kuku//";
-		u = new User(usr, bootstrapIp, portFile, portOut);
+		HashMap<String,User> users= new HashMap<String,User>();
+		User u = new User(usr, bootstrapIp, portFile, portOut);
 		users.put(usr, u);
 		
-		NodTest nod = new NodTest(bootstrapIp, bootstrapPort);
+		NodTest nod = new NodTest(bootstrapIp, bootstrapPort, users, u);
 		
-		TestTreeClientHandler klient = new TestTreeClientHandler();
+		TestTreeClientHandler klient = new TestTreeClientHandler(nod);
 		
 		
 		

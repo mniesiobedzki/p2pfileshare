@@ -1,17 +1,16 @@
 package test;
 
-import file.FileClient;
 import file.FileServer;
 
 public class UltimateTest {
 	
 	public static void main(String[] args) {
 		
-		String usr = "Majkl";
-		String thisIp = "192.168.14.127";
-		String ip = "192.168.14.121";
-		int portIn = 6666;
-		int portOut= 5555;
+		String usr = "Marcin";
+		String thisIp = "192.168.14.121";
+		String ip = "192.168.14.127";
+		int portIn = 5555;
+		int portOut= 6666;
 		int portFile= 13267;
 		String fname="kuku";
 		String path="kuku//";
@@ -28,13 +27,14 @@ public class UltimateTest {
 		}
 
 		//serwer.ft.addUser("usr2", path);
+		@SuppressWarnings("unused")
 		FileServer server = new FileServer(serwer.ft, usr, portFile);
-		while(true){
-			if(klient.changed){
-				System.err.println("WszedÅ‚em w zmianÄ™ pliku. FolderTree -> changed = true");
-				serwer.ft.update(klient.ft.getFolder());
-				klient.changed=false;
-			}
+ 		while(true){
+ 			if(klient.changed){
+				System.err.println("Wszed³em w zmianê pliku. FolderTree -> changed = true");
+ 				serwer.ft.update(klient.ft.getFolder());
+ 				klient.changed=false;
+ 			}
 			else{
 				try {
 					Thread.sleep(1000);
@@ -42,9 +42,10 @@ public class UltimateTest {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				//System.err.println("Nie byÅ‚o zmiany w pliku. FolderTree -> changed = false");
+				//System.err.println("Nie by³o zmiany w pliku. FolderTree -> changed = false");
 			}
-		}
+ 		}
+
 	}
 	
 }
