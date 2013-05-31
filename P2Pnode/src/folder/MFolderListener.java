@@ -7,7 +7,6 @@ import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -24,10 +23,6 @@ public class MFolderListener {
 	public static boolean fileCreated 	= false;
 	public static boolean fileDeleted	= false;
 	public static boolean fileModified 	= false;
-	
-	public static LinkedList<String> fileCreatedList 	= new LinkedList<String>();
-	public static LinkedList<String> fileDeletedList 	= new LinkedList<String>();
-	public static LinkedList<String> fileModifiedList 	= new LinkedList<String>();
 	
 	public static String ignorowanyPlik; //ignorowanie potrzebne do poprawnej synchronizcji - zapobiega wykryciu modyfikacji pliku po tym jak zosta� zsynchronizowany od drugiego peera i jest zmieniana nazwa z ^nazwapliku do nazwapliku
 	
@@ -128,7 +123,6 @@ public class MFolderListener {
 									+ event.context().toString()));
 					
 					System.err.println("putuje: "+userId+newlyCreatedFile.getFileName());
-					fileCreatedList.push(userId+newlyCreatedFile.getFileName());
 					filesAndTheirHistory.put(userId+newlyCreatedFile.getFileName(),newlyCreatedFile);
 					
 					folderTree.addFile(newlyCreatedFile, userId);
@@ -178,7 +172,6 @@ public class MFolderListener {
 							System.err.println("BUJA");
 							filesAndTheirHistory.get(userId+singleNod.getName()).getSingleFileHistory().add(null);
 							fileDeleted = true;
-							fileDeletedList.push(userId+singleNod.getName());
 							System.err.println("WYKASOWANO " + userId+singleNod.getName() +"\n");
 						}
 					}
@@ -215,7 +208,6 @@ public class MFolderListener {
 									 	+ event.context().toString()));
 						
 						fileModified = true;
-						fileModifiedList.push(event.context().toString());
 						if(folderTree.syncFolder!=null){
 							folderTree.syncFolder.get(userId+f.getFileName()).history.add(f.getSingleFileHistory().getLast());
 							folderTree.syncFolder.get(userId+f.getFileName()).getHistory().getLast().setData(kuku.lastModified());
