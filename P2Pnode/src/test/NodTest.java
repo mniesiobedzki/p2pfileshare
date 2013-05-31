@@ -24,7 +24,8 @@ public class NodTest implements Runnable{
 		 boolean send = true;
 		 while(true){
 			try {
-
+				System.out.println("³¹cze siê do bootstrapa przez port "+port);
+				System.out.println("na ip "+ ip);
 				sock = new Socket(ip,port);
 				if(send){
 					send(sock, u);

@@ -8,8 +8,8 @@ public class MegaTest {
 	public static void main(String[] args) {
 		
 		String usr = "Marcin";
-		String thisIp = "192.168.80.132";
-		String bootstrapIp = "192.168.80.131";
+		String thisIp = "192.168.80.131";
+		String bootstrapIp = "192.168.80.132";
 		int portOut= 6666;
 		int portFile= 13267;
 		int bootstrapPort= 1027;
