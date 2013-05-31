@@ -16,6 +16,7 @@ public class FolderServer implements Runnable {
 	@Override
 	public void run() {
 		try {
+			Thread.sleep(1000);
 			java.io.File[] listaFajli = File.listAllTheFilesInDir(path);
 
 			for (java.io.File file : listaFajli) {
