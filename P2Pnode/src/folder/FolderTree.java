@@ -84,6 +84,8 @@ public class FolderTree implements Serializable {
             Nod n = this.getFolder().get(k);
             s += "\n\t";
             s += n.name;
+            s += " ";
+            s += n.ip;
             for (String c : n.getChildren()) {
             	if(folder.get(c).getHistory().getLast()!=null){
             		s += "\n\t\t"+folder.get(c).getHistory().getLast().getData();
