@@ -58,9 +58,10 @@ public class Controller {
         this.gui = guiWindower;
         this.gui.addButtonActionListener(guziki); // podpięcie guzików
         this.addPropertyChangeListener(this.gui); // podpięcie zmian
-        LOG.debug("Controller - created");
 
         clientP2Pnode = new ClientP2Pnode(this);
+
+        LOG.debug("Controller - created");
     }
 
     private void addPropertyChangeListener(PropertyChangeListener listener) {
