@@ -1,7 +1,5 @@
 package folder;
 
-import java.io.*;
-import java.net.*;
 import file.File;
 import folder.FolderTree;
 import folder.MFolderListener;

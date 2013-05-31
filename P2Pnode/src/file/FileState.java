@@ -1,14 +1,16 @@
 package file;
 
-import java.io.FileInputStream;
 import java.io.Serializable;
-import java.security.MessageDigest;
 
 // Obiekt kt�ry jest dodawany do LinkedListy folderu kt�ry obserwujemy.
 // FileState jest po prostu wygodn� wersj� wiersza w historii danego pliku 
 
 public class FileState implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3205801148612400934L;
 	private	String personID = ""; 	// kto zmienil plik
 	private long   data 	= 0;	// kiedy plik by� zmieniany		
 	private String fileName = "";	// nazwa zmienianego pliku

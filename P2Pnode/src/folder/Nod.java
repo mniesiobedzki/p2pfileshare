@@ -6,6 +6,10 @@ import java.util.LinkedList;
 import file.FileState;
 
 public class Nod implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6541854418182281268L;
 	String value;
 	LinkedList<String> children = new LinkedList<String>();// klucze potomków
 	String parent;// klucz rodzica

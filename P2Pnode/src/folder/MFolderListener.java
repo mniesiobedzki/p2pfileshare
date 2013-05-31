@@ -6,7 +6,6 @@ import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -81,7 +80,7 @@ public class MFolderListener {
 
 			List<WatchEvent<?>> events = watchKey.pollEvents();
 			
-			for (WatchEvent event : events) {
+			for (@SuppressWarnings("rawtypes") WatchEvent event : events) {
 				if(event.context().toString().startsWith("^") || event.context().toString().startsWith("TeraCopyTestFile")){
 					continue;
 				}
@@ -251,6 +250,7 @@ public class MFolderListener {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private static Entry<String, File> searchForFile(String fileName){
 		
 		 try {

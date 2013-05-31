@@ -1,37 +1,21 @@
 package file;
 
-import folder.FolderTree;
-import folder.Nod;
-import gui.GuiWindower;
 
 import java.security.MessageDigest;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Map;
-import java.util.Map.Entry;
-
-import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardWatchEventKinds;
-import java.nio.file.WatchEvent;
-import java.nio.file.WatchKey;
-import java.nio.file.WatchService;
-import java.util.List;
 
 import node.ClientP2Pnode;
 
 public class File implements Serializable{
 
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2367214998788855842L;
 	// file hash pliku z pakietu P2PP
 	private String fileId; 
 	private String fileName;
