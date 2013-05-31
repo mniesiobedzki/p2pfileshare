@@ -4,10 +4,10 @@ import java.io.*;
 import java.net.*;
 
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncHashMap;
-import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncTreeMap;
 import file.File;
 import folder.FolderTree;
 import folder.MFolderListener;
+import folder.Nod;
 
 public class TestTreeServer implements Runnable {
 
@@ -19,7 +19,7 @@ public class TestTreeServer implements Runnable {
 	int port;
 	int portT;
 	public FolderTree ft;
-	JCSyncHashMap syncTree;
+	JCSyncHashMap<String, Nod> syncTree;
 	
 	@Override
 	public void run() {
@@ -28,7 +28,6 @@ public class TestTreeServer implements Runnable {
 
 
 			ft = new FolderTree(fname,uname, syncTree,ip, port);
-			// File fa = new File(name, File.generateFileId(uname));
 			java.io.File[] listaFajli = File.listAllTheFilesInDir(path);
 
 			for (java.io.File file : listaFajli) {
@@ -105,7 +104,7 @@ public class TestTreeServer implements Runnable {
 	 *            - file path
 	 * @param port - port
 	 */
-	public TestTreeServer(JCSyncHashMap syncTree, String fname, String uname, String path, int port, int portT, String ip) {
+	public TestTreeServer(JCSyncHashMap<String, Nod> syncTree, String fname, String uname, String path, int port, int portT, String ip) {
 		super();
 		this.syncTree=syncTree;
 		this.fname = fname;
