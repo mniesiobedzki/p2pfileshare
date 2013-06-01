@@ -12,7 +12,6 @@ public class MegaUltimateTest {
 		// TODO Auto-generated method stub
 
         GuiWindower gui = new GuiWindower();
-
         TestController controller = new TestController(gui);
 	}
 

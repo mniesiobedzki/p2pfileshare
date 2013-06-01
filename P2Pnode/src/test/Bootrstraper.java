@@ -34,7 +34,7 @@ public class Bootrstraper implements Runnable{
 	}
 
 	public static void main(String[] args) {
-		new Bootrstraper(1025,1049);
+		new Bootrstraper(21000,21024);
 	}
 	
 }
