@@ -29,4 +29,7 @@
 		<srcroot bind="false" url="file://$MODULE_DIR$/../../P2Pm-source-code/sources/p2pm-tests/src/main/java"/>
 		<relative-module-cls project-related="jar://$PROJECT_DIR$/P2Pnode/p2pm-13-05-15-0223.jar!/"/>
 	</lib>
+	<levels>
+		<level name="P2Pm" value="project"/>
+	</levels>
 </component>

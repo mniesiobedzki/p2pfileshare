@@ -7,6 +7,7 @@
 	<classpathentry exported="true" kind="lib" path="javasysmon-0.3.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="log4j-1.2.17.jar"/>
 	<classpathentry exported="true" kind="lib" path="objenesis-tck-1.3.jar"/>
-	<classpathentry exported="true" kind="lib" path="p2pm-13-05-15-0223.jar" sourcepath="/Users/marek/Developer/IdeaProjects/P2Pm-source-code/sources/p2pp/src/main/java"/>
+	<classpathentry kind="lib" path="p2pm-13-05-15-0223.jar" sourcepath="/Users/marek/Developer/IdeaProjects/P2Pm-source-code/sources/p2pp/src/main/java"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/P2Pm"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="P2Pm">
+    <CLASSES />
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../P2Pm-source-code/sources/p2pp/src/main/java" />
+      <root url="file://$PROJECT_DIR$/../P2Pm-source-code/sources/p2pp/src/tests/java" />
+      <root url="file://$PROJECT_DIR$/../P2Pm-source-code/sources/jcsync/src/main/java" />
+      <root url="file://$PROJECT_DIR$/../P2Pm-source-code/sources/jcsync/src/tests/java" />
+      <root url="file://$PROJECT_DIR$/../P2Pm-source-code/sources/jcsync/src/samples/java" />
+      <root url="file://$PROJECT_DIR$/../P2Pm-source-code/sources/jcsync/src/samples/tests" />
+      <root url="file://$PROJECT_DIR$/../P2Pm-source-code/sources/pubsub/src/main/java" />
+      <root url="file://$PROJECT_DIR$/../P2Pm-source-code/sources/pubsub/src/tests/java" />
+      <root url="file://$PROJECT_DIR$/../P2Pm-source-code/sources/p2pm-tests/src/main/java" />
+    </SOURCES>
+  </library>
+</component>
