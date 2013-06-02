@@ -15,7 +15,7 @@ public class ServerStart {
     private BootstrapServerRunner bootstrapServerRunner;
 
     public ServerStart() {
-        this.serverPort  = 21000;
+        this.serverPort = 21001;
         this.bootstrapServerRunner = new BootstrapServerRunner(this.serverPort);
         this.bootstrapServerRunner.start();
     }
@@ -37,9 +37,9 @@ public class ServerStart {
         return serverPort;
     }
 
-    public void machineInfo(){
+    public void machineInfo() {
         LOG.info("Operating system name: " + System.getProperty("os.name"));
         LOG.info("Operating system version: " + System.getProperty("os.version"));
-        LOG.info("Java version: " +  System.getProperty("java.version"));
+        LOG.info("Java version: " + System.getProperty("java.version"));
     }
 }

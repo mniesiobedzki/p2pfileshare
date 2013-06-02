@@ -50,7 +50,7 @@ public class ClientP2Pnode {
             LOG.debug("collection onLocalStateUpdated callback invoked method="
                     + methodName + ": " + object.getID());
             System.out
-                    .println(" LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL ");
+                    .println("LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL ");
         }
 
         public void onRemoteStateUpdated(JCSyncAbstractSharedObject object,
@@ -58,7 +58,7 @@ public class ClientP2Pnode {
             LOG.debug("collection onRemoteStateUpdated callback invoked method="
                     + methodName + ": " + object.getID());
             System.out
-                    .println(" REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE ");
+                    .println("REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE ");
 
             // aktualizacja plików na dysku. Chciałbym to zrobić ładnie przez obserwatora, ale niestety nie działa.
             controller.updateTree();
@@ -113,14 +113,16 @@ public class ClientP2Pnode {
             try {
                 this.jcSyncTreeMap_sharedCollectionObject = new SharedCollectionObject(collID, this.jcSyncTreeMap, this.jcSyncCore, DefaultConsistencyManager.class);
             } catch (ObjectExistsException e) {
-                LOG.debug("Collection already exists");
+                LOG.info("Collection already exists");
                 LOG.info("Connecting to the collection");
                 this.jcSyncTreeMap_sharedCollectionObject = (SharedCollectionObject) SharedCollectionObject.getFromOverlay(collID, this.jcSyncCore);
                 this.jcSyncTreeMap = (JCSyncTreeMap<String, Nod>) this.jcSyncTreeMap_sharedCollectionObject.getNucleusObject();
             }
 
             this.observable.addObserver(this.collectionObserver);
+            LOG.info("Collection added to the Observer");
             this.jcSyncTreeMap_sharedCollectionObject.addStateListener(this.collectionListener);
+            LOG.info("Collection added to the Listener");
         } catch (Exception e) {
             e.printStackTrace();
             /*
@@ -148,24 +150,29 @@ public class ClientP2Pnode {
             this.observable = new JCSyncObservable();
             //initCollectionTreeMap(nodeName, controller);
             this.jcSyncHashMap = new JCSyncHashMap<String, Nod>();
-            LOG.info("Creating the collection");
+
             try {
+                LOG.info("Creating the new collection");
                 this.jcSyncHashMap_sharedCollectionObject = new SharedCollectionObject(collID, this.jcSyncHashMap, this.jcSyncCore, DefaultConsistencyManager.class);
             } catch (ObjectExistsException e) {
-                LOG.debug("Collection JCSyncHashMap exists");
-                LOG.trace("Connecting to the collection JCSyncHashMap");
+                LOG.info("Collection JCSyncHashMap exists");
+                LOG.info("Connecting to the collection JCSyncHashMap");
                 this.jcSyncHashMap_sharedCollectionObject = (SharedCollectionObject) SharedCollectionObject.getFromOverlay(collID, this.jcSyncCore);
                 this.jcSyncHashMap = (JCSyncHashMap<String, Nod>) this.jcSyncHashMap_sharedCollectionObject.getNucleusObject();
             }
-
+            LOG.info("Adding the Observer");
             this.observable.addObserver(this.collectionObserver);
+            LOG.info("Observer Added");
+            LOG.info("Adding the Listener");
             this.jcSyncHashMap_sharedCollectionObject.addStateListener(this.collectionListener);
+            LOG.info("Listener added");
         } catch (Exception e) {
             e.printStackTrace();
             /*
              * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
 			 * Level.SEVERE, null, e);
 			 */
+            LOG.error("Collection not initialized !!");
         }
     }
 
@@ -433,7 +440,7 @@ public class ClientP2Pnode {
         node.setTcpPort(clientPort);
 
         node.networkJoin();
-
+        LOG.info("Node created -> joining to the network ....");
         return node;
     }
 

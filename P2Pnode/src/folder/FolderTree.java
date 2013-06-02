@@ -25,7 +25,7 @@ public class FolderTree implements Serializable {
     private static final long serialVersionUID = -7730198483613602338L;
     public boolean updated = false;
     public HashMap<String, Nod> folder = new HashMap<String, Nod>();
-    public JCSyncHashMap<String, Nod> syncFolder = new JCSyncHashMap<String, Nod>();
+    public JCSyncHashMap<String, Nod> syncFolder;
     // klucz to dla korzenia "root"
     // dla użytkownika jego ID
     // dla pliku ID użytkownika + ID pliku
@@ -37,17 +37,22 @@ public class FolderTree implements Serializable {
      * @param tree -
      */
     public FolderTree(String path, String usr, JCSyncHashMap<String, Nod> tree, String ip, int port) {
-        syncFolder = tree;
+        LOG.info("FolderTree constructor");
+        this.syncFolder = tree;
+        LOG.info("Drzewo podpięte");
         this.usr = usr;
+        LOG.info("User dodany");
         this.folder.put("root", new Nod(path));
-        if (syncFolder != null) {
-            syncFolder.put("root", folder.get("root"));
+        LOG.info("Root dodany do drzewa");
+        if (this.syncFolder != null) {
+            this.syncFolder.put("root", folder.get("root"));
             new Thread(new FolderServer(this, usr, path)).start();
             LOG.info("Uruchomiono nowy FolderServer");
         } else {
             LOG.warn("JCSync jest null-em");
         }
         this.addUser(usr, path, ip, port);
+        LOG.info("FolderTree created with path: " + path + " for user: " + usr + " IP:" + ip + ":" + port);
     }
 
     public HashMap<String, Nod> getFolder() {
@@ -61,6 +66,7 @@ public class FolderTree implements Serializable {
      * @param path - ścieżka do folderu lokalna dla użytkownika
      */
     public void addUser(String usr, String path, String ip, int port) {
+        LOG.info("adding new user " + usr);
         Nod n = new Nod(usr, folder.get("root"), ip, port);
         System.out.println(n);
         System.out.println("Użytkownik :" + usr);
@@ -68,10 +74,11 @@ public class FolderTree implements Serializable {
         n.setPath(path);
         folder.put(usr, n);
 
-        if (syncFolder != null) {
-            syncFolder.put(usr, n);
+        if (this.syncFolder != null) {
+            this.syncFolder.put(usr, n);
         }
         updated = true;
+        LOG.info("User added");
     }
 
     public Nod getRoot() {
@@ -116,9 +123,9 @@ public class FolderTree implements Serializable {
         file.setParent(folder.get(usr));
         folder.put(usr + file.getName(), file);
 
-        if (syncFolder != null) {
+        if (this.syncFolder != null) {
             System.out.println("Dodaje do drzewaJCsync: " + usr + file.getName());
-            syncFolder.put(usr + file.getName(), file);
+            this.syncFolder.put(usr + file.getName(), file);
         }
         updated = true;
     }
@@ -170,8 +177,8 @@ public class FolderTree implements Serializable {
 
     public void putAll() {
         LinkedList<String> usrs = new LinkedList<String>();
-        for (Nod n : syncFolder.values()) {
-            if (syncFolder.get("root").getChildren().contains(n.getName())) {
+        for (Nod n : this.syncFolder.values()) {
+            if (this.syncFolder.get("root").getChildren().contains(n.getName())) {
                 usrs.add(n.getName());
                 folder.put(n.value, n);
                 if (!folder.get("root").children.contains(n.getName())) {
@@ -302,7 +309,7 @@ public class FolderTree implements Serializable {
         System.out.println("\nusrs " + rootLocal.getChildren());
         System.out.println(this);
         //plik zaktualizowano
-        for (Nod n : syncFolder.values()) {
+        for (Nod n : this.syncFolder.values()) {
             if (!n.getParent().equals(usr) && folder.get(n.getValue()).getHistory().size() > 0 && folder.get(usr + n.getName()) != null) {
                 if (n.getHistory().getLast() == null && folder.get(usr + n.getName()).getHistory().getLast() != null) {
                     changes.add(n);
@@ -319,7 +326,7 @@ public class FolderTree implements Serializable {
         System.out.println("usrs jcsync: " + syncFolder.get("root").getChildren());
         System.out.println("usrs: " + folder.get("root").getChildren());
         //pliki utworzone
-        for (Nod n : syncFolder.values()) {
+        for (Nod n : this.syncFolder.values()) {
             if (!n.getValue().equals("root") && !users.contains(n.getName())) {
                 if (!folder.containsKey(usr + n.getName())) {
                     System.out.println("stworzono " + n.name);
@@ -337,7 +344,7 @@ public class FolderTree implements Serializable {
                 System.out.println("FolderTree: rządanie pliku " + nod.getParent() + nod.getName());
                 System.out.println("FolderTree: czas zmiany zdalneg: " + folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
                 @SuppressWarnings("unused")
-                FileClient fileClient = new FileClient(this, nod, syncFolder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
+                FileClient fileClient = new FileClient(this, nod, this.syncFolder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
             } else {
                 //kod kasujący plik
                 MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + nod.getName());
@@ -354,7 +361,7 @@ public class FolderTree implements Serializable {
         for (Nod nod : changes) {
             if (nod.getHistory().getLast() != null) {
                 @SuppressWarnings("unused")
-                FileClient fileClient = new FileClient(this, nod, syncFolder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
+                FileClient fileClient = new FileClient(this, nod, this.syncFolder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
             } else {
                 //kod kasujący plik
                 MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + "\\" + nod.getName());
