@@ -128,6 +128,7 @@ public class FolderTree implements Serializable {
     }
 
     public void addFile(File f, String usr) {
+        LOG.info("Method addFile(" + f.getFilePath() + "," + usr);
         Nod file = new Nod(usr + f.getFileName(), folder.get(usr), f.getSingleFileHistory(), folder.get(usr), f.getFileName(), f.getFilePath());
         file.setParent(folder.get(usr));
         folder.put(usr + file.getName(), file);
@@ -374,7 +375,7 @@ public class FolderTree implements Serializable {
                 System.out.println("FolderTree: czas zmiany zdalneg: " + folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
                 @SuppressWarnings("unused")
                 FileClient fileClient = new FileClient(this, nod, this.syncFolder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
-            } catch (java.util.NoSuchElementException e) {
+            } catch (Exception e) {
                 LOG.info("nod.getHistory().getLast() == null");
 
                 //kod kasujący plik
@@ -384,8 +385,12 @@ public class FolderTree implements Serializable {
                     this.updated = true;
                 } else {
                     File deletedFile = new File(nod.getName(), nod.getPath(), usr);
-                    deletedFile.setFileId(nod.history.getFirst().getFileId());
-                    addFile(deletedFile, usr);
+                    try {
+                        deletedFile.setFileId(nod.history.getFirst().getFileId());
+                        addFile(deletedFile, usr);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                 }
             }
         }
@@ -410,7 +415,7 @@ public class FolderTree implements Serializable {
             try {
                 @SuppressWarnings("unused")
                 FileClient fileClient = new FileClient(this, nod, this.syncFolder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
-            } catch (java.util.NoSuchElementException e) {
+            } catch (Exception e) {
 
                 //kod kasujący plik
                 MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + System.getProperty("file.separator") + nod.getName());
