@@ -350,7 +350,9 @@ public class FolderTree implements Serializable {
         }
 
         for (Nod nod : created) {
-            if (nod.getHistory().getLast() != null) {
+            //if (nod.getHistory().getLast() != null) {
+
+            if (!nod.getHistory().isEmpty()) {
                 System.out.println("FolderTree: rządanie pliku " + nod.getParent() + nod.getName());
                 System.out.println("FolderTree: czas zmiany zdalneg: " + folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
                 @SuppressWarnings("unused")
@@ -395,7 +397,8 @@ public class FolderTree implements Serializable {
 //
 //        }
         for (Nod nod : changes) {
-            if (nod.getHistory().getLast() != null) {
+            //if (nod.getHistory().getLast() != null) {
+            if (!nod.getHistory().isEmpty()) {
                 @SuppressWarnings("unused")
                 FileClient fileClient = new FileClient(this, nod, this.syncFolder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
             } else {
