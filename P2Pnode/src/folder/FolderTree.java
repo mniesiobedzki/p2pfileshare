@@ -412,12 +412,24 @@ public class FolderTree implements Serializable {
 //            }
 //        }
         for (Nod nod : changes) {
-            try {
+            if (nod.getHistory().getLast() != null) {
+                System.out.println("FolderTree: żądanie pliku " + nod.getParent() + nod.getName());
+                System.out.println("FolderTree: czas zmiany zdalnego: " + folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
+                System.out.println("przez port: " + folder.get(nod.getParent()).port);
+                System.err.println(this);
+                System.err.println(nod);
+                System.err.println(syncFolder.get(nod.getParent()).ip);
+                System.err.println(nod.getParent() + nod.getName());
+                System.err.println(folder.get(usr).getPath());
+                System.err.println(nod.getName());
+                System.err.println(usr);
+                System.err.println(folder.get(nod.parent).getPort());
                 @SuppressWarnings("unused")
-                FileClient fileClient = new FileClient(this, nod, this.syncFolder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
-            } catch (Exception e) {
-
+                FileClient fileClient = new FileClient(this, nod, syncFolder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
+            } else {
                 //kod kasujący plik
+                System.out.println("Kasuje plik: " + nod.name);
+                System.out.println("Ścieżka: " + folder.get(usr).getPath() + System.getProperty("file.separator") + nod.getName());
                 MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + System.getProperty("file.separator") + nod.getName());
                 if (this.getFolder().containsKey(usr + nod.getName())) {
                     this.getFolder().get(usr + nod.getName()).history.add(null);
