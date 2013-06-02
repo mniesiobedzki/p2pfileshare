@@ -349,33 +349,13 @@ public class FolderTree implements Serializable {
             }
         }
 
-//        for (Nod nod : created) {
-//            if (nod.getHistory().getLast() != null) {
-//                System.out.println("FolderTree: rządanie pliku " + nod.getParent() + nod.getName());
-//                System.out.println("FolderTree: czas zmiany zdalneg: " + folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
-//                @SuppressWarnings("unused")
-//                FileClient fileClient = new FileClient(this, nod, this.syncFolder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
-//            } else {
-//                //kod kasujący plik
-//                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + nod.getName());
-//                if (this.getFolder().containsKey(usr + nod.getName())) {
-//                    this.getFolder().get(usr + nod.getName()).history.add(null);
-//                    this.updated = true;
-//                } else {
-//                    File deletedFile = new File(nod.getName(), nod.getPath(), usr);
-//                    deletedFile.setFileId(nod.history.getFirst().getFileId());
-//                    addFile(deletedFile, usr);
-//                }
-//            }
-//        }
         for (Nod nod : created) {
-            try {
-                // if (nod.getHistory().getLast() != null) {
+            if (nod.getHistory().getLast() != null) {
                 System.out.println("FolderTree: rządanie pliku " + nod.getParent() + nod.getName());
                 System.out.println("FolderTree: czas zmiany zdalneg: " + folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
                 @SuppressWarnings("unused")
                 FileClient fileClient = new FileClient(this, nod, this.syncFolder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
-
+            } else {
                 //kod kasujący plik
                 MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + nod.getName());
                 if (this.getFolder().containsKey(usr + nod.getName())) {
@@ -383,37 +363,54 @@ public class FolderTree implements Serializable {
                     this.updated = true;
                 } else {
                     File deletedFile = new File(nod.getName(), nod.getPath(), usr);
-                    try {
-                        deletedFile.setFileId(nod.history.getFirst().getFileId());
-                        addFile(deletedFile, usr);
-                    } catch (Exception ex) {
-                        ex.printStackTrace();
-                    }
+                    deletedFile.setFileId(nod.history.getFirst().getFileId());
+                    addFile(deletedFile, usr);
                 }
-
-            } catch (Exception e) {
-                LOG.info("nod.getHistory().getLast() == null");
-
-
             }
         }
-//        for (Nod nod : changes) {
-//            if (nod.getHistory().getLast() != null) {
+//        for (Nod nod : created) {
+//            try {
+//                // if (nod.getHistory().getLast() != null) {
+//                System.out.println("FolderTree: rządanie pliku " + nod.getParent() + nod.getName());
+//                System.out.println("FolderTree: czas zmiany zdalneg: " + folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
 //                @SuppressWarnings("unused")
 //                FileClient fileClient = new FileClient(this, nod, this.syncFolder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
-//            } else {
+//            } catch (Exception e) {
+//                LOG.info("nod.getHistory().getLast() == null");
+//
+//
+//            }
 //                //kod kasujący plik
-//                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + System.getProperty("file.separator") + nod.getName());
+//                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + nod.getName());
 //                if (this.getFolder().containsKey(usr + nod.getName())) {
 //                    this.getFolder().get(usr + nod.getName()).history.add(null);
 //                    this.updated = true;
 //                } else {
 //                    File deletedFile = new File(nod.getName(), nod.getPath(), usr);
-//                    deletedFile.setFileId(nod.history.getFirst().getFileId());
-//                    addFile(deletedFile, usr);
+//                        deletedFile.setFileId(nod.history.getFirst().getFileId());
+//                        addFile(deletedFile, usr);
+//
 //                }
-//            }
+//
+//
 //        }
+        for (Nod nod : changes) {
+            if (nod.getHistory().getLast() != null) {
+                @SuppressWarnings("unused")
+                FileClient fileClient = new FileClient(this, nod, this.syncFolder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
+            } else {
+                //kod kasujący plik
+                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + System.getProperty("file.separator") + nod.getName());
+                if (this.getFolder().containsKey(usr + nod.getName())) {
+                    this.getFolder().get(usr + nod.getName()).history.add(null);
+                    this.updated = true;
+                } else {
+                    File deletedFile = new File(nod.getName(), nod.getPath(), usr);
+                    deletedFile.setFileId(nod.history.getFirst().getFileId());
+                    addFile(deletedFile, usr);
+                }
+            }
+        }
         for (Nod nod : changes) {
             if (nod.getHistory().getLast() != null) {
                 System.out.println("FolderTree: żądanie pliku " + nod.getParent() + nod.getName());
