@@ -46,8 +46,15 @@ public class FolderTree implements Serializable {
         LOG.info("Root dodany do drzewa");
         if (this.syncFolder != null) {
             LOG.info("SyncFolder nie ejst NULLe,");
-            this.syncFolder.put("root", folder.get("root"));
-            LOG.info("dodano root");
+            if (this.syncFolder.containsKey("root")) {
+                LOG.info("Jest Root");
+                this.updated = true;
+            } else {
+                this.syncFolder.put("root", folder.get("root"));
+                LOG.info("dodano root");
+            }
+
+
             new Thread(new FolderServer(this, usr, path)).start();
             LOG.info("Uruchomiono nowy FolderServer");
         } else {
@@ -285,8 +292,8 @@ public class FolderTree implements Serializable {
             } else {
                 //kod kasujący plik
                 System.out.println("Kasuje plik: " + nod.name);
-                System.out.println("Ścieżka: " + folder.get(usr).getPath() + "\\" + nod.getName());
-                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + "\\" + nod.getName());
+                System.out.println("Ścieżka: " + folder.get(usr).getPath() + System.getProperty("file.separator") + nod.getName());
+                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + System.getProperty("file.separator") + nod.getName());
                 if (this.getFolder().containsKey(usr + nod.getName())) {
                     this.getFolder().get(usr + nod.getName()).history.add(null);
                     this.updated = true;
@@ -366,7 +373,7 @@ public class FolderTree implements Serializable {
                 FileClient fileClient = new FileClient(this, nod, this.syncFolder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
             } else {
                 //kod kasujący plik
-                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + "\\" + nod.getName());
+                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + System.getProperty("file.separator") + nod.getName());
                 if (this.getFolder().containsKey(usr + nod.getName())) {
                     this.getFolder().get(usr + nod.getName()).history.add(null);
                     this.updated = true;
