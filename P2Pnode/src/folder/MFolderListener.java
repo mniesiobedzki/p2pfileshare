@@ -94,11 +94,11 @@ public class MFolderListener {
 
                     }
 
-                    System.out.println("Created: " + MFolderListener.listenedPath.toString() + "\\" + event.context().toString());
+                    System.out.println("Created: " + MFolderListener.listenedPath.toString() + System.getProperty("file.separator") + event.context().toString());
 
                     java.io.File kuku = new java.io.File(event.context().toString());
 
-                    File newlyCreatedFile = new File(event.context().toString(), MFolderListener.listenedPath.toString() + "\\" + event.context().toString(), userId);
+                    File newlyCreatedFile = new File(event.context().toString(), MFolderListener.listenedPath.toString() + System.getProperty("file.separator") + event.context().toString(), userId);
 
 //					if(kuku.lastModified() == 0){
 //						Date dt = new Date();
@@ -107,7 +107,7 @@ public class MFolderListener {
 //						newlyCreatedFile.setFileStateHistoryEntry(
 //								dt.getTime(), event.context().toString(),
 //								userId, new java.io.File(event.context().toString()).length(),
-//								File.getMD5Checksum(listenedPath.toString() + "\\"
+//								File.getMD5Checksum(listenedPath.toString() + System.getProperty("file.separator")
 //										+ event.context().toString()));
 //					} else {
 //						
@@ -118,7 +118,7 @@ public class MFolderListener {
                     newlyCreatedFile.setFileStateHistoryEntry(
                             kuku.lastModified(), event.context().toString(),
                             userId, new java.io.File(event.context().toString()).length(),
-                            File.getMD5Checksum(listenedPath.toString() + "\\"
+                            File.getMD5Checksum(listenedPath.toString() + System.getProperty("file.separator")
                                     + event.context().toString()));
 
                     System.err.println("putuje: " + userId + newlyCreatedFile.getFileName());
@@ -188,14 +188,14 @@ public class MFolderListener {
                     //Entry<String, File> deFajl = searchForFile(event.context().toString());
                     System.out.println("filesAndTheirHistory: " + filesAndTheirHistory);
                     File f = filesAndTheirHistory.get(userId + event.context().toString());
-                    String currentFileMD5 = File.getMD5Checksum(listenedPath.toString() + "\\" + event.context().toString());
+                    String currentFileMD5 = File.getMD5Checksum(listenedPath.toString() + System.getProperty("file.separator") + event.context().toString());
                     System.out.println(filesAndTheirHistory);
                     System.out.println(event.context().toString());
                     System.out.println(f);
                     System.out.println(f.getLastModified());
                     if (f.getLastModified() == 0 || (f != null && !currentFileMD5.equals(f.getSingleFileHistory().getLast().getMd5()))) {
                         System.out.println("bangla");
-                        java.io.File kuku = new java.io.File(listenedPath.toString() + "\\" + event.context().toString());
+                        java.io.File kuku = new java.io.File(listenedPath.toString() + System.getProperty("file.separator") + event.context().toString());
                         System.out.println(event.context().toString());
                         f.setFileStateHistoryEntry(
                                 kuku.lastModified(),
@@ -203,7 +203,7 @@ public class MFolderListener {
                                 userId,
                                 new java.io.File(myDir.toString() + "/"
                                         + event.context().toString()).length(),
-                                File.getMD5Checksum(listenedPath.toString() + "\\"
+                                File.getMD5Checksum(listenedPath.toString() + System.getProperty("file.separator")
                                         + event.context().toString()));
 
                         fileModified = true;
@@ -244,7 +244,7 @@ public class MFolderListener {
     private static Entry<String, File> searchForFile(String fileName) {
 
         try {
-            String currentFileMD5 = File.getMD5Checksum(listenedPath.toString() + "\\" + fileName);
+            String currentFileMD5 = File.getMD5Checksum(listenedPath.toString() + System.getProperty("file.separator") + fileName);
             for (Entry<String, File> entry : filesAndTheirHistory.entrySet()) {
                 if (currentFileMD5.equals(entry.getValue().getSingleFileHistory().getLast().getMd5())) {
                     return entry;

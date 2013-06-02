@@ -2,6 +2,7 @@ package file;
 
 import folder.FolderTree;
 import folder.Nod;
+import org.apache.log4j.Logger;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -14,6 +15,8 @@ public class FileServer extends Thread {
     public FolderTree tree;
     public String uname;
     public int port;
+
+    public static final Logger LOG = Logger.getLogger(FolderTree.class);
 
     public FileServer(FolderTree ft, String name, int port) {
         // create socket
@@ -30,12 +33,13 @@ public class FileServer extends Thread {
      */
     public void send(OutputStream os, String path) throws Exception {
         // sendfile
+        LOG.info("Sending file " + path);
         java.io.File myFile = new java.io.File(path);
         byte[] mybytearray = new byte[(int) myFile.length() + 1];
         FileInputStream fis = new FileInputStream(myFile);
         BufferedInputStream bis = new BufferedInputStream(fis);
         bis.read(mybytearray, 0, mybytearray.length);
-        System.out.println("Sending...");
+        System.out.println("Sending... ");
         os.write(mybytearray, 0, mybytearray.length);
         os.flush();
         os.close();
@@ -45,10 +49,10 @@ public class FileServer extends Thread {
     public void run() {
         ServerSocket servsock;
         try {
-            System.out.println("Server plik�w na porcie: " + port);
+            System.out.println("Server plików na porcie: " + port);
             servsock = new ServerSocket(port);
             while (true) {
-
+                LOG.info("New connection");
                 System.out.println("Waiting...");
 
                 Socket sock = servsock.accept();
@@ -74,7 +78,7 @@ public class FileServer extends Thread {
 
                     path += System.getProperty("file.separator");
                     path += n.getName();
-                    System.err.println("wysy�am plik");
+                    System.err.println("wysyłam plik ");
                     System.out.println("key: " + msg);
                     System.out.println("path: " + path);
                     this.send(os, path);

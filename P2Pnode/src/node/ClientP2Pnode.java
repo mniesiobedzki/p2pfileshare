@@ -55,7 +55,7 @@ public class ClientP2Pnode {
 
         public void onRemoteStateUpdated(JCSyncAbstractSharedObject object,
                                          String methodName, Object retVal) {
-            LOG.debug("collection onRemoteStateUpdated callback invoked method="
+            LOG.info("collection onRemoteStateUpdated callback invoked method="
                     + methodName + ": " + object.getID());
             System.out
                     .println("REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE ");
