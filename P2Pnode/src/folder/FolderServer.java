@@ -14,6 +14,7 @@ public class FolderServer implements Runnable {
 
     @Override
     public void run() {
+        LOG.info("Run method");
         try {
             Thread.sleep(1000);
             java.io.File[] listaFajli = File.listAllTheFilesInDir(path);
@@ -44,6 +45,9 @@ public class FolderServer implements Runnable {
 
     public FolderServer(FolderTree ft, String uname, String path) {
         super();
+
+        LOG.info("FolderServer(folderTreeObj, " + uname + ", " + path + ")");
+
         this.uname = uname;
         this.path = path;
         this.ft = ft;

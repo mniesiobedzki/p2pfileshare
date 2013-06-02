@@ -45,11 +45,13 @@ public class FolderTree implements Serializable {
         this.folder.put("root", new Nod(path));
         LOG.info("Root dodany do drzewa");
         if (this.syncFolder != null) {
+            LOG.info("SyncFolder nie ejst NULLe,");
             this.syncFolder.put("root", folder.get("root"));
+            LOG.info("dodano root");
             new Thread(new FolderServer(this, usr, path)).start();
             LOG.info("Uruchomiono nowy FolderServer");
         } else {
-            LOG.warn("JCSync jest null-em");
+            LOG.info("JCSync jest null-em");
         }
         this.addUser(usr, path, ip, port);
         LOG.info("FolderTree created with path: " + path + " for user: " + usr + " IP:" + ip + ":" + port);

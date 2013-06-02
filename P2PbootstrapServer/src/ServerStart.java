@@ -15,7 +15,7 @@ public class ServerStart {
     private BootstrapServerRunner bootstrapServerRunner;
 
     public ServerStart() {
-        this.serverPort = 21001;
+        this.serverPort = 21000;
         this.bootstrapServerRunner = new BootstrapServerRunner(this.serverPort);
         this.bootstrapServerRunner.start();
     }
