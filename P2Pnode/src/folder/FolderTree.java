@@ -375,8 +375,6 @@ public class FolderTree implements Serializable {
                 System.out.println("FolderTree: czas zmiany zdalneg: " + folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
                 @SuppressWarnings("unused")
                 FileClient fileClient = new FileClient(this, nod, this.syncFolder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
-            } catch (Exception e) {
-                LOG.info("nod.getHistory().getLast() == null");
 
                 //kod kasujący plik
                 MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + nod.getName());
@@ -392,6 +390,11 @@ public class FolderTree implements Serializable {
                         ex.printStackTrace();
                     }
                 }
+
+            } catch (Exception e) {
+                LOG.info("nod.getHistory().getLast() == null");
+
+
             }
         }
 //        for (Nod nod : changes) {
