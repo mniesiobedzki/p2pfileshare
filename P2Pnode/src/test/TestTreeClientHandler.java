@@ -20,16 +20,22 @@ public class TestTreeClientHandler implements Runnable{
 			for(User u: nod.users.values()){
 				if(!u.name.equals(nod.u.name)){
 					TestTreeClientWBootstrap klient = new TestTreeClientWBootstrap(u.ip, u.treePort);
-					clients.add(klient);
+					synchronized(clients){
+						clients.add(klient);
+					}
 				}
 			}
 			LinkedList<TestTreeClientWBootstrap> remove = new LinkedList<TestTreeClientWBootstrap>();
-			for (TestTreeClientWBootstrap c : clients) {
-				if(c.kill){
-					remove.add(c);
+			synchronized(clients){
+				for (TestTreeClientWBootstrap c : clients) {
+					synchronized(c){
+						if(c.kill){
+							remove.add(c);
+						}
+					}
 				}
+				clients.removeAll(remove);
 			}
-			clients.removeAll(remove);
 		}
 	}
 	public TestTreeClientHandler(NodTest nod) {

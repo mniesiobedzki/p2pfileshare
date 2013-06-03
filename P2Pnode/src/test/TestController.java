@@ -54,21 +54,29 @@ public class TestController {
         		@SuppressWarnings("unused")
         		FileServer server = new FileServer(serwer.ft, usr, portFile);
          		while(true){
-         			for (TestTreeClientWBootstrap tc : klient.clients) {
+         			synchronized(klient.clients){
+						for (TestTreeClientWBootstrap tc : klient.clients) {
+
         				if(tc.changed){
         					System.err.println("Wszed³em w zmianê pliku. FolderTree -> changed = true");
-        	 				serwer.ft.update(tc.ft.getFolder());
-        	 				tc.changed=false;
-        				}else{
-        					try {
-        						Thread.sleep(1000);
-        					} catch (InterruptedException e) {
-        						// TODO Auto-generated catch block
-        						e.printStackTrace();
+        					synchronized(serwer.ft){
+        						serwer.ft.update(tc.ft.getFolder());
         					}
+        						tc.changed=false;
+        					
+        				}else{
         					//System.err.println("Nie by³o zmiany w pliku. FolderTree -> changed = false");
         				}
+    					
+
+    					try {
+    						Thread.sleep(1000);
+    					} catch (InterruptedException e) {
+    						// TODO Auto-generated catch block
+    						e.printStackTrace();
+    					}
         			}
+         		}
          		}
             }
         }
@@ -77,6 +85,7 @@ public class TestController {
 		this.gui = gui;
 	    this.gui.addButtonActionListener(guziki); // podpiÄ™cie guzikÃ³w
 	    this.addPropertyChangeListener(this.gui); // podpiÄ™cie zmian
+	    
         //clientP2Pnode = new ClientP2Pnode(this);
 	}
 

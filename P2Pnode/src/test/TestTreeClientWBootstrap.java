@@ -15,7 +15,7 @@ public class TestTreeClientWBootstrap implements Runnable{
 	int 	serverPort;
 	boolean changed=false;
 	boolean kill = false;
-	FolderTree ft;
+	FolderTree ft = null;
 
 	@Override
 	public void run() {
@@ -40,14 +40,17 @@ public class TestTreeClientWBootstrap implements Runnable{
 					InputStream socketStream = sock.getInputStream();
 					ObjectInputStream objectInput = new ObjectInputStream(socketStream);
 					ft = (FolderTree) objectInput.readObject();
-					if(ft!=null){
-						changed = true;
-						System.out.println(">>>" + ft);
-						objectInput.close();
-						socketStream.close();
-						sock.close();
+
+					synchronized(ft){
+						if(ft!=null){
+							changed = true;
+							System.out.println(">>>" + ft);
+							objectInput.close();
+							socketStream.close();
+							sock.close();
+						}
+	//					Thread.sleep(1000);
 					}
-//					Thread.sleep(1000);
 				}
 
 			} catch (Exception e) {
@@ -84,6 +87,8 @@ public class TestTreeClientWBootstrap implements Runnable{
 	public TestTreeClientWBootstrap(String serverIP, int serverPort){
 		this.serverPort = serverPort;
 		this.serverIP 	= serverIP;
+		System.err.println("nowy ttc " +serverIP +":"+serverPort);
+		new Thread(this).start();
 	}
 
 }
