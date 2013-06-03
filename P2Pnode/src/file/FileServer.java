@@ -20,10 +20,10 @@ public class FileServer extends Thread {
 
     public FileServer(FolderTree ft, String name, int port) {
         // create socket
-        tree = ft;
-        uname = name;
-        this.start();
+        this.tree = ft;
+        this.uname = name;
         this.port = port;
+        this.start();
     }
 
     /**
