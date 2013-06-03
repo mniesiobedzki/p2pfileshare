@@ -17,19 +17,7 @@
 	<lib name="objenesis-tck-1.3.jar" scope="COMPILE">
 		<relative-module-cls project-related="jar://$PROJECT_DIR$/P2Pnode/objenesis-tck-1.3.jar!/"/>
 	</lib>
-	<lib name="p2pm-13-05-15-0223.jar" scope="COMPILE">
-		<srcroot url="file://$MODULE_DIR$/../../P2Pm-source-code/sources/p2pp/src/main/java"/>
-		<srcroot bind="false" url="file://$MODULE_DIR$/../../P2Pm-source-code/sources/p2pp/src/tests/java"/>
-		<srcroot bind="false" url="file://$MODULE_DIR$/../../P2Pm-source-code/sources/jcsync/src/main/java"/>
-		<srcroot bind="false" url="file://$MODULE_DIR$/../../P2Pm-source-code/sources/jcsync/src/tests/java"/>
-		<srcroot bind="false" url="file://$MODULE_DIR$/../../P2Pm-source-code/sources/jcsync/src/samples/java"/>
-		<srcroot bind="false" url="file://$MODULE_DIR$/../../P2Pm-source-code/sources/jcsync/src/samples/tests"/>
-		<srcroot bind="false" url="file://$MODULE_DIR$/../../P2Pm-source-code/sources/pubsub/src/main/java"/>
-		<srcroot bind="false" url="file://$MODULE_DIR$/../../P2Pm-source-code/sources/pubsub/src/tests/java"/>
-		<srcroot bind="false" url="file://$MODULE_DIR$/../../P2Pm-source-code/sources/p2pm-tests/src/main/java"/>
-		<relative-module-cls project-related="jar://$PROJECT_DIR$/P2Pnode/p2pm-13-05-15-0223.jar!/"/>
+	<lib name="$MODULE_DIR$/p2pm-13-06-03-0014.jar" scope="COMPILE">
+		<relative-module-cls project-related="jar://$PROJECT_DIR$/P2Pnode/p2pm-13-06-03-0014.jar!/"/>
 	</lib>
-	<levels>
-		<level name="P2Pm" value="project"/>
-	</levels>
 </component>
