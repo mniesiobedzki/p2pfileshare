@@ -181,11 +181,11 @@ public class GuiWindower implements PropertyChangeListener {
                     serverIPAdress.setText(stringtokenizer.nextToken() + "." + stringtokenizer.nextToken() + "." + stringtokenizer.nextToken() + ".");
                 }
             });
-            try {
-                comboboxKartSieciowych.setSelectedIndex(1);
-            } catch (IllegalArgumentException e) {
-                System.err.println("-> NIE ZNALAZLEM ZADNEGO AKTYWNEGO INTERFEJSU SIECIOWEGO POZA LOOPBACKIEM. Wiec sobie crashne");
-            }
+//            try {
+//                comboboxKartSieciowych.setSelectedIndex(1);
+//            } catch (IllegalArgumentException e) {
+//                System.err.println("-> NIE ZNALAZLEM ZADNEGO AKTYWNEGO INTERFEJSU SIECIOWEGO POZA LOOPBACKIEM. Wiec sobie crashne");
+//            }
             panelPierwszegoUruchomienia.add(comboboxKartSieciowych);
 
             RichJLabel podajIPJLabel = new RichJLabel("IP+port bootstrapa:", 0);
