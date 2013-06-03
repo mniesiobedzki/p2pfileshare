@@ -26,17 +26,49 @@ public class JCSyncExamplePiotrek {
 
     private P2PNode p2pNode;
     private NodeCallback p2pNodeCallback = new NodeCallback() {
-        @Override public void onDisconnect(Node node) {}
-        @Override public void onUserLookup(Node node, Object userInfo) {}
-        @Override public void onObjectLookup(Node node, Object object) {}
-        @Override public void onTopicNotify(Node node, Object topicID, byte[] message, boolean historical, short eventType) {}
-        @Override public void onTopicCreate(Node node, Object topicID) {}
-        @Override public void onTopicCreate(Node node, Object topicID, int transID) {}
-        @Override public void onTopicRemove(Node node, Object topicID) {}
-        @Override public void onTopicSubscribe(Node node, Object topicID) {}
-        @Override public void onTopicSubscribe(Node node, Object topicID, int transID) {}
-        @Override public void onTopicUnsubscribe(Node node, Object topicID, int respCode) {}
-        @Override public void onInsertObject(Node node, NetworkObject object) {}
+        @Override
+        public void onDisconnect(Node node) {
+        }
+
+        @Override
+        public void onUserLookup(Node node, Object userInfo) {
+        }
+
+        @Override
+        public void onObjectLookup(Node node, Object object) {
+        }
+
+        @Override
+        public void onTopicNotify(Node node, Object topicID, byte[] message, boolean historical, short eventType) {
+        }
+
+        @Override
+        public void onTopicCreate(Node node, Object topicID) {
+        }
+
+        @Override
+        public void onTopicCreate(Node node, Object topicID, int transID) {
+        }
+
+        @Override
+        public void onTopicRemove(Node node, Object topicID) {
+        }
+
+        @Override
+        public void onTopicSubscribe(Node node, Object topicID) {
+        }
+
+        @Override
+        public void onTopicSubscribe(Node node, Object topicID, int transID) {
+        }
+
+        @Override
+        public void onTopicUnsubscribe(Node node, Object topicID, int respCode) {
+        }
+
+        @Override
+        public void onInsertObject(Node node, NetworkObject object) {
+        }
 
         @Override
         public void onJoin(Node node) {
@@ -46,16 +78,38 @@ public class JCSyncExamplePiotrek {
 
         }
 
-        @Override public void onOverlayError(Node node, Object sourceID, int errorCode) {}
-        @Override public void onOverlayError(Node node, Object sourceID, int errorCode, int transID) {}
-        @Override public void onPubSubError(Node node, Object topicID, short operationType, int errorCode) {}
-        @Override public void onPubSubError(Node node, Object topicID, short operationType, int errorCode, int transID) {}
-        @Override public boolean onDeliverRequest(List<NetworkObject> objectList) { return false; }
-        @Override public boolean onForwardingRequest(List<NetworkObject> objectList) { return false; }
-        @Override public void onBootstrapError(Node node, int errorCode) {}
+        @Override
+        public void onOverlayError(Node node, Object sourceID, int errorCode) {
+        }
 
         @Override
-        public void onMessageDelivery(List<NetworkObject> networkObjects) {
+        public void onOverlayError(Node node, Object sourceID, int errorCode, int transID) {
+        }
+
+        @Override
+        public void onPubSubError(Node node, Object topicID, short operationType, int errorCode) {
+        }
+
+        @Override
+        public void onPubSubError(Node node, Object topicID, short operationType, int errorCode, int transID) {
+        }
+
+        @Override
+        public boolean onDeliverRequest(List<NetworkObject> objectList) {
+            return false;
+        }
+
+        @Override
+        public boolean onForwardingRequest(List<NetworkObject> objectList) {
+            return false;
+        }
+
+        @Override
+        public void onBootstrapError(Node node, int errorCode) {
+        }
+
+        @Override
+        public void onMessageDelivery(String s, List<NetworkObject> networkObjects) {
             //To change body of implemented methods use File | Settings | File Templates.
         }
     };
@@ -68,7 +122,7 @@ public class JCSyncExamplePiotrek {
         @Override
         public void update(Observable o, Object arg) {
             if (o.equals(observable)) {
-                String args_ = (String)arg;
+                String args_ = (String) arg;
                 LOG.trace("[Update o=" + o + "] " + arg);
             }
         }
@@ -77,6 +131,7 @@ public class JCSyncExamplePiotrek {
         public void onLocalStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
             LOG.debug("collection onLocalStateUpdated callback invoked method=" + methodName + ": " + collection);
         }
+
         public void onRemoteStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
             LOG.debug("collection onRemoteStateUpdated callback invoked method=" + methodName + ": " + collection);
         }
@@ -112,27 +167,27 @@ public class JCSyncExamplePiotrek {
         try {
             System.err.println("huj");
             LOG.trace("Initializing JCSyncCore");
-            this.jcsyncCore = new JCSyncCore(this.p2pNode, this.p2pNode.getTcpPort()+2);
+            this.jcsyncCore = new JCSyncCore(this.p2pNode, this.p2pNode.getTcpPort() + 2);
             this.jcsyncCore.init();
             this.observable = new JCSyncObservable();
             this.collection = new JCSyncHashMap<String, OperationDetails>();
-            System.err.println("kurwa"+this.p2pNode.getTcpPort());
+            System.err.println("kurwa" + this.p2pNode.getTcpPort());
             LOG.trace("Creating the collection");
             try {
-                System.err.println("trololo"+this.p2pNode.getTcpPort());
+                System.err.println("trololo" + this.p2pNode.getTcpPort());
                 this.collection_so = new SharedCollectionObject("collection", this.collection, this.jcsyncCore, ConsistencyManager.class);
-                System.err.println("kurwa huj"+this.p2pNode.getTcpPort());
+                System.err.println("kurwa huj" + this.p2pNode.getTcpPort());
             } catch (ObjectExistsException e) {
                 LOG.debug("Collection already exists -- getting it...");
-                System.err.println("PIPA"+this.p2pNode.getTcpPort());
+                System.err.println("PIPA" + this.p2pNode.getTcpPort());
                 this.collection_so = (SharedCollectionObject) SharedCollectionObject.getFromOverlay("collection", this.jcsyncCore);
                 this.collection = (JCSyncHashMap<String, OperationDetails>) this.collection_so.getNucleusObject();
                 LOG.debug("I got the collection: " + this.collection);
-                System.err.println("WTF?"+this.p2pNode.getTcpPort());
+                System.err.println("WTF?" + this.p2pNode.getTcpPort());
             }
             this.observable.addObserver(this.collectionObserver);
             this.collection_so.addStateListener(this.collectionListener);
-            System.err.println("lol"+this.p2pNode.getTcpPort());
+            System.err.println("lol" + this.p2pNode.getTcpPort());
         } catch (Throwable e) {
             LOG.error("Error while initializing JCSync: " + e);
         }
@@ -159,7 +214,7 @@ public class JCSyncExamplePiotrek {
 
         try {
             example2.initLayer("127.0.0.1", 21000, "2", 24000);
-            example1.initLayer("127.0.0.1",2000, "1",24001);
+            example1.initLayer("127.0.0.1", 2000, "1", 24001);
         } catch (Throwable e) {
             LOG.error("Error while initializing layer: " + e);
         }

@@ -10,10 +10,8 @@ import pl.edu.pjwstk.mteam.jcsync.core.JCSyncStateListener;
 import pl.edu.pjwstk.mteam.jcsync.core.consistencyManager.DefaultConsistencyManager;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.JCSyncHashMap;
 import pl.edu.pjwstk.mteam.jcsync.core.implementation.collections.SharedCollectionObject;
-import pl.edu.pjwstk.mteam.jcsync.core.implementation.util.JCSyncObservable;
 import pl.edu.pjwstk.mteam.jcsync.exception.ObjectExistsException;
 import pl.edu.pjwstk.mteam.p2p.P2PNode;
-import pl.edu.pjwstk.mteam.p2pm.tests.tests.tests.jcsyncbasic.ConsistencyManager;
 import pl.edu.pjwstk.mteam.p2pm.tests.tests.tests.jcsyncbasic.OperationDetails;
 
 import java.util.List;
@@ -26,17 +24,49 @@ public class JCSyncExampleKonrad1 {
 
     private P2PNode p2pNode;
     private NodeCallback p2pNodeCallback = new NodeCallback() {
-        @Override public void onDisconnect(Node node) {}
-        @Override public void onUserLookup(Node node, Object userInfo) {}
-        @Override public void onObjectLookup(Node node, Object object) {}
-        @Override public void onTopicNotify(Node node, Object topicID, byte[] message, boolean historical, short eventType) {}
-        @Override public void onTopicCreate(Node node, Object topicID) {}
-        @Override public void onTopicCreate(Node node, Object topicID, int transID) {}
-        @Override public void onTopicRemove(Node node, Object topicID) {}
-        @Override public void onTopicSubscribe(Node node, Object topicID) {}
-        @Override public void onTopicSubscribe(Node node, Object topicID, int transID) {}
-        @Override public void onTopicUnsubscribe(Node node, Object topicID, int respCode) {}
-        @Override public void onInsertObject(Node node, NetworkObject object) {}
+        @Override
+        public void onDisconnect(Node node) {
+        }
+
+        @Override
+        public void onUserLookup(Node node, Object userInfo) {
+        }
+
+        @Override
+        public void onObjectLookup(Node node, Object object) {
+        }
+
+        @Override
+        public void onTopicNotify(Node node, Object topicID, byte[] message, boolean historical, short eventType) {
+        }
+
+        @Override
+        public void onTopicCreate(Node node, Object topicID) {
+        }
+
+        @Override
+        public void onTopicCreate(Node node, Object topicID, int transID) {
+        }
+
+        @Override
+        public void onTopicRemove(Node node, Object topicID) {
+        }
+
+        @Override
+        public void onTopicSubscribe(Node node, Object topicID) {
+        }
+
+        @Override
+        public void onTopicSubscribe(Node node, Object topicID, int transID) {
+        }
+
+        @Override
+        public void onTopicUnsubscribe(Node node, Object topicID, int respCode) {
+        }
+
+        @Override
+        public void onInsertObject(Node node, NetworkObject object) {
+        }
 
         @Override
         public void onJoin(Node node) {
@@ -46,27 +76,53 @@ public class JCSyncExampleKonrad1 {
 
         }
 
-        @Override public void onOverlayError(Node node, Object sourceID, int errorCode) {}
-        @Override public void onOverlayError(Node node, Object sourceID, int errorCode, int transID) {}
-        @Override public void onPubSubError(Node node, Object topicID, short operationType, int errorCode) {}
-        @Override public void onPubSubError(Node node, Object topicID, short operationType, int errorCode, int transID) {}
-        @Override public boolean onDeliverRequest(List<NetworkObject> objectList) { return false; }
-        @Override public boolean onForwardingRequest(List<NetworkObject> objectList) { return false; }
-        @Override public void onBootstrapError(Node node, int errorCode) {}
-        @Override public void onMessageDelivery(List<NetworkObject> objectList) {System.out.println("MSG");}
+        @Override
+        public void onOverlayError(Node node, Object sourceID, int errorCode) {
+        }
+
+        @Override
+        public void onOverlayError(Node node, Object sourceID, int errorCode, int transID) {
+        }
+
+        @Override
+        public void onPubSubError(Node node, Object topicID, short operationType, int errorCode) {
+        }
+
+        @Override
+        public void onPubSubError(Node node, Object topicID, short operationType, int errorCode, int transID) {
+        }
+
+        @Override
+        public boolean onDeliverRequest(List<NetworkObject> objectList) {
+            return false;
+        }
+
+        @Override
+        public boolean onForwardingRequest(List<NetworkObject> objectList) {
+            return false;
+        }
+
+        @Override
+        public void onBootstrapError(Node node, int errorCode) {
+        }
+
+        @Override
+        public void onMessageDelivery(String s, List<NetworkObject> objectList) {
+            System.out.println("MSG");
+        }
     };
 
     private JCSyncCore jcsyncCore;
     private JCSyncHashMap<String, OperationDetails> collection;
     private SharedCollectionObject collection_so;
     private Observer collectionObserver = new Observer() {
-    	
-    
+
+
         @Override
         public void update(Observable o, Object arg) {
-        	
-        	System.out.println("UPDATE w OBSERWER");
-        	
+
+            System.out.println("UPDATE w OBSERWER");
+
             //String args_ = (String)arg;
             //LOG.trace("[Update o=" + o + "] " + arg);
         }
@@ -76,6 +132,7 @@ public class JCSyncExampleKonrad1 {
             LOG.debug("collection onLocalStateUpdated callback invoked method=" + methodName + ": " + collection);
             System.out.println(" LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL ");
         }
+
         public void onRemoteStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
             LOG.debug("collection onRemoteStateUpdated callback invoked method=" + methodName + ": " + collection);
             System.out.println(" REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE ");
@@ -104,7 +161,7 @@ public class JCSyncExampleKonrad1 {
         try {
 
             LOG.trace("Initializing JCSyncCore");
-            this.jcsyncCore = new JCSyncCore(this.p2pNode, this.p2pNode.getTcpPort()+2);
+            this.jcsyncCore = new JCSyncCore(this.p2pNode, this.p2pNode.getTcpPort() + 2);
             this.jcsyncCore.init();
             this.collection = new JCSyncHashMap<String, OperationDetails>();
             LOG.trace("Creating the collection");
@@ -117,7 +174,7 @@ public class JCSyncExampleKonrad1 {
                 LOG.debug("I got the collection: " + this.collection);
 
             }
-           this.collection_so.addObserver(collectionObserver);
+            this.collection_so.addObserver(collectionObserver);
             this.collection_so.addStateListener(this.collectionListener);
 
         } catch (Throwable e) {
@@ -129,18 +186,18 @@ public class JCSyncExampleKonrad1 {
     }
 
     public void doStuff() {
-    	int i = 0;
+        int i = 0;
 
         LOG.debug("Doing stuff");
 
-        do{
-        String userName = this.p2pNode.getUserName();
-        LOG.trace("Invoking operation: " + this.collection + " " + new OperationDetails(userName, userName+"@0", System.currentTimeMillis()));
-        this.collection.put("key"+i, new OperationDetails(userName, userName+"@0", System.currentTimeMillis()));
-        LOG.info("Collection after the operation: " + this.collection);
-        snooze(4000);
-        i++;
-        } while(true);
+        do {
+            String userName = this.p2pNode.getUserName();
+            LOG.trace("Invoking operation: " + this.collection + " " + new OperationDetails(userName, userName + "@0", System.currentTimeMillis()));
+            this.collection.put("key" + i, new OperationDetails(userName, userName + "@0", System.currentTimeMillis()));
+            LOG.info("Collection after the operation: " + this.collection);
+            snooze(4000);
+            i++;
+        } while (true);
 
     }
 
@@ -149,23 +206,23 @@ public class JCSyncExampleKonrad1 {
         JCSyncExampleKonrad1 example = new JCSyncExampleKonrad1();
 
         try {
-           // example.initLayer(args[0], Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
-        	example.initLayer("192.168.128.96", 21000, "Konrad", 22211);
+            // example.initLayer(args[0], Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
+            example.initLayer("192.168.128.96", 21000, "Konrad", 22211);
         } catch (Throwable e) {
             LOG.error("Error while initializing layer: " + e);
         }
 
     }
-    
-	public void snooze(long time) {
-		try {
-			Thread.sleep(time);
-		} catch (InterruptedException ex) {
-			/*
+
+    public void snooze(long time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException ex) {
+            /*
 			 * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
 			 * Level.SEVERE, null, ex);
 			 */
-		}
-	}
+        }
+    }
 
 }
