@@ -31,6 +31,7 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Akcja " + e.getActionCommand());
+            LOG.info(" wybrany interface ma ip: "+ gui.getClientIp());
             if (e.getActionCommand().equals("Rozpocznij")) {
 
 
@@ -83,6 +84,8 @@ public class Controller {
      * Updates files in the folder
      */
     public void updateTree() {
-        folderTree.update();
+    	synchronized(folderTree.folder){
+    		folderTree.update();
+    	}
     }
 }
