@@ -131,11 +131,15 @@ public class FolderTree implements Serializable {
         LOG.info("Method addFile(" + f.getFilePath() + "," + usr);
         Nod file = new Nod(usr + f.getFileName(), folder.get(usr), f.getSingleFileHistory(), folder.get(usr), f.getFileName(), f.getFilePath());
         file.setParent(folder.get(usr));
-        folder.put(usr + file.getName(), file);
+        synchronized(folder){
+        	folder.put(usr + file.getName(), file);
+        }
 
         if (this.syncFolder != null) {
             System.out.println("Dodaje do drzewaJCsync: " + usr + file.getName());
-            this.syncFolder.put(usr + file.getName(), file);
+            synchronized(this.syncFolder){
+            	this.syncFolder.put(usr + file.getName(), file);
+            }
         }
         updated = true;
     }
@@ -444,6 +448,8 @@ public class FolderTree implements Serializable {
                 }
             }
         }
-        this.syncFolder.putAll(folder);
+        synchronized(this.syncFolder){
+        	this.syncFolder.putAll(folder);
+        }
     }
 }
