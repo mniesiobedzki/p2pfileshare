@@ -208,7 +208,7 @@ public class JCSyncExampleKonrad2 {
 
         try {
             // example.initLayer(args[0], Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
-            example.initLayer("192.168.128.96", 21000, "Konrad2", 22221);
+            example.initLayer("127.0.0.1", 21000, "Konrad2", 22221);
         } catch (Throwable e) {
             LOG.error("Error while initializing layer: " + e);
         }
@@ -220,7 +220,7 @@ public class JCSyncExampleKonrad2 {
             Thread.sleep(time);
         } catch (InterruptedException ex) {
             /*
-			 * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
+             * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
 			 * Level.SEVERE, null, ex);
 			 */
         }
