@@ -196,6 +196,7 @@ public class GuiWindower implements PropertyChangeListener {
             serverIPAdress.setPreferredSize(new Dimension(80, 25));
             serverIPAdress.setFont(new Font("Segoe UI", Font.PLAIN, 12));
             serverIPAdress.setHorizontalAlignment(JTextField.CENTER);
+            serverIPAdress.setText("127.0.0.1");
             panelPierwszegoUruchomienia.add(serverIPAdress);
 
             serverPortInput = new JTextField();
