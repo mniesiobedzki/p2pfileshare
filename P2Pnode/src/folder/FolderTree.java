@@ -137,7 +137,11 @@ public class FolderTree implements Serializable {
     public void addFile(File f, String usr) {
         LOG.info("Method addFile(" + f.getFilePath() + "," + usr);
         Nod file = new Nod(usr + f.getFileName(), folder.get(usr), f.getSingleFileHistory(), folder.get(usr), f.getFileName(), f.getFilePath());
-        file.setParent(folder.get(usr));
+        if(syncFolder!=null){
+        	file.setParent(folder.get(usr), syncFolder.get(usr));
+        }else{
+        	file.setParent(folder.get(usr), null);
+        }
         synchronized(folder){
         	folder.put(usr + file.getName(), file);
         }
