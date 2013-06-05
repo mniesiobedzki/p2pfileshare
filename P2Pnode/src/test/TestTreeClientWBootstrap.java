@@ -41,8 +41,8 @@ public class TestTreeClientWBootstrap implements Runnable{
 					ObjectInputStream objectInput = new ObjectInputStream(socketStream);
 					ft = (FolderTree) objectInput.readObject();
 
+					if(ft!=null){
 					synchronized(ft){
-						if(ft!=null){
 							changed = true;
 							System.out.println(">>>" + ft);
 							objectInput.close();
