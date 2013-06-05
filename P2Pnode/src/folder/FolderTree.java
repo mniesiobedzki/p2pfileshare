@@ -76,25 +76,25 @@ public class FolderTree implements Serializable {
      * @param usr  - ID użytkownika
      * @param path - ścieżka do folderu lokalna dla użytkownika
      */
-    public void addUser(String usr, String path, String ip, int port) {
-        LOG.info("adding new user " + usr);
-        Nod n = new Nod(usr, folder.get("root"), ip, port);
+    public void addUser(String u, String path, String ip, int port) {
+        LOG.info("adding new user " + u);
+        Nod n = new Nod(u, folder.get("root"), ip, port);
         System.out.println(n);
-        System.out.println("Użytkownik :" + usr);
+        System.out.println("Użytkownik :" + u);
         System.out.println("folder w :" + path);
         n.setPath(path);
-        folder.put(usr, n);
+        folder.put(u, n);
 
         if (this.syncFolder != null) {
         	System.out.println("root syncFolder: "+ this.syncFolder.get("root"));
         	System.out.println("jego dzieci: "+ this.syncFolder.get("root").getChildren());
-        	if(this.syncFolder.get("root").getChildren().size()>0 && !this.syncFolder.get("root").getChildren().contains("usr")){
-        		this.syncFolder.get("root").getChildren().add(usr);
+        	if(this.syncFolder.get("root").getChildren().size()>0 && !this.syncFolder.get("root").getChildren().contains(u)){
+        		this.syncFolder.get("root").getChildren().add(u);
         	}
-            this.syncFolder.put(usr, n);
+            this.syncFolder.put(u, n);
         }
         updated = true;
-        LOG.info("User added");
+        LOG.info("User " +u +" added");
     }
 
     public Nod getRoot() {
