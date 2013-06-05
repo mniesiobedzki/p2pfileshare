@@ -45,7 +45,7 @@ public class FolderTree implements Serializable {
         LOG.info("Root dodany do drzewa");
         if (this.syncFolder != null) {
             LOG.info("SyncFolder nie ejst NULLe,");
-            if (this.syncFolder.containsKey("root"+syncFolder.get("root"))) {
+            if (this.syncFolder.containsKey("root")) {
                 LOG.info("Jest Root");
                 this.folder.put("root", syncFolder.get("root"));
                 this.updated = true;
