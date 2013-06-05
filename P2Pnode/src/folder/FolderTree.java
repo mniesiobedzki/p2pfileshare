@@ -89,7 +89,7 @@ public class FolderTree implements Serializable {
         	System.out.println("root syncFolder: "+ this.syncFolder.get("root"));
         	System.out.println("jego dzieci: "+ this.syncFolder.get("root").getChildren());
         	if(this.syncFolder.get("root").getChildren().size()>0 && !this.syncFolder.get("root").getChildren().contains("usr")){
-        		this.syncFolder.get("root").getChildren().add("usr");
+        		this.syncFolder.get("root").getChildren().add(usr);
         	}
             this.syncFolder.put(usr, n);
         }
