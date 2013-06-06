@@ -45,7 +45,7 @@ public class FileClient {
             // receive file
             this.receiveFile(ft, n, is, path, name, usr);
             long end = System.currentTimeMillis();
-            System.out.println(end - start);
+            System.out.println("przesy³anie pliku strwa³o: "+ (end - start));
             os.flush();
             os.close();
 
