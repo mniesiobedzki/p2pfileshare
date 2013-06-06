@@ -29,7 +29,7 @@ public class FolderTree implements Serializable {
     // klucz to dla korzenia "root"
     // dla użytkownika jego ID
     // dla pliku ID użytkownika + ID pliku
-    public String usr;
+    public String localUser;
 
     /**
      * @param path - ścieżka do folderu ze współdzoelonymi plikami
@@ -40,7 +40,7 @@ public class FolderTree implements Serializable {
         LOG.info("FolderTree constructor");
         this.syncFolder = tree;
         LOG.info("Drzewo podpięte");
-        this.usr = usr;
+        this.localUser = usr;
         LOG.info("User dodany");
         LOG.info("Root dodany do drzewa");
         if (this.syncFolder != null) {
@@ -243,13 +243,13 @@ public class FolderTree implements Serializable {
         System.out.println(this);
         //plik zaktualizowano
         for (Nod n : folder.values()) {
-            if (!n.getParent().equals(usr) && folder.get(n.getValue()).getHistory().size() > 0 && folder.get(usr + n.getName()) != null) {
+            if (!n.getParent().equals(localUser) && folder.get(n.getValue()).getHistory().size() > 0 && folder.get(localUser + n.getName()) != null) {
 
-                if (n.getHistory().getLast() == null && folder.get(usr + n.getName()).getHistory().getLast() != null) {
+                if (n.getHistory().getLast() == null && folder.get(localUser + n.getName()).getHistory().getLast() != null) {
                     changes.add(n);
-                } else if (folder.get(usr + n.getName()).getHistory().getLast() == null) {
+                } else if (folder.get(localUser + n.getName()).getHistory().getLast() == null) {
                     //raz wykasowany jest ignorowany
-                } else if (folder.get(usr + n.getName()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
+                } else if (folder.get(localUser + n.getName()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
                     System.out.println("zmieniono " + n.name);
                     changes.add(n);
                 }
@@ -260,7 +260,7 @@ public class FolderTree implements Serializable {
         //pliki utworzone
         for (Nod n : folder.values()) {
             if (!n.getValue().equals("root") && !users.contains(n.getName())) {
-                if (!folder.containsKey(usr + n.getName())) {
+                if (!folder.containsKey(localUser + n.getName())) {
                     System.out.println("stworzono " + n.name);
                     System.out.println(n.getPath());
                     System.out.println(n.getValue());
@@ -276,17 +276,17 @@ public class FolderTree implements Serializable {
                 System.out.println("FolderTree: czas zmiany zdalnego: " + folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
                 System.out.println("przez port: " + folder.get(nod.getParent()).port);
                 @SuppressWarnings("unused")
-                FileClient fileClient = new FileClient(this, nod, folder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
+                FileClient fileClient = new FileClient(this, nod, folder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(localUser).getPath(), nod.getName(), localUser, folder.get(nod.getParent()).port);
             } else {
                 //kod kasujący plik
-                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + nod.getName());
-                if (this.getFolder().containsKey(usr + nod.getName())) {
-                    this.getFolder().get(usr + nod.getName()).history.add(null);
+                MFolderListener.deleteFileFromDisc(folder.get(localUser).getPath() + nod.getName());
+                if (this.getFolder().containsKey(localUser + nod.getName())) {
+                    this.getFolder().get(localUser + nod.getName()).history.add(null);
                     this.updated = true;
                 } else {
-                    File deletedFile = new File(nod.getName(), nod.getPath(), usr);
+                    File deletedFile = new File(nod.getName(), nod.getPath(), localUser);
                     deletedFile.setFileId(nod.history.getFirst().getFileId());
-                    addFile(deletedFile, usr);
+                    addFile(deletedFile, localUser);
                 }
             }
         }
@@ -299,24 +299,24 @@ public class FolderTree implements Serializable {
                 System.err.println(nod);
                 System.err.println(folder.get(nod.getParent()).ip);
                 System.err.println(nod.getParent() + nod.getName());
-                System.err.println(folder.get(usr).getPath());
+                System.err.println(folder.get(localUser).getPath());
                 System.err.println(nod.getName());
-                System.err.println(usr);
+                System.err.println(localUser);
                 System.err.println(folder.get(nod.parent).getPort());
                 @SuppressWarnings("unused")
-                FileClient fileClient = new FileClient(this, nod, folder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
+                FileClient fileClient = new FileClient(this, nod, folder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(localUser).getPath(), nod.getName(), localUser, folder.get(nod.getParent()).port);
             } else {
                 //kod kasujący plik
                 System.out.println("Kasuje plik: " + nod.name);
-                System.out.println("Ścieżka: " + folder.get(usr).getPath() + System.getProperty("file.separator") + nod.getName());
-                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + System.getProperty("file.separator") + nod.getName());
-                if (this.getFolder().containsKey(usr + nod.getName())) {
-                    this.getFolder().get(usr + nod.getName()).history.add(null);
+                System.out.println("Ścieżka: " + folder.get(localUser).getPath() + System.getProperty("file.separator") + nod.getName());
+                MFolderListener.deleteFileFromDisc(folder.get(localUser).getPath() + System.getProperty("file.separator") + nod.getName());
+                if (this.getFolder().containsKey(localUser + nod.getName())) {
+                    this.getFolder().get(localUser + nod.getName()).history.add(null);
                     this.updated = true;
                 } else {
-                    File deletedFile = new File(nod.getName(), nod.getPath(), usr);
+                    File deletedFile = new File(nod.getName(), nod.getPath(), localUser);
                     deletedFile.setFileId(nod.history.getFirst().getFileId());
-                    addFile(deletedFile, usr);
+                    addFile(deletedFile, localUser);
                 }
             }
         }
@@ -335,12 +335,12 @@ public class FolderTree implements Serializable {
         System.out.println(this);
         //plik zaktualizowano
         for (Nod n : this.folder.values()) {
-            if (!n.getParent().equals(usr) && folder.get(n.getValue()).getHistory().size() > 0 && folder.get(usr + n.getName()) != null) {
-                if (n.getHistory().getLast() == null && folder.get(usr + n.getName()).getHistory().getLast() != null) {
+            if (!n.getParent().equals(localUser) && folder.get(n.getValue()).getHistory().size() > 0 && folder.get(localUser + n.getName()) != null) {
+                if (n.getHistory().getLast() == null && folder.get(localUser + n.getName()).getHistory().getLast() != null) {
                     changes.add(n);
-                } else if (folder.get(usr + n.getName()).getHistory().getLast() == null) {
+                } else if (folder.get(localUser + n.getName()).getHistory().getLast() == null) {
                     //raz wykasowany jest ignorowany
-                } else if (folder.get(usr + n.getName()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
+                } else if (folder.get(localUser + n.getName()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
                     System.out.println("zmieniono " + n.name);
                     changes.add(n);
                 }
@@ -353,7 +353,7 @@ public class FolderTree implements Serializable {
         //pliki utworzone
         for (Nod n : this.folder.values()) {
             if (!n.getValue().equals("root") && !users.contains(n.getName())) {
-                if (!folder.containsKey(usr + n.getName())) {
+                if (!folder.containsKey(localUser + n.getName())) {
                     System.out.println("stworzono " + n.name);
                     System.out.println(n.getPath());
                     System.out.println(n.getValue());
@@ -371,17 +371,17 @@ public class FolderTree implements Serializable {
                 System.out.println("FolderTree: rządanie pliku " + nod.getParent() + nod.getName());
                 System.out.println("FolderTree: czas zmiany zdalneg: " + folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
                 @SuppressWarnings("unused")
-                FileClient fileClient = new FileClient(this, nod, this.folder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
+                FileClient fileClient = new FileClient(this, nod, this.folder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(localUser).getPath(), nod.getName(), localUser, folder.get(nod.getParent()).port);
             } else if (nod.getHistory()!=null && !nod.getHistory().isEmpty() && nod.getHistory().getLast()==null){
                 //kod kasujący plik
-                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + nod.getName());
-                if (this.getFolder().containsKey(usr + nod.getName())) {
-                    this.getFolder().get(usr + nod.getName()).history.add(null);
+                MFolderListener.deleteFileFromDisc(folder.get(localUser).getPath() + nod.getName());
+                if (this.getFolder().containsKey(localUser + nod.getName())) {
+                    this.getFolder().get(localUser + nod.getName()).history.add(null);
                     this.updated = true;
                 } else {
-                    File deletedFile = new File(nod.getName(), nod.getPath(), usr);
+                    File deletedFile = new File(nod.getName(), nod.getPath(), localUser);
                     deletedFile.setFileId(nod.history.getFirst().getFileId());
-                    addFile(deletedFile, usr);
+                    addFile(deletedFile, localUser);
                 }
             }
         }
@@ -415,17 +415,17 @@ public class FolderTree implements Serializable {
             //if (nod.getHistory().getLast() != null) {
             if (!nod.getHistory().isEmpty()) {
                 @SuppressWarnings("unused")
-                FileClient fileClient = new FileClient(this, nod, this.folder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
+                FileClient fileClient = new FileClient(this, nod, this.folder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(localUser).getPath(), nod.getName(), localUser, folder.get(nod.getParent()).port);
             } else {
                 //kod kasujący plik
-                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + System.getProperty("file.separator") + nod.getName());
-                if (this.getFolder().containsKey(usr + nod.getName())) {
-                    this.getFolder().get(usr + nod.getName()).history.add(null);
+                MFolderListener.deleteFileFromDisc(folder.get(localUser).getPath() + System.getProperty("file.separator") + nod.getName());
+                if (this.getFolder().containsKey(localUser + nod.getName())) {
+                    this.getFolder().get(localUser + nod.getName()).history.add(null);
                     this.updated = true;
                 } else if(nod.history!=null){
-                    File deletedFile = new File(nod.getName(), nod.getPath(), usr);
+                    File deletedFile = new File(nod.getName(), nod.getPath(), localUser);
                     deletedFile.setFileId(nod.history.getFirst().getFileId());
-                    addFile(deletedFile, usr);
+                    addFile(deletedFile, localUser);
                 }
             }
         }
@@ -438,24 +438,24 @@ public class FolderTree implements Serializable {
                 System.err.println(nod);
                 System.err.println(folder.get(nod.getParent()).ip);
                 System.err.println(nod.getParent() + nod.getName());
-                System.err.println(folder.get(usr).getPath());
+                System.err.println(folder.get(localUser).getPath());
                 System.err.println(nod.getName());
-                System.err.println(usr);
+                System.err.println(localUser);
                 System.err.println(folder.get(nod.parent).getPort());
                 @SuppressWarnings("unused")
-                FileClient fileClient = new FileClient(this, nod, folder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
+                FileClient fileClient = new FileClient(this, nod, folder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(localUser).getPath(), nod.getName(), localUser, folder.get(nod.getParent()).port);
             } else {
                 //kod kasujący plik
                 System.out.println("Kasuje plik: " + nod.name);
-                System.out.println("Ścieżka: " + folder.get(usr).getPath() + System.getProperty("file.separator") + nod.getName());
-                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + System.getProperty("file.separator") + nod.getName());
-                if (this.getFolder().containsKey(usr + nod.getName())) {
-                    this.getFolder().get(usr + nod.getName()).history.add(null);
+                System.out.println("Ścieżka: " + folder.get(localUser).getPath() + System.getProperty("file.separator") + nod.getName());
+                MFolderListener.deleteFileFromDisc(folder.get(localUser).getPath() + System.getProperty("file.separator") + nod.getName());
+                if (this.getFolder().containsKey(localUser + nod.getName())) {
+                    this.getFolder().get(localUser + nod.getName()).history.add(null);
                     this.updated = true;
                 } else {
-                    File deletedFile = new File(nod.getName(), nod.getPath(), usr);
+                    File deletedFile = new File(nod.getName(), nod.getPath(), localUser);
                     deletedFile.setFileId(nod.history.getFirst().getFileId());
-                    addFile(deletedFile, usr);
+                    addFile(deletedFile, localUser);
                 }
             }
         }
