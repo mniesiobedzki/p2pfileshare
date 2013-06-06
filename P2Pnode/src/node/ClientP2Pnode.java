@@ -85,12 +85,14 @@ public class ClientP2Pnode {
     }
 
     public void initializeJCSyncHashMap(int portOut, String serverIP, int serverPort, String nodeName) {
+
         LOG.info("Initializing connection to bootstrap - JCSyncCore HashMap");
+
         this.node = this.connect(serverIP, serverPort, nodeName, portOut, this.nodeCallback);
 
         while (!this.node.isConnected()) {
             LOG.info("Node " + nodeName + ": Not connected :(");
-            snooze(1000);
+            snooze(500);
         }
         LOG.info("Node " + nodeName + ": Connected !!");
 
@@ -99,32 +101,23 @@ public class ClientP2Pnode {
         LOG.info("Initializing JCSyncCore HashMap");
         try {
             this.jcSyncCore.init();
-            //this.observable = new JCSyncObservable();
-            //initCollectionTreeMap(nodeName, controller);
+
             this.jcSyncHashMap = new JCSyncHashMap<String, Nod>();
 
             try {
                 LOG.info("Creating the new collection");
                 this.jcSyncHashMap_sharedCollectionObject = new SharedCollectionObject(collID, this.jcSyncHashMap, this.jcSyncCore, DefaultConsistencyManager.class);
             } catch (ObjectExistsException e) {
-                LOG.info("Collection JCSyncHashMap exists");
-                LOG.info("Connecting to the collection JCSyncHashMap");
+                LOG.info("Collection JCSyncHashMap exists -> Connecting to the collection JCSyncHashMap");
                 this.jcSyncHashMap_sharedCollectionObject = (SharedCollectionObject) SharedCollectionObject.getFromOverlay(collID, this.jcSyncCore);
                 this.jcSyncHashMap = (JCSyncHashMap<String, Nod>) this.jcSyncHashMap_sharedCollectionObject.getNucleusObject();
             }
-            LOG.info("Adding the Observer");
+
             this.jcSyncHashMap_sharedCollectionObject.addObserver(this.collectionObserver);
-            //this.observable.addObserver(this.collectionObserver);
-            LOG.info("Observer Added");
-            LOG.info("Adding the Listener");
             this.jcSyncHashMap_sharedCollectionObject.addStateListener(this.collectionListener);
-            LOG.info("Listener added");
+            LOG.info("Collection based on JCSyncHashMap (" + collID + ") has been initialized. Listener and Observer has been added.");
         } catch (Exception e) {
             e.printStackTrace();
-            /*
-             * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
-			 * Level.SEVERE, null, e);
-			 */
             LOG.error("Collection not initialized !!");
         }
     }

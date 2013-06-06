@@ -31,7 +31,7 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.out.println("Akcja " + e.getActionCommand());
-            LOG.info(" wybrany interface ma ip: "+ gui.getClientIp());
+            LOG.info(" wybrany interface ma ip: " + gui.getClientIp());
             if (e.getActionCommand().equals("Rozpocznij")) {
 
 
@@ -73,10 +73,7 @@ public class Controller {
         try {
             Thread.sleep(time);
         } catch (InterruptedException ex) {
-            /*
-             * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
-			 * Level.SEVERE, null, ex);
-			 */
+
         }
     }
 
@@ -84,8 +81,9 @@ public class Controller {
      * Updates files in the folder
      */
     public void updateTree() {
-    	synchronized(folderTree.folder){
-    		folderTree.update();
-    	}
+        LOG.info("Updateing Tree with files. MSG from Listener");
+        synchronized (folderTree.folder) {
+            folderTree.update();
+        }
     }
 }
