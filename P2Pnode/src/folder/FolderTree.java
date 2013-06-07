@@ -385,50 +385,7 @@ public class FolderTree implements Serializable {
                 }
             }
         }
-//        for (Nod nod : created) {
-//            try {
-//                // if (nod.getHistory().getLast() != null) {
-//                System.out.println("FolderTree: rządanie pliku " + nod.getParent() + nod.getName());
-//                System.out.println("FolderTree: czas zmiany zdalneg: " + folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
-//                @SuppressWarnings("unused")
-//                FileClient fileClient = new FileClient(this, nod, this.syncFolder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(usr).getPath(), nod.getName(), usr, folder.get(nod.getParent()).port);
-//            } catch (Exception e) {
-//                LOG.info("nod.getHistory().getLast() == null");
-//
-//
-//            }
-//                //kod kasujący plik
-//                MFolderListener.deleteFileFromDisc(folder.get(usr).getPath() + nod.getName());
-//                if (this.getFolder().containsKey(usr + nod.getName())) {
-//                    this.getFolder().get(usr + nod.getName()).history.add(null);
-//                    this.updated = true;
-//                } else {
-//                    File deletedFile = new File(nod.getName(), nod.getPath(), usr);
-//                        deletedFile.setFileId(nod.history.getFirst().getFileId());
-//                        addFile(deletedFile, usr);
-//
-//                }
-//
-//
-//        }
-        for (Nod nod : changes) {
-            //if (nod.getHistory().getLast() != null) {
-            if (!nod.getHistory().isEmpty()) {
-                @SuppressWarnings("unused")
-                FileClient fileClient = new FileClient(this, nod, this.folder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(localUser).getPath(), nod.getName(), localUser, folder.get(nod.getParent()).port);
-            } else {
-                //kod kasujący plik
-                MFolderListener.deleteFileFromDisc(folder.get(localUser).getPath() + System.getProperty("file.separator") + nod.getName());
-                if (this.getFolder().containsKey(localUser + nod.getName())) {
-                    this.getFolder().get(localUser + nod.getName()).history.add(null);
-                    this.updated = true;
-                } else if(nod.history!=null){
-                    File deletedFile = new File(nod.getName(), nod.getPath(), localUser);
-                    deletedFile.setFileId(nod.history.getFirst().getFileId());
-                    addFile(deletedFile, localUser);
-                }
-            }
-        }
+        
         for (Nod nod : changes) {
             if (nod.getHistory().getLast() != null) {
                 System.out.println("FolderTree: żądanie pliku " + nod.getParent() + nod.getName());
