@@ -112,12 +112,17 @@ public class JCSyncExample {
         }
 
         @Override
-        public void onMessageDelivery(String s, List<NetworkObject> networkObjects) {
+        public void onMessageDelivery(List<NetworkObject> networkObjects) {
             //To change body of implemented methods use File | Settings | File Templates.
-            System.out.println("******************************************");
-            System.out.println("onMessageDelivery " + networkObjects.getClass().getName());
-            System.out.println("******************************************");
         }
+
+//        @Override
+//        public void onMessageDelivery(String s, List<NetworkObject> networkObjects) {
+//            //To change body of implemented methods use File | Settings | File Templates.
+//            System.out.println("******************************************");
+//            System.out.println("onMessageDelivery " + networkObjects.getClass().getName());
+//            System.out.println("******************************************");
+//        }
     };
 
     private JCSyncCore jcsyncCore;
@@ -253,7 +258,7 @@ public class JCSyncExample {
             // Settings | File Templates.
         }
         /*
-		 * try { this.jcSyncHashMap_sharedObject = new
+         * try { this.jcSyncHashMap_sharedObject = new
 		 * SharedObservableObject("myMap", this.jcSyncHashMap, this.jcSyncCore,
 		 * ConsistencyManager.class); } catch (ObjectExistsException e) {
 		 * this.jcSyncHashMap_sharedObject =

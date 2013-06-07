@@ -107,9 +107,10 @@ public class JCSyncExampleKonrad1 {
         }
 
         @Override
-        public void onMessageDelivery(String s, List<NetworkObject> objectList) {
-            System.out.println("MSG");
+        public void onMessageDelivery(List<NetworkObject> networkObjects) {
+            //To change body of implemented methods use File | Settings | File Templates.
         }
+
     };
 
     private JCSyncCore jcsyncCore;
