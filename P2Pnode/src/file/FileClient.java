@@ -37,7 +37,7 @@ public class FileClient {
 //	    System.out.println("historia pliku: "+ft.getFolder().get(key).getHistory());
 //	    System.out.println("ostatni element historii: "+ft.getFolder().get(key).getHistory().getLast());
 //	    System.out.println("data modyfikacji: "+ft.getFolder().get(key).getHistory().getLast().getData());
-//	    System.out.println("wysyï¿½am ï¿½ï¿½danie udostï¿½pnienia pliku: " + key +" modyfikowanego o "+ ft.getFolder().get(key).getHistory().getLast().getData());
+	    System.out.println("wysy³am ¿¹danie udostêpnienia pliku: " + key +" modyfikowanego o "+ ft.getFolder().get(key).getHistory().getLast().getData());
             key += "\n";
             os.write(key.getBytes(Charset.forName("UTF-8")));
 
@@ -45,7 +45,7 @@ public class FileClient {
             // receive file
             this.receiveFile(ft, n, is, path, name, usr);
             long end = System.currentTimeMillis();
-            System.out.println("przesy³anie pliku strwa³o: "+ (end - start));
+            System.out.println("przesy³anie pliku trwa³o: "+ (end - start));
             os.flush();
             os.close();
 

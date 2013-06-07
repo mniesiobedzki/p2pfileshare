@@ -323,12 +323,13 @@ public class FolderTree implements Serializable {
     }
 
     public void update() {
-        this.putAll(syncFolder);//dodawanie nowych
-        
+    	synchronized(folder){
+    		synchronized(syncFolder){
+    			this.putAll(syncFolder);//dodawanie nowych
+    		}
         LinkedList<String> users = new LinkedList<String>();
         LinkedList<Nod> changes = new LinkedList<Nod>();
         LinkedList<Nod> created = new LinkedList<Nod>();
-
 
         Nod rootLocal = folder.get("root");
         System.out.println("\nusrs " + rootLocal.getChildren());
@@ -367,12 +368,12 @@ public class FolderTree implements Serializable {
         for (Nod nod : created) {
             //if (nod.getHistory().getLast() != null) {
 
-            if (nod.getHistory()!=null && !nod.getHistory().isEmpty() && nod.getHistory().getLast()!=null) {
+            if (nod.getHistory().getLast() != null) {
                 System.out.println("FolderTree: rządanie pliku " + nod.getParent() + nod.getName());
                 System.out.println("FolderTree: czas zmiany zdalneg: " + folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
                 @SuppressWarnings("unused")
                 FileClient fileClient = new FileClient(this, nod, this.folder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(localUser).getPath(), nod.getName(), localUser, folder.get(nod.getParent()).port);
-            } else if (nod.getHistory()!=null && !nod.getHistory().isEmpty() && nod.getHistory().getLast()==null){
+            } else{
                 //kod kasujący plik
                 MFolderListener.deleteFileFromDisc(folder.get(localUser).getPath() + nod.getName());
                 if (this.getFolder().containsKey(localUser + nod.getName())) {
@@ -419,5 +420,7 @@ public class FolderTree implements Serializable {
         synchronized(this.syncFolder){
         	this.syncFolder.putAll(folder);
         }
+
+    	}
     }
 }

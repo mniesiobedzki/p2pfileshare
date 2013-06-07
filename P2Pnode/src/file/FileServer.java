@@ -49,7 +49,7 @@ public class FileServer extends Thread {
     public void run() {
         ServerSocket servsock;
         try {
-            System.out.println("Server plików na porcie: " + port);
+            System.out.println("Server plikow na porcie: " + port);
             servsock = new ServerSocket(port);
             while (true) {
                 LOG.info("New connection");
@@ -78,7 +78,7 @@ public class FileServer extends Thread {
 
                     path += System.getProperty("file.separator");
                     path += n.getName();
-                    System.err.println("wysyłam plik ");
+                    System.err.println("wysylam plik ");
                     System.out.println("key: " + msg);
                     System.out.println("path: " + path);
                     this.send(os, path);

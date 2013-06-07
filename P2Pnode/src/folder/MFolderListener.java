@@ -22,14 +22,14 @@ public class MFolderListener {
     public static boolean fileDeleted = false;
     public static boolean fileModified = false;
 
-    public static String ignorowanyPlik; //ignorowanie potrzebne do poprawnej synchronizcji - zapobiega wykryciu modyfikacji pliku po tym jak zosta� zsynchronizowany od drugiego peera i jest zmieniana nazwa z ^nazwapliku do nazwapliku
+    public static String ignorowanyPlik; //ignorowanie potrzebne do poprawnej synchronizcji - zapobiega wykryciu modyfikacji pliku po tym jak zostaďż˝ zsynchronizowany od drugiego peera i jest zmieniana nazwa z ^nazwapliku do nazwapliku
 
-    // Lista obiektów typu FileState.
+    // Lista obiektĂłw typu FileState.
     // Lista ta przechowuje informacje o wszystkich modyfikacjach
     // danego pliku z folderu.
-    // @param String ma postać "user1Nowy dokument tekstowy - Kopia (4).txt"
+    // @param String ma postaÄ‡ "user1Nowy dokument tekstowy - Kopia (4).txt"
     public static Map<String, File> filesAndTheirHistory = new HashMap<String, File>();
-    public static Path listenedPath;        // ścieżka folderu który jest nasłuchiwany
+    public static Path listenedPath;        // Ĺ›cieĹĽka folderu ktĂłry jest nasĹ‚uchiwany
 
     public static void runFolderListener(String path, final FolderTree folderTree, final String userId) {
         System.out.println("MFolderListener dziala");
@@ -61,7 +61,7 @@ public class MFolderListener {
 
     private static void handleDirectoryChangeEvent(Path myDir, FolderTree folderTree, String userId) {
 
-        LOG.info("WYKRYTO ZMANĘ w obserowanym folderze !! " + myDir);
+        LOG.info("WYKRYTO ZMANÄ� w obserowanym folderze !! " + myDir);
 
         try {
 
@@ -85,12 +85,12 @@ public class MFolderListener {
 
                     if (ignorowanyPlik != null && event.context().toString().equals(ignorowanyPlik)) {
 
-                        System.out.println("Created - IGNORUJ�!");
+                        System.out.println("Created - IGNORUJďż˝!");
                         ignorowanyPlik = null;
                         return;
                     } else {
 
-                        System.out.println("NIE ignoruj� " + ignorowanyPlik + " != " + event.context().toString());
+                        System.out.println("NIE ignorujďż˝ " + ignorowanyPlik + " != " + event.context().toString());
 
                     }
 
@@ -102,7 +102,7 @@ public class MFolderListener {
 
 //					if(kuku.lastModified() == 0){
 //						Date dt = new Date();
-//						System.err.println("Wszedłem i: " +dt.getTime() );
+//						System.err.println("WszedĹ‚em i: " +dt.getTime() );
 //						
 //						newlyCreatedFile.setFileStateHistoryEntry(
 //								dt.getTime(), event.context().toString(),
@@ -126,7 +126,7 @@ public class MFolderListener {
 
                     folderTree.addFile(newlyCreatedFile, userId);
 
-                    System.err.println("Doda�em do drzewa \n" + folderTree.toString());
+                    System.err.println("Dodaďż˝em do drzewa \n" + folderTree.toString());
                     // setFileStateHistoryEntry(new Date().getTime(),
                     // event.context().toString(),
                     // "1111",
@@ -175,7 +175,7 @@ public class MFolderListener {
                         }
                     }
 
-                    // Metoda ustawiaj�ca pola obiektu FileState na stan -
+                    // Metoda ustawiajďż˝ca pola obiektu FileState na stan -
                     // DELETED
                     // To-Do PERSON ID podstawic prawdziwe dane
                     // setFileStateHistoryEntry(new
@@ -211,7 +211,9 @@ public class MFolderListener {
                             folderTree.syncFolder.get(userId + f.getFileName()).history.add(f.getSingleFileHistory().getLast());
                             folderTree.syncFolder.get(userId + f.getFileName()).getHistory().getLast().setData(kuku.lastModified());
                             System.out.println(folderTree.folder.get(userId + f.getFileName()).getHistory());
-                            folderTree.update();
+                            synchronized (folderTree.folder) {
+                                folderTree.update();
+                            }
                             folderTree.updated = true;
                         } else {
                             folderTree.folder.get(userId + f.getFileName()).history.add(f.getSingleFileHistory().getLast());
@@ -222,7 +224,7 @@ public class MFolderListener {
                     }
 
 
-                    // Metoda ustawiaj�ca pola obiektu FileState
+                    // Metoda ustawiajďż˝ca pola obiektu FileState
                     // To-Do PERSON ID podstawic prawdziwe dane
                     // setFileStateHistoryEntry(new Date().getTime(),
                     // event.context().toString(),

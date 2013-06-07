@@ -41,10 +41,6 @@ public class File implements Serializable{
 		this.filePath = filePath;
 	}
 
-	public File(ClientP2Pnode clientP2Pnode) {
-		// TODO Auto-generated constructor stub
-	}
-	
 	public File(String fileName, String filePath, String userId){
 		this.fileName = fileName;
 		this.filePath = filePath;
@@ -53,6 +49,7 @@ public class File implements Serializable{
 		
 		try {
 			java.io.File kuku = new java.io.File(fileName);
+			System.out.println("stworzono plik :"+fileName+" edytowany o: "+kuku.lastModified());
 			this.singleFileHistory.add(new FileState(userId,kuku.lastModified(),fileName,kuku.length(),File.getMD5Checksum(filePath), this.getFileId()));
 		} catch (Exception e) {
 			e.printStackTrace();
