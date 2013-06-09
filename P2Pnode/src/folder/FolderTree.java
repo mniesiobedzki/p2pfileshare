@@ -86,12 +86,12 @@ public class FolderTree implements Serializable {
         folder.put(u, n);
 
         if (this.syncFolder != null) {
-        	System.out.println("root syncFolder: "+ this.syncFolder.get("root"));
-        	System.out.println("jego dzieci: "+ this.syncFolder.get("root").getChildren());
-        	if(this.syncFolder.get("root").getChildren().size()>0 && !this.syncFolder.get("root").getChildren().contains(u)){
-        		this.syncFolder.get("root").getChildren().add(u);
+        	if(this.syncFolder.get("root").children.contains(n.name)){
+	        	System.out.println("root syncFolder: "+ this.syncFolder.get("root"));
+	        	System.out.println("jego dzieci: "+ this.syncFolder.get("root").getChildren());
+	        	this.syncFolder.get("root").addChlid(u);
+	        	this.syncFolder.put(u, n);
         	}
-            this.syncFolder.put(u, n);
         }
         updated = true;
         LOG.info("User " +u +" added");
@@ -205,10 +205,8 @@ public class FolderTree implements Serializable {
         for (Nod n : this.syncFolder.values()) {
             if (this.syncFolder.get("root").getChildren().contains(n.getName())) {
                 usrs.add(n.getName());
-                folder.put(n.value, n);
-                if (!folder.get("root").children.contains(n.getName())) {
-                    folder.get("root").children.add(n.getName());
-                }
+                //folder.put(n.value, n);
+                this.addUser(n.name, n.parent, n.ip, n.port);
             } else if (!n.getName().equals("root")) {
                 addNod(n);
             }
