@@ -125,7 +125,7 @@ public class MFolderListener {
                     filesAndTheirHistory.put(userId + newlyCreatedFile.getFileName(), newlyCreatedFile);
 
                     folderTree.addFile(newlyCreatedFile, userId);
-
+                    folderTree.putAllToSync();
                     System.err.println("Dodaďż˝em do drzewa \n" + folderTree.toString());
                     // setFileStateHistoryEntry(new Date().getTime(),
                     // event.context().toString(),
@@ -211,9 +211,9 @@ public class MFolderListener {
                             folderTree.syncFolder.get(userId + f.getFileName()).history.add(f.getSingleFileHistory().getLast());
                             folderTree.syncFolder.get(userId + f.getFileName()).getHistory().getLast().setData(kuku.lastModified());
                             System.out.println(folderTree.folder.get(userId + f.getFileName()).getHistory());
-                            synchronized (folderTree.folder) {
-                                folderTree.update();
-                            }
+
+                            folderTree.putAllToSync();
+                            folderTree.update();
                             folderTree.updated = true;
                         } else {
                             folderTree.folder.get(userId + f.getFileName()).history.add(f.getSingleFileHistory().getLast());
@@ -221,6 +221,8 @@ public class MFolderListener {
                             System.out.println(folderTree.folder.get(userId + f.getFileName()).getHistory());
                             folderTree.updated = true;
                         }
+
+                        folderTree.putAllToSync();
                     }
 
 

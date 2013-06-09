@@ -1,6 +1,7 @@
 package main;
 
 import file.FileServer;
+import folder.FolderServer;
 import folder.FolderTree;
 import gui.GuiWindower;
 import node.ClientP2Pnode;
@@ -47,6 +48,8 @@ public class Controller {
                 LOG.info("Tworze nowy obiekt folder Tree z argumentami(" + gui.getFolderPath() + ", " + gui.getClientName() + ", drzewo-JCSync, " + gui.getClientIp() + ", " + gui.getPortIn() + ")");
                 folderTree = new FolderTree(gui.getFolderPath(), gui.getClientName(), clientP2Pnode.getJCSyncHashMap(), gui.getClientIp(), gui.getPortIn());
                 LOG.info("Tworze nowy obiekt FileServer z argumentami(folderTree" + ", " + gui.getClientName() + ", " + gui.getPortIn() + ")");
+                FolderServer fs = new FolderServer(folderTree, folderTree.localUser, gui.getFolderPath());
+                new  Thread(fs).start();
                 FileServer server = new FileServer(folderTree, gui.getClientName(), gui.getPortIn());
                 updateTree();
 
@@ -81,9 +84,7 @@ public class Controller {
      * Updates files in the folder
      */
     public void updateTree() {
-        LOG.info("Updateing Tree with files. MSG from Listener");
-        synchronized (folderTree.folder) {
+        LOG.info("Updating Tree with files. MSG from Listener");
             folderTree.update();
-        }
     }
 }
