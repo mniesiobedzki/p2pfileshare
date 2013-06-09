@@ -211,7 +211,6 @@ public class MFolderListener {
                             folderTree.syncFolder.get(userId + f.getFileName()).history.add(f.getSingleFileHistory().getLast());
                             folderTree.syncFolder.get(userId + f.getFileName()).getHistory().getLast().setData(kuku.lastModified());
                             System.out.println(folderTree.folder.get(userId + f.getFileName()).getHistory());
-
                             folderTree.putAllToSync();
                             folderTree.update();
                             folderTree.updated = true;
@@ -222,7 +221,6 @@ public class MFolderListener {
                             folderTree.updated = true;
                         }
 
-                        folderTree.putAllToSync();
                     }
 
 
