@@ -48,10 +48,10 @@ public class FolderTree implements Serializable {
         
         if (this.syncFolder != null) {
             this.putAll();
+            putAllToSync();
         } else {
             LOG.info("JCSync jest null-em");
         }
-        putAllToSync();
         LOG.info("FolderTree created with path: " + path + " for user: " + usr + " IP:" + ip + ":" + port);
         LOG.info(this);
     }
