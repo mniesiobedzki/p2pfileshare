@@ -84,9 +84,11 @@ public class FolderTree implements Serializable {
 	            LOG.info("!root ");
 				//synchronized(syncFolder){
 					if(nod.getHistory()!=null && nod.getHistory().size()>0){
-						syncFolder.put(nod.getParent()+nod.getName(), nod);syncFolder.get("root").getChildren();
+			            LOG.info("dodaje plik ");
+						syncFolder.put(nod.getParent()+nod.getName(), nod);
 			            LOG.info("dodano plik do struktury synchronizowanej "+nod.name);
 					}else{
+			            LOG.info("dodaje węzeł ");
 						syncFolder.put(nod.getName(), nod);
 			            LOG.info("dodano węzeł do struktury synchronizowanej "+nod.name);
 					}
