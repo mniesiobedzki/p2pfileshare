@@ -283,6 +283,9 @@ public class FolderTree implements Serializable {
                 addNod(n);
                 if(n.getHistory()!=null && n.getHistory().size()>0){
                 	LOG.info("pobrano dane o pliku "+ n.getName() + " nalezacym do "+n.getParent());
+                }else if(n.getParent().equals("root")){
+                	LOG.info("pobrano dane o uzytkowniku "+ n.getName() + " nalezacym do "+n.getParent());
+                	folder.get("root").children.add(n.name);
                 }else{
                 	LOG.info("pobrano dane o wezle "+ n.getName() + " nalezacym do "+n.getParent());
                 }
