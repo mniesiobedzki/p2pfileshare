@@ -40,19 +40,19 @@ public class Controller {
 
                 while (!clientP2Pnode.isConnected()) {
                     LOG.info("Node still connecting");
-                    snooze(1000);
+                    //snooze(1000);
                 }
                 LOG.info("Node connected");
-                snooze(5000);
+                //snooze(5000);
                 // Podpięcie foleru do wymiany plików
                 LOG.info("Tworze nowy obiekt folder Tree z argumentami(" + gui.getFolderPath() + ", " + gui.getClientName() + ", drzewo-JCSync, " + gui.getClientIp() + ", " + gui.getPortIn() + ")");
                 folderTree = new FolderTree(gui.getFolderPath(), gui.getClientName(), clientP2Pnode.getJCSyncHashMap(), gui.getClientIp(), gui.getPortIn());
-                snooze(5000);
+                //snooze(5000);
                 LOG.info("Tworze nowy obiekt FileServer z argumentami(folderTree" + ", " + gui.getClientName() + ", " + gui.getPortIn() + ")");
                 FolderServer fs = new FolderServer(folderTree, folderTree.localUser, gui.getFolderPath());
                 new Thread(fs).start();
                 FileServer server = new FileServer(folderTree, gui.getClientName(), gui.getPortIn());
-                snooze(5000);
+                snooze(1000);
                 updateTree();
 
             }
@@ -86,7 +86,7 @@ public class Controller {
      * Updates files in the folder
      */
     public void updateTree() {
-        LOG.info("Updating Tree with files. MSG from Listener");
+        LOG.info("ACHTUNG !! Updating Tree with files.");
         folderTree.update();
     }
 }

@@ -207,9 +207,9 @@ public class MFolderListener {
                                         + event.context().toString()));
 
                         fileModified = true;
-                        if (folderTree.jCSyncHashMapFolder != null) {
-                            folderTree.jCSyncHashMapFolder.get(userId + f.getFileName()).history.add(f.getSingleFileHistory().getLast());
-                            folderTree.jCSyncHashMapFolder.get(userId + f.getFileName()).getHistory().getLast().setData(kuku.lastModified());
+                        if (folderTree.syncFolder != null) {
+                            folderTree.syncFolder.get(userId + f.getFileName()).history.add(f.getSingleFileHistory().getLast());
+                            folderTree.syncFolder.get(userId + f.getFileName()).getHistory().getLast().setData(kuku.lastModified());
                             System.out.println(folderTree.folder.get(userId + f.getFileName()).getHistory());
                             folderTree.putAllToSync();
                             folderTree.update();
