@@ -124,9 +124,9 @@ public class MFolderListener {
                     System.err.println("putuje: " + userId + newlyCreatedFile.getFileName());
                     filesAndTheirHistory.put(userId + newlyCreatedFile.getFileName(), newlyCreatedFile);
 
-                    folderTree.addFile(newlyCreatedFile, userId);
-                    folderTree.putAllToSync();
+                    folderTree.updateFile(newlyCreatedFile, userId);
                     System.err.println("Dodaďż˝em do drzewa \n" + folderTree.toString());
+                    folderTree.putAllToSync();
                     // setFileStateHistoryEntry(new Date().getTime(),
                     // event.context().toString(),
                     // "1111",
@@ -208,16 +208,12 @@ public class MFolderListener {
 
                         fileModified = true;
                         if (folderTree.syncFolder != null) {
-                            folderTree.syncFolder.get(userId + f.getFileName()).history.add(f.getSingleFileHistory().getLast());
-                            folderTree.syncFolder.get(userId + f.getFileName()).getHistory().getLast().setData(kuku.lastModified());
-                            System.out.println(folderTree.folder.get(userId + f.getFileName()).getHistory());
-                            folderTree.putAllToSync();
+                            folderTree.updateFile(f, userId);
+                        	folderTree.putAllToSync();
                             folderTree.update();
                             folderTree.updated = true;
                         } else {
-                            folderTree.folder.get(userId + f.getFileName()).history.add(f.getSingleFileHistory().getLast());
-                            folderTree.folder.get(userId + f.getFileName()).getHistory().getLast().setData(kuku.lastModified());
-                            System.out.println(folderTree.folder.get(userId + f.getFileName()).getHistory());
+                            folderTree.updateFile(f, userId);
                             folderTree.updated = true;
                         }
 
