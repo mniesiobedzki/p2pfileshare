@@ -3,6 +3,7 @@ package file;
 import folder.FolderTree;
 import folder.MFolderListener;
 import folder.Nod;
+import org.apache.log4j.Logger;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,6 +14,8 @@ import java.net.UnknownHostException;
 import java.nio.charset.Charset;
 
 public class FileClient {
+    public static final Logger LOG = Logger.getLogger(FileClient.class);
+
     /**
      * @param ft   - folder tree
      * @param n    - nod
@@ -37,7 +40,7 @@ public class FileClient {
 //	    System.out.println("historia pliku: "+ft.getFolder().get(key).getHistory());
 //	    System.out.println("ostatni element historii: "+ft.getFolder().get(key).getHistory().getLast());
 //	    System.out.println("data modyfikacji: "+ft.getFolder().get(key).getHistory().getLast().getData());
-	    System.out.println("wysy³am ¿¹danie udostêpnienia pliku: " + key +" modyfikowanego o "+ ft.getFolder().get(key).getHistory().getLast().getData());
+            System.out.println("wysyï¿½am ï¿½ï¿½danie udostï¿½pnienia pliku: " + key + " modyfikowanego o " + ft.getFolder().get(key).getHistory().getLast().getData());
             key += "\n";
             os.write(key.getBytes(Charset.forName("UTF-8")));
 
@@ -45,7 +48,7 @@ public class FileClient {
             // receive file
             this.receiveFile(ft, n, is, path, name, usr);
             long end = System.currentTimeMillis();
-            System.out.println("przesy³anie pliku trwa³o: "+ (end - start));
+            System.out.println("przesyï¿½anie pliku trwaï¿½o: " + (end - start));
             os.flush();
             os.close();
 
@@ -72,6 +75,7 @@ public class FileClient {
      * @throws Exception
      */
     public void receiveFile(FolderTree ft, Nod n, InputStream is, String path, String name, String usr) throws Exception {
+        LOG.debug("Recieve File nod:" + n.getName() + ", path:" + path + ", name:" + name + ", user:" + usr);
         try {
             String tempStamp = "^";
             // read this file into InputStream
