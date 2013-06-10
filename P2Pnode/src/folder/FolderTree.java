@@ -48,7 +48,9 @@ public class FolderTree implements Serializable {
         
         if (this.syncFolder != null) {
             this.putAll();
+            LOG.info("pobieram dane do lokalnej struktury");
             putAllToSync();
+            LOG.info("wkładam lokalne dane do synchronizowanej struktury");
         } else {
             LOG.info("JCSync jest null-em");
         }
@@ -61,9 +63,13 @@ public class FolderTree implements Serializable {
     }
 
     public void putAllToSync(){
+        LOG.info("wszedłem w putAllToSync()");
+        LOG.info("syncFolder zawiera "+syncFolder.keySet().toString());
     	for (Nod nod : folder.values()) {
-			if(nod.getValue().equals("root")){
-				synchronized(syncFolder){
+            LOG.info("przetwarzam "+nod.getName());
+			if(nod.getValue()!=null && nod.getValue().equals("root")){
+	            LOG.info("root");
+				//synchronized(syncFolder){
 					if(syncFolder.get("root")==null){
 						syncFolder.put("root", nod);
 					}
@@ -72,16 +78,19 @@ public class FolderTree implements Serializable {
 							syncFolder.get("root").getChildren().add(u);
 						}
 					}
-					System.out.println(syncFolder.get("root").getChildren());
-				}
+		            LOG.info("Korzeń zaktualizowano do postaci "+syncFolder.get("root").getChildren());
+				//}
 			}else{
-				synchronized(syncFolder){
+	            LOG.info("!root ");
+				//synchronized(syncFolder){
 					if(nod.getHistory()!=null && nod.getHistory().size()>0){
-						syncFolder.put(nod.getParent()+nod.getName(), nod);
+						syncFolder.put(nod.getParent()+nod.getName(), nod);syncFolder.get("root").getChildren();
+			            LOG.info("dodano plik do struktury synchronizowanej "+nod.name);
 					}else{
 						syncFolder.put(nod.getName(), nod);
+			            LOG.info("dodano węzeł do struktury synchronizowanej "+nod.name);
 					}
-				}
+				//}
 			}
 		}
     }
@@ -112,9 +121,18 @@ public class FolderTree implements Serializable {
 	        	this.syncFolder.put(u, n);
         	}
         }*/
-        updated = true;
-        LOG.info("User " +u +" added");
 
+    	}else{
+
+	        LOG.info("updating new user " + u);
+	        Nod n = new Nod(u, folder.get("root"), ip, port);
+	        System.out.println(n);
+	        System.out.println("Użytkownik :" + u);
+	        System.out.println("folder w :" + path);
+	        n.setPath(path);
+	        folder.put(u, n);
+	        updated = true;
+	        LOG.info("User " +u +" updated");
     	}
     }
 
@@ -129,7 +147,7 @@ public class FolderTree implements Serializable {
 
     @Override
     public String toString() {
-        String s = "FolderTree [root=" + this.getFolder().get("root").getName() + "]" + "\n";
+        String s = "\nFolderTree [root=" + this.getFolder().get("root").getName() + "]" + "\n";
 
         for (String k : this.getFolder().get("root").getChildren()) {
             Nod n = this.getFolder().get(k);
@@ -170,6 +188,8 @@ public class FolderTree implements Serializable {
             }
         }
         }
+        s+="\n\nsyncFolder"+this.syncFolder.keySet().toString()+"\n";
+        s+="\n\nfolder"+this.folder.keySet().toString()+"\n";
         return s;
     }
 
@@ -245,8 +265,16 @@ public class FolderTree implements Serializable {
                 usrs.add(n.getName());
                 //folder.put(n.value, n);
                 this.addUser(n.name, n.parent, n.ip, n.port);
-            } else if (!n.getName().equals("root")) {
+                this.getFolder().get(n.name).children.clear();
+                this.getFolder().get(n.name).children.addAll(n.getChildren());
+	            LOG.info("pobrano użytkownika "+n.getName()+" i dodano do korzenia ");
+            } else if (!n.getValue().equals("root")) {
                 addNod(n);
+                if(n.getHistory()!=null){
+                	LOG.info("pobrano dane o pliku "+ n.getName() + " nalezacym do "+n.getParent());
+                }else{
+                	LOG.info("pobrano dane o wezle "+ n.getName() + " nalezacym do "+n.getParent());
+                }
             }
         }
     }
@@ -361,9 +389,9 @@ public class FolderTree implements Serializable {
     public void update() {
     	System.out.println("userzy z jcsync "+syncFolder.get("root").getChildren());
     	synchronized(folder){
-    		synchronized(syncFolder){
-    			this.putAll(syncFolder);//dodawanie nowych
-    		}
+    		//synchronized(syncFolder){
+    			this.putAll();//dodawanie nowych
+    		//}
         LinkedList<String> users = new LinkedList<String>();
         LinkedList<Nod> changes = new LinkedList<Nod>();
         LinkedList<Nod> created = new LinkedList<Nod>();
