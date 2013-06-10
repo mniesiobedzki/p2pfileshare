@@ -45,7 +45,7 @@ public class FolderTree implements Serializable {
         LOG.info("Root dodany do drzewa");
         this.folder.put("root", new Nod(path));
         this.addUser(usr, path, ip, port);
-        
+
         if (this.syncFolder != null) {
             LOG.info("pobieram dane do lokalnej struktury");
             this.putAll();
@@ -63,68 +63,69 @@ public class FolderTree implements Serializable {
         return folder;
     }
 
-    public void putAllToSync(){
+    public void putAllToSync() {
         LOG.info("wszedłem w putAllToSync()");
-        LOG.info("syncFolder zawiera "+syncFolder.keySet().toString());
-        LOG.info("folder zawiera "+folder.keySet().toString());
-    	for (Nod nod : folder.values()) {
-            LOG.info("przetwarzam "+nod.getName());
-			if(nod.getValue()!=null && nod.getValue().equals("root")){
-	            LOG.info("root");
-				//synchronized(syncFolder){
-					if(syncFolder.get("root")==null){
-						syncFolder.put("root", new Nod("root"));
-					}
-					for (String u : nod.getChildren()) {
-						if(!syncFolder.get("root").children.contains(u)){
-							syncFolder.get("root").children.add(u);
-						}
-					}
-		            LOG.info("Korzeń zaktualizowano do postaci "+syncFolder.get("root").getChildren());
-				//}
-			}else{
-	            LOG.info("!root ");
-				//synchronized(syncFolder){
-					if(nod.getHistory()!=null && nod.getHistory().size()>0){
-			            LOG.info("dodaje plik ");
-			            if(syncFolder.containsKey(nod.getParent()+nod.getName())){
-			            	syncFolder.get(nod.getParent()+nod.getName()).history=nod.history;
-			            }else{
-			            	syncFolder.put(nod.getParent()+nod.getName(), nod);
-			            }
-			            LOG.info("dodano plik do struktury synchronizowanej "+nod.name);
-					}else{
-			            LOG.info("dodaje węzeł ");
-			            if(syncFolder.containsKey(nod.getName())){
-			            	syncFolder.get(nod.getName()).children=nod.children;
-			            }else{
-							syncFolder.put(nod.getName(), nod);
-			            }
-			            LOG.info("dodano węzeł do struktury synchronizowanej "+nod.name);
-					}
-				//}
-			}
-		}
+        LOG.info("syncFolder zawiera " + syncFolder.keySet().toString());
+        LOG.info("folder zawiera " + folder.keySet().toString());
+        for (Nod nod : folder.values()) {
+            LOG.info("przetwarzam " + nod.getName());
+            if (nod.getValue() != null && nod.getValue().equals("root")) {
+                LOG.info("root");
+                //synchronized(syncFolder){
+                if (syncFolder.get("root") == null) {
+                    syncFolder.put("root", new Nod("root"));
+                }
+                for (String u : nod.getChildren()) {
+                    if (!syncFolder.get("root").children.contains(u)) {
+                        syncFolder.get("root").children.add(u);
+                    }
+                }
+                LOG.info("Korzeń zaktualizowano do postaci " + syncFolder.get("root").getChildren());
+                //}
+            } else {
+                LOG.info("!root ");
+                //synchronized(syncFolder){
+                if (nod.getHistory() != null && nod.getHistory().size() > 0) {
+                    LOG.info("dodaje plik ");
+                    if (syncFolder.containsKey(nod.getParent() + nod.getName())) {
+                        syncFolder.get(nod.getParent() + nod.getName()).history = nod.history;
+                    } else {
+                        syncFolder.put(nod.getParent() + nod.getName(), nod);
+                    }
+                    LOG.info("dodano plik do struktury synchronizowanej " + nod.name);
+                } else {
+                    LOG.info("dodaje węzeł ");
+                    if (syncFolder.containsKey(nod.getName())) {
+                        syncFolder.get(nod.getName()).children = nod.children;
+                    } else {
+                        syncFolder.put(nod.getName(), nod);
+                    }
+                    LOG.info("dodano węzeł do struktury synchronizowanej " + nod.name);
+                }
+                //}
+            }
+        }
     }
+
     /**
      * Metoda dodająca użytkownika
      *
-     * @param usr  - ID użytkownika
+     * @param u    - ID użytkownika
      * @param path - ścieżka do folderu lokalna dla użytkownika
      */
     public void addUser(String u, String path, String ip, int port) {
 
-    	if(!this.folder.get("root").children.contains(u)){
-	        LOG.info("adding new user " + u);
-	        Nod n = new Nod(u, folder.get("root"), ip, port);
-	        System.out.println(n);
-	        System.out.println("Użytkownik :" + u);
-	        System.out.println("folder w :" + path);
-	        n.setPath(path);
-	        folder.put(u, n);
-	        
+        if (!this.folder.get("root").children.contains(u)) {
+            LOG.info("adding new user " + u);
+            Nod n = new Nod(u, folder.get("root"), ip, port);
+            System.out.println(n);
+            System.out.println("Użytkownik :" + u);
+            System.out.println("folder w :" + path);
+            n.setPath(path);
+            folder.put(u, n);
+
         /*if (this.syncFolder != null) {
-        	if(!this.syncFolder.get("root").children.contains(n.name)){
+            if(!this.syncFolder.get("root").children.contains(n.name)){
 	        	System.out.println("root syncFolder: "+ this.syncFolder.get("root"));
 	        	System.out.println("jego dzieci: "+ this.syncFolder.get("root").getChildren());
 	        	this.syncFolder.get("root").addChlid(u);
@@ -134,18 +135,18 @@ public class FolderTree implements Serializable {
         	}
         }*/
 
-    	}else{
+        } else {
 
-	        LOG.info("updating new user " + u);
-	        Nod n = new Nod(u, folder.get("root"), ip, port);
-	        System.out.println(n);
-	        System.out.println("Użytkownik :" + u);
-	        System.out.println("folder w :" + path);
-	        n.setPath(path);
-	        folder.put(u, n);
-	        updated = true;
-	        LOG.info("User " +u +" updated");
-    	}
+            LOG.info("updating new user " + u);
+            Nod n = new Nod(u, folder.get("root"), ip, port);
+            System.out.println(n);
+            System.out.println("Użytkownik :" + u);
+            System.out.println("folder w :" + path);
+            n.setPath(path);
+            folder.put(u, n);
+            updated = true;
+            LOG.info("User " + u + " updated");
+        }
     }
 
     public Nod getRoot() {
@@ -177,8 +178,8 @@ public class FolderTree implements Serializable {
                 s += c;
             }
         }
-        s+="\n\nsyncFolder"+this.syncFolder.keySet().toString()+"\n";
-        s+="\n\nfolder"+this.folder.keySet().toString()+"\n";
+        s += "\n\nsyncFolder" + this.syncFolder.keySet().toString() + "\n";
+        s += "\n\nfolder" + this.folder.keySet().toString() + "\n";
         return s;
     }
 
@@ -189,17 +190,22 @@ public class FolderTree implements Serializable {
 
     public void addFile(File f, String usr) {
         LOG.info("Method addFile(" + f.getFilePath() + "," + usr);
-        Nod file = new Nod(usr + f.getFileName(), folder.get(usr), f.getSingleFileHistory(), folder.get(usr), f.getFileName(), f.getFilePath());
-        file.setParent(folder.get(usr));
-        //synchronized(folder){
-        	folder.put(usr + file.getName(), file);
-        //}
 
-        if (this.syncFolder != null) {
-            putAllToSync();
+        if (File.isFileIgnored(f.getFileName())) {
+            LOG.warn("Ignore file " + f.getFileName());
+        } else {
+            Nod file = new Nod(usr + f.getFileName(), folder.get(usr), f.getSingleFileHistory(), folder.get(usr), f.getFileName(), f.getFilePath());
+            file.setParent(folder.get(usr));
+            //synchronized(folder){
+            folder.put(usr + file.getName(), file);
+            //}
+
+            if (this.syncFolder != null) {
+                putAllToSync();
+            }
+            System.out.println(this);
+            updated = true;
         }
-        System.out.println(this);
-        updated = true;
     }
 
     /**
@@ -255,23 +261,23 @@ public class FolderTree implements Serializable {
                 this.addUser(n.name, n.path, n.ip, n.port);
                 this.getFolder().get(n.name).children.clear();
                 this.getFolder().get(n.name).children.addAll(n.getChildren());
-	            LOG.info("pobrano użytkownika "+n.getName()+" i dodano do korzenia ");
+                LOG.info("pobrano użytkownika " + n.getName() + " i dodano do korzenia ");
             } else if (!n.getValue().equals("root")) {
                 addNod(n);
-                if(n.getHistory()!=null && n.getHistory().size()>0){
-                	LOG.info("pobrano dane o pliku "+ n.getName() + " nalezacym do "+n.getParent());
-                }else if(n.getParent().equals("root")){
-                	LOG.info("pobrano dane o uzytkowniku "+ n.getName() + " nalezacym do "+n.getParent());
-                	folder.get("root").children.add(n.name);
-                }else{
-                	LOG.info("pobrano dane o wezle "+ n.getName() + " nalezacym do "+n.getParent());
+                if (n.getHistory() != null && n.getHistory().size() > 0) {
+                    LOG.info("pobrano dane o pliku " + n.getName() + " nalezacym do " + n.getParent());
+                } else if (n.getParent().equals("root")) {
+                    LOG.info("pobrano dane o uzytkowniku " + n.getName() + " nalezacym do " + n.getParent());
+                    folder.get("root").children.add(n.name);
+                } else {
+                    LOG.info("pobrano dane o wezle " + n.getName() + " nalezacym do " + n.getParent());
                 }
-            }else{
-            	for(String c: syncFolder.get("root").getChildren()){
-            		if(!folder.get("root").children.contains(c)){
-            			folder.get("root").addChlid(c);
-            		}
-            	}
+            } else {
+                for (String c : syncFolder.get("root").getChildren()) {
+                    if (!folder.get("root").children.contains(c)) {
+                        folder.get("root").addChlid(c);
+                    }
+                }
             }
         }
     }
@@ -322,12 +328,18 @@ public class FolderTree implements Serializable {
         for (Nod n : folder.values()) {
             if (!n.getValue().equals("root") && !users.contains(n.getName())) {
                 if (!folder.containsKey(localUser + n.getName())) {
-                    System.out.println("stworzono " + n.name);
-                    System.out.println(n.getPath());
-                    System.out.println(n.getValue());
-                    System.out.println(n.getPort());
-                    System.out.println(n.getIp());
-                    created.add(n);
+                    if (n.getName().equals(".DS_Store")) {
+                        LOG.warn("Ignore MAC OS X's .DS_Store file");
+                    } else if (n.getName().equals("Thumbs.db")) {
+                        LOG.warn("Ignore Windows's Thumbs.db file");
+                    } else {
+                        System.out.println("stworzono " + n.name);
+                        System.out.println(n.getPath());
+                        System.out.println(n.getValue());
+                        System.out.println(n.getPort());
+                        System.out.println(n.getIp());
+                        created.add(n);
+                    }
                 }
             }
         }
@@ -384,104 +396,104 @@ public class FolderTree implements Serializable {
     }
 
     public void update() {
-    	System.out.println("userzy z jcsync "+syncFolder.get("root").getChildren());
-    	synchronized(folder){
-    		//synchronized(syncFolder){
-    			this.putAll();//dodawanie nowych
-    		//}
-        LinkedList<String> users = new LinkedList<String>();
-        LinkedList<Nod> changes = new LinkedList<Nod>();
-        LinkedList<Nod> created = new LinkedList<Nod>();
+        System.out.println("userzy z jcsync " + syncFolder.get("root").getChildren());
+        synchronized (folder) {
+            //synchronized(syncFolder){
+            this.putAll();//dodawanie nowych
+            //}
+            LinkedList<String> users = new LinkedList<String>();
+            LinkedList<Nod> changes = new LinkedList<Nod>();
+            LinkedList<Nod> created = new LinkedList<Nod>();
 
-        Nod rootLocal = folder.get("root");
-        System.out.println("\nusrs " + rootLocal.getChildren());
-        System.out.println(this);
-        //plik zaktualizowano
-        for (Nod n : this.folder.values()) {
-            if (!n.getParent().equals(localUser) && folder.get(n.getValue()).getHistory().size() > 0 && folder.get(localUser + n.getName()) != null) {
-                if (n.getHistory().getLast() == null && folder.get(localUser + n.getName()).getHistory().getLast() != null) {
-                    changes.add(n);
-                } else if (folder.get(localUser + n.getName()).getHistory().getLast() == null) {
-                    //raz wykasowany jest ignorowany
-                } else if (folder.get(localUser + n.getName()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
-                    System.out.println("zmieniono " + n.name);
-                    changes.add(n);
+            Nod rootLocal = folder.get("root");
+            System.out.println("\nusrs " + rootLocal.getChildren());
+            System.out.println(this);
+            //plik zaktualizowano
+            for (Nod n : this.folder.values()) {
+                if (!n.getParent().equals(localUser) && folder.get(n.getValue()).getHistory().size() > 0 && folder.get(localUser + n.getName()) != null) {
+                    if (n.getHistory().getLast() == null && folder.get(localUser + n.getName()).getHistory().getLast() != null) {
+                        changes.add(n);
+                    } else if (folder.get(localUser + n.getName()).getHistory().getLast() == null) {
+                        //raz wykasowany jest ignorowany
+                    } else if (folder.get(localUser + n.getName()).getHistory().getLast().getData() < n.getHistory().getLast().getData()) {
+                        System.out.println("zmieniono " + n.name);
+                        changes.add(n);
+                    }
                 }
             }
-        }
-        users.addAll(folder.get("root").getChildren());
-        System.out.println("jcsynctree: "+syncFolder.keySet());
-        System.out.println("usrs jcsync: " + folder.get("root").getChildren());
-        System.out.println("usrs: " + folder.get("root").getChildren());
-        //pliki utworzone
-        for (Nod n : this.folder.values()) {
-            if (!n.getValue().equals("root") && !users.contains(n.getName())) {
-                if (!folder.containsKey(localUser + n.getName())) {
-                    System.out.println("stworzono " + n.name);
-                    System.out.println(n.getPath());
-                    System.out.println(n.getValue());
-                    System.out.println(n.getPort());
-                    System.out.println(n.getIp());
-                    created.add(n);
+            users.addAll(folder.get("root").getChildren());
+            System.out.println("jcsynctree: " + syncFolder.keySet());
+            System.out.println("usrs jcsync: " + folder.get("root").getChildren());
+            System.out.println("usrs: " + folder.get("root").getChildren());
+            //pliki utworzone
+            for (Nod n : this.folder.values()) {
+                if (!n.getValue().equals("root") && !users.contains(n.getName())) {
+                    if (!folder.containsKey(localUser + n.getName())) {
+                        System.out.println("stworzono " + n.name);
+                        System.out.println(n.getPath());
+                        System.out.println(n.getValue());
+                        System.out.println(n.getPort());
+                        System.out.println(n.getIp());
+                        created.add(n);
+                    }
                 }
             }
-        }
 
-        for (Nod nod : created) {
-            //if (nod.getHistory().getLast() != null) {
-        	System.out.println("przerabiam nod "+nod.name);
-            if (nod.getHistory()!=null && nod.getHistory().getLast() != null) {
-                System.out.println("FolderTree: rządanie pliku " + nod.getParent() + nod.getName());
-                System.out.println("FolderTree: czas zmiany zdalneg: " + folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
-                @SuppressWarnings("unused")
-                FileClient fileClient = new FileClient(this, nod, this.folder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(localUser).getPath(), nod.getName(), localUser, folder.get(nod.getParent()).port);
-            } else{
-                //kod kasujący plik
-                MFolderListener.deleteFileFromDisc(folder.get(localUser).getPath() + nod.getName());
-                if (this.getFolder().containsKey(localUser + nod.getName())) {
-                    this.getFolder().get(localUser + nod.getName()).history.add(null);
-                    this.updated = true;
+            for (Nod nod : created) {
+                //if (nod.getHistory().getLast() != null) {
+                System.out.println("przerabiam nod " + nod.name);
+                if (nod.getHistory() != null && nod.getHistory().getLast() != null) {
+                    System.out.println("FolderTree: rządanie pliku " + nod.getParent() + nod.getName());
+                    System.out.println("FolderTree: czas zmiany zdalneg: " + folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
+                    @SuppressWarnings("unused")
+                    FileClient fileClient = new FileClient(this, nod, this.folder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(localUser).getPath(), nod.getName(), localUser, folder.get(nod.getParent()).port);
                 } else {
-                    File deletedFile = new File(nod.getName(), nod.getPath(), localUser);
-                    deletedFile.setFileId(nod.history.getFirst().getFileId());
-                    addFile(deletedFile, localUser);
+                    //kod kasujący plik
+                    MFolderListener.deleteFileFromDisc(folder.get(localUser).getPath() + nod.getName());
+                    if (this.getFolder().containsKey(localUser + nod.getName())) {
+                        this.getFolder().get(localUser + nod.getName()).history.add(null);
+                        this.updated = true;
+                    } else {
+                        File deletedFile = new File(nod.getName(), nod.getPath(), localUser);
+                        deletedFile.setFileId(nod.history.getFirst().getFileId());
+                        addFile(deletedFile, localUser);
+                    }
                 }
             }
-        }
-        
-        for (Nod nod : changes) {
-            if (nod.getHistory().getLast() != null) {
-                System.out.println("FolderTree: żądanie pliku " + nod.getParent() + nod.getName());
-                System.out.println("FolderTree: czas zmiany zdalnego: " + folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
-                System.out.println("przez port: " + folder.get(nod.getParent()).port);
-                System.err.println(this);
-                System.err.println(nod);
-                System.err.println(folder.get(nod.getParent()).ip);
-                System.err.println(nod.getParent() + nod.getName());
-                System.err.println(folder.get(localUser).getPath());
-                System.err.println(nod.getName());
-                System.err.println(localUser);
-                System.err.println(folder.get(nod.parent).getPort());
-                @SuppressWarnings("unused")
-                FileClient fileClient = new FileClient(this, nod, folder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(localUser).getPath(), nod.getName(), localUser, folder.get(nod.getParent()).port);
-            } else {
-                //kod kasujący plik
-                System.out.println("Kasuje plik: " + nod.name);
-                System.out.println("Ścieżka: " + folder.get(localUser).getPath() + System.getProperty("file.separator") + nod.getName());
-                MFolderListener.deleteFileFromDisc(folder.get(localUser).getPath() + System.getProperty("file.separator") + nod.getName());
-                if (this.getFolder().containsKey(localUser + nod.getName())) {
-                    this.getFolder().get(localUser + nod.getName()).history.add(null);
-                    this.updated = true;
-                } else {
-                    File deletedFile = new File(nod.getName(), nod.getPath(), localUser);
-                    deletedFile.setFileId(nod.history.getFirst().getFileId());
-                    addFile(deletedFile, localUser);
-                }
-            }
-        }
-        putAllToSync();
-        
 
-    	}
+            for (Nod nod : changes) {
+                if (nod.getHistory().getLast() != null) {
+                    System.out.println("FolderTree: żądanie pliku " + nod.getParent() + nod.getName());
+                    System.out.println("FolderTree: czas zmiany zdalnego: " + folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
+                    System.out.println("przez port: " + folder.get(nod.getParent()).port);
+                    System.err.println(this);
+                    System.err.println(nod);
+                    System.err.println(folder.get(nod.getParent()).ip);
+                    System.err.println(nod.getParent() + nod.getName());
+                    System.err.println(folder.get(localUser).getPath());
+                    System.err.println(nod.getName());
+                    System.err.println(localUser);
+                    System.err.println(folder.get(nod.parent).getPort());
+                    @SuppressWarnings("unused")
+                    FileClient fileClient = new FileClient(this, nod, folder.get(nod.getParent()).ip, nod.getParent() + nod.getName(), folder.get(localUser).getPath(), nod.getName(), localUser, folder.get(nod.getParent()).port);
+                } else {
+                    //kod kasujący plik
+                    System.out.println("Kasuje plik: " + nod.name);
+                    System.out.println("Ścieżka: " + folder.get(localUser).getPath() + System.getProperty("file.separator") + nod.getName());
+                    MFolderListener.deleteFileFromDisc(folder.get(localUser).getPath() + System.getProperty("file.separator") + nod.getName());
+                    if (this.getFolder().containsKey(localUser + nod.getName())) {
+                        this.getFolder().get(localUser + nod.getName()).history.add(null);
+                        this.updated = true;
+                    } else {
+                        File deletedFile = new File(nod.getName(), nod.getPath(), localUser);
+                        deletedFile.setFileId(nod.history.getFirst().getFileId());
+                        addFile(deletedFile, localUser);
+                    }
+                }
+            }
+            putAllToSync();
+
+
+        }
     }
 }

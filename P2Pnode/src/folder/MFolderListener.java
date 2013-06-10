@@ -78,6 +78,11 @@ public class MFolderListener {
             List<WatchEvent<?>> events = watchKey.pollEvents();
 
             for (@SuppressWarnings("rawtypes") WatchEvent event : events) {
+                if (File.isFileIgnored(event.context().toString())) {
+                    LOG.warn("Ignore file " + event.context().toString());
+                    ignorowanyPlik = null;
+                    return;
+                }
                 if (event.context().toString().startsWith("^") || event.context().toString().startsWith("TeraCopyTestFile")) {
                     continue;
                 }
@@ -91,14 +96,7 @@ public class MFolderListener {
                         System.out.println("Created - IGNORUJĘ!");
                         ignorowanyPlik = null;
                         return;
-                    } else if (event.context().toString().equals(DS_STORE)) {
-                        LOG.warn("Ignore MAC OS X's .DS_Store file");
-                        ignorowanyPlik = null;
-                        return;
-                    } else if (event.context().toString().equals(THUMBSDB)) {
-                        LOG.warn("Ignore Windows's Thumb.db file");
-                        ignorowanyPlik = null;
-                        return;
+
                     } else {
 
                         System.out.println("NIE ignorujďż˝ " + ignorowanyPlik + " != " + event.context().toString());
@@ -244,9 +242,14 @@ public class MFolderListener {
                 }
             }
 
-        } catch (Exception e) {
+        } catch (
+                Exception e
+                )
+
+        {
             System.out.println("Error: " + e.toString());
         }
+
     }
 
     @SuppressWarnings("unused")
