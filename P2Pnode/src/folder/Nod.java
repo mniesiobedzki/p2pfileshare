@@ -168,12 +168,9 @@ public class Nod implements Serializable {
 		return parent;
 	}
 
-	public void setParent(Nod parent, Nod parent2) {
+	public void setParent(Nod parent) {
 		this.parent = parent.value;
 		parent.addChlid(this.value);
-		if(parent2!=null){
-			parent2.addChlid(this.value);
-		}
 	}
 
 	public LinkedList<FileState> getHistory() {

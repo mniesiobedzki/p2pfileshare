@@ -177,29 +177,6 @@ public class FolderTree implements Serializable {
                 s += c;
             }
         }
-        if(syncFolder!=null && syncFolder.get("root")!=null){
-        s+="\n----------------------------\n";
-        for (String k : this.syncFolder.get("root").getChildren()) {
-            Nod n = this.syncFolder.get(k);
-            s += "\n\t";
-            s += n.name;
-            s += " ";
-            s += n.ip;
-            System.err.println(s);
-            for (String c : n.getChildren()) {
-            	/*System.err.println(c);
-            	System.err.println(syncFolder.get(c));
-            	System.err.println(syncFolder.get(c).getHistory());*/
-                if (syncFolder.get(c).getHistory().getLast() != null) {
-                    s += "\n\t\t" + syncFolder.get(c).getHistory().getLast().getData();
-                } else {
-                    s += "\n\t\twykasowany";
-                }
-                s += "\n\t\t";
-                s += c;
-            }
-        }
-        }
         s+="\n\nsyncFolder"+this.syncFolder.keySet().toString()+"\n";
         s+="\n\nfolder"+this.folder.keySet().toString()+"\n";
         return s;
@@ -213,10 +190,10 @@ public class FolderTree implements Serializable {
     public void addFile(File f, String usr) {
         LOG.info("Method addFile(" + f.getFilePath() + "," + usr);
         Nod file = new Nod(usr + f.getFileName(), folder.get(usr), f.getSingleFileHistory(), folder.get(usr), f.getFileName(), f.getFilePath());
-        file.setParent(folder.get(usr), null);
-        synchronized(folder){
+        file.setParent(folder.get(usr));
+        //synchronized(folder){
         	folder.put(usr + file.getName(), file);
-        }
+        //}
 
         if (this.syncFolder != null) {
             putAllToSync();
