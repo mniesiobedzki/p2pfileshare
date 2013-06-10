@@ -63,11 +63,12 @@ public class FolderTree implements Serializable {
         return folder;
     }
 
-    public void putAllToSync() {
+    public synchronized void putAllToSync() {
         LOG.info("wszedłem w putAllToSync()");
         LOG.info("syncFolder zawiera " + syncFolder.keySet().toString());
         LOG.info("folder zawiera " + folder.keySet().toString());
-        for (Nod nod : folder.values()) {
+        HashMap<String, Nod> folderTemp = new HashMap<String, Nod>(folder);
+        for (Nod nod : folderTemp.values()) {
             LOG.info("przetwarzam " + nod.getName());
             if (nod.getValue() != null && nod.getValue().equals("root")) {
                 LOG.info("root");
@@ -90,7 +91,9 @@ public class FolderTree implements Serializable {
                     if (syncFolder.containsKey(nod.getParent() + nod.getName())) {
                         syncFolder.get(nod.getParent() + nod.getName()).history = nod.history;
                     } else {
+                        System.out.println("PRZED PUTOWANIEM: Parent:" + nod.getParent().toString() + ", " + nod.getName() + " - " + nod.toString());
                         syncFolder.put(nod.getParent() + nod.getName(), nod);
+                        System.out.println("PO PUTOWANIU");
                     }
                     LOG.info("dodano plik do struktury synchronizowanej " + nod.name);
                 } else {
