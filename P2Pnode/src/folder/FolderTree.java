@@ -87,11 +87,19 @@ public class FolderTree implements Serializable {
 				//synchronized(syncFolder){
 					if(nod.getHistory()!=null && nod.getHistory().size()>0){
 			            LOG.info("dodaje plik ");
-						syncFolder.put(nod.getParent()+nod.getName(), nod);
+			            if(syncFolder.containsKey(nod.getParent()+nod.getName())){
+			            	syncFolder.get(nod.getParent()+nod.getName()).history=nod.history;
+			            }else{
+			            	syncFolder.put(nod.getParent()+nod.getName(), nod);
+			            }
 			            LOG.info("dodano plik do struktury synchronizowanej "+nod.name);
 					}else{
 			            LOG.info("dodaje węzeł ");
-						syncFolder.put(nod.getName(), nod);
+			            if(syncFolder.containsKey(nod.getName())){
+			            	syncFolder.get(nod.getName()).children=nod.children;
+			            }else{
+							syncFolder.put(nod.getName(), nod);
+			            }
 			            LOG.info("dodano węzeł do struktury synchronizowanej "+nod.name);
 					}
 				//}
@@ -437,7 +445,7 @@ public class FolderTree implements Serializable {
         for (Nod nod : created) {
             //if (nod.getHistory().getLast() != null) {
         	System.out.println("przerabiam nod "+nod.name);
-            if (nod.getHistory().getLast() != null) {
+            if (nod.getHistory()!=null && nod.getHistory().getLast() != null) {
                 System.out.println("FolderTree: rządanie pliku " + nod.getParent() + nod.getName());
                 System.out.println("FolderTree: czas zmiany zdalneg: " + folder.get(nod.getParent() + nod.getName()).getHistory().getLast().getData());
                 @SuppressWarnings("unused")
