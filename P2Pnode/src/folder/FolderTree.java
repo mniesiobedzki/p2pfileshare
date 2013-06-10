@@ -51,6 +51,7 @@ public class FolderTree implements Serializable {
             this.putAll();
             LOG.info("wkładam lokalne dane do synchronizowanej struktury");
             putAllToSync();
+            update();
         } else {
             LOG.info("JCSync jest null-em");
         }
@@ -65,6 +66,7 @@ public class FolderTree implements Serializable {
     public void putAllToSync(){
         LOG.info("wszedłem w putAllToSync()");
         LOG.info("syncFolder zawiera "+syncFolder.keySet().toString());
+        LOG.info("folder zawiera "+folder.keySet().toString());
     	for (Nod nod : folder.values()) {
             LOG.info("przetwarzam "+nod.getName());
 			if(nod.getValue()!=null && nod.getValue().equals("root")){
@@ -74,8 +76,8 @@ public class FolderTree implements Serializable {
 						syncFolder.put("root", new Nod("root"));
 					}
 					for (String u : nod.getChildren()) {
-						if(!syncFolder.get("root").getChildren().contains(u)){
-							syncFolder.get("root").getChildren().add(u);
+						if(!syncFolder.get("root").children.contains(u)){
+							syncFolder.get("root").children.add(u);
 						}
 					}
 		            LOG.info("Korzeń zaktualizowano do postaci "+syncFolder.get("root").getChildren());
