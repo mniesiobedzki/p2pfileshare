@@ -47,10 +47,10 @@ public class FolderTree implements Serializable {
         this.addUser(usr, path, ip, port);
         
         if (this.syncFolder != null) {
-            this.putAll();
             LOG.info("pobieram dane do lokalnej struktury");
-            putAllToSync();
+            this.putAll();
             LOG.info("wkładam lokalne dane do synchronizowanej struktury");
+            putAllToSync();
         } else {
             LOG.info("JCSync jest null-em");
         }
@@ -71,7 +71,7 @@ public class FolderTree implements Serializable {
 	            LOG.info("root");
 				//synchronized(syncFolder){
 					if(syncFolder.get("root")==null){
-						syncFolder.put("root", nod);
+						syncFolder.put("root", new Nod("root"));
 					}
 					for (String u : nod.getChildren()) {
 						if(!syncFolder.get("root").getChildren().contains(u)){
