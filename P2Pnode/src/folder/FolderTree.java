@@ -273,20 +273,25 @@ public class FolderTree implements Serializable {
     public void putAll() {
         LinkedList<String> usrs = new LinkedList<String>();
         for (Nod n : this.syncFolder.values()) {
-            if (this.syncFolder.get("root").getChildren().contains(n.getName())) {
+            if (this.syncFolder.get("root").getChildren().contains(n.getName()) || this.folder.get("root").getChildren().contains(n.getName())) {
                 usrs.add(n.getName());
-                //folder.put(n.value, n);
-                this.addUser(n.name, n.parent, n.ip, n.port);
+                this.addUser(n.name, n.path, n.ip, n.port);
                 this.getFolder().get(n.name).children.clear();
                 this.getFolder().get(n.name).children.addAll(n.getChildren());
 	            LOG.info("pobrano użytkownika "+n.getName()+" i dodano do korzenia ");
             } else if (!n.getValue().equals("root")) {
                 addNod(n);
-                if(n.getHistory()!=null){
+                if(n.getHistory()!=null && n.getHistory().size()>0){
                 	LOG.info("pobrano dane o pliku "+ n.getName() + " nalezacym do "+n.getParent());
                 }else{
                 	LOG.info("pobrano dane o wezle "+ n.getName() + " nalezacym do "+n.getParent());
                 }
+            }else{
+            	for(String c: syncFolder.get("root").getChildren()){
+            		if(!folder.get("root").children.contains(c)){
+            			folder.get("root").addChlid(c);
+            		}
+            	}
             }
         }
     }
