@@ -85,7 +85,7 @@ public class Controller {
     /**
      * Updates files in the folder
      */
-    public void updateTree() {
+    public synchronized void updateTree() {
         LOG.info("ACHTUNG !! Updating Tree with files.");
         folderTree.update();
     }
