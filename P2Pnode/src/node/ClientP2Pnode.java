@@ -83,8 +83,8 @@ public class ClientP2Pnode {
         }
         LOG.info("Node " + nodeName + ": Connected !!");
 
-
-        JCSyncCore jcSyncCore = new JCSyncCore(this.node, serverPort);
+        LOG.trace("JCSyncCore jcSyncCore = new JCSyncCore(this.node, "+serverPort+this.node.getTcpPort()+");");
+        JCSyncCore jcSyncCore = new JCSyncCore(this.node, serverPort+this.node.getTcpPort());
         LOG.info("Initializing JCSyncCore HashMap");
         try {
             jcSyncCore.init();
@@ -94,10 +94,10 @@ public class ClientP2Pnode {
             SharedCollectionObject jcSyncHashMap_sharedCollectionObject;
             String collID = "P2PFileshareTreeMapCollection";
             try {
-                LOG.info("Creating the new collection");
+                LOG.info("Creating the new collection; User:"+this.node.getUserName());
                 jcSyncHashMap_sharedCollectionObject = new SharedCollectionObject(collID, this.jcSyncHashMap, jcSyncCore, DefaultConsistencyManager.class);
             } catch (ObjectExistsException e) {
-                LOG.info("Collection JCSyncHashMap exists -> Connecting to the collection JCSyncHashMap");
+                LOG.info("Collection JCSyncHashMap exists -> Connecting to the collection JCSyncHashMap; User:"+this.node.getUserName());
                 jcSyncHashMap_sharedCollectionObject = (SharedCollectionObject) SharedCollectionObject.getFromOverlay(collID, jcSyncCore);
                 this.jcSyncHashMap = (JCSyncHashMap<String, Nod>) jcSyncHashMap_sharedCollectionObject.getNucleusObject();
             }

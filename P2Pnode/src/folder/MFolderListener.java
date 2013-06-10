@@ -14,6 +14,9 @@ public class MFolderListener {
 
     public static final Logger LOG = Logger.getLogger(MFolderListener.class);
 
+    private static String DS_STORE = ".DS_Store";
+    private static String THUMBSDB = "Thumbs.db";
+
     /**
      * TUTAJ M***** WSTAWI KOMENTARZ
      */
@@ -61,7 +64,7 @@ public class MFolderListener {
 
     private static void handleDirectoryChangeEvent(Path myDir, FolderTree folderTree, String userId) {
 
-        LOG.info("WYKRYTO ZMANÄ� w obserowanym folderze !! " + myDir);
+        LOG.info("WYKRYTO ZMANIĘ w obserowanym folderze !! " + myDir);
 
         try {
 
@@ -85,7 +88,15 @@ public class MFolderListener {
 
                     if (ignorowanyPlik != null && event.context().toString().equals(ignorowanyPlik)) {
 
-                        System.out.println("Created - IGNORUJďż˝!");
+                        System.out.println("Created - IGNORUJĘ!");
+                        ignorowanyPlik = null;
+                        return;
+                    } else if (event.context().toString().equals(DS_STORE)) {
+                        LOG.warn("Ignore MAC OS X's .DS_Store file");
+                        ignorowanyPlik = null;
+                        return;
+                    } else if (event.context().toString().equals(THUMBSDB)) {
+                        LOG.warn("Ignore Windows's Thumb.db file");
                         ignorowanyPlik = null;
                         return;
                     } else {
@@ -209,7 +220,7 @@ public class MFolderListener {
                         fileModified = true;
                         if (folderTree.syncFolder != null) {
                             folderTree.updateFile(f, userId);
-                        	folderTree.putAllToSync();
+                            folderTree.putAllToSync();
                             folderTree.update();
                             folderTree.updated = true;
                         } else {
