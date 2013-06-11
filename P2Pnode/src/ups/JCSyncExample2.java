@@ -207,9 +207,9 @@ public class JCSyncExample2 {
 
     public static void main(String args[]) {
 
-        Thread t = Thread.currentThread();
-        t.setName("Node2Thread");
-        System.out.println("Current thread : " + t.getName() + " " + t);
+//        Thread t = Thread.currentThread();
+//        t.setName("Node2Thread");
+//        System.out.println("Current thread : " + t.getName() + " " + t);
 
         JCSyncExample2 example = new JCSyncExample2();
 

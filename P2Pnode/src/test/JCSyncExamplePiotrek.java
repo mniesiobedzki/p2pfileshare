@@ -22,7 +22,7 @@ import java.util.Observer;
 
 public class JCSyncExamplePiotrek {
 
-    public static final Logger LOG = Logger.getLogger(JCSyncExample.class);
+    public static final Logger LOG = Logger.getLogger(JCSyncExampleTEST.class);
 
     private P2PNode p2pNode;
     private NodeCallback p2pNodeCallback = new NodeCallback() {
@@ -112,7 +112,6 @@ public class JCSyncExamplePiotrek {
         public void onMessageDelivery(String s, List<NetworkObject> networkObjects) {
             //To change body of implemented methods use File | Settings | File Templates.
         }
-
 
     };
 
