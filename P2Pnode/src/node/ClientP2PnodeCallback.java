@@ -37,10 +37,10 @@ public class ClientP2PnodeCallback implements NodeCallback {
     }
 
     @Override
-    public void onMessageDelivery(List<NetworkObject> networkObjects) {
+    public void onMessageDelivery(String s, List<NetworkObject> networkObjects) {
         //To change body of implemented methods use File | Settings | File Templates.
-        System.out.println("MSG");
     }
+
 
     @Override
     public void onInsertObject(Node arg0, NetworkObject arg1) {

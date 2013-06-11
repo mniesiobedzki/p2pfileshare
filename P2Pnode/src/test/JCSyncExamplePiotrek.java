@@ -109,7 +109,7 @@ public class JCSyncExamplePiotrek {
         }
 
         @Override
-        public void onMessageDelivery(List<NetworkObject> networkObjects) {
+        public void onMessageDelivery(String s, List<NetworkObject> networkObjects) {
             //To change body of implemented methods use File | Settings | File Templates.
         }
 

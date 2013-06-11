@@ -29,7 +29,7 @@ public class ServerStart {
 
     public static void main(String[] args) {
         System.out.println("Server STARTING");
-        ServerStart server = new ServerStart();
+        ServerStart server = new ServerStart(21000);
         System.out.println("Server Started at port: " + server.getServerPort());
     }
 

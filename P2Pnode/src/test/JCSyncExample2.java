@@ -112,7 +112,7 @@ public class JCSyncExample2 {
         }
 
         @Override
-        public void onMessageDelivery(List<NetworkObject> networkObjects) {
+        public void onMessageDelivery(String s, List<NetworkObject> networkObjects) {
             //To change body of implemented methods use File | Settings | File Templates.
         }
 
@@ -201,13 +201,15 @@ public class JCSyncExample2 {
     }
 
     public void doStuff() {
+        int i = 0;
+        do {
+            LOG.debug("Doing stuff");
 
-        LOG.debug("Doing stuff");
-
-        String userName = this.p2pNode.getUserName();
-        LOG.trace("Invoking operation: " + this.collection + " " + new OperationDetails(userName, userName + "@0", System.currentTimeMillis()));
-        this.collection.put("key", new OperationDetails(userName, userName + "@0", System.currentTimeMillis()));
-        LOG.info("Collection after the operation: " + this.collection);
+            String userName = this.p2pNode.getUserName();
+            LOG.trace("Invoking operation: " + this.collection + " " + new OperationDetails(userName, userName + "@0", System.currentTimeMillis()));
+            this.collection.put("key", new OperationDetails(userName, userName + "@0", System.currentTimeMillis()));
+            LOG.info("Collection after the operation: " + this.collection);
+        } while (true);
 
     }
 
@@ -260,5 +262,16 @@ public class JCSyncExample2 {
 
         return jcSyncObservable;
 
+    }
+
+    public void snooze(long time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException ex) {
+            /*
+             * Logger.getLogger(BasicCollectionUsage.class.getName()).log(
+			 * Level.SEVERE, null, ex);
+			 */
+        }
     }
 }

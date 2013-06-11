@@ -18,9 +18,9 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class JCSyncExampleKonrad1 {
+public class JCSyncExample2 {
 
-    public static final Logger LOG = Logger.getLogger(JCSyncExampleKonrad1.class);
+    public static final Logger LOG = Logger.getLogger(JCSyncExample2.class);
 
     private P2PNode p2pNode;
     private NodeCallback p2pNodeCallback = new NodeCallback() {
@@ -107,9 +107,10 @@ public class JCSyncExampleKonrad1 {
         }
 
         @Override
-        public void onMessageDelivery(List<NetworkObject> networkObjects) {
+        public void onMessageDelivery(String s, List<NetworkObject> networkObjects) {
             //To change body of implemented methods use File | Settings | File Templates.
         }
+
 
     };
 
@@ -122,21 +123,22 @@ public class JCSyncExampleKonrad1 {
         @Override
         public void update(Observable o, Object arg) {
 
-            System.out.println("UPDATE w OBSERWER");
+            //System.out.println("UPDATE w OBSERWER");
 
             //String args_ = (String)arg;
             //LOG.trace("[Update o=" + o + "] " + arg);
+            LOG.debug("OBSERWER OBSERWER OBSERWER Update o=" + o + "] " + arg);
         }
     };
     private JCSyncStateListener collectionListener = new JCSyncStateListener() {
         public void onLocalStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
-            LOG.debug("collection onLocalStateUpdated callback invoked method=" + methodName + ": " + collection);
-            System.out.println(" LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL ");
+            LOG.debug("LOCAL LOCAL LOCAL collection onLocalStateUpdated callback invoked method=" + methodName + ": " + collection);
+            // System.out.println(" LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL LOCAL ");
         }
 
         public void onRemoteStateUpdated(JCSyncAbstractSharedObject object, String methodName, Object retVal) {
-            LOG.debug("collection onRemoteStateUpdated callback invoked method=" + methodName + ": " + collection);
-            System.out.println(" REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE ");
+            LOG.debug("REMOTE REMOTE REMOTE collection onRemoteStateUpdated callback invoked method=" + methodName + ": " + collection);
+            //System.out.println(" REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE REMOTE ");
         }
     };
 
@@ -162,7 +164,7 @@ public class JCSyncExampleKonrad1 {
         try {
 
             LOG.trace("Initializing JCSyncCore");
-            this.jcsyncCore = new JCSyncCore(this.p2pNode, this.p2pNode.getTcpPort() + 2);
+            this.jcsyncCore = new JCSyncCore(this.p2pNode, this.p2pNode.getTcpPort() + 20);
             this.jcsyncCore.init();
             this.collection = new JCSyncHashMap<String, OperationDetails>();
             LOG.trace("Creating the collection");
@@ -175,7 +177,7 @@ public class JCSyncExampleKonrad1 {
                 LOG.debug("I got the collection: " + this.collection);
 
             }
-            this.collection_so.addObserver(collectionObserver);
+            this.collection_so.addObserver(this.collectionObserver);
             this.collection_so.addStateListener(this.collectionListener);
 
         } catch (Throwable e) {
@@ -189,14 +191,15 @@ public class JCSyncExampleKonrad1 {
     public void doStuff() {
         int i = 0;
 
-        LOG.debug("Doing stuff");
 
+        //snooze(10000);
         do {
+            LOG.info("DOING STUFF");
             String userName = this.p2pNode.getUserName();
             LOG.trace("Invoking operation: " + this.collection + " " + new OperationDetails(userName, userName + "@0", System.currentTimeMillis()));
             this.collection.put("key" + i, new OperationDetails(userName, userName + "@0", System.currentTimeMillis()));
             LOG.info("Collection after the operation: " + this.collection);
-            snooze(4000);
+            snooze(3000);
             i++;
         } while (true);
 
@@ -204,11 +207,15 @@ public class JCSyncExampleKonrad1 {
 
     public static void main(String args[]) {
 
-        JCSyncExampleKonrad1 example = new JCSyncExampleKonrad1();
+        Thread t = Thread.currentThread();
+        t.setName("Node2Thread");
+        System.out.println("Current thread : " + t.getName() + " " + t);
+
+        JCSyncExample2 example = new JCSyncExample2();
 
         try {
             // example.initLayer(args[0], Integer.parseInt(args[1]), args[2], Integer.parseInt(args[3]));
-            example.initLayer("127.0.0.1", 21000, "Konrad", 22211);
+            example.initLayer("127.0.0.1", 21000, "Node2", 21221);
         } catch (Throwable e) {
             LOG.error("Error while initializing layer: " + e);
         }
