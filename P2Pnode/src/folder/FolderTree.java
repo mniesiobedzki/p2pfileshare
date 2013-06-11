@@ -181,7 +181,9 @@ public class FolderTree implements Serializable {
                 s += c;
             }
         }
-        s += "\n\nsyncFolder" + this.syncFolder.keySet().toString() + "\n";
+        if(syncFolder!=null){
+        	s += "\n\nsyncFolder" + this.syncFolder.keySet().toString() + "\n";
+        }
         s += "\n\nfolder" + this.folder.keySet().toString() + "\n";
         return s;
     }
